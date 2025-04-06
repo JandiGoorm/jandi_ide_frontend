@@ -1,54 +1,54 @@
-# React + TypeScript + Vite
+### 개발 환경
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+프로젝트는 Vite 를 기반으로 React + TypeScript 환경으로 구축했습니다.
 
-Currently, two official plugins are available:
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 스타일링 방식
 
-## Expanding the ESLint configuration
+reset.css 를 사용하여 브라우저 기본 스타일을 제거했습니다.  
+variables.css 에서 CSS 변수를 정의하여 색상과 폰트 등을 관리하고 있으며, CSS 변수를 사용할 때는 semantic token 을 정의하여 일관된 스타일을 적용합니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<br/>
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 코드 품질 관리
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Husky 를 사용하여 커밋 시점에 자동으로 코드 검사가 이루어지도록 설정했습니다. 커밋할 때마다 Prettier 를 통해 코드 포맷팅을 적용하고, ESLint 를 통해 코드 품질을 검사합니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| 도구 | 역할 |
+|------|------|
+| Husky | 커밋 시점에 자동으로 코드 검사 실행 |
+| Prettier | 코드 포맷팅 자동화 |
+| ESLint | 코드 품질 검사 및 오류 방지 |
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+<br/>
+
+### 설치된 라이브러리
+
+| 라이브러리 | 설명 |
+|------------|------|
+| axios | API 통신 관리 |
+| react-router-dom | 페이지 라우팅 관리 |
+| react-hook-form | 폼 상태 및 유효성 검사 관리 |
+| zod | 스키마 기반 폼 유효성 검사 및 타입 검증 |
+| react-icons | 다양한 아이콘 사용 지원 |
+
+<br/>
+
+
+### 커밋 타입
+
+| 키워드   | 설명                                                  |
+| -------- | ----------------------------------------------------- |
+| feat     | 새로운 기능에 대한 커밋                               |
+| fix      | 버그 수정에 대한 커밋                                 |
+| build    | 빌드 관련 파일 수정 / 모듈 설치 또는 삭제에 대한 커밋 |
+| chore    | 그 외 자잘한 수정에 대한 커밋                         |
+| ci       | ci 관련 설정 수정에 대한 커밋                         |
+| docs     | 문서 수정에 대한 커밋                                 |
+| style    | 코드 스타일 혹은 포맷 등에 관한 커밋                  |
+| refactor | 코드 리팩토링에 대한 커밋                             |
+| test     | 테스트 코드 수정에 대한 커밋                          |
+| perf     | 성능 개선에 대한 커밋                                 |
+
+
