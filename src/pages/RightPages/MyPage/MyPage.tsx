@@ -1,5 +1,5 @@
-import { Sidebar } from "../../layouts/SidebarLayout/SidebarLayout";
-import LeftSide from "./LeftSide";
+import { Sidebar } from "../../../layouts/SidebarLayout/SidebarLayout";
+import LeftSide from "../../LeftPages/LeftSide";
 import styles from "./Mypage.module.css";
 
 const MyPage = () => {

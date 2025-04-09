@@ -1,4 +1,4 @@
-import BaseLayout from "../../layouts/BasyLaout/BaseLayout";
+import BaseLayout from "../../../layouts/BasyLaout/BaseLayout";
 
 const Home = () => {
   return (

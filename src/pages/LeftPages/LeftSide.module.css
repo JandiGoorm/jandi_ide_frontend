@@ -16,6 +16,12 @@
   justify-content: space-between;
 }
 
+.top_section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .icon_box {
   display: flex;
   flex-direction: column;
@@ -24,6 +30,10 @@
 
   color: white;
   white-space: nowrap;
+}
+
+.logo{
+  height: 2rem;
 }
 
 .toggle_button {
