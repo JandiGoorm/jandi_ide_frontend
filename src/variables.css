@@ -3,6 +3,19 @@
   --color-black: oklch(0 0 0);
   --color-whitepure: oklch(100% 0 0);
 
+  /* color */
+  --color-gray-10: rgba(217, 217, 217, 0.1); /* 밑색 띠지 색상 */
+  --color-yellow-10: rgba(242, 193, 56, 0.1); /* 밑색 띠지 색상 */
+  --color-black-font: #2A2A2A; /* 화이트모드용 기본 폰트 색상 */
+  --color-white-font: #E0F5E9; /* 다크모드용 기본 폰트 색상 */
+  --color-green-temp: #3FA171; /* 임시 기본 버튼 색상 */
+  --color-yellow-temp: #F2C138; /* 임시 기본 버튼 색상 */
+
+  /* font-familyts */
+  --font-logo: 'Alkatra', cursive;
+  --font-catchphrase: 'Libre Baskerville', serif;
+  --font-general: 'Roboto', sans-serif;
+
   /* breakpoint  */
   --breakpoint-sm: 390px;
   --breakpoint-md: 720px;
@@ -73,7 +86,15 @@
 }
 
 :root[theme="light"] {
+  --color-bg-band: var(--color-yellow-10);
+  --color-bg-temp: var(--color-white); 
+  --color-font-general: var(--color-black-font);
+  --color-button-general: var(--color-yellow-temp); /* 임시 기본 버튼 색상 */
 }
 
 :root[theme="dark"] {
+  --color-bg-band: var(--color-gray-10); /* 배경 띠지 색상 */
+  --color-bg-temp: var(--color-black); /* 임시 배경 색상 */
+  --color-font-general: var(--color-white-font); /* 기본 범용 폰트 색상 */
+  --color-button-general: var(--color-green-temp);
 }

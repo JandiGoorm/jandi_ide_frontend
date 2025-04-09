@@ -1,0 +1,73 @@
+.container{
+    color: var(--color-font-general);
+}
+
+.logo{
+    font-family: var(--font-logo);
+    font-size: clamp(1.5rem, 3vw, 4rem);
+
+    margin: 10px;
+}
+
+.catchphrase{
+    font-family: var(--font-catchphrase);
+    font-size: clamp(1.5rem, 3vw, 6rem);
+    margin: 10px;
+}
+
+.general{
+    font-family: var(--font-general);
+    font-size: clamp(1rem, 2vw, 2rem);
+
+    margin: 15px;
+    padding-bottom: 120px;
+}
+
+.github_logo{
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+
+.arrow_img{
+    width: 60px;
+    padding-left: 10%;
+    display: none;
+    padding: 10px;
+}
+
+.login_button{
+    height: 60px;
+    width: 80%;
+    max-width: 400;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 0 auto;
+
+    background-color: var(--color-button-general);
+}
+
+.login_button p{
+    font-size: clamp(1rem, 2vw, 2rem);
+    color: var(--color-font-general);
+
+    display: flex;
+    flex-grow: 2;
+}
+
+/* 휴대폰 이상 */
+@media (min-width: 640px) {
+    .arrow_img{
+        display: none;
+    }
+}
+
+/* 태블릿 이상 */
+@media (min-width: 640px) {
+    .arrow_img{
+        display: inline-block;
+    }
+}

@@ -1,0 +1,45 @@
+.container {
+    height: 100vh;
+    padding: 2rem;
+    padding-top: 144px;
+    margin: 0 auto;
+    
+    text-align: center;
+    background-color: var(--color-bg-band);
+}
+
+/* 휴대폰 */
+@media (min-width: 0px) {
+    .container {
+        max-width: 320px;
+        padding: 2.5rem;
+        padding-top: 144px;
+    }   
+}
+
+/* 태블릿 */
+@media (min-width: 640px) {
+    .container {
+        max-width: 400px;
+        padding: 2.5rem;
+        padding-top: 144px;
+    }   
+}
+  
+/* 노트북 */
+@media (min-width: 768px) {
+    .container {
+        max-width: 480px;
+        padding: 3rem;
+        padding-top: 144px;
+    }
+}
+  
+/* 데스크탑 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 560px;
+        padding: 3.5rem;
+        padding-top: 144px;
+    }
+}
