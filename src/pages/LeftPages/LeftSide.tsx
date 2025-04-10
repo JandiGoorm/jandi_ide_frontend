@@ -4,22 +4,25 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Sidebar, useSidebar } from "../../layouts/SidebarLayout/SidebarLayout";
 import styles from "./LeftSide.module.css";
 import LogoDemo from "../../../public/LogoDemo.png";
+import defaultUser from "../../../public/defaultUser.webp";
 
 const LeftSide = () => {
   const { isOpen } = useSidebar();
 
   return (
-    <div className={clsx(styles.sidebar, isOpen && styles.open)}>
-      <div className={styles.top_section}>
-        <div className={styles.icon_box}>
-          <GiHamburgerMenu size={28} />
-        </div>
-
-        {isOpen && (
-          <div className={styles.logo_box}>
-            <img src={LogoDemo} alt="Logo" className={styles.logo} />
+    <div className={styles.sidebar}>
+      <div className={clsx(styles.top_section, isOpen && styles.open)}>
+        <div className={styles.menu}>
+          <div className={styles.icon_box}>
+            <GiHamburgerMenu size={28} />
           </div>
-        )}
+
+          {isOpen && (
+            <div className={styles.logo_box}>
+              <img src={LogoDemo} alt="Logo" className={styles.logo} />
+            </div>
+          )}
+        </div>
 
         <Sidebar.ToggleButton className={styles.toggle_button}>
           {(isOpen) =>
@@ -40,7 +43,12 @@ const LeftSide = () => {
 
       {isOpen && (
         <div className={styles.container}>
-          <img src={LogoDemo} alt="Logo" className={styles.logo} />
+          <div className={styles.UserInfo}>
+            <img src={defaultUser} alt="Logo" className={styles.UserProfile} />
+            <div>
+              <p className={styles.UserIntro}>Lorem Ipsum...</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
