@@ -12,10 +12,12 @@
 .sidebar_layout {
   display: flex;
   min-height: 100vh;
-  background-color: var(--color-side-background);
+  background: var(--color-background);
 }
 
 .content {
   flex: 1;
   background: var(--color-background);
+  max-width: 1440px;
+  margin: 0 auto;
 }
