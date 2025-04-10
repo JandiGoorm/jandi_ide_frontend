@@ -6,7 +6,7 @@ import styles from "./SimpleProfile.module.css";
 import LogoDemo from "../../../public/LogoDemo.png";
 import defaultUser from "../../../public/defaultUser.webp";
 
-const LeftSide = () => {
+const SimpleProfile = () => {
   const { isOpen } = useSidebar();
 
   return (
@@ -55,4 +55,4 @@ const LeftSide = () => {
   );
 };
 
-export default LeftSide;
+export default SimpleProfile;
