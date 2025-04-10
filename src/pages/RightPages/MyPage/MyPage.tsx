@@ -5,7 +5,7 @@ import styles from "./Mypage.module.css";
 const MyPage = () => {
   return (
     <Sidebar.Provider>
-      <Sidebar.Panel className={styles.panner}>
+      <Sidebar.Panel className={styles.userInfo}>
         <LeftSide />
       </Sidebar.Panel>
 

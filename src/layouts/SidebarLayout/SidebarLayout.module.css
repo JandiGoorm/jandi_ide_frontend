@@ -5,15 +5,17 @@
 
   min-width: 0px;
   width: 100px;
-  background-color: #f4f4f4;
+
   transition: width 0.3s ease;
 }
 
 .sidebar_layout {
   display: flex;
   height: 100vh;
+  background-color: var(--color-side-background);
 }
 
 .content {
   flex: 1;
+  background: var(--color-background);
 }

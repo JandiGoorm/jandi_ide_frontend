@@ -80,6 +80,7 @@
   ***배경-부분***
   코드창: code-main
   실행창: code-terminal
+  Sidebar: side-background
   ***글씨***
   기본문구, 캐치프라이즈 : primary
   아이콘, 툴팁 속 문구: inside
@@ -105,6 +106,7 @@
   --color-back-line: oklch(0.83 0.1542 87.81);
   --color-code-main: ;
   --color-code-terminal: ;
+    --color-side-background: ;
   --color-text-primary: oklch(0.29 0 0);
   --color-text-inside: oklch(0 0 0);
   --color-text-example: oklch(0.8 0 0);
@@ -127,6 +129,7 @@
   --color-back-line: oklch(0.89 0 0);
   --color-code-main: oklch(0.27 0.0068 164.46);
   --color-code-terminal: oklch(0.24 0.007 164.37);
+  --color-side-background: oklch(0.27 0.0068 164.46);
   --color-text-primary: oklch(0.95 0.0272 160.88);
   --color-text-inside: oklch(1 0 0);
   --color-text-example: oklch(0.53 0.0265 161.07);
