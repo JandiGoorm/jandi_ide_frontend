@@ -1,5 +1,5 @@
 import styles from "./Button.module.css";
-import React from "react";
+import React, { useState } from "react";
 
 /**
  * @typedef {Object} ButtonProps
@@ -20,7 +20,7 @@ import React from "react";
  */
 
 type ButtonSize = "sm" | "md" | "lg";
-type ButtonVariant = "solid" | "outline" | "ghost" | "none";
+type ButtonVariant = "solid" | "lang" | "none";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
@@ -36,14 +36,24 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
   const sizeClass = styles[`btn_${size}`];
   const variantClass = styles[`btn_${variant}`];
+  const baseClass = isInModal ? styles.modal_btn : styles.btn;
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsClicked(!isClicked); // 클릭할 때마다 토글
+    props.onClick?.(e); // 외부에서 전달한 onClick도 실행
+  };
+
+  const clickedClass =
+    variant === "lang" && isClicked ? styles.btn_lang_clicked : "";
 
   return (
     <button
-      className={`${sizeClass} ${variantClass} ${
-        isInModal ? styles.modal_btn : styles.btn
-      }`}
+      className={`${sizeClass} ${variantClass} ${baseClass} ${clickedClass}`}
+      onClick={handleClick}
       {...props}
     >
       {children}

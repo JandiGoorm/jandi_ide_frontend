@@ -14,6 +14,9 @@ const Test = () => {
         <Button size="lg" variant="none">
           test
         </Button>
+        <Button size="lg" variant="lang">
+          test
+        </Button>
       </div>
     </BaseLayout>
   );
