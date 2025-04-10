@@ -18,8 +18,8 @@ function App() {
 
         {/* 로그인 & 회원가입 */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/Register/language" element={<Regitster_lang />} />
-        <Route path="/Register/company" element={<Regitster_company />} />
+        <Route path="/register/language" element={<Regitster_lang />} />
+        <Route path="/register/company" element={<Regitster_company />} />
       </Routes>
     </BrowserRouter>
   );

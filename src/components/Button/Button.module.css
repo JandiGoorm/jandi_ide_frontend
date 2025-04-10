@@ -1,5 +1,6 @@
 .btn {
     width: fit-content;
+    height: fit-content;
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
@@ -34,8 +35,6 @@
     font-weight: var(--font-weight-semibold);
     border-radius: var(--radius-button-lg);
   }
-  
-  /* Variant styles */
   
   .btn_none {
     background: transparent;

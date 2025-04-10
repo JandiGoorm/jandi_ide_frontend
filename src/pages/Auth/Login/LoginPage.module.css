@@ -1,73 +1,48 @@
-.container{
-    color: var(--color-font-general);
-}
-
-.logo{
+.logo {
     font-family: var(--font-logo);
-    font-size: clamp(1.5rem, 3vw, 4rem);
-
-    margin: 10px;
+    font-size: var(--text-xl);
+    color: var(--color-text-primary);
 }
 
-.catchphrase{
+.catchphrase {
     font-family: var(--font-catchphrase);
-    font-size: clamp(1.5rem, 3vw, 6rem);
-    margin: 10px;
+    font-size: var(--text-2xl);
+    color: var(--color-text-primary);
+
+    padding: 0.5rem 0rem;
 }
 
-.general{
+.explain {
     font-family: var(--font-general);
-    font-size: clamp(1rem, 2vw, 2rem);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
 
-    margin: 15px;
-    padding-bottom: 120px;
+    padding-bottom: 5rem;
 }
 
-.github_logo{
-    width: 40px;
-    height: 40px;
-    padding: 10px;
+.inner {
+    display: flex;
+    justify-content: center;
 }
 
-.arrow_img{
-    width: 60px;
-    padding-left: 10%;
+.github_logo {
+    width: 2rem;
+}
+
+.button_text {
+    margin: auto 1.5rem;
+}
+
+.arrow_img {
     display: none;
-    padding: 10px;
+    width: 3rem;
+    align-self: flex-end;
+    padding-bottom: 0.5rem;
 }
 
-.login_button{
-    height: 60px;
-    width: 80%;
-    max-width: 400;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    margin: 0 auto;
-
-    background-color: var(--color-button-general);
-}
-
-.login_button p{
-    font-size: clamp(1rem, 2vw, 2rem);
-    color: var(--color-font-general);
-
-    display: flex;
-    flex-grow: 2;
-}
-
-/* 휴대폰 이상 */
-@media (min-width: 640px) {
+/* 일정 크기 이상일 경우 버튼 속 화살표 숨김 처리 */
+@media (min-width: 720px) {
     .arrow_img{
-        display: none;
-    }
-}
-
-/* 태블릿 이상 */
-@media (min-width: 640px) {
-    .arrow_img{
-        display: inline-block;
+        display: inline;
     }
 }
