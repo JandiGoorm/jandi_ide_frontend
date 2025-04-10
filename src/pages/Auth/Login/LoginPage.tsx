@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
-import BaseLayout from "../../../layouts/BasyLaout/BaseLayout";
+import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
