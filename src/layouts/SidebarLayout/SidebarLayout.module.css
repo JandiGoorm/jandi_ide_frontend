@@ -13,11 +13,14 @@
   display: flex;
   min-height: 100vh;
   background: var(--color-background);
+  overflow: hidden;
 }
 
 .content {
   flex: 1;
   background: var(--color-background);
+  overflow-y: auto;
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  max-height: calc(100vh - 4rem);
 }
