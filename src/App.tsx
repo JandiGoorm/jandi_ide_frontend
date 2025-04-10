@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/RightPages/Home/Home";
-import MyPage from "./pages/RightPages/MyPage/MyPage";
+import SettingPage from "./pages/RightPages/MyPage/SettingPage/SettingPage";
 import Test from "./pages/RightPages/Test/Test";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage" element={<SettingPage />} />
       </Routes>
     </BrowserRouter>
   );
