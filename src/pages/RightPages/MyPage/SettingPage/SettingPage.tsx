@@ -39,7 +39,20 @@ const SettingPage = () => {
         <LeftSide />
       </Sidebar.Panel>
 
-      <Sidebar.Content>
+      <Sidebar.Content
+        header={
+          <div
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              marginBottom: "1rem",
+              color: "white",
+            }}
+          >
+            설정 페이지
+          </div>
+        }
+      >
         <div className={styles.content}>
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>

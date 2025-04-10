@@ -101,11 +101,18 @@ const Panel = ({ className, children, ...props }: SidebarProps) => {
   );
 };
 
-interface ContentProps extends React.HTMLProps<HTMLDivElement> {}
+interface ContentProps extends React.HTMLProps<HTMLDivElement> {
+  header?: React.ReactNode;
+}
 
 // 콘텐츠를 나타내는 컴포넌트입니다. (오른쪽 콘텐츠 영역)
-const Content = ({ className, ...props }: ContentProps) => {
-  return <div className={clsx(styles.content, className)} {...props} />;
+const Content = ({ className, header, children, ...props }: ContentProps) => {
+  return (
+    <div className={clsx(styles.content, className)} {...props}>
+      {header}
+      {children}
+    </div>
+  );
 };
 
 export const Sidebar = {

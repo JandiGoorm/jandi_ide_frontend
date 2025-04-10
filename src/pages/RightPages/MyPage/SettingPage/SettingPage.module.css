@@ -1,7 +1,7 @@
 
 .content {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   padding: 2rem 6rem;
   box-sizing: border-box;
   color: var(--color-text-primary);
