@@ -98,3 +98,74 @@
   --color-font-general: var(--color-white-font); /* 기본 범용 폰트 색상 */
   --color-button-general: var(--color-green-temp);
 }
+
+  /* 
+  ***배경***
+  밑색: background
+  띠: back-line
+  ***배경-부분***
+  코드창: code-main
+  실행창: code-terminal
+  ***글씨***
+  기본문구, 캐치프라이즈 : primary
+  아이콘, 툴팁 속 문구: inside
+  예시문구: example
+  경고문구: warning
+  음영처리 문자: sub
+  사이드바 일반: side-primary
+  사이드바 강조: side-on
+  ***버튼***
+  일반: basic
+  언어 미선택: lang-off
+  언어 선택: lang-on
+  채팅박 선택: chat-on
+  ***요소***
+  프로젝트 배경: project-back
+  태그 배경: tag-back
+  툴팁 배경: tooltip-back
+  채팅글 배경: chat-back
+  */
+
+/* :root[theme="light"] {
+  --color-background: linear-gradient(0deg, oklch(0.96 0.054 91.03), oklch(1 0 0));
+  --color-back-line: oklch(0.83 0.1542 87.81);
+  --color-code-main: ;
+  --color-code-terminal: ;
+  --color-text-primary: oklch(0.29 0 0);
+  --color-text-inside: oklch(0 0 0);
+  --color-text-example: oklch(0.8 0 0);
+  --color-text-warning: oklch(0.63 0.194 29.44);
+  --color-text-sub: ;
+  --color-text-side-primary: oklch(0.29 0 0);
+  --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
+  --color-button-lang-off: oklch(0.83 0.1542 87.81);
+  --color-button-lang-on: ;
+  --color-button-chat-on: oklch(0.95 0.0367 91.69);
+  --color-project-back: ;
+  --color-tag-back: ;
+  --color-tooltip-back: oklch(0.95 0.0367 91.69);
+  --color-chat-back: ;
+} */
+
+/* :root[theme="dark"] { */
+  :root {
+  --color-background: linear-gradient(0deg, oklch(0.23 0.031 158.45), oklch(0.17 0 0));
+  --color-back-line: oklch(0.89 0 0);
+  --color-code-main: oklch(0.27 0.0068 164.46);
+  --color-code-terminal: oklch(0.24 0.007 164.37);
+  --color-text-primary: oklch(0.95 0.0272 160.88);
+  --color-text-inside: oklch(1 0 0);
+  --color-text-example: oklch(0.53 0.0265 161.07);
+  --color-text-warning: oklch(0.63 0.194 29.44);
+  --color-text-sub: oklch(0.7 0.0152 162.29);
+  --color-text-side-primary: oklch(0.95 0.0272 160.88);
+  --color-text-side-on: oklch(0.84 0.1862 160.41);
+  --color-button-basic: linear-gradient(90deg, oklch(0.64 0.1176 158.9), oklch(0.45 0.0984 156.65));
+  --color-button-lang-off: oklch(0.64 0.1176 158.9);
+  --color-button-lang-on: oklch(0.78 0.1965 153.13);
+  --color-button-chat-on: oklch(0.3 0.0195 163.33);
+  --color-project-back: oklch(0.3 0.0195 163.33);
+  --color-tag-back: oklch(0.62 0.1158 154.67);
+  --color-tooltip-back: oklch(0.24 0 0);
+  --color-chat-back: oklch(0.3 0.0195 163.33);
+}
