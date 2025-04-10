@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Sidebar, useSidebar } from "../../layouts/SidebarLayout/SidebarLayout";
-import styles from "./LeftSide.module.css";
+import styles from "./SimpleProfile.module.css";
 import LogoDemo from "../../../public/LogoDemo.png";
 import defaultUser from "../../../public/defaultUser.webp";
 
