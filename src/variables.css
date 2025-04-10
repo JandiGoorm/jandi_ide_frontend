@@ -70,6 +70,7 @@
   --radius-button-sm: var(--radius-sm);
   --radius-button-md: var(--radius-md);
   --radius-button-lg: var(--radius-lg);
+  --radius-input: var(--radius-md);
 }
 
   /* 
@@ -137,6 +138,7 @@
   --color-button-lang-off: oklch(0.64 0.1176 158.9);
   --color-button-lang-on: oklch(0.78 0.1965 153.13);
   --color-button-chat-on: oklch(0.3 0.0195 163.33);
+  --color-input-basic: oklch(0.45 0.0984 156.65);
   --color-project-back: oklch(0.3 0.0195 163.33);
   --color-tag-back: oklch(0.62 0.1158 154.67);
   --color-tooltip-back: oklch(0.24 0 0);
