@@ -7,6 +7,7 @@ import Test from "./pages/RightPages/Test/Test";
 import LoginPage from "./pages/Auth/Login/LoginPage";
 import Regitster_lang from "./pages/Auth/Register/SelectLanguagePage";
 import Regitster_company from "./pages/Auth/Register/SelectCompanyPage";
+import Regitster_done from "./pages/Auth/Register/DonePage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register/language" element={<Regitster_lang />} />
         <Route path="/register/company" element={<Regitster_company />} />
+        <Route path="/register/done" element={<Regitster_done />} />
       </Routes>
     </BrowserRouter>
   );
