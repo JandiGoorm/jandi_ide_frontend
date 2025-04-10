@@ -1,0 +1,52 @@
+.btn {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--color-button-basic);
+    color: var(--color-text-inside);
+  }
+  
+  .modal_btn {
+    --color-button-bg: var(--color-gray-500);
+    --color-button-text: var(--color-white);
+  }
+  
+  /* Size variants */
+  .btn_sm {
+    padding: 0.25rem 1rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-normal);
+    border-radius: var(--radius-button-sm);
+  }
+  
+  .btn_md {
+    padding: 0.25rem 2rem;
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-button-md);
+  }
+  
+  .btn_lg {
+    padding: 0.25rem 3rem;
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-button-lg);
+  }
+  
+  /* Variant styles */
+  
+  .btn_none {
+    background: transparent;
+    color: var(--color-text-sub);
+    padding: 0rem;
+  }
+
+  .btn_lang {
+    background: var(--color-button-lang-off);
+  }
+
+  .btn_lang_clicked {
+    background: var(--color-button-lang-on);
+  }
