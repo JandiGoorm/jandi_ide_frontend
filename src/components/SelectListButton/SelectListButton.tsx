@@ -45,8 +45,10 @@ const SelectButtonList: React.FC<SelectButtonListProps> = ({
   onClickItem,
 }) => {
   const list = type == "lang" ? languageList : companyList;
+
   return (
     <div className={styles.itemButtons}>
+      {/* 버튼 리스트 */}
       {list.map((item, index) => (
         <Button
           key={index}
@@ -57,6 +59,11 @@ const SelectButtonList: React.FC<SelectButtonListProps> = ({
           {item}
         </Button>
       ))}
+
+      {/* 경고 문구 */}
+      {selectedItems.length === 0 && (
+        <p className={styles.warning}>ERR: 최소 1개 이상 선택해야 합니다.</p>
+      )}
     </div>
   );
 };

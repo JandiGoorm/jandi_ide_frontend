@@ -19,6 +19,8 @@ const SelectLanguagePage = () => {
   };
 
   const handleOnClickNext = () => {
+    if (selectedLangs.length === 0) return;
+
     navigate("/register/company", {
       state: { selectedLangs },
     });

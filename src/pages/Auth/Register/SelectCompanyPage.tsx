@@ -26,6 +26,8 @@ const SelectCompanyPage = () => {
   };
 
   const handleOnClickNext = () => {
+    if (selectedCompanies.length === 0) return;
+
     navigate("/register/done", {
       state: { selectedLangs, selectedCompanies },
     });
