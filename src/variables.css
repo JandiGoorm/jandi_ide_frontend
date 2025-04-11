@@ -111,7 +111,7 @@
   --color-text-inside: oklch(0 0 0);
   --color-text-example: oklch(0.8 0 0);
   --color-text-warning: oklch(0.63 0.194 29.44);
-  --color-text-sub: oklch(0.85 0 100);
+  --color-text-sub: oklch(0.7 0.0152 162.29);
   --color-text-side-primary: oklch(0.29 0 0);
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
@@ -129,7 +129,7 @@
   --color-back-line: oklch(0.89 0 0);
   --color-code-main: oklch(0.27 0.0068 164.46);
   --color-code-terminal: oklch(0.24 0.007 164.37);
-  --color-side-background: oklch(0.27 0.0068 164.46);
+  --color-side-background: oklch(0.26 0 0);
   --color-text-primary: oklch(0.95 0.0272 160.88);
   --color-text-inside: oklch(1 0 0);
   --color-text-example: oklch(0.53 0.0265 161.07);
