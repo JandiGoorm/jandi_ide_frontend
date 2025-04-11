@@ -7,7 +7,7 @@ import styles from "./SelectCompanyPage.module.css";
 
 //component
 import Button from "../../../components/Button/Button";
-import SelectButtonList from "./SelectButtonList";
+import SelectButtonList from "../../../components/SelectListButton/SelectListButton";
 
 const SelectCompanyPage = () => {
   const navigate = useNavigate();

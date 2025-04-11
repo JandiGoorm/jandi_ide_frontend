@@ -6,7 +6,7 @@ import styles from "./SelectLanguagePage.module.css";
 
 //component
 import Button from "../../../components/Button/Button";
-import SelectButtonList from "./SelectButtonList";
+import SelectButtonList from "../../../components/SelectListButton/SelectListButton";
 
 const SelectLanguagePage = () => {
   const navigate = useNavigate();

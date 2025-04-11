@@ -1,7 +1,7 @@
-import styles from "./SelectButtonList.module.css";
+import styles from "./SelectListButton.module.css";
 
 //component
-import Button from "../../../components/Button/Button";
+import Button from "../Button/Button";
 
 interface SelectButtonListProps {
   type: string;
