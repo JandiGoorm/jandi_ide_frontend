@@ -19,6 +19,12 @@
 .content {
     padding: 5px;
     padding-top: 10%;
+
+    /* 글 내용 드래그 방지 */
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
 }
 
 /* 태블릿 이상 */
