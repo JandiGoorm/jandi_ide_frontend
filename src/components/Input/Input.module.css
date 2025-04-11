@@ -1,0 +1,39 @@
+.input {
+    width: 100%;
+    border: 1px solid   var(--color-input-basic);
+    outline: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-radius: var(--radius-input);
+    /* font-family: "42dot Sans", serif; */
+  }
+
+  .dark {
+    background-color: transparent;
+    color: var(--color-text-inside);
+  }
+
+  .input::placeholder {
+    color: var(--color-text-sub);
+  }
+
+  .input_sm {
+    font-size: var(--text-sm);
+  }
+  .input_md {
+    font-size: var(--text-base);
+  }
+  
+  .input_lg {
+    font-size: var(--text-lg);
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox에서 spin 버튼 숨기기 */
+}
