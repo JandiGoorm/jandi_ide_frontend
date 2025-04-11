@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    color: var(--color-text-primary);
+}
+
+.switchContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.switchOn {
+    background-color: #4CAF50;
+}
+
+.switchHandle {
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+.switchOn .switchHandle {
+    transform: translateX(30px);
+}
+

@@ -4,6 +4,7 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import LeftSide from "../../../LeftPages/SimpleProfile";
 import styles from "./SettingPage.module.css";
 import defaultUser from "../../../../../public/defaultUser.webp";
+import BasicHeader from "../../../../layouts/Components/BasicHeader";
 
 const languageList = [
   "JavaScript",
@@ -39,20 +40,7 @@ const SettingPage = () => {
         <LeftSide />
       </Sidebar.Panel>
 
-      <Sidebar.Content
-        header={
-          <div
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-              marginBottom: "1rem",
-              color: "white",
-            }}
-          >
-            설정 페이지
-          </div>
-        }
-      >
+      <Sidebar.Content header={<BasicHeader />}>
         <div className={styles.content}>
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>
