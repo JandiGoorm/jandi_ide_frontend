@@ -5,6 +5,8 @@
     height: 4rem;
     padding: 1rem;
     color: var(--color-text-primary);
+    justify-content: right;
+    padding-right: 2rem;
 }
 
 .switchContainer {
@@ -16,26 +18,26 @@
 .switch {
     width: 60px;
     height: 30px;
-    background-color: #ccc;
+    background-color: transparent;
     border-radius: 15px;
+    border: 0.5px solid var(--color-button-lang-on);
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.switchOn {
-    background-color: #4CAF50;
-}
-
 .switchHandle {
     width: 26px;
     height: 26px;
-    background-color: white;
+    background-color: var(--color-button-lang-on);
     border-radius: 50%;
     position: absolute;
     top: 2px;
     left: 2px;
     transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .switchOn .switchHandle {
