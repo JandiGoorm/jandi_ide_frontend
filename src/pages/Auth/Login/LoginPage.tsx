@@ -5,6 +5,7 @@ import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import styles from "./LoginPage.module.css";
 
 //component
+import AuthBanner from "../AuthBanner";
 import Button from "../../../components/Button/Button";
 
 const LoginPage = () => {
@@ -29,17 +30,11 @@ const LoginPage = () => {
   return (
     <BaseLayout>
       <AuthLayout>
-        {/* 로고 */}
-        <p className={styles.logo}>Team! Jandi</p>
-
-        {/* 캐치프레이즈 */}
-        <div className={styles.catchphrase}>
-          <p>Welcome Back!</p>
-          <p>Your code missed you.</p>
-        </div>
-
-        {/* 설명 문구 */}
-        <p className={styles.explain}>로그인하여 성장을 계속 이어가세요.</p>
+        {/* 상단 문구 */}
+        <AuthBanner
+          catchPhrases={["Welcome Back!", "Your code missed you."]}
+          explains={["로그인하여 성장을 계속 이어가세요."]}
+        />
 
         {/* 로그인 버튼 */}
         <Button onClick={handleLogin}>
