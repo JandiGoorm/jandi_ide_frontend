@@ -107,37 +107,24 @@
   --color-code-main: oklch(0.97 0.0329 89.85);
   --color-code-terminal: oklch(0.94 0.0641 88.61);
   --color-side-background: oklch(0.97 0.0329 89.85);
-
-
   --color-text-primary: oklch(0.29 0 0);
   --color-text-inside: oklch(0 0 0);
   --color-text-example: oklch(0.8 0 0);
   --color-text-warning: oklch(0.63 0.194 29.44);
-
-/* ***고칠부분*** */
-  --color-text-sub: oklch(0.7 0.0152 162.29);
-
-
+  --color-text-sub: oklch(0.85 0 100);
   --color-text-side-primary: oklch(0.29 0 0);
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
   --color-button-lang-on: oklch(0.76 0.156381 82.8658);
   --color-button-chat-on: oklch(0.95 0.0367 91.69);
   --color-input-basic: oklch(0.83 0.1542 87.81);
-
-/* ***고칠부분*** */
-  --color-project-back: oklch(0.3 0.0195 163.33);
-  --color-tag-back: oklch(0.62 0.1158 154.67);
-  
-
+  --color-project-back: oklch(0.97 0.0329 89.85);
+  --color-tag-back: oklch(0.83 0.1542 87.81); 
   --color-tooltip-back: oklch(0.95 0.0367 91.69);
-
-  /* ***고칠부분*** */
-  --color-chat-back: oklch(0.3 0.0195 163.33);
+  --color-chat-back: oklch(0.97 0.0329 89.85);
 }
 
 :root[theme="dark"] {
-  /* :root { */
   --color-background: linear-gradient(0deg, oklch(0.23 0.031 158.45), oklch(0.17 0 0));
   --color-back-line: oklch(0.89 0 0);
   --color-code-main: oklch(0.27 0.0068 164.46);
