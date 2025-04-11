@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
@@ -5,26 +6,22 @@ import styles from "./SelectLanguagePage.module.css";
 
 //component
 import Button from "../../../components/Button/Button";
+import SelectButtonList from "./SelectButtonList";
 
-const languageList = [
-  "Python",
-  "C/C++",
-  "JavaScript",
-  "C#",
-  "Go",
-  "Fortran",
-  "Delphi/Object Pascal",
-  "SQL",
-  "MATLAB",
-  "Rust",
-  "R",
-  "Ruby",
-];
 const SelectLanguagePage = () => {
   const navigate = useNavigate();
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+
+  const handleLanguageClick = (lang: string) => {
+    setSelectedLangs((prev) =>
+      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
+    );
+  };
 
   const handleOnClickNext = () => {
-    navigate("/register/company");
+    navigate("/register/company", {
+      state: { selectedLangs },
+    });
   };
 
   return (
@@ -46,13 +43,11 @@ const SelectLanguagePage = () => {
           </p>
 
           {/* 언어 선택 버튼 */}
-          <div className={styles.languageButtons}>
-            {languageList.map((language) => (
-              <Button key={language} variant="lang">
-                {language}
-              </Button>
-            ))}
-          </div>
+          <SelectButtonList
+            type={"lang"}
+            selectedItems={selectedLangs}
+            onClickItem={handleLanguageClick}
+          />
 
           {/* 이전 / 다음 버튼 */}
           <Button onClick={handleOnClickNext}>Next</Button>

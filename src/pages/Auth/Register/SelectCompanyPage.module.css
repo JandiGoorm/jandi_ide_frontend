@@ -19,13 +19,3 @@
 
     padding-bottom: 5rem;
 }
-
-.languageButtons {
-    padding-bottom: 5rem;
-}
-
-.languageButtons Button{
-    margin: 0.5rem;
-    padding: 0.7rem;
-    font-size: var(--text-sm);
-}

@@ -1,0 +1,7 @@
+.itemButtons {
+    padding-bottom: 5rem;
+}
+
+.itemButtons Button{
+    font-size: var(--text-sm);
+}

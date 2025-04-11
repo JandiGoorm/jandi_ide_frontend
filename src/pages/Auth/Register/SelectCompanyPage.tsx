@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
@@ -5,27 +7,28 @@ import styles from "./SelectCompanyPage.module.css";
 
 //component
 import Button from "../../../components/Button/Button";
+import SelectButtonList from "./SelectButtonList";
 
-const languageList = [
-  "삼성전자",
-  "네이버",
-  "카카오",
-  "라인플러스",
-  "우아한형제들",
-  "구글",
-  "애플",
-  "아마존",
-  "마이크로소프트",
-  "메타",
-  "하이퍼커넥트",
-  "비바리퍼블리카",
-  "당근마켓",
-];
 const SelectCompanyPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const selectedLangs = location.state?.selectedLangs || [];
+  const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
+
+  console.log("선택된 언어:", selectedLangs);
+
+  const handleCompanyClick = (company: string) => {
+    setSelectedCompanies((prev) =>
+      prev.includes(company)
+        ? prev.filter((c) => c !== company)
+        : [...prev, company]
+    );
+  };
 
   const handleOnClickNext = () => {
-    navigate("/");
+    navigate("/register/done", {
+      state: { selectedLangs, selectedCompanies },
+    });
   };
 
   return (
@@ -44,14 +47,12 @@ const SelectCompanyPage = () => {
           {/* 설명 문구 */}
           <p className={styles.explain}>선호하는 기업을 선택해주세요.</p>
 
-          {/* 언어 선택 버튼 */}
-          <div className={styles.languageButtons}>
-            {languageList.map((language) => (
-              <Button key={language} variant="lang">
-                {language}
-              </Button>
-            ))}
-          </div>
+          {/* 기업 선택 버튼 */}
+          <SelectButtonList
+            type={"company"}
+            selectedItems={selectedCompanies}
+            onClickItem={handleCompanyClick}
+          />
 
           {/* 이전 / 다음 버튼 */}
           <Button onClick={handleOnClickNext}>Next</Button>
