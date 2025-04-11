@@ -1,0 +1,14 @@
+.panner {
+    background-color: var(--color-back-line);
+  }
+  
+  .content {
+    width: 100%;
+    height: 100%;
+  
+    background-color: transparent;
+  
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  

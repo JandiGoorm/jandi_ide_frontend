@@ -9,6 +9,9 @@ import Regitster_lang from "./pages/Auth/Register/SelectLanguagePage";
 import Regitster_company from "./pages/Auth/Register/SelectCompanyPage";
 import Regitster_done from "./pages/Auth/Register/DonePage";
 
+// 채팅
+import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +25,9 @@ function App() {
         <Route path="/register/language" element={<Regitster_lang />} />
         <Route path="/register/company" element={<Regitster_company />} />
         <Route path="/register/done" element={<Regitster_done />} />
+
+        {/* 채팅 */}
+        <Route path="/chat" element={<ChatMainPage />} />
       </Routes>
     </BrowserRouter>
   );
