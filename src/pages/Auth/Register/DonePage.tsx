@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import styles from "./DonePage.module.css";
@@ -11,9 +10,6 @@ import Button from "../../../components/Button/Button";
 
 const DonePage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const selectedLangs = location.state?.selectedLangs || [];
-  const selectedCompanies = location.state?.selectedCompanies || [];
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // 현재 html에 설정된 theme 속성 읽기
@@ -25,12 +21,11 @@ const DonePage = () => {
       setTheme("light");
     }
   }, []);
+
+  // Start 버튼 클릭 시 메인 페이지로 이동
   const handleNext = () => {
     navigate("/");
   };
-
-  console.log("선택된 언어:", selectedLangs);
-  console.log("선택된 기업:", selectedCompanies);
 
   return (
     <BaseLayout>

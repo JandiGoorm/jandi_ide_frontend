@@ -22,8 +22,12 @@ const LoginPage = () => {
     }
   }, []);
 
+  // 로그인 버튼 클릭 시 로그인 or 회원가입 진행
   const handleLogin = () => {
-    // if new user
+    // 만약 기존회원이라면 로그인 진행
+    // 로그인 진행...
+
+    // 만약 신규 회원이라면 회원가입 진행
     navigate("/register/language");
   };
 

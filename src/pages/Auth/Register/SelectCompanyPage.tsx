@@ -15,8 +15,7 @@ const SelectCompanyPage = () => {
   const selectedLangs = location.state?.selectedLangs || [];
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
 
-  console.log("선택된 언어:", selectedLangs);
-
+  // 기업 버튼 클릭 시 selectedCompanies에 추가 or 삭제
   const handleCompanyClick = (company: string) => {
     setSelectedCompanies((prev) =>
       prev.includes(company)
@@ -25,12 +24,19 @@ const SelectCompanyPage = () => {
     );
   };
 
+  // Next 버튼 클릭 시 회원가입 진행 후 홈으로 이동
   const handleOnClickNext = () => {
-    if (selectedCompanies.length === 0) return;
+    if (selectedCompanies.length === 0)
+      // 기업 미선택 시 넘어가지 않음
+      return;
 
-    navigate("/register/done", {
-      state: { selectedLangs, selectedCompanies },
-    });
+    console.log("언어 선택:", selectedLangs);
+    console.log("기업 선택:", selectedCompanies);
+
+    // 회원가입 진행...
+
+    // 가입 완료 페이지로 이동
+    navigate("/register/done");
   };
 
   return (
