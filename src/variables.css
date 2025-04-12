@@ -75,6 +75,7 @@
   --radius-button-sm: var(--radius-sm);
   --radius-button-md: var(--radius-md);
   --radius-button-lg: var(--radius-lg);
+  --radius-input: var(--radius-md);
 }
 
   /* 
@@ -84,6 +85,7 @@
   ***배경-부분***
   코드창: code-main
   실행창: code-terminal
+  Sidebar: side-background
   ***글씨***
   기본문구, 캐치프라이즈 : primary
   아이콘, 툴팁 속 문구: inside
@@ -104,33 +106,48 @@
   채팅글 배경: chat-back
   */
 
-/* :root[theme="light"] {
+:root[theme="light"] {
   --color-background: linear-gradient(0deg, oklch(0.96 0.054 91.03), oklch(1 0 0));
-  --color-back-line: oklch(0.83 0.1542 87.81);
-  --color-code-main: ;
-  --color-code-terminal: ;
+  --color-back-line: oklch(0.83 0.1542 87.81 / 10%);
+  --color-code-main: oklch(0.97 0.0329 89.85);
+  --color-code-terminal: oklch(0.94 0.0641 88.61);
+  --color-side-background: oklch(0.97 0.0329 89.85);
+
+
   --color-text-primary: oklch(0.29 0 0);
   --color-text-inside: oklch(0 0 0);
   --color-text-example: oklch(0.8 0 0);
   --color-text-warning: oklch(0.63 0.194 29.44);
-  --color-text-sub: ;
+
+/* ***고칠부분*** */
+  --color-text-sub: oklch(0.7 0.0152 162.29);
+
+
   --color-text-side-primary: oklch(0.29 0 0);
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
-  --color-button-lang-on: ;
+  --color-button-lang-on: oklch(0.76 0.156381 82.8658);
   --color-button-chat-on: oklch(0.95 0.0367 91.69);
-  --color-project-back: ;
-  --color-tag-back: ;
-  --color-tooltip-back: oklch(0.95 0.0367 91.69);
-  --color-chat-back: ;
-} */
+  --color-input-basic: oklch(0.83 0.1542 87.81);
 
-/* :root[theme="dark"] { */
-  :root {
+/* ***고칠부분*** */
+  --color-project-back: oklch(0.3 0.0195 163.33);
+  --color-tag-back: oklch(0.62 0.1158 154.67);
+  
+
+  --color-tooltip-back: oklch(0.95 0.0367 91.69);
+
+  /* ***고칠부분*** */
+  --color-chat-back: oklch(0.3 0.0195 163.33);
+}
+
+:root[theme="dark"] {
+  /* :root { */
   --color-background: linear-gradient(0deg, oklch(0.23 0.031 158.45), oklch(0.17 0 0));
   --color-back-line: oklch(0.89 0 0 / 0.1);
   --color-code-main: oklch(0.27 0.0068 164.46);
   --color-code-terminal: oklch(0.24 0.007 164.37);
+  --color-side-background: oklch(0.27 0.0068 164.46);
   --color-text-primary: oklch(0.95 0.0272 160.88);
   --color-text-inside: oklch(1 0 0);
   --color-text-example: oklch(0.53 0.0265 161.07);
@@ -142,6 +159,7 @@
   --color-button-lang-off: oklch(0.64 0.1176 158.9);
   --color-button-lang-on: oklch(0.78 0.1965 153.13);
   --color-button-chat-on: oklch(0.3 0.0195 163.33);
+  --color-input-basic: oklch(0.45 0.0984 156.65);
   --color-project-back: oklch(0.3 0.0195 163.33);
   --color-tag-back: oklch(0.62 0.1158 154.67);
   --color-tooltip-back: oklch(0.24 0 0);

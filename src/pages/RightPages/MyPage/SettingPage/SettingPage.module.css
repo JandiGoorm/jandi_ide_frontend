@@ -1,0 +1,78 @@
+
+.content {
+  width: 100%;
+  /* height: 100%; */
+  padding: 2rem 6rem;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  gap: 4rem;
+}
+
+.basicInfo_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.basicInfo_content{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.basicInfo_button_div{
+  display: flex;
+  gap: 1rem;
+}
+
+.userDelete_conainer{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.selectLanguage_content{
+  display: flex;
+  flex-wrap: wrap;        
+  justify-content: center; 
+  gap: 1rem;             
+}
+
+.profileModify_content{
+  display: flex;
+  gap: 1rem;
+}
+
+.UserProfile {
+  border-radius: var( --radius-full);
+  max-width: 15rem;
+  width: 100%;
+}
+
+.profile_image_div{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile_description{
+  flex: 1;
+}
+
+.description_content{
+  padding: 2rem;
+  border: 1px solid var(--color-input-basic);
+  box-sizing: border-box;
+  background-color: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-lg);
+  resize: none;
+  color: var(--color-text-primary);
+  outline: none;
+  height: 100%;
+  width: 100%;
+}
+

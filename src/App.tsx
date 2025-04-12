@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/RightPages/Home/Home";
-import MyPage from "./pages/RightPages/MyPage/MyPage";
-import Test from "./pages/RightPages/Test/Test";
+import DarkModeProvider from "./contexts/DarkmodeProvider";
+import Home from "./pages/BasicPages/Home/Home";
+import SettingPage from "./pages/RightPages/MyPage/SettingPage/SettingPage";
+import Test from "./pages/BasicPages/Test/Test";
+import ChatDetailPage from "./pages/RightPages/ChatPage/Detail/ChatDetailPage";
 
 // 로그인 & 회원가입
 import LoginPage from "./pages/Auth/Login/LoginPage";
@@ -14,12 +16,14 @@ import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/mypage" element={<MyPage />} />
-
+    <DarkModeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/mypage" element={<SettingPage />} />
+          <Route path="/chat/id" element={<ChatDetailPage />} />
+          
         {/* 로그인 & 회원가입 */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register/language" element={<Regitster_lang />} />
@@ -28,8 +32,9 @@ function App() {
 
         {/* 채팅 */}
         <Route path="/chat" element={<ChatMainPage />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </DarkModeProvider>
   );
 }
 
