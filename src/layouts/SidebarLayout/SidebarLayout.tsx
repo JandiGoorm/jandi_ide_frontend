@@ -109,8 +109,10 @@ interface ContentProps extends React.HTMLProps<HTMLDivElement> {
 const Content = ({ className, header, children, ...props }: ContentProps) => {
   return (
     <div className={clsx(styles.content, className)} {...props}>
-      {header}
-      {children}
+      <div className={styles.main_content}>
+        {header}
+        {children}
+      </div>
     </div>
   );
 };
