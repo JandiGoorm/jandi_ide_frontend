@@ -1,5 +1,6 @@
 .btn {
     width: fit-content;
+    height: fit-content;
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
@@ -35,8 +36,6 @@
     border-radius: var(--radius-button-lg);
   }
   
-  /* Variant styles */
-  
   .btn_none {
     background: transparent;
     color: var(--color-text-sub);
@@ -44,6 +43,8 @@
   }
 
   .btn_lang {
+    margin: 0.5rem;
+    padding: 0.7rem;
     background: var(--color-button-lang-off);
   }
 

@@ -1,0 +1,65 @@
+.panner {
+    background-color: var(--color-back-line);
+  }
+  
+.content {
+    width: 100%;
+    height: 100%;
+  
+    background-color: transparent;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.chatGuidelines {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.contents {
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+    padding-left: 4rem;
+    font-family: var(--font-general);
+    color: var(--color-text-primary);
+}
+
+.header {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-2xl);
+    padding: 1.5rem 0rem;
+}
+
+.paragraph {
+    padding: 1rem 0rem;
+}
+
+.title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-lg);
+    padding: 0.5rem 0rem;
+}
+
+.rules {
+    margin-left: 1rem;
+}
+
+.rules li {
+    font-size: var(--text-sm);
+    padding: 0.3rem;
+}
+
+.rules strong {
+    font-weight: var(--font-weight-bold);
+}
+
+.rules logo {
+    font-family: var(--font-logo);
+}
+  
+.rules colored {
+    color: var(--color-text-side-on)
+}

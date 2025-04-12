@@ -1,0 +1,94 @@
+.sidebar {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
+
+  gap: 1rem;
+  overflow: hidden;
+  background-color: var(--color-side-background);
+  min-height: 100vh;
+}
+
+.open {
+  justify-content: space-between;
+  display: flex;
+}
+
+.top_section {
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  /* gap: 0.5rem; */
+}
+
+.icon_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  padding: 0 0.5rem;
+}
+
+.logo{
+  height: 2rem;
+  align-items: center;
+}
+
+.toggle_button {
+  padding: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  overflow: hidden; /* 이거 중요! */
+}
+
+.title_div {
+  color: var(--color-text-primary);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.title {
+  flex-grow: 1;
+  font-family: var(--font-catchphrase);
+  font-size: var(--text-3xl);
+  padding-bottom: 0.7rem;
+}
+
+.sub_title {
+  font-family: var(--font-general);
+  font-size: var(--text-base);
+  padding-bottom: 0.5rem;
+}
+
+.chat_button_list {
+  flex-grow: 1; /* 남은 공간을 모두 채움 */
+  overflow-y: auto; /* 스크롤 가능하도록 */
+  display: flex;
+  flex-direction: column;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
+
+.chat_button_list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

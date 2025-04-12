@@ -1,0 +1,13 @@
+.inner {
+    display: flex;
+    justify-content: center;
+}
+
+.button_text {
+    margin: auto 1.5rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.arrow_img {
+    width: 0.5rem;
+}

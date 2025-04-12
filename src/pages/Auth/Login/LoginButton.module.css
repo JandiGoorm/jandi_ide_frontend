@@ -1,0 +1,27 @@
+.inner {
+    display: flex;
+    justify-content: center;
+}
+
+.github_logo {
+    width: 2rem;
+}
+
+.button_text {
+    margin: auto 1.5rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.arrow_img {
+    display: none;
+    width: 3rem;
+    align-self: flex-end;
+    padding-bottom: 0.5rem;
+}
+
+/* 일정 크기 이상일 경우 버튼 속 화살표 숨김 처리 */
+@media (min-width: 720px) {
+    .arrow_img{
+        display: inline;
+    }
+}
