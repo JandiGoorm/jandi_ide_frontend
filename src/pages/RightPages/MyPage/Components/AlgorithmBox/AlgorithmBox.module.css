@@ -4,19 +4,30 @@
     padding-bottom: 0.7rem;
     border-radius: var(--radius-sm);
     color: var(--color-text-primary);
+    -ms-overflow-style: none;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 .header{
     display: flex;
     justify-content: space-between;
+    gap: 0.3rem;
 }
 
 .title {
+    overflow-x: scroll;
+    white-space: nowrap;
+    
     font-weight: var(--font-weight-semibold);
     font-size: var(--text-base);
 }
 
 .info {
+    min-width: fit-content;
     font-size: var(--text-xs);
     color: var(--color-text-sub);
 }
