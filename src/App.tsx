@@ -11,6 +11,9 @@ import Regitster_lang from "./pages/Auth/Register/SelectLanguagePage";
 import Regitster_company from "./pages/Auth/Register/SelectCompanyPage";
 import Regitster_done from "./pages/Auth/Register/DonePage";
 
+// 메인 페이지
+import MainPage from "./pages/RightPages/MyPage/MainPage/MainPage";
+
 // 채팅
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
 
@@ -29,6 +32,9 @@ function App() {
           <Route path="/register/language" element={<Regitster_lang />} />
           <Route path="/register/company" element={<Regitster_company />} />
           <Route path="/register/done" element={<Regitster_done />} />
+
+          {/* 메인페이지 */}
+          <Route path="/mypage/main" element={<MainPage />} />
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
