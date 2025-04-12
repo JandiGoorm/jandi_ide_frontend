@@ -119,26 +119,18 @@
   --color-text-inside: oklch(0 0 0);
   --color-text-example: oklch(0.8 0 0);
   --color-text-warning: oklch(0.63 0.194 29.44);
-
-/* ***고칠부분*** */
   --color-text-sub: oklch(0.63 0.0232 72);
-
-
   --color-text-side-primary: oklch(0.29 0 0);
+  --color-text-side-on: oklch(0.83 0.17177 82.5648);
+
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
   --color-button-lang-on: oklch(0.88 0.1774 93.68);
   --color-button-chat-on: oklch(0.93 0.0896 88.54);
   --color-input-basic: oklch(0.83 0.1542 87.81);
-
-/* ***고칠부분*** */
   --color-project-back: oklch(0.94 0.0823 90.81);
   --color-tag-back: oklch(0.83 0.1542 87.81);
-  
-
   --color-tooltip-back: oklch(0.99 0 0);
-
-  /* ***고칠부분*** */
   --color-chat-back: oklch(0.94 0.0823 90.81);
 }
 
