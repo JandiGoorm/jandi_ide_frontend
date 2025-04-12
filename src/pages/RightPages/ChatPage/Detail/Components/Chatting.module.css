@@ -1,0 +1,54 @@
+.chat_bubble {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mine {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.other {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.profile_img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+}
+
+.chat_content {
+  background-color: var(--color-code-terminal);
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  color: var(--color-text-primary);
+  word-wrap: break-word;
+  flex: 1;
+
+}
+
+.chat_name {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  font-size: var(--text-lg);
+}
+
+.chat_text {
+  font-size: var(--text-base);
+  margin-bottom: 0.75rem;
+}
+
+.chat_sub_info_box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat_date {
+  font-size: var(--text-sm);
+  text-align: right;
+  color: var(--color-text-sub);
+}

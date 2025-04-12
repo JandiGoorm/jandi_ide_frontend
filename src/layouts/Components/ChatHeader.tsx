@@ -1,9 +1,9 @@
-import styles from "./BasicHeader.module.css";
+import styles from "./ChatHeader.module.css";
 import React from "react";
 import { useDarkModeContext } from "../../contexts/DarkmodeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 
-const BasicHeader: React.FC = () => {
+const ChatHeader: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkModeContext();
 
   return (
@@ -26,4 +26,4 @@ const BasicHeader: React.FC = () => {
   );
 };
 
-export default BasicHeader;
+export default ChatHeader;

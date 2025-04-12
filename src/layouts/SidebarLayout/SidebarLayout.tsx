@@ -29,7 +29,7 @@ interface SidebarLayoutProps {
 }
 // Sidebar의 상태를 관리하고 하위 컴포넌트에 전달하는 Provider 입니다.
 const Provider = ({ children }: SidebarLayoutProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleToggleSidebar = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -109,8 +109,10 @@ interface ContentProps extends React.HTMLProps<HTMLDivElement> {
 const Content = ({ className, header, children, ...props }: ContentProps) => {
   return (
     <div className={clsx(styles.content, className)} {...props}>
-      {header}
-      {children}
+      <div className={styles.main_content}>
+        {header}
+        {children}
+      </div>
     </div>
   );
 };
