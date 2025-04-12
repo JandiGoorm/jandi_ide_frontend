@@ -16,7 +16,7 @@
 .switch {
     width: 60px;
     height: 30px;
-    background-color: #ccc;
+    background-color: #FFF1C9;
     border-radius: 15px;
     position: relative;
     cursor: pointer;
@@ -24,18 +24,21 @@
 }
 
 .switchOn {
-    background-color: #4CAF50;
+    background-color: #2E2E2E;
 }
 
-.switchHandle {
-    width: 26px;
-    height: 26px;
-    background-color: white;
+.switchHandle{
+    /* background-color: #fff; */
     border-radius: 50%;
     position: absolute;
     top: 2px;
     left: 2px;
     transition: transform 0.3s ease;
+}
+
+.switchHandle img {
+    width: 26px;
+    height: 26px;
 }
 
 .switchOn .switchHandle {

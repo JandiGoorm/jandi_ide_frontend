@@ -132,6 +132,8 @@
   --color-tag-back: oklch(0.83 0.1542 87.81);
   --color-tooltip-back: oklch(0.99 0 0);
   --color-chat-back: oklch(0.94 0.0823 90.81);
+
+  --img-mode-switch: url('/switch_sun');
 }
 
 :root[theme="dark"] {
@@ -160,4 +162,6 @@
   --color-tag-back: oklch(0.64 0.1176 158.9);
   --color-tooltip-back: oklch(0.24 0 0);
   --color-chat-back: oklch(0.3 0.0195 163.33);
+
+  --img-mode-switch: url('/switch_moon');
 }

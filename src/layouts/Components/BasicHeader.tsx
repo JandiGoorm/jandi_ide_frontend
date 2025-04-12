@@ -12,7 +12,9 @@ const BasicHeader: React.FC = () => {
           className={`${styles.switch} ${isDarkMode ? styles.switchOn : ""}`}
           onClick={toggleDarkMode}
         >
-          <div className={styles.switchHandle}></div>
+          <div className={styles.switchHandle}>
+            <img src={isDarkMode ? "/switch_moon.png" : "/switch_sun.png"} />
+          </div>
         </div>
         <span>{isDarkMode ? "On" : "Off"}</span>
       </div>

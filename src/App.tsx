@@ -23,15 +23,15 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/mypage" element={<SettingPage />} />
           <Route path="/chat/id" element={<ChatDetailPage />} />
-          
-        {/* 로그인 & 회원가입 */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register/language" element={<Regitster_lang />} />
-        <Route path="/register/company" element={<Regitster_company />} />
-        <Route path="/register/done" element={<Regitster_done />} />
 
-        {/* 채팅 */}
-        <Route path="/chat" element={<ChatMainPage />} />
+          {/* 로그인 & 회원가입 */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register/language" element={<Regitster_lang />} />
+          <Route path="/register/company" element={<Regitster_company />} />
+          <Route path="/register/done" element={<Regitster_done />} />
+
+          {/* 채팅 */}
+          <Route path="/chat" element={<ChatMainPage />} />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>
