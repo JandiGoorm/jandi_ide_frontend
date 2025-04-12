@@ -162,7 +162,7 @@
   --color-button-basic: linear-gradient(90deg, oklch(0.64 0.1176 158.9), oklch(0.45 0.0984 156.65));
   --color-button-lang-off: oklch(0.64 0.1176 158.9);
   --color-button-lang-on: oklch(0.78 0.1965 153.13);
-  --color-button-chat-on: oklch(0.33 0.0097 164.35);
+  --color-button-chat-on: oklch(0.31 0.0111 167.94);
   --color-input-basic: oklch(0.45 0.0984 156.65);
   --color-project-back: oklch(0.3 0.0195 163.33);
   --color-tag-back: oklch(0.64 0.1176 158.9);
