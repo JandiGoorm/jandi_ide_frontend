@@ -1,6 +1,7 @@
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import LeftSide from "../../../LeftPages/ChatPage/Main/ChatMainLeft";
+import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import styles from "./ChatMainPage.module.css";
 
 const ChatMainPage = () => {
@@ -11,7 +12,7 @@ const ChatMainPage = () => {
           <LeftSide />
         </Sidebar.Panel>
 
-        <Sidebar.Content>
+        <Sidebar.Content header={<BasicHeader />}>
           <div className={styles.chatGuidelines}>
             <div className={styles.contents}>
               <p className={styles.header}>채팅방 입장 전 확인해주세요!</p>

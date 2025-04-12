@@ -1,10 +1,13 @@
 import styles from "./ChatDetailPage.module.css";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import LeftSide from "../../../LeftPages/ChatDetailLeft";
+
 import ChatHeader from "../../../../layouts/Components/ChatHeader";
 import Button from "../../../../components/Button/Button";
 import { chatDummyData } from "./constants";
 import Chatting from "./Components/Chatting";
+
+import BasicHeader from "../../../../layouts/Components/BasicHeader";
 
 const ChatDetailPage = () => {
   return (
@@ -12,7 +15,6 @@ const ChatDetailPage = () => {
       <Sidebar.Panel className={styles.userInfo}>
         <LeftSide />
       </Sidebar.Panel>
-
       <Sidebar.Content header={<ChatHeader />}>
         <div className={styles.content}>
           <div className={styles.flexBox}>
