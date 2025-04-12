@@ -25,9 +25,7 @@ const ChatDetailPage = () => {
               <div className={styles.chat_input_box}>
                 <textarea
                   className={styles.description_content}
-                  placeholder="건전한 대화를 위해 타인에게 불쾌감을 줄 수 있는 글은 삼가주세요.
-                              도배, 광고, 홍보 목적의 메시지는 제한되며, 반복 시 이용이 제한될 수 있습니다.
-                              운영진의 안내에 따르지 않을 경우 채팅 이용이 제한될 수 있으니 유의해주세요."
+                  placeholder="건전한 대화를 위해 타인에게 불쾌감을 줄 수 있는 글은 삼가주세요. 도배, 광고, 홍보 목적의 메시지는 제한되며, 반복 시 이용이 제한될 수 있습니다."
                 />
               </div>
               <div className={styles.send_button_box}>

@@ -1,5 +1,6 @@
 import Button from "../../../../../components/Button/Button";
 import styles from "./Chatting.module.css";
+import { MdMoreHoriz } from "react-icons/md";
 
 interface ChattingProps {
   chat: {
@@ -21,7 +22,14 @@ const Chatting = ({ chat }: ChattingProps) => {
         className={styles.profile_img}
       />
       <div className={styles.chat_content}>
-        <div className={styles.chat_name}>{chat.username}</div>
+        <div className={styles.chat_sub_info_box}>
+          <div className={styles.chat_name}>{chat.username}</div>
+          <div>
+            <Button size="lg" variant="none">
+              <MdMoreHoriz />
+            </Button>
+          </div>
+        </div>
         <div className={styles.chat_text}>{chat.message}</div>
         <div className={styles.chat_sub_info_box}>
           <div>
