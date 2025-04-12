@@ -5,7 +5,8 @@
     height: 4rem;
     padding: 1rem;
     color: var(--color-text-primary);
-    flex-direction: row-reverse;
+    justify-content: right;
+    padding-right: 2rem;
 }
 
 .switchContainer {
@@ -17,7 +18,7 @@
 .switch {
     width: 60px;
     height: 30px;
-    background-color: #FFF1C9;
+    background-color: transparent;
     border-radius: 15px;
     border: 0.5px solid var(--color-button-lang-on);
     position: relative;
@@ -25,12 +26,10 @@
     transition: background-color 0.3s ease;
 }
 
-.switchOn {
-    background-color: #2E2E2E;
-}
-
-.switchHandle{
-    /* background-color: #fff; */
+.switchHandle {
+    width: 26px;
+    height: 26px;
+    background-color: var(--color-button-lang-on);
     border-radius: 50%;
     position: absolute;
     top: 2px;
@@ -39,11 +38,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.switchHandle img {
-    width: 26px;
-    height: 26px;
 }
 
 .switchOn .switchHandle {

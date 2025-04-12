@@ -2,7 +2,11 @@ import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
 import styles from "./Text.module.css";
-
+import {
+  Modal,
+  ModalContent,
+  ModalTrigger,
+} from "../../../components/Modal/Modal";
 const Test = () => {
   return (
     <BaseLayout>
@@ -47,6 +51,16 @@ const Test = () => {
           inputSize="lg"
           placeholder="예시"
         />
+      </div>
+      <div className={styles.button_div}>
+        <Modal>
+          <ModalTrigger>
+            <Button>모달</Button>
+          </ModalTrigger>
+          <ModalContent>
+            <div>예시</div>
+          </ModalContent>
+        </Modal>
       </div>
     </BaseLayout>
   );
