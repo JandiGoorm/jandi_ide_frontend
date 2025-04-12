@@ -128,7 +128,7 @@
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
   --color-button-lang-on: oklch(0.88 0.1774 93.68);
-  --color-button-chat-on: oklch(0.94 0.0667 88.44);
+  --color-button-chat-on: oklch(0.93 0.0896 88.54);
   --color-input-basic: oklch(0.83 0.1542 87.81);
 
 /* ***고칠부분*** */
