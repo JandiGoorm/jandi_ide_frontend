@@ -10,6 +10,7 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 //components
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
+import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 const MainPage = () => {
   return (
@@ -33,7 +34,38 @@ const MainPage = () => {
             <Button className={styles.projectMore}>
               <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
             </Button>
-            <div className={styles.projectList}></div>
+            <div className={styles.projectList}>
+              <ProjectBox
+                id={1}
+                title="프로젝트 이름이름이름이름"
+                lang="C/C++"
+                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
+              />
+              <ProjectBox
+                id={1}
+                title="프로젝트 이름이름이름이름"
+                lang="C/C++"
+                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
+              />
+              <ProjectBox
+                id={1}
+                title="프로젝트 이름이름이름이름"
+                lang="C/C++"
+                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
+              />
+              <ProjectBox
+                id={1}
+                title="프로젝트 이름이름이름이름"
+                lang="C/C++"
+                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
+              />
+              <ProjectBox
+                id={1}
+                title="프로젝트 이름이름이름이름"
+                lang="C/C++"
+                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
+              />
+            </div>
           </section>
 
           {/* 프로젝트 정보 */}
@@ -43,7 +75,7 @@ const MainPage = () => {
             </Button>
             <div className={styles.algorithmList}>
               <AlgorithmBox
-                id="algo-day2"
+                id={1}
                 title="네이버 대비 알고리즘 2일차"
                 problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
                 duration={60}
@@ -63,7 +95,7 @@ const MainPage = () => {
               />
 
               <AlgorithmBox
-                id="algo-day2"
+                id={2}
                 title="네이버 대비 알고리즘 2일차"
                 problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
                 duration={60}
@@ -73,7 +105,7 @@ const MainPage = () => {
               />
 
               <AlgorithmBox
-                id="algo-day2"
+                id={3}
                 title="네이버 대비 알고리즘 2일차"
                 problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
                 duration={60}
