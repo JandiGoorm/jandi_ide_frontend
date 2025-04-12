@@ -1,9 +1,15 @@
 import clsx from "clsx";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Sidebar, useSidebar } from "../../layouts/SidebarLayout/SidebarLayout";
+import {
+  Sidebar,
+  useSidebar,
+} from "../../../../layouts/SidebarLayout/SidebarLayout";
 import styles from "./ChatMainLeft.module.css";
-import LogoDemo from "../../../public/LogoDemo.png";
+import LogoDemo from "../../../../../public/LogoDemo.png";
+
+//components
+import ChatRoomButton from "./components/ChatRoomButton";
 
 const ChatMainLeft = () => {
   const { isOpen } = useSidebar();
@@ -48,13 +54,13 @@ const ChatMainLeft = () => {
             <div className={styles.sub_title}>채팅방을 선택해주세요.</div>
           </div>
 
-          <button className={styles.chat_button}>
-            <p className={styles.chat_name}>네이버 오픈 채팅</p>
-            <div className={styles.chat_status}>
-              <div className={styles.status_dot}></div>
-              <p className={styles.chat_explain}>2321명 소통중</p>
-            </div>
-          </button>
+          <div className={styles.chat_button_list}>
+            <ChatRoomButton chatName={"네이버"} chatParticipant={101} />
+
+            <ChatRoomButton chatName={"카카오"} chatParticipant={67} />
+
+            <ChatRoomButton chatName={"라인"} chatParticipant={24} />
+          </div>
         </div>
       )}
     </div>

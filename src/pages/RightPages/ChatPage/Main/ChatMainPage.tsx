@@ -1,6 +1,6 @@
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
-import LeftSide from "../../../LeftPages/ChatMainLeft";
+import LeftSide from "../../../LeftPages/ChatPage/Main/ChatMainLeft";
 import styles from "./ChatMainPage.module.css";
 
 const ChatMainPage = () => {
