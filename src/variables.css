@@ -99,7 +99,7 @@
   일반: basic
   언어 미선택: lang-off
   언어 선택: lang-on
-  채팅박 선택: chat-on
+  채팅방 선택: chat-on
   ***요소***
   프로젝트 배경: project-back
   채팅글 배경: chat-back
@@ -124,10 +124,11 @@
   --color-text-side-on: oklch(0.83 0.17177 82.5648);
   --color-button-basic: linear-gradient(90deg, oklch(0.83 0.1542 87.81), oklch(0.76 0.156381 82.8658));
   --color-button-lang-off: oklch(0.83 0.1542 87.81);
-  --color-button-lang-on: oklch(0.76 0.156381 82.8658);
-  --color-button-chat-on: oklch(0.95 0.0367 91.69);
+  --color-button-lang-on: oklch(0.88 0.1774 93.68);
+  --color-button-chat-on: oklch(0.93 0.0896 88.54);
   --color-input-basic: oklch(0.83 0.1542 87.81);
   --color-project-back: oklch(0.94 0.0823 90.81);
+  --img-mode-switch: url('/switch_sun');
   --color-tag-back: oklch(0.83 0.1542 87.81); 
   --color-tooltip-back: oklch(0.99 0 0);
   --color-chat-back: oklch(0.94 0.0823 90.81);
@@ -156,4 +157,5 @@
   --color-tag-back: oklch(0.64 0.1176 158.9);
   --color-tooltip-back: oklch(0.24 0 0);
   --color-chat-back: oklch(0.3 0.0195 163.33);
+  --img-mode-switch: url('/switch_moon');
 }

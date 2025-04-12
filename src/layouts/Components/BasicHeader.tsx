@@ -14,11 +14,7 @@ const BasicHeader: React.FC = () => {
           onClick={toggleDarkMode}
         >
           <div className={styles.switchHandle}>
-            {isDarkMode ? (
-              <FaMoon size={16} color={"white"} />
-            ) : (
-              <FaSun size={16} color={"white"} />
-            )}
+            <img src={isDarkMode ? "/switch_moon.png" : "/switch_sun.png"} />
           </div>
         </div>
       </div>

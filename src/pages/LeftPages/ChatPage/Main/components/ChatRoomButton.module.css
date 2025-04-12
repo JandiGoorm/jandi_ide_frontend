@@ -1,6 +1,6 @@
 .chat_button {
     font-family: var(--font-general);
-    background-color: var(--color-chat-back);
+    background-color: var(--color-button-chat-on);
     width: 100%;
     border-radius: var(--radius-4xl);
     padding: 0.5rem;
