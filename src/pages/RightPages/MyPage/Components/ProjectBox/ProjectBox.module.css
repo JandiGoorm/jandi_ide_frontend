@@ -4,14 +4,26 @@
     padding-bottom: 0.7rem;
     border-radius: var(--radius-sm);
     color: var(--color-text-primary);
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .title {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
     font-weight: var(--font-weight-semibold);
     font-size: var(--text-base);
 }
 
 .contents {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 3rem;
     padding: 0.5rem 0rem;
     font-size: var(--text-sm);
 }

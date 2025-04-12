@@ -16,10 +16,12 @@
     display: flex;
     justify-content: space-between;
     gap: 0.3rem;
+    
 }
 
 .title {
     overflow-x: scroll;
+    overflow-y: hidden;
     white-space: nowrap;
     
     font-weight: var(--font-weight-semibold);
@@ -33,6 +35,9 @@
 }
 
 .problem_list {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 3rem;
     padding: 0.5rem 0rem;
 }
 
