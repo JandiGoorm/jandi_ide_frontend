@@ -1,0 +1,51 @@
+.algorithm_item{
+    background-color: var(--color-project-back);
+    padding: 1rem;
+    padding-bottom: 0.7rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-base);
+}
+
+.info {
+    font-size: var(--text-xs);
+    color: var(--color-text-sub);
+}
+
+.problem_list {
+    padding: 0.5rem 0rem;
+}
+
+.problem {
+    display: flex;
+    text-align: center;
+    padding-top: 0.3rem;
+    font-size: var(--text-sm);
+}
+
+.problem img {
+    width: var(--text-sm);
+    padding-left: 0.3rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.buttons button {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-text-primary)
+}
+

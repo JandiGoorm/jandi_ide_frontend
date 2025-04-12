@@ -1,0 +1,30 @@
+.companySection, .projectSection, .algorithmSection{
+    padding: 1rem 2rem;
+}
+
+.companyMore, .projectMore, .algorithmMore{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-general);
+}
+
+.projectList, .algorithmList{
+    display: grid;
+	grid-template-columns: 100%;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* 태블릿 이상 */
+@media (min-width: 720px) {
+    .projectList, .algorithmList{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
