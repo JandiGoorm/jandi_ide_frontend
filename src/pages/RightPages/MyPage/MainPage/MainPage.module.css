@@ -14,6 +14,19 @@
     font-family: var(--font-general);
 }
 
+.companyList {
+    width: 100%;
+    margin: 1rem 0.5rem;
+    display: flex;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 .projectList, .algorithmList{
     display: grid;
 	grid-template-columns: 100%;

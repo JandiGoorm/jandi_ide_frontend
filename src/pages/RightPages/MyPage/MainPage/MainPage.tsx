@@ -10,6 +10,7 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 //components
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
+import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
 import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 const MainPage = () => {
@@ -26,7 +27,68 @@ const MainPage = () => {
             <Button className={styles.companyMore}>
               <BsPinAngleFill /> 관심 기업 <AiOutlineDoubleRight />
             </Button>
-            <div className={styles.companyList}></div>
+            <div className={styles.companyList}>
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+              <SimpleCompanyBox
+                id={1}
+                thumbnail="/logo_goorm.png"
+                name="구름"
+              />
+            </div>
           </section>
 
           {/* 프로젝트 정보 */}
