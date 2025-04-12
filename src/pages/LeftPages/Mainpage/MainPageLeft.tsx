@@ -1,20 +1,14 @@
-import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
-import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
-import {
-  Sidebar,
-  useSidebar,
-} from "../../../layouts/SidebarLayout/SidebarLayout";
+import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 import styles from "./MainPage.module.css";
-import LogoDemo from "../../../../public/LogoDemo.png";
+
+//components
+import LeftPart from "../../../layouts/Components/LeftPart";
 import LangTag from "./components/LangTag";
 import Button from "../../../components/Button/Button";
-import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 
 const MainPageLeft = () => {
   const navigate = useNavigate();
-  const { isOpen } = useSidebar();
   const { isDarkMode } = useDarkModeContext();
   const userData = {
     profile: isDarkMode
@@ -45,67 +39,35 @@ const MainPageLeft = () => {
   };
 
   return (
-    <div className={styles.sidebar}>
-      <div className={clsx(styles.top_section, isOpen && styles.open)}>
-        <div className={styles.menu}>
-          <div className={styles.icon_box}>
-            <GiHamburgerMenu size={28} />
-          </div>
+    <LeftPart>
+      <div className={styles.container}>
+        {/* 유저 프로필 */}
+        <div className={styles.info}>
+          <img className={styles.user_profile} src={userData.profile} />
+          <p className={styles.user_name}>{userData.name}</p>
+          <p className={styles.user_email}>{userData.email}</p>
+        </div>
+        <hr />
 
-          {isOpen && (
-            <div className={styles.logo_box}>
-              <img src={LogoDemo} alt="Logo" className={styles.logo} />
-            </div>
-          )}
+        {/* 유저 설명란 */}
+        <div className={styles.explains}>
+          <p className={styles.user_intro}>{userData.intro}</p>
+        </div>
+        <hr />
+
+        {/* 유저 선호언어 */}
+        <div>
+          <LangTag className={styles.user_langs} langList={userData.lang} />
         </div>
 
-        <Sidebar.ToggleButton className={styles.toggle_button}>
-          {(isOpen) =>
-            isOpen ? (
-              <div className={styles.icon_box}>
-                <FaLongArrowAltLeft size={20} />
-                <p>접기</p>
-              </div>
-            ) : (
-              <div className={styles.icon_box}>
-                <FaLongArrowAltRight size={20} />
-                <p>열기</p>
-              </div>
-            )
-          }
-        </Sidebar.ToggleButton>
+        {/* 버튼 */}
+        <div className={styles.button_list}>
+          <Button onClick={handleLogout}>로그아웃</Button>
+          <Button onClick={handleSetting}>회원 정보 수정</Button>
+          <Button onClick={handleViewProfile}>내 프로필 보기</Button>
+        </div>
       </div>
-
-      {isOpen && (
-        <div className={styles.container}>
-          {/* 유저 프로필 */}
-          <div className={styles.info}>
-            <img className={styles.user_profile} src={userData.profile} />
-            <p className={styles.user_name}>{userData.name}</p>
-            <p className={styles.user_email}>{userData.email}</p>
-          </div>
-          <hr />
-
-          {/* 유저 설명란 */}
-          <div className={styles.explains}>
-            <p className={styles.user_intro}>{userData.intro}</p>
-          </div>
-          <hr />
-
-          {/* 유저 선호언어 */}
-          <div>
-            <LangTag className={styles.user_langs} langList={userData.lang} />
-          </div>
-
-          {/* 버튼 */}
-          <div className={styles.button_list}>
-            <Button onClick={handleLogout}>로그아웃</Button>
-            <Button onClick={handleSetting}>회원 정보 수정</Button>
-            <Button onClick={handleViewProfile}>내 프로필 보기</Button>
-          </div>
-        </div>
-      )}
-    </div>
+    </LeftPart>
   );
 };
 
