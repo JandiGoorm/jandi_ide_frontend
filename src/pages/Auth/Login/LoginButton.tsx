@@ -1,21 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import styles from "./LoginButton.module.css";
 import Button from "../../../components/Button/Button";
+import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 
 const LoginButton = () => {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  // 현재 html에 설정된 theme 속성 읽기
-  useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute("theme");
-    if (currentTheme === "dark") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
+  const { isDarkMode } = useDarkModeContext();
 
   // 로그인 버튼 클릭 시 로그인 or 회원가입 진행
   const handleLogin = () => {
@@ -31,18 +21,12 @@ const LoginButton = () => {
       <div className={styles.inner}>
         <img
           className={styles.github_logo}
-          src={
-            theme === "dark"
-              ? "/github_icon_white.png"
-              : "/github_icon_black.png"
-          }
+          src={isDarkMode ? "/github_icon_white.png" : "/github_icon_black.png"}
         />
         <span className={styles.button_text}>Login with GitHub</span>
         <img
           className={styles.arrow_img}
-          src={
-            theme === "dark" ? "/arrow_long_white.png" : "/arrow_long_black.png"
-          }
+          src={isDarkMode ? "/arrow_long_white.png" : "/arrow_long_black.png"}
         />
       </div>
     </Button>

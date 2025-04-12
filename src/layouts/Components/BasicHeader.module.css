@@ -5,6 +5,7 @@
     height: 4rem;
     padding: 1rem;
     color: var(--color-text-primary);
+    flex-direction: row-reverse;
 }
 
 .switchContainer {
