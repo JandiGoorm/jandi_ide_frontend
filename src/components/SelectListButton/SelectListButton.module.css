@@ -1,0 +1,14 @@
+.itemButtons {
+    padding-bottom: 5rem;
+}
+
+.itemButtons Button{
+    font-size: var(--text-sm);
+}
+
+.warning {
+    color: var(--color-text-warning);
+    font-size: var(--text-xs);
+    text-align: right;
+    padding-right: 1rem;
+}

@@ -1,0 +1,36 @@
+.chat_button {
+    font-family: var(--font-general);
+    background-color: var(--color-chat-back);
+    width: 100%;
+    border-radius: var(--radius-4xl);
+    padding: 0.5rem;
+    display: flex;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat_name{
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+}
+
+.chat_status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status_dot{
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: var(--radius-full);
+}
+
+.chat_explain{
+    font-size: var(--text-sm);
+    color: var(--color-text-sub);
+    padding-left: 0.5rem;
+}
+  

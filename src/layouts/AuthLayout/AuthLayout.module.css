@@ -1,0 +1,42 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered {
+    width: 100vw;
+    height: 50vh;
+    min-height: fit-content;
+
+    text-align: center;
+    background-color: var(--color-back-line);
+}
+
+.content {
+    padding: 5px;
+    padding-top: 10%;
+
+    /* 글 내용 드래그 방지 */
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+/* 태블릿 이상 */
+@media (min-width: 720px) {
+    .centered {    
+        width: 40vw;
+        min-width: 450px;
+        height: 100vh;
+    }
+
+    .content {
+        padding: 10px;
+        padding-top: 20%;
+    }
+}

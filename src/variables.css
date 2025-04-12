@@ -3,6 +3,11 @@
   --color-black: oklch(0 0 0);
   --color-whitepure: oklch(100% 0 0);
 
+  /* font-familyts */
+  --font-logo: 'Alkatra', cursive;
+  --font-catchphrase: 'Libre Baskerville', serif;
+  --font-general: 'Roboto', sans-serif;
+
   /* breakpoint  */
   --breakpoint-sm: 390px;
   --breakpoint-md: 720px;
@@ -126,7 +131,7 @@
 
 :root[theme="dark"] {
   --color-background: linear-gradient(0deg, oklch(0.23 0.031 158.45), oklch(0.17 0 0));
-  --color-back-line: oklch(0.89 0 0);
+  --color-back-line: oklch(0.89 0 0 / 0.1);
   --color-code-main: oklch(0.27 0.0068 164.46);
   --color-code-terminal: oklch(0.24 0.007 164.37);
   --color-side-background: oklch(0.26 0 0);
