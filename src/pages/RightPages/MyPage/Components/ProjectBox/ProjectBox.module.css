@@ -5,6 +5,7 @@
     border-radius: var(--radius-sm);
     color: var(--color-text-primary);
     -ms-overflow-style: none;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -15,6 +16,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    cursor: text;
 
     font-weight: var(--font-weight-semibold);
     font-size: var(--text-base);

@@ -29,15 +29,25 @@
 
 .projectList, .algorithmList{
     display: grid;
-	grid-template-columns: 100%;
+	grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
     padding: 1rem;
 }
 
-/* 태블릿 이상 */
 @media (min-width: 720px) {
     .projectList, .algorithmList{
-        display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1296px) {
+    .projectList, .algorithmList{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .projectList, .algorithmList{
+        grid-template-columns: repeat(4, 1fr);
     }
 }

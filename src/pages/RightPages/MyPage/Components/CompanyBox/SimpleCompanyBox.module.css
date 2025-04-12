@@ -8,6 +8,7 @@
 .thumbnail {
     width: 7rem;
     border-radius: var(--radius-full);
+    cursor: pointer;
 }
 
 .name {
@@ -16,4 +17,5 @@
     word-wrap: break-word;
     text-align: center;
     color: var(--color-text-primary);
+    cursor: pointer;
 }
