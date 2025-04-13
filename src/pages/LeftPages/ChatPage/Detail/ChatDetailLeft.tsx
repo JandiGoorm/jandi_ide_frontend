@@ -1,9 +1,12 @@
 import clsx from "clsx";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Sidebar, useSidebar } from "../../layouts/SidebarLayout/SidebarLayout";
+import {
+  Sidebar,
+  useSidebar,
+} from "../../../../layouts/SidebarLayout/SidebarLayout";
 import styles from "./ChatDetailLeft.module.css";
-import LogoDemo from "../../../public/LogoDemo.png";
+import LogoDemo from "../../../../../public/LogoDemo.png";
 
 const ChatDetailLeft = () => {
   const { isOpen } = useSidebar();
