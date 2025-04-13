@@ -1,13 +1,10 @@
 import styles from "./ChatDetailPage.module.css";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
-import LeftSide from "../../../LeftPages/ChatDetailLeft";
-
+import LeftSide from "../../../LeftPages/ChatPage/Detail/ChatDetailLeft";
 import ChatHeader from "../../../../layouts/Components/ChatHeader";
 import Button from "../../../../components/Button/Button";
 import { chatDummyData } from "./constants";
 import Chatting from "./Components/Chatting";
-
-import BasicHeader from "../../../../layouts/Components/BasicHeader";
 
 const ChatDetailPage = () => {
   return (

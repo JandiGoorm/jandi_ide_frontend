@@ -1,5 +1,5 @@
 import styles from "./ChatDetailLeft.module.css";
-import LeftPart from "../../layouts/Components/LeftPart";
+import LeftPart from "../../../../layouts/Components/LeftPart";
 
 const ChatDetailLeft = () => {
   return (

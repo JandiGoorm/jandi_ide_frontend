@@ -1,6 +1,7 @@
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
+import Select from "../../../components/Select/Select";
 import styles from "./Text.module.css";
 import {
   Modal,
@@ -61,6 +62,9 @@ const Test = () => {
             <div>예시</div>
           </ModalContent>
         </Modal>
+      </div>
+      <div className={styles.button_div}>
+        <Select options={["React", "Vue", "Svelte"]} defaultValue="React" />
       </div>
     </BaseLayout>
   );

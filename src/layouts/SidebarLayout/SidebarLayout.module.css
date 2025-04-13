@@ -12,13 +12,19 @@
 .sidebar_layout {
   display: flex;
   height: 100vh;
-  background: var(--color-background);
   overflow: hidden;
+}
+
+.default_layout {
+  background: var(--color-background);
+}
+
+.Algo_layout {
+  background: var(--color-code-main);
 }
 
 .content {
   flex: 1;
-  background: var(--color-background);
   overflow-y: auto; 
   min-height: 100vh;
   box-sizing: border-box;
