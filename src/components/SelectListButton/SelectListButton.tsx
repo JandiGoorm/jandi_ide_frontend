@@ -3,6 +3,7 @@ import styles from "./SelectListButton.module.css";
 //component
 import Button from "../Button/Button";
 
+// lang, company
 interface SelectButtonListProps {
   type: string;
   selectedItems: string[];

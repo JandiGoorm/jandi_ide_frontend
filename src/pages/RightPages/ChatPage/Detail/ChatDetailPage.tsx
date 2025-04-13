@@ -12,7 +12,6 @@ const ChatDetailPage = () => {
       <Sidebar.Panel className={styles.userInfo}>
         <LeftSide />
       </Sidebar.Panel>
-
       <Sidebar.Content header={<ChatHeader />}>
         <div className={styles.content}>
           <div className={styles.flexBox}>

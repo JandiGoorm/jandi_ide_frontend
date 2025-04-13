@@ -39,6 +39,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* 이미지 드래그 방지 */
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
 }
 
 .switchHandle img {

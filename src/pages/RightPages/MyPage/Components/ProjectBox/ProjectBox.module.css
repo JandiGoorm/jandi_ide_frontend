@@ -1,0 +1,44 @@
+.project_item{
+    background-color: var(--color-project-back);
+    padding: 1rem;
+    padding-bottom: 0.7rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    -ms-overflow-style: none;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.title {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    cursor: text;
+
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-base);
+}
+
+.contents {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 3rem;
+    padding: 0.5rem 0rem;
+    font-size: var(--text-sm);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.footer button {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-text-primary)
+}
+

@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    color: var(--color-text-primary);
+    font-family: var(--font-general);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info p{
+    padding: 0.3rem 1rem;
+    text-align: center;
+}
+
+.user_name {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.user_profile {
+    width: 160px;
+    height: 160px;
+    margin: 0px auto;
+}
+
+.container hr{
+    margin: 2rem;
+    width: 40%;
+    border-color: var(--color-text-primary);
+}
+
+.explains {
+    padding: 0rem 1rem;
+    font-size: var(--text-base);
+    line-height: 1.3;
+}
+
+.button_list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.button_list Button {
+    margin: 0.5rem;
+    width: 100%;
+} 
