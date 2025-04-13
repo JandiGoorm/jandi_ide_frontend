@@ -14,6 +14,11 @@ import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
 import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 const MainPage = () => {
+  const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
+  const projectContents =
+    "이것은 구름 딥다이브의 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. ";
+  const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
+
   return (
     <BaseLayout>
       <Sidebar.Provider>
@@ -28,66 +33,14 @@ const MainPage = () => {
               <BsPinAngleFill /> 관심 기업 <AiOutlineDoubleRight />
             </Button>
             <div className={styles.companyList}>
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
-              <SimpleCompanyBox
-                id={1}
-                thumbnail="/logo_goorm.png"
-                name="구름"
-              />
+              {companies.map((company, i) => (
+                <SimpleCompanyBox
+                  key={"company" + i}
+                  id={i + 1}
+                  thumbnail="/logo_goorm.png"
+                  name={company}
+                />
+              ))}
             </div>
           </section>
 
@@ -97,36 +50,15 @@ const MainPage = () => {
               <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
             </Button>
             <div className={styles.projectList}>
-              <ProjectBox
-                id={1}
-                title="프로젝트 이름이름이름이름"
-                lang="C/C++"
-                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
-              />
-              <ProjectBox
-                id={1}
-                title="프로젝트 이름이름이름이름"
-                lang="C/C++"
-                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
-              />
-              <ProjectBox
-                id={1}
-                title="프로젝트 이름이름이름이름"
-                lang="C/C++"
-                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. 이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. 이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. 이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
-              />
-              <ProjectBox
-                id={1}
-                title="프로젝트 이름이름이름이름"
-                lang="C/C++"
-                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
-              />
-              <ProjectBox
-                id={1}
-                title="프로젝트 이름이름이름이름"
-                lang="C/C++"
-                contents="이것은 구름 딥다이브의 첫번째 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다."
-              />
+              {[...Array(4)].map((_, i) => (
+                <ProjectBox
+                  id={i}
+                  key={"project" + i}
+                  title={`${i + 1}번째 프로젝트 제목`}
+                  contents={projectContents.repeat(i + 1)}
+                  lang={langs[i]}
+                />
+              ))}
             </div>
           </section>
 
@@ -136,45 +68,18 @@ const MainPage = () => {
               <BsPinAngleFill /> 알고리즘 문제 <AiOutlineDoubleRight />
             </Button>
             <div className={styles.algorithmList}>
-              <AlgorithmBox
-                id={1}
-                title="네이버 대비 알고리즘 2일차"
-                problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                duration={60}
-                problemCount={2}
-                lang="Python"
-                levelImg="/level_5.png"
-              />
-
-              <AlgorithmBox
-                id="algo-day2"
-                title="네이버 대비 알고리즘 2일차"
-                problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                duration={60}
-                problemCount={2}
-                lang="Python"
-                levelImg="/level_5.png"
-              />
-
-              <AlgorithmBox
-                id={2}
-                title="네이버 대비 알고리즘 2일차"
-                problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                duration={60}
-                problemCount={2}
-                lang="Python"
-                levelImg="/level_5.png"
-              />
-
-              <AlgorithmBox
-                id={3}
-                title="네이버 대비 알고리즘 2일차"
-                problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                duration={60}
-                problemCount={2}
-                lang="Python"
-                levelImg="/level_5.png"
-              />
+              {[...Array(5)].map((_, i) => (
+                <AlgorithmBox
+                  id={i + 1}
+                  key={"project" + i}
+                  title={companies[i] + " 대비 알고리즘 " + (i + 1) + " 일차"}
+                  problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
+                  duration={60}
+                  problemCount={2 * (i + 1)}
+                  lang={langs[i]}
+                  levelImg="/level_5.png"
+                />
+              ))}
             </div>
           </section>
         </Sidebar.Content>
