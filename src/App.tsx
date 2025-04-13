@@ -13,6 +13,7 @@ import Regitster_done from "./pages/Auth/Register/DonePage";
 
 // 채팅
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
+import AlgorithmPage from "./pages/RightPages/AlgorithmPage/Main/AlgorithmPage";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
+
+          {/* 알고리즘 */}
+          <Route path="/algo/company" element={<AlgorithmPage />} />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>
