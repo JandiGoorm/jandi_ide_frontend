@@ -26,20 +26,26 @@ export const useSidebar = () => {
 
 interface SidebarLayoutProps {
   children?: React.ReactNode;
+  className?: string;
 }
 // Sidebar의 상태를 관리하고 하위 컴포넌트에 전달하는 Provider 입니다.
-const Provider = ({ children }: SidebarLayoutProps) => {
+const Provider = ({
+  children,
+  className = styles.default_layout,
+}: SidebarLayoutProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleToggleSidebar = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
+  console.log("className: ", className);
+
   return (
     <SidebarContext.Provider
       value={{ isOpen, toggleSidebar: handleToggleSidebar }}
     >
-      <div className={styles.sidebar_layout}>{children}</div>
+      <div className={clsx(styles.sidebar_layout, className)}>{children}</div>
     </SidebarContext.Provider>
   );
 };
