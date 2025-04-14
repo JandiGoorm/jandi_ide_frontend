@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
@@ -13,7 +14,10 @@ import Button from "../../../../components/Button/Button";
 import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
 import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
+
 const MainPage = () => {
+  const navigate = useNavigate();
+
   const projectContents =
     "이것은 구름 딥다이브의 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. ";
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
@@ -25,6 +29,11 @@ const MainPage = () => {
   const projects = [];
   const algorithms = [];
 
+  // 더보기 페이지 이동
+  const handleNaviCompany = () => navigate(`/mypage/company`);
+  const handleNaviProject = () => navigate(`/mypage/project`);
+  const handleNaviAlgorithm = () => navigate(`/mypage/algorithm`);
+
   return (
     <BaseLayout>
       <Sidebar.Provider>
@@ -35,7 +44,7 @@ const MainPage = () => {
         <Sidebar.Content header={<BasicHeader />}>
           {/* 기업 정보 */}
           <section className={styles.companySection}>
-            <Button className={styles.companyMore}>
+            <Button className={styles.companyMore} onClick={handleNaviCompany}>
               <BsPinAngleFill /> 관심 기업 <AiOutlineDoubleRight />
             </Button>
             {companies.length > 0 ? (
@@ -60,7 +69,7 @@ const MainPage = () => {
 
           {/* 프로젝트 정보 */}
           <section className={styles.projectSection}>
-            <Button className={styles.projectMore}>
+            <Button className={styles.projectMore} onClick={handleNaviProject}>
               <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
             </Button>
             {projects.length > 0 ? (
@@ -86,7 +95,10 @@ const MainPage = () => {
 
           {/* 알고리즘 정보 */}
           <section className={styles.algorithmSection}>
-            <Button className={styles.algorithmMore}>
+            <Button
+              className={styles.algorithmMore}
+              onClick={handleNaviAlgorithm}
+            >
               <BsPinAngleFill /> 알고리즘 문제 <AiOutlineDoubleRight />
             </Button>
             {algorithms.length > 0 ? (
