@@ -35,7 +35,7 @@ const MainPageLeft = () => {
 
   const handleViewProfile = () => {
     // 프로필 페이지로 이동
-    navigate("/mypage/profile");
+    navigate("/mypage");
   };
 
   return (

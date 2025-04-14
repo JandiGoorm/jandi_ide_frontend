@@ -28,7 +28,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/test" element={<Test />} />
-          <Route path="/mypage/setting" element={<SettingPage />} />
           <Route path="/chat/id" element={<ChatDetailPage />} />
 
           {/* 로그인 & 회원가입 */}
@@ -38,10 +37,11 @@ function App() {
           <Route path="/register/done" element={<Regitster_done />} />
 
           {/* 메인페이지 */}
-          <Route path="/mypage/main" element={<MainPage />} />
+          <Route path="/mypage" element={<MainPage />} />
           <Route path="/mypage/company" element={<CompanyMorePage />} />
           <Route path="/mypage/project" element={<ProjectMorePage />} />
           <Route path="/mypage/algorithm" element={<AlgorithmMorePage />} />
+          <Route path="/mypage/setting" element={<SettingPage />} />
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
