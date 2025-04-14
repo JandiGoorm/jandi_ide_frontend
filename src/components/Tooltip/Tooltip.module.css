@@ -1,0 +1,18 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip_text {
+    position: absolute;
+    bottom: -150%;
+    left: 50%;
+  
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    z-index: 9;
+    background-color: var(--color-tooltip-back);
+    color: var(--color-text-inside);
+  }
