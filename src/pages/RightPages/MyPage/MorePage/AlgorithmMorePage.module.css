@@ -1,13 +1,11 @@
-.container{
-    container-type: inline-size; 
-    container-name: left_container;
-}
-
-.companySection, .projectSection, .algorithmSection{
+.algorithmSection{
     padding: 1rem 2rem;
+
+    container-type: inline-size; 
+    container-name: algorithm_section;
 }
 
-.companyMore, .projectMore, .algorithmMore{
+.algorithmMore{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,34 +26,26 @@
     font-size: var(--text-lg);
 }
 
-.companyList {
-    width: 100%;
-    margin: 1rem 0.5rem;
-    display: flex;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
 
 
-.projectList, .algorithmList{
+.algorithmList{
     display: grid;
 	grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
     padding: 1rem;
 }
 
-@container left_container (min-width: 600px) {
-    .projectList, .algorithmList {
+@container algorithm_section (min-width: 600px) {
+    .algorithmList {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@container left_container (min-width: 900px) {
-    .projectList, .algorithmList {
+@container algorithm_section (min-width: 900px) {
+    .algorithmList {
         grid-template-columns: repeat(3, 1fr);
     }
 }
