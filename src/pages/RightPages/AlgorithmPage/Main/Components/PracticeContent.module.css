@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: var(--color-text-primary);
+    box-sizing: border-box;
+    padding: 0 2rem;
+  }
+
+  .selected_box{
+    display: flex;
+    flex-direction: column;
+    height: 15rem;
+    box-sizing: border-box;
+  }
+
+  .select_box {
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .header{
+    margin-bottom: 1rem;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .content_box{
+    height: 100%;
+    border: 1px solid var(--color-input-basic);
+    border-radius: var(--radius-input);
+    box-sizing: border-box;
+  }

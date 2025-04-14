@@ -1,0 +1,26 @@
+.content_box{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: var(--color-text-primary);
+  }
+.content_sub_box{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+  .title{
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .sub_title{
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.05rem;
+  }
+
+  .text{
+    font-size: var(--text-xl);
+    letter-spacing: 0.05rem;
+  }
