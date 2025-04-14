@@ -4,6 +4,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Sidebar, useSidebar } from "../SidebarLayout/SidebarLayout";
 import styles from "./LeftPart.module.css";
 import { useDarkModeContext } from "../../contexts/DarkmodeContext";
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+} from "../../components/Drawer/Drawer";
 
 interface LeftLayoutProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,7 +25,14 @@ const LeftPart: React.FC<LeftLayoutProps> = ({ children }) => {
       <div className={clsx(styles.top_section, isOpen && styles.open)}>
         <div className={styles.menu}>
           <div className={styles.icon_box}>
-            <GiHamburgerMenu size={28} />
+            <Drawer>
+              <DrawerTrigger>
+                <GiHamburgerMenu size={28} style={{ cursor: "pointer" }} />
+              </DrawerTrigger>
+              <DrawerContent>
+                <div>d</div>
+              </DrawerContent>
+            </Drawer>
           </div>
 
           {isOpen && (
