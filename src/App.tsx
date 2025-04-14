@@ -15,6 +15,7 @@ import Regitster_done from "./pages/Auth/Register/DonePage";
 import MainPage from "./pages/RightPages/MyPage/MainPage/MainPage";
 import CompanyMorePage from "./pages/RightPages/MyPage/MorePage/CompanyMorePage";
 import ProjectMorePage from "./pages/RightPages/MyPage/MorePage/ProjectMorePage";
+import AlgorithmMorePage from "./pages/RightPages/MyPage/MorePage/AlgorithmMorePage";
 
 // 채팅
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
@@ -40,6 +41,7 @@ function App() {
           <Route path="/mypage/main" element={<MainPage />} />
           <Route path="/mypage/company" element={<CompanyMorePage />} />
           <Route path="/mypage/project" element={<ProjectMorePage />} />
+          <Route path="/mypage/algorithm" element={<AlgorithmMorePage />} />
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
