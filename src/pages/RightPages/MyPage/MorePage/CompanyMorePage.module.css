@@ -1,0 +1,40 @@
+.my_company_section, .all_company_section {
+    padding: 1rem 2rem;
+}
+
+.companyMore, .projectMore, .algorithmMore{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    
+    color: var(--color-text-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-general);
+}
+
+.companyList {
+    display: grid;
+	grid-template-columns: repeat(1, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+@media (min-width: 720px) {
+    .companyList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1290px) {
+    .companyList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .companyList {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
