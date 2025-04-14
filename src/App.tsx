@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DarkModeProvider from "./contexts/DarkmodeProvider";
-import Home from "./pages/BasicPages/Home/Home";
+import HomePage from "./pages/RightPages/MainPage/HomePage";
 import SettingPage from "./pages/RightPages/MyPage/SettingPage/SettingPage";
 import Test from "./pages/BasicPages/Test/Test";
 import ChatDetailPage from "./pages/RightPages/ChatPage/Detail/ChatDetailPage";
@@ -23,7 +23,7 @@ function App() {
     <DarkModeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/test" element={<Test />} />
           <Route path="/mypage/setting" element={<SettingPage />} />
           <Route path="/chat/id" element={<ChatDetailPage />} />
