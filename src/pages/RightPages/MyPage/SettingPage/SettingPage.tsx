@@ -5,35 +5,18 @@ import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import styles from "./SettingPage.module.css";
 import defaultUser from "../../../../../public/defaultUser.webp";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
-
-const languageList = [
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-];
-
+import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
+import { useState } from "react";
 const SettingPage = () => {
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+
+  // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
+  const handleLanguageClick = (lang: string) => {
+    setSelectedLangs((prev) =>
+      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
+    );
+  };
+
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
@@ -72,11 +55,11 @@ const SettingPage = () => {
               <Button>언어 변경 완료</Button>
             </div>
             <div className={styles.selectLanguage_content}>
-              {languageList.map((lang) => (
-                <Button key={lang} variant="lang">
-                  {lang}
-                </Button>
-              ))}
+              <SelectButtonList
+                type={"lang"}
+                selectedItems={selectedLangs}
+                onClickItem={handleLanguageClick}
+              />
             </div>
           </div>
           <div className={styles.profileModify_container}>
