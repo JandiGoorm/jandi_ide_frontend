@@ -1,7 +1,7 @@
 import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
-import LeftSide from "../../../LeftPages/SimpleProfile";
+import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import styles from "./SettingPage.module.css";
 import defaultUser from "../../../../../public/defaultUser.webp";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
