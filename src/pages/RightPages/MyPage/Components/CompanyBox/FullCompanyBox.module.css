@@ -1,0 +1,42 @@
+.company_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-project-back);
+    padding: 1rem;
+    padding-bottom: 0.7rem;
+    border-radius: var(--radius-sm);
+    min-width: fit-content;
+}
+
+.thumbnail {
+    width: 7rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+}
+
+.name {
+    margin: 0.5rem;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: center;
+    color: var(--color-text-primary);
+    cursor: text;
+    font-weight: var(--font-weight-bold);
+}
+
+.button_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.button_list Button {
+    margin: 0.3rem;
+    width: 100%;
+    font-size: var(--text-sm);
+    min-width: fit-content;
+    white-space: nowrap;
+} 
