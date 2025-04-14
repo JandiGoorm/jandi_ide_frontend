@@ -27,7 +27,7 @@ const SettingPage = () => {
         <div className={styles.content}>
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>
-              <p>기본정보 수정</p>
+              <p className={styles.title}>기본정보 수정</p>
               <Button>닉네임 변경</Button>
             </div>
             <div className={styles.basicInfo_content}>
@@ -51,7 +51,7 @@ const SettingPage = () => {
           </div>
           <div className={styles.selectLanguage_container}>
             <div className={styles.basicInfo_header}>
-              <p>선호 언어 선택</p>
+              <p className={styles.title}>선호 언어 선택</p>
               <Button>언어 변경 완료</Button>
             </div>
             <div className={styles.selectLanguage_content}>
@@ -64,7 +64,7 @@ const SettingPage = () => {
           </div>
           <div className={styles.profileModify_container}>
             <div className={styles.basicInfo_header}>
-              <p>프로필 수정</p>
+              <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
                 <Button>프로필 초기화</Button>
                 <Button>소개글 변경</Button>

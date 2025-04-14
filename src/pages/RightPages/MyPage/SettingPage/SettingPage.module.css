@@ -10,6 +10,12 @@
   gap: 4rem;
 }
 
+.title {
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-general);
+}
 .basicInfo_header{
   display: flex;
   align-items: center;
