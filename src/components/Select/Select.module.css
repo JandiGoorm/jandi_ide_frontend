@@ -1,6 +1,6 @@
 .selectContainer {
     position: relative;
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     box-sizing: border-box;
     min-width: 10rem;
     cursor: pointer;
@@ -24,14 +24,14 @@
     top: 100%;
     left: 0;
     right: 0;
-    margin: 4px 0 0;
+    margin: 1px 0 0;
     padding: 0;
     list-style: none;
     background-color: var(--color-tooltip-back);
     border: 1px solid var(--color-input-basic);
-    border-radius: 6px;
+    border-radius: var(--radius-input);
     z-index: 10;
-    max-height: 200px;
+    max-height: 10rem;
     overflow-y: auto;
     color: var(--color-text-inside);
   }

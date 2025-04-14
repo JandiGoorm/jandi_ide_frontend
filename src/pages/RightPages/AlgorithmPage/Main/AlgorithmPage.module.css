@@ -2,3 +2,12 @@
     background-color: var(--color-code-main);
   }
   
+.company_dest{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  height: calc(100vh - 8rem);
+  margin: auto;
+}
