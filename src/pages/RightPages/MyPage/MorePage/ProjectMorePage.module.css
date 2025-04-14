@@ -1,5 +1,8 @@
 .projectSection{
     padding: 1rem 2rem;
+
+    container-type: inline-size; 
+    container-name: project_section;
 }
 
 .projectMore{
@@ -35,20 +38,14 @@
     padding: 1rem;
 }
 
-@media (min-width: 720px) {
+@container project_section (min-width: 600px) {
     .projectList {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 1296px) {
+@container project_section (min-width: 900px) {
     .projectList {
         grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1440px) {
-    .projectList {
-        grid-template-columns: repeat(4, 1fr);
     }
 }

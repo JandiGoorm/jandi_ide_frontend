@@ -1,3 +1,8 @@
+.container{
+    container-type: inline-size; 
+    container-name: left_container;
+}
+
 .companySection, .projectSection, .algorithmSection{
     padding: 1rem 2rem;
 }
@@ -43,20 +48,14 @@
     padding: 1rem;
 }
 
-@media (min-width: 720px) {
-    .projectList, .algorithmList{
+@container left_container (min-width: 600px) {
+    .projectList, .algorithmList {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 1296px) {
-    .projectList, .algorithmList{
+@container left_container (min-width: 900px) {
+    .projectList, .algorithmList {
         grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1440px) {
-    .projectList, .algorithmList{
-        grid-template-columns: repeat(4, 1fr);
     }
 }
