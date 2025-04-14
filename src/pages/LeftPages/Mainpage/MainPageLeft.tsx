@@ -30,7 +30,7 @@ const MainPageLeft = () => {
 
   const handleSetting = () => {
     // 설정 페이지로 이동
-    navigate("/mypage");
+    navigate("/mypage/setting");
   };
 
   const handleViewProfile = () => {
