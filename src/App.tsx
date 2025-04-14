@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
-          <Route path="/mypage" element={<SettingPage />} />
+          <Route path="/mypage/setting" element={<SettingPage />} />
           <Route path="/chat/id" element={<ChatDetailPage />} />
 
           {/* 로그인 & 회원가입 */}
