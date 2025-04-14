@@ -14,6 +14,7 @@ import Regitster_done from "./pages/Auth/Register/DonePage";
 // 메인 페이지
 import MainPage from "./pages/RightPages/MyPage/MainPage/MainPage";
 import CompanyMorePage from "./pages/RightPages/MyPage/MorePage/CompanyMorePage";
+import ProjectMorePage from "./pages/RightPages/MyPage/MorePage/ProjectMorePage";
 
 // 채팅
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
@@ -38,6 +39,7 @@ function App() {
           {/* 메인페이지 */}
           <Route path="/mypage/main" element={<MainPage />} />
           <Route path="/mypage/company" element={<CompanyMorePage />} />
+          <Route path="/mypage/project" element={<ProjectMorePage />} />
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
