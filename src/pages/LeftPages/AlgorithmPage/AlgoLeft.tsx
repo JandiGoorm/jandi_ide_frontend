@@ -1,70 +1,39 @@
-import clsx from "clsx";
-import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
-import {
-  Sidebar,
-  useSidebar,
-} from "../../../layouts/SidebarLayout/SidebarLayout";
 import styles from "./AlgoLeft.module.css";
-import LogoDemo from "../../../../public/LogoDemo.png";
-import Input from "../../../components/Input/Input";
-// import Button from "../../../components/Button/Button";
+import { useState } from "react";
+import LeftPart from "../../../layouts/Components/LeftPart";
+import Company from "./Components/Company";
 
-const AlgoLeft = () => {
-  const { isOpen } = useSidebar();
+import Button from "../../../components/Button/Button";
+import Custom from "./Components/Custom";
+
+const AlgoLeft: React.FC = () => {
+  const [selected, setSelected] = useState<0 | 1>(0);
 
   return (
-    <div className={styles.sidebar}>
-      <div className={clsx(styles.top_section, isOpen && styles.open)}>
-        <div className={styles.menu}>
-          <div className={styles.icon_box}>
-            <GiHamburgerMenu size={28} />
+    <LeftPart>
+      <div className={styles.container}>
+        <div className={styles.select_header}>
+          <div
+            className={`${styles.select_button} ${selected === 0 ? styles.active : ""}`}
+            onClick={() => setSelected(0)}
+          >
+            모의 코딩하기
           </div>
-
-          {isOpen && (
-            <div className={styles.logo_box}>
-              <img src={LogoDemo} alt="Logo" className={styles.logo} />
-            </div>
-          )}
+          <div
+            className={`${styles.select_button} ${selected === 1 ? styles.active : ""}`}
+            onClick={() => setSelected(1)}
+          >
+            코딩 연습하기
+          </div>
         </div>
-
-        <Sidebar.ToggleButton className={styles.toggle_button}>
-          {(isOpen) =>
-            isOpen ? (
-              <div className={styles.icon_box}>
-                <FaLongArrowAltLeft size={20} />
-                <p>접기</p>
-              </div>
-            ) : (
-              <div className={styles.icon_box}>
-                <FaLongArrowAltRight size={20} />
-                <p>열기</p>
-              </div>
-            )
-          }
-        </Sidebar.ToggleButton>
+        <div className={styles.content_box}>
+          {selected === 0 ? <Company /> : <Custom />}
+        </div>
+        <div className={styles.button_box}>
+          <Button>시작하기</Button>
+        </div>
       </div>
-
-      {isOpen && (
-        <div className={styles.container}>
-          <div className={styles.select_header}></div>
-          <div className={styles.content_box}>
-            <div className={styles.input_box}>
-              <p>회사 선택</p>
-              <Input
-                style={{
-                  boxSizing: "border-box",
-                  width: "100%",
-                }}
-              />
-            </div>
-
-            <Input />
-            <Input />
-          </div>
-        </div>
-      )}
-    </div>
+    </LeftPart>
   );
 };
 
