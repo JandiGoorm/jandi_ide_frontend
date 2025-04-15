@@ -1,0 +1,10 @@
+.container{
+    color: var(--color-text-primary);
+    overflow-x: auto;
+}
+
+.project_name{
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+}
