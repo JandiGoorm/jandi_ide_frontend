@@ -21,6 +21,9 @@ import AlgorithmMorePage from "./pages/RightPages/MyPage/MorePage/AlgorithmMoreP
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
 import AlgorithmPage from "./pages/RightPages/AlgorithmPage/Main/AlgorithmPage";
 
+//코드편집기
+import ProjectEditPage from "./pages/RightPages/CodeEditPage/ProjectEditPage/ProjectEditPage";
+
 function App() {
   return (
     <DarkModeProvider>
@@ -48,6 +51,9 @@ function App() {
 
           {/* 알고리즘 */}
           <Route path="/algo/company" element={<AlgorithmPage />} />
+
+          {/* 코드편집기 */}
+          <Route path="/project/:id" element={<ProjectEditPage />} />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>
