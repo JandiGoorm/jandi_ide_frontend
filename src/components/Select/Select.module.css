@@ -2,7 +2,7 @@
     position: relative;
     font-size: var(--text-lg);
     box-sizing: border-box;
-    min-width: 10rem;
+    /* min-width: 10rem; */
     cursor: pointer;
   }
   

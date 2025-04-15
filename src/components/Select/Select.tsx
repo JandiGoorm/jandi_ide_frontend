@@ -1,16 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Select.module.css";
 
 interface CustomSelectProps {
   options: string[];
+  value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
 }
 
-const Select = ({ options, defaultValue, onChange }: CustomSelectProps) => {
+const Select = ({
+  options,
+  value,
+  defaultValue,
+  onChange,
+}: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(defaultValue || options[0]);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelected(value);
+    }
+  }, [value]);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
