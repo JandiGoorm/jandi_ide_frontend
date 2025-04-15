@@ -34,7 +34,8 @@ const SettingPage = () => {
               <Input
                 style={{
                   boxSizing: "border-box",
-                  width: "30%",
+                  width: "40%",
+                  minWidth: "15rem",
                 }}
                 inputSize="lg"
                 placeholder="Email"
@@ -42,7 +43,8 @@ const SettingPage = () => {
               <Input
                 style={{
                   boxSizing: "border-box",
-                  width: "20%",
+                  width: "30%",
+                  minWidth: "10rem",
                 }}
                 inputSize="lg"
                 placeholder="UserName"
