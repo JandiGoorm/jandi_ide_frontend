@@ -38,6 +38,9 @@
     border: 1px solid var(--color-text-sub);
   }
   
+  .today_cell{
+    border: 3px solid var(--color-text-side-on);
+  }
   
   .dayNumber {
     padding: 0.25rem;
@@ -48,6 +51,6 @@
   
   .today {
     color: var(--color-text-side-on);
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
   }
   

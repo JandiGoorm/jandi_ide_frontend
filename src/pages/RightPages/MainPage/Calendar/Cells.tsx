@@ -41,7 +41,7 @@ const Cells = ({ currentMonth, onDateClick, selectedDate }: Props) => {
       days.push(
         <div
           key={num}
-          className={`${styles.dayCell} ${!isCurrentMonth ? styles.notCurrentMonth : styles.currentMonth}`}
+          className={`${styles.dayCell} ${!isCurrentMonth ? styles.notCurrentMonth : styles.currentMonth} ${isToday ? styles.today_cell : ""}`}
           onClick={() => {
             onDateClick(cloneDay);
           }}
