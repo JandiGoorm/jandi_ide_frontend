@@ -70,12 +70,15 @@ const MainPage = () => {
 
             {/* 프로젝트 정보 */}
             <section className={styles.projectSection}>
-              <Button
-                className={styles.projectMore}
-                onClick={handleNaviProject}
-              >
-                <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
-              </Button>
+              <div className={styles.header}>
+                <Button
+                  className={styles.projectMore}
+                  onClick={handleNaviProject}
+                >
+                  <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
+                </Button>
+                <Button>깃허브에서 불러오기</Button>
+              </div>
               {projects.length > 0 ? (
                 <div className={styles.projectList}>
                   {projects.map((project, i) => (
@@ -99,12 +102,14 @@ const MainPage = () => {
 
             {/* 알고리즘 정보 */}
             <section className={styles.algorithmSection}>
-              <Button
-                className={styles.algorithmMore}
-                onClick={handleNaviAlgorithm}
-              >
-                <BsPinAngleFill /> 알고리즘 문제 <AiOutlineDoubleRight />
-              </Button>
+              <div className={styles.header}>
+                <Button
+                  className={styles.algorithmMore}
+                  onClick={handleNaviAlgorithm}
+                >
+                  <BsPinAngleFill /> 알고리즘 문제 <AiOutlineDoubleRight />
+                </Button>
+              </div>
               {algorithms.length > 0 ? (
                 <div className={styles.algorithmList}>
                   {algorithms.map((algorithm, i) => (
