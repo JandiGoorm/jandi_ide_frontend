@@ -33,7 +33,7 @@ const Provider = ({
   children,
   className = styles.default_layout,
 }: SidebarLayoutProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => window.innerWidth > 768);
 
   const handleToggleSidebar = useCallback(() => {
     setIsOpen((prev) => !prev);
