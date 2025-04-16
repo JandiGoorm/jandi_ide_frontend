@@ -14,6 +14,12 @@ import Button from "../../../../components/Button/Button";
 import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
 import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
+import {
+  Modal,
+  ModalTrigger,
+  ModalContent,
+} from "../../../../components/Modal/Modal";
+import AddProject from "../Components/AddModal/AddProject";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -77,7 +83,14 @@ const MainPage = () => {
                 >
                   <BsPinAngleFill /> 대표 프로젝트 <AiOutlineDoubleRight />
                 </Button>
-                <Button>깃허브에서 불러오기</Button>
+                <Modal>
+                  <ModalTrigger>
+                    <Button>깃허브에서 불러오기</Button>
+                  </ModalTrigger>
+                  <ModalContent>
+                    <AddProject />
+                  </ModalContent>
+                </Modal>
               </div>
               {projects.length > 0 ? (
                 <div className={styles.projectList}>
