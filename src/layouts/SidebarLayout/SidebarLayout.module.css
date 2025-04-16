@@ -34,3 +34,8 @@
   max-width: 1440px;
   margin: 0 auto;
 }
+
+.full_width {
+  max-width: none;
+  margin: 0;
+}

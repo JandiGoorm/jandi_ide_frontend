@@ -109,13 +109,25 @@ const Panel = ({ className, children, ...props }: SidebarProps) => {
 
 interface ContentProps extends React.HTMLProps<HTMLDivElement> {
   header?: React.ReactNode;
+  fullWidth?: boolean;
 }
 
 // 콘텐츠를 나타내는 컴포넌트입니다. (오른쪽 콘텐츠 영역)
-const Content = ({ className, header, children, ...props }: ContentProps) => {
+const Content = ({
+  className,
+  header,
+  children,
+  fullWidth,
+  ...props
+}: ContentProps) => {
   return (
     <div className={clsx(styles.content, className)} {...props}>
-      <div className={styles.main_content}>
+      <div
+        className={clsx(
+          styles.main_content,
+          fullWidth && styles.full_width // fullWidth가 true면 다른 스타일 적용
+        )}
+      >
         {header}
         {children}
       </div>
