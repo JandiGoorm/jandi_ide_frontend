@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DarkModeProvider from "./contexts/DarkmodeProvider";
+import { PageEndPoints } from "./constants/api";
+
 import HomePage from "./pages/RightPages/MainPage/HomePage";
 import SettingPage from "./pages/RightPages/MyPage/SettingPage/SettingPage";
 import Test from "./pages/BasicPages/Test/Test";
@@ -30,32 +32,50 @@ function App() {
     <DarkModeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/chat/id" element={<ChatDetailPage />} />
+          <Route path={PageEndPoints.HOME} element={<HomePage />} />
+          <Route path={PageEndPoints.TEST} element={<Test />} />
 
           {/* 로그인 & 회원가입 */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/callback" element={<LoginCallback />} />
-          <Route path="/register/language" element={<Regitster_lang />} />
-          <Route path="/register/company" element={<Regitster_company />} />
-          <Route path="/register/done" element={<Regitster_done />} />
+          <Route path={PageEndPoints.LOGIN} element={<LoginPage />} />
+          <Route path={PageEndPoints.CALLBACK} element={<LoginCallback />} />
+          <Route
+            path={PageEndPoints.LOGIN_LANGUAGE}
+            element={<Regitster_lang />}
+          />
+          <Route
+            path={PageEndPoints.LOGIN_COMPANY}
+            element={<Regitster_company />}
+          />
+          <Route path={PageEndPoints.LOGIN_DONE} element={<Regitster_done />} />
 
-          {/* 메인페이지 */}
-          <Route path="/mypage" element={<MainPage />} />
-          <Route path="/mypage/company" element={<CompanyMorePage />} />
-          <Route path="/mypage/project" element={<ProjectMorePage />} />
-          <Route path="/mypage/algorithm" element={<AlgorithmMorePage />} />
-          <Route path="/mypage/setting" element={<SettingPage />} />
+          {/* 마이페이지 */}
+          <Route path={PageEndPoints.MYPAGE} element={<MainPage />} />
+          <Route
+            path={PageEndPoints.MY_COMPANY}
+            element={<CompanyMorePage />}
+          />
+          <Route
+            path={PageEndPoints.MY_PROJECT}
+            element={<ProjectMorePage />}
+          />
+          <Route path={PageEndPoints.MY_ALGO} element={<AlgorithmMorePage />} />
+          <Route path={PageEndPoints.SETTING} element={<SettingPage />} />
 
           {/* 채팅 */}
-          <Route path="/chat" element={<ChatMainPage />} />
+          <Route path={PageEndPoints.CHAT_MAIN} element={<ChatMainPage />} />
+          <Route
+            path={PageEndPoints.CHAT_DETAIL}
+            element={<ChatDetailPage />}
+          />
 
           {/* 알고리즘 */}
-          <Route path="/algo/company" element={<AlgorithmPage />} />
+          <Route path={PageEndPoints.ALGO_MAIN} element={<AlgorithmPage />} />
 
           {/* 코드편집기 */}
-          <Route path="/project/:id" element={<ProjectEditPage />} />
+          <Route
+            path={PageEndPoints.GITHUB_PROJECT}
+            element={<ProjectEditPage />}
+          />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>
