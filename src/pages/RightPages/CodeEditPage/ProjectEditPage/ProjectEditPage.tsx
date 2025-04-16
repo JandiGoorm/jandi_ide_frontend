@@ -21,7 +21,8 @@ const ProjectEditPage = () => {
             <Editor
               height="100%"
               theme={isDarkMode ? "vs-dark" : "light"}
-              defaultLanguage="react"
+              defaultLanguage="java"
+              path="file.java"
               options={{
                 // readOnly: true,
                 minimap: {
