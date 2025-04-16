@@ -6,18 +6,17 @@ const LoginButton = () => {
   const { isDarkMode } = useDarkModeContext();
 
   // 로그인 버튼 클릭 시 로그인 or 회원가입 진행
-  const handleLogin = () => {
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     console.log("클릭됨");
-    // 만약 기존회원이라면 로그인 진행
     const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-    console.log(clientId);
-    // const redirectUri = import.meta.env.VITE_RED_URL;
 
+    // 깃허브 로그인으로 리다이렉트
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}`;
   };
 
   return (
-    <Button onClick={handleLogin}>
+    <Button onClick={(e) => handleLogin(e)}>
       <div className={styles.inner}>
         <img
           className={styles.github_logo}
