@@ -14,7 +14,18 @@ import {
   DropdownContent,
   DropdownTrigger,
 } from "../../../components/Dropdown/Dropdown";
+import useAxios from "../../../hooks/useAxios";
+import { useEffect } from "react";
+import { APIEndPoints } from "../../../constants/api";
 const Test = () => {
+  const { fetchData: getApi } = useAxios();
+
+  useEffect(() => {
+    getApi({ method: "GET", url: `${APIEndPoints.MY_INFO}` })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, [getApi]);
+
   return (
     <BaseLayout>
       <div className={styles.button_div}>
@@ -89,6 +100,7 @@ const Test = () => {
           </DropdownContent>
         </Dropdown>
       </div>
+      <div className={styles.button_div}></div>
     </BaseLayout>
   );
 };
