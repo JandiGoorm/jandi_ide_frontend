@@ -1,39 +1,22 @@
 import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
-import LeftSide from "../../../LeftPages/SimpleProfile";
+import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import styles from "./SettingPage.module.css";
 import defaultUser from "../../../../../public/defaultUser.webp";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
-
-const languageList = [
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "C++",
-  "Go",
-  "Java",
-];
-
+import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
+import { useState } from "react";
 const SettingPage = () => {
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+
+  // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
+  const handleLanguageClick = (lang: string) => {
+    setSelectedLangs((prev) =>
+      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
+    );
+  };
+
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
@@ -44,14 +27,15 @@ const SettingPage = () => {
         <div className={styles.content}>
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>
-              <p>기본정보 수정</p>
+              <p className={styles.title}>기본정보 수정</p>
               <Button>닉네임 변경</Button>
             </div>
             <div className={styles.basicInfo_content}>
               <Input
                 style={{
                   boxSizing: "border-box",
-                  width: "30%",
+                  width: "40%",
+                  minWidth: "15rem",
                 }}
                 inputSize="lg"
                 placeholder="Email"
@@ -59,7 +43,8 @@ const SettingPage = () => {
               <Input
                 style={{
                   boxSizing: "border-box",
-                  width: "20%",
+                  width: "30%",
+                  minWidth: "10rem",
                 }}
                 inputSize="lg"
                 placeholder="UserName"
@@ -68,20 +53,20 @@ const SettingPage = () => {
           </div>
           <div className={styles.selectLanguage_container}>
             <div className={styles.basicInfo_header}>
-              <p>선호 언어 선택</p>
+              <p className={styles.title}>선호 언어 선택</p>
               <Button>언어 변경 완료</Button>
             </div>
             <div className={styles.selectLanguage_content}>
-              {languageList.map((lang) => (
-                <Button key={lang} variant="lang">
-                  {lang}
-                </Button>
-              ))}
+              <SelectButtonList
+                type={"lang"}
+                selectedItems={selectedLangs}
+                onClickItem={handleLanguageClick}
+              />
             </div>
           </div>
           <div className={styles.profileModify_container}>
             <div className={styles.basicInfo_header}>
-              <p>프로필 수정</p>
+              <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
                 <Button>프로필 초기화</Button>
                 <Button>소개글 변경</Button>

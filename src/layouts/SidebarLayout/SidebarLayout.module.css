@@ -23,6 +23,9 @@
   background: var(--color-code-main);
 }
 
+.Code_layout {
+  background-color: var(--color-menu-background);
+}
 .content {
   flex: 1;
   overflow-y: auto; 
@@ -33,4 +36,9 @@
 .main_content {
   max-width: 1440px;
   margin: 0 auto;
+}
+
+.full_width {
+  max-width: none;
+  margin: 0;
 }

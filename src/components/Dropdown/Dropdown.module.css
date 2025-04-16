@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .content {
+    position: absolute;
+    z-index: 9999;
+    background-color: var(--color-menu-background);
+    font-size: var(--text-xl);
+    color: var(--color-text-primary);
+    border-radius: var(--radius-md);
+  }
+  
+  .trigger {
+    width: fit-content;
+    cursor: pointer;
+  }

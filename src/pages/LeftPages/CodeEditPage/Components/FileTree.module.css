@@ -1,0 +1,42 @@
+.tree {
+    list-style: none;
+    padding-left: 1rem;
+  }
+  
+  .node {
+    cursor: pointer;
+    user-select: none;
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .folder {
+    font-weight: var(--font-weight-bold);
+  }
+  
+  .file {
+    margin-left: 1rem;
+    font-weight: var(--font-weight-normal);
+  }
+  
+  .collapsed::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 0.1rem;
+    transform: rotate(0deg);
+    transition: transform 0.5s;
+  }
+  
+  .expanded::before {
+    content: "▼";
+    display: inline-block;
+    margin-right: 0.1rem;
+    transform: rotate(0deg);
+    transition: transform 0.5s;
+  }
+
+  .selected {
+    color: var(--color-text-side-on);
+  }
+  

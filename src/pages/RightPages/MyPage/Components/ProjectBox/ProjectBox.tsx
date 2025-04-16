@@ -1,10 +1,16 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ProjectBox.module.css";
 import LangTag from "../../../../LeftPages/Mainpage/components/LangTag";
+import Button from "../../../../../components/Button/Button";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+} from "../../../../../components/Dropdown/Dropdown";
 
 //icons
 import { MdMoreVert } from "react-icons/md";
+import DropDownMenu from "../Contents/DropdownMenu";
 
 interface ProjectBoxProps {
   id: number;
@@ -20,13 +26,8 @@ export default function ProjectBox({
   lang,
 }: ProjectBoxProps) {
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
 
-  const handleClick = () => navigate(`/mypage/project/${id}`);
-  const handleMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(!showMenu);
-  };
+  const handleClick = () => navigate(`/project/${id}`);
 
   return (
     <div className={styles.project_item} onClick={handleClick}>
@@ -39,9 +40,16 @@ export default function ProjectBox({
       {/* 하단 - 언어태그, 더보기 버튼 */}
       <div className={styles.footer}>
         <LangTag langList={[lang]} />
-        <button onClick={handleMenu}>
-          <MdMoreVert />
-        </button>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button variant="none" size="sm">
+              <MdMoreVert size={24} />
+            </Button>
+          </DropdownTrigger>
+          <DropdownContent>
+            <DropDownMenu menu="프로젝트" />
+          </DropdownContent>
+        </Dropdown>
       </div>
 
       {/* 더보기 버튼 처리 */}

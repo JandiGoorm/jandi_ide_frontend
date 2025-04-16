@@ -22,6 +22,9 @@ import AlgorithmMorePage from "./pages/RightPages/MyPage/MorePage/AlgorithmMoreP
 import ChatMainPage from "./pages/RightPages/ChatPage/Main/ChatMainPage";
 import AlgorithmPage from "./pages/RightPages/AlgorithmPage/Main/AlgorithmPage";
 
+//코드편집기
+import ProjectEditPage from "./pages/RightPages/CodeEditPage/ProjectEditPage/ProjectEditPage";
+
 function App() {
   return (
     <DarkModeProvider>
@@ -29,7 +32,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/test" element={<Test />} />
-          <Route path="/mypage/setting" element={<SettingPage />} />
           <Route path="/chat/id" element={<ChatDetailPage />} />
 
           {/* 로그인 & 회원가입 */}
@@ -40,16 +42,20 @@ function App() {
           <Route path="/register/done" element={<Regitster_done />} />
 
           {/* 메인페이지 */}
-          <Route path="/mypage/main" element={<MainPage />} />
+          <Route path="/mypage" element={<MainPage />} />
           <Route path="/mypage/company" element={<CompanyMorePage />} />
           <Route path="/mypage/project" element={<ProjectMorePage />} />
           <Route path="/mypage/algorithm" element={<AlgorithmMorePage />} />
+          <Route path="/mypage/setting" element={<SettingPage />} />
 
           {/* 채팅 */}
           <Route path="/chat" element={<ChatMainPage />} />
 
           {/* 알고리즘 */}
           <Route path="/algo/company" element={<AlgorithmPage />} />
+
+          {/* 코드편집기 */}
+          <Route path="/project/:id" element={<ProjectEditPage />} />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>

@@ -42,6 +42,7 @@
 .logo{
   height: 1.5rem;
   align-items: center;
+  cursor: pointer;
 }
 
 .toggle_button {

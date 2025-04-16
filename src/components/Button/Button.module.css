@@ -38,7 +38,7 @@
   
   .btn_none {
     background: transparent;
-    color: var(--color-text-sub);
+    /* color: var(--color-text-sub); */
     padding: 0rem;
   }
 

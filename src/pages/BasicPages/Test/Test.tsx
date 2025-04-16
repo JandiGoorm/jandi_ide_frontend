@@ -2,12 +2,18 @@ import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
 import Select from "../../../components/Select/Select";
+import Tooltip from "../../../components/Tooltip/Tooltip";
 import styles from "./Text.module.css";
 import {
   Modal,
   ModalContent,
   ModalTrigger,
 } from "../../../components/Modal/Modal";
+import {
+  Dropdown,
+  DropdownContent,
+  DropdownTrigger,
+} from "../../../components/Dropdown/Dropdown";
 const Test = () => {
   return (
     <BaseLayout>
@@ -65,6 +71,23 @@ const Test = () => {
       </div>
       <div className={styles.button_div}>
         <Select options={["React", "Vue", "Svelte"]} defaultValue="React" />
+      </div>
+      <div className={styles.button_div}>
+        <Tooltip text={"tooltip"}>
+          <p className={styles.text}>툴팁 테스트</p>
+        </Tooltip>
+      </div>
+      <div className={styles.button_div}>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button>드롭다운</Button>
+          </DropdownTrigger>
+          <DropdownContent>
+            <div>
+              <p>ss</p>
+            </div>
+          </DropdownContent>
+        </Dropdown>
       </div>
     </BaseLayout>
   );

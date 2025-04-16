@@ -4,6 +4,7 @@ import Company from "./Components/Company";
 
 import Button from "../../../components/Button/Button";
 import Custom from "./Components/Custom";
+import { useNavigate } from "react-router-dom";
 
 type Mode = "company" | "practice";
 
@@ -13,6 +14,15 @@ interface AlgoLeftProps {
 }
 
 const AlgoLeft: React.FC<AlgoLeftProps> = ({ selected, setSelected }) => {
+  const navigate = useNavigate();
+  const startAlgo = () => {
+    if (selected === "company") {
+      navigate("/algo/test/company");
+    } else {
+      navigate("/algo/test/custom");
+    }
+  };
+
   return (
     <LeftPart>
       <div className={styles.container}>
@@ -34,7 +44,13 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({ selected, setSelected }) => {
           {selected === "company" ? <Company /> : <Custom />}
         </div>
         <div className={styles.button_box}>
-          <Button>시작하기</Button>
+          <Button
+            onClick={() => {
+              startAlgo();
+            }}
+          >
+            시작하기
+          </Button>
         </div>
       </div>
     </LeftPart>

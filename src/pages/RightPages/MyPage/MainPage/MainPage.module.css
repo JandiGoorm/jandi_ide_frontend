@@ -45,7 +45,7 @@
     display: grid;
 	grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
 @container left_container (min-width: 600px) {
@@ -59,3 +59,16 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 760px) {
+    .header {
+      flex-direction: column;
+      justify-content: inherit;
+      gap: 1rem;
+    }
+  }

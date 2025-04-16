@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

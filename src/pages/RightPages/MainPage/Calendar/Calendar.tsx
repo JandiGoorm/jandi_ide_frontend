@@ -1,4 +1,4 @@
-import { addMonths, format, subMonths } from "date-fns";
+import { format } from "date-fns";
 import styles from "./Calendar.module.css";
 import Header from "./Header";
 import { useState } from "react";
@@ -9,17 +9,27 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState("");
   const onDateClick = (day: Date) => setSelectedDate(format(day, "yyyy-MM-dd"));
-  const preMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
-  const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
   const goToday = () => setCurrentMonth(new Date());
+
+  const onChangeYear = (year: number) => {
+    const newDate = new Date(currentMonth);
+    newDate.setFullYear(year);
+    setCurrentMonth(newDate);
+  };
+
+  const onChangeMonth = (month: number) => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(month - 1);
+    setCurrentMonth(newDate);
+  };
 
   return (
     <div className={styles.container}>
       <Header
         currentMonth={currentMonth}
-        preMonth={preMonth}
-        nextMonth={nextMonth}
         goToday={goToday}
+        onChangeYear={onChangeYear}
+        onChangeMonth={onChangeMonth}
       />
       <Days />
       <Cells

@@ -2,11 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AlgorithmBox.module.css";
 import LangTag from "../../../../LeftPages/Mainpage/components/LangTag";
+import Button from "../../../../../components/Button/Button";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+} from "../../../../../components/Dropdown/Dropdown";
 
 //icons
 import { BsPinAngle } from "react-icons/bs";
 import { BsPinAngleFill } from "react-icons/bs";
 import { MdMoreVert } from "react-icons/md";
+import DropDownMenu from "../Contents/DropdownMenu";
 
 interface AlgorithmBoxProps {
   id: number;
@@ -29,16 +36,11 @@ export default function AlgorithmBox({
 }: AlgorithmBoxProps) {
   const navigate = useNavigate();
   const [isPinned, setIsPinned] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
 
   const handleClick = () => navigate(`/mypage/problem/${id}`);
   const handlePin = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPinned(!isPinned);
-  };
-  const handleMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowMenu(!showMenu);
   };
 
   return (
@@ -65,12 +67,19 @@ export default function AlgorithmBox({
       <div className={styles.footer}>
         <LangTag langList={[lang]} />
         <div className={styles.buttons}>
-          <button onClick={handlePin}>
-            {isPinned ? <BsPinAngleFill /> : <BsPinAngle />}
-          </button>
-          <button onClick={handleMenu}>
-            <MdMoreVert />
-          </button>
+          <Button variant="none" size="sm" onClick={handlePin}>
+            {isPinned ? <BsPinAngleFill size={24} /> : <BsPinAngle size={24} />}
+          </Button>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button variant="none" size="sm">
+                <MdMoreVert size={24} />
+              </Button>
+            </DropdownTrigger>
+            <DropdownContent>
+              <DropDownMenu menu="문제집" />
+            </DropdownContent>
+          </Dropdown>
         </div>
       </div>
 
