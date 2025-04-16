@@ -23,6 +23,9 @@
   background: var(--color-code-main);
 }
 
+.Code_layout {
+  background-color: var(--color-menu-background);
+}
 .content {
   flex: 1;
   overflow-y: auto; 

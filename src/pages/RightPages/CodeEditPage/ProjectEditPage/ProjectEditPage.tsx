@@ -1,7 +1,6 @@
 import styles from "./ProjectEditPage.module.css";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
-import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import LeftSide from "../../../LeftPages/CodeEditPage/ProjectLeft";
 import Editor from "@monaco-editor/react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
@@ -11,12 +10,12 @@ const ProjectEditPage = () => {
 
   return (
     <BaseLayout>
-      <Sidebar.Provider>
+      <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
           <LeftSide />
         </Sidebar.Panel>
 
-        <Sidebar.Content header={<BasicHeader />} fullWidth>
+        <Sidebar.Content fullWidth>
           <div className={styles.container}>
             <Editor
               height="100%"
