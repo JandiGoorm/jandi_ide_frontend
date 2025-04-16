@@ -24,4 +24,6 @@ export const PageEndPoints = {
 
 export const APIEndPoints = {
   LOGIN: "/users/login",
+  REFRESH: "/users/refresh",
+  MY_INFO: "/users/me",
 };
