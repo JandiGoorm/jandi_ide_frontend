@@ -72,17 +72,7 @@ const ModalContent = ({ children }: ModalContentProps) => {
         <>
           <div className={styles.backdrop} onClick={closeModal} />
           <div className={styles.container}>
-            <MdClose
-              onClick={closeModal}
-              style={{
-                position: "absolute",
-                top: "1rem",
-                right: "1rem",
-                cursor: "pointer",
-                color: "black",
-              }}
-              size={20}
-            />
+            <MdClose onClick={closeModal} className={styles.close} size={24} />
             {children}
           </div>
         </>
