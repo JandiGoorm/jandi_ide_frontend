@@ -1,19 +1,19 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./LoginButton.module.css";
 import Button from "../../../components/Button/Button";
 import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 
 const LoginButton = () => {
-  const navigate = useNavigate();
   const { isDarkMode } = useDarkModeContext();
 
   // 로그인 버튼 클릭 시 로그인 or 회원가입 진행
   const handleLogin = () => {
+    console.log("클릭됨");
     // 만약 기존회원이라면 로그인 진행
-    // 로그인 진행...
+    const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+    console.log(clientId);
+    // const redirectUri = import.meta.env.VITE_RED_URL;
 
-    // 만약 신규 회원이라면 회원가입 진행
-    navigate("/register/language");
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}`;
   };
 
   return (
