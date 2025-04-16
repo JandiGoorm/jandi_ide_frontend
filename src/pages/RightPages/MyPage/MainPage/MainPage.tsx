@@ -19,7 +19,7 @@ import {
   ModalTrigger,
   ModalContent,
 } from "../../../../components/Modal/Modal";
-import AddProject from "../Components/AddModal/AddProject";
+import AddProject from "../Components/Contents/AddProject";
 
 const MainPage = () => {
   const navigate = useNavigate();
