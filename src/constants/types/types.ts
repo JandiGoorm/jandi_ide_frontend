@@ -12,3 +12,12 @@ export interface User {
   updatedAt: string;
   role: UserRole;
 }
+
+export interface Project {
+  createdAt: string;
+  description: string;
+  githubName: string;
+  id: number;
+  name: string;
+  owner: User;
+}

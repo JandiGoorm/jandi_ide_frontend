@@ -10,6 +10,8 @@ const axiosInstance = axios.create({
 const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.MY_INFO}`,
   `GET:${APIEndPoints.GIT_REPO}`,
+  `POST:${APIEndPoints.ADD_PROJECT}`,
+  `GET:${APIEndPoints.MY_PROJECT}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {

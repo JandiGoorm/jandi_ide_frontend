@@ -3,12 +3,8 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import styles from "./MainPage.module.css";
-
-//icons
 import { BsPinAngleFill } from "react-icons/bs";
 import { AiOutlineDoubleRight } from "react-icons/ai";
-
-//components
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
 import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
@@ -21,23 +17,38 @@ import {
 } from "../../../../components/Modal/Modal";
 import AddProject from "../Components/Contents/AddProject";
 import { useAuth } from "../../../../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import useAxios from "../../../../hooks/useAxios";
+import { buildPath } from "../../../../utils/buildPath";
+import { APIEndPoints } from "../../../../constants/api";
+import { Project } from "../../../../constants/types/types";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { fetchData: getApi } = useAxios();
+  const id = user?.id;
+  const [projects, setProjects] = useState<Project[]>([]);
 
-  const projectContents =
-    "이것은 구름 딥다이브의 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. ";
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
-
   const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
-  const projects = ["구름 프로젝트", "구름구름 프로젝트", "프로젝트 이름"];
   const algorithms = ["네이버 대비 알고리즘", "알고리즘 연습", "PS 연습"];
 
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(`/mypage/company`);
   const handleNaviProject = () => navigate(`/mypage/project`);
   const handleNaviAlgorithm = () => navigate(`/mypage/algorithm`);
+
+  useEffect(() => {
+    if (!id) return;
+
+    getApi({
+      method: "GET",
+      url: buildPath(APIEndPoints.MY_PROJECT, { id }),
+    }).then((res) => {
+      setProjects(res?.data);
+    });
+  }, [getApi, user]);
 
   return (
     <BaseLayout>
@@ -100,9 +111,9 @@ const MainPage = () => {
                     <ProjectBox
                       id={i}
                       key={"project" + i}
-                      title={project}
-                      contents={projectContents.repeat(i + 1)}
-                      lang={langs[i]}
+                      title={project.name}
+                      contents={project.description}
+                      lang={langs[i % langs.length]}
                     />
                   ))}
                 </div>

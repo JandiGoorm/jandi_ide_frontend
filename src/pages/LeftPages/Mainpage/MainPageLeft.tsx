@@ -4,7 +4,7 @@ import styles from "./MainPage.module.css";
 import LeftPart from "../../../layouts/Components/LeftPart";
 import LangTag from "./components/LangTag";
 import Button from "../../../components/Button/Button";
-import { User } from "../../../constants/types/User";
+import { User } from "../../../constants/types/types";
 
 interface MainPageLeftProps {
   user: User | null;

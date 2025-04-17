@@ -3,7 +3,7 @@ import AuthService from "../apis/auth";
 import { AuthContext } from "./AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageEndPoints } from "../constants/api";
-import { User } from "../constants/types/User";
+import { User } from "../constants/types/types";
 
 interface AuthProviderProps {
   children: ReactNode;
