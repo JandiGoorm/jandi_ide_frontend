@@ -7,16 +7,26 @@ import { Tree } from "../../../constants/types/types";
 
 interface ProjectLeftProps {
   fileTree: Tree[] | null;
+  selectedFile: string | null;
+  setSelectedFile: (file: string | null) => void;
 }
 
-const ProjectLeft: React.FC<ProjectLeftProps> = ({ fileTree }) => {
+const ProjectLeft: React.FC<ProjectLeftProps> = ({
+  fileTree,
+  selectedFile,
+  setSelectedFile,
+}) => {
   const fileData = fileTree ? buildTree(fileTree) : [];
 
   return (
     <LeftPart>
       <div className={styles.container}>
         <div className={styles.project_name}> PROJECT 1 </div>
-        <FileTree tree={fileData} />
+        <FileTree
+          tree={fileData}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+        />
         <Button style={{ marginTop: "2rem" }}>GitHub 보기</Button>
       </div>
     </LeftPart>

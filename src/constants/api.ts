@@ -33,4 +33,5 @@ export const APIEndPoints = {
 
   ADD_PROJECT: "/projects",
   MANAGE_PROJECT: "/projects/:id",
+  PROJECT_BLOB: "/projects/:id/blob",
 };

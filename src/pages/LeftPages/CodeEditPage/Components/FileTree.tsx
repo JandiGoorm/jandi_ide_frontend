@@ -5,11 +5,11 @@ import { FaFile, FaFolder } from "react-icons/fa";
 
 type Props = {
   tree: Node[];
+  selectedFile: string | null;
+  setSelectedFile: (file: string | null) => void;
 };
 
-const FileTree: React.FC<Props> = ({ tree }) => {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-
+const FileTree: React.FC<Props> = ({ tree, selectedFile, setSelectedFile }) => {
   return (
     <ul className={styles.tree}>
       {tree.map((node) => (

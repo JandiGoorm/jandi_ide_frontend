@@ -13,6 +13,7 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.ADD_PROJECT}`,
   `GET:${APIEndPoints.MY_PROJECT}`,
   `GET:${APIEndPoints.MANAGE_PROJECT}`,
+  `GET:${APIEndPoints.PROJECT_BLOB}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
