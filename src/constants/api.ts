@@ -26,4 +26,6 @@ export const APIEndPoints = {
   LOGIN: "/users/login",
   REFRESH: "/users/refresh",
   MY_INFO: "/users/me",
+
+  GIT_REPO: "/users/:id/repos",
 };

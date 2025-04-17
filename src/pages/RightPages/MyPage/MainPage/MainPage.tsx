@@ -90,7 +90,7 @@ const MainPage = () => {
                     <Button>깃허브에서 불러오기</Button>
                   </ModalTrigger>
                   <ModalContent>
-                    <AddProject />
+                    <AddProject user={user} />
                   </ModalContent>
                 </Modal>
               </div>
