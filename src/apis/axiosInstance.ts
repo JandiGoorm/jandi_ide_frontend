@@ -14,8 +14,6 @@ axiosInstance.interceptors.request.use((config) => {
   const url = config.url;
   const requestKey = `${method}:${url}`;
 
-  console.log("interceptor", { method, url, requestKey });
-
   const isRequiredAuth = useHeaderEndPoints.has(requestKey);
 
   console.log(isRequiredAuth);
