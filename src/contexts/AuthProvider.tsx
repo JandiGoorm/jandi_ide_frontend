@@ -3,24 +3,10 @@ import AuthService from "../apis/auth";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import { PageEndPoints } from "../constants/api";
+import { User } from "../constants/types/User";
 
 interface AuthProviderProps {
   children: ReactNode;
-}
-
-export type UserRole = "ADMIN" | "USER";
-
-interface User {
-  id: number;
-  githubId: string;
-  profileImage: string;
-  introduction: string;
-  email: string;
-  nickName: string;
-  githubUsername: string;
-  createdAt: string;
-  updatedAt: string;
-  role: UserRole;
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
