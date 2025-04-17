@@ -20,9 +20,11 @@ import {
   ModalContent,
 } from "../../../../components/Modal/Modal";
 import AddProject from "../Components/Contents/AddProject";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const projectContents =
     "이것은 구름 딥다이브의 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. ";
@@ -41,7 +43,7 @@ const MainPage = () => {
     <BaseLayout>
       <Sidebar.Provider>
         <Sidebar.Panel className={styles.panner}>
-          <LeftSide />
+          <LeftSide user={user} />
         </Sidebar.Panel>
 
         <Sidebar.Content header={<BasicHeader />}>
