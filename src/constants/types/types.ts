@@ -21,3 +21,17 @@ export interface Project {
   name: string;
   owner: User;
 }
+
+export interface ProjectInfo {
+  sha: string;
+  tree: Tree;
+}
+
+export interface Tree {
+  mode: string;
+  path: string;
+  sha: string;
+  size: number;
+  type: string;
+  url: string;
+}

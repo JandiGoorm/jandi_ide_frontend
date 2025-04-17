@@ -3,22 +3,14 @@ import { buildTree } from "../../../utils/buildTree";
 import styles from "./ProjectLeft.module.css";
 import FileTree from "./Components/FileTree";
 import Button from "../../../components/Button/Button";
+import { Tree } from "../../../constants/types/types";
 
-const fileStructure: { path: string; type: "blob" | "tree" }[] = [
-  { path: "index.html", type: "blob" },
-  { path: "package.json", type: "blob" },
-  { path: "src", type: "tree" },
-  { path: "src/app.jsx", type: "blob" },
-  { path: "src/app.css", type: "blob" },
-  { path: "src/component", type: "tree" },
-  { path: "src/component/Best.jsx", type: "blob" },
-  { path: "src/component/BuyList.jsx", type: "blob" },
-  { path: "src/component/Confirm.jsx", type: "blob" },
-  { path: "src/component/Footer.jsx", type: "blob" },
-];
+interface ProjectLeftProps {
+  fileTree: Tree[] | null;
+}
 
-const ProjectLeft = () => {
-  const fileData = buildTree(fileStructure);
+const ProjectLeft: React.FC<ProjectLeftProps> = ({ fileTree }) => {
+  const fileData = fileTree ? buildTree(fileTree) : [];
 
   return (
     <LeftPart>
