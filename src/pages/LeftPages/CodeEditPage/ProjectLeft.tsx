@@ -2,6 +2,7 @@ import LeftPart from "../../../layouts/Components/LeftPart";
 import { buildTree } from "../../../utils/buildTree";
 import styles from "./ProjectLeft.module.css";
 import FileTree from "./Components/FileTree";
+import Button from "../../../components/Button/Button";
 
 const fileStructure: { path: string; type: "blob" | "tree" }[] = [
   { path: "index.html", type: "blob" },
@@ -24,6 +25,7 @@ const ProjectLeft = () => {
       <div className={styles.container}>
         <div className={styles.project_name}> PROJECT 1 </div>
         <FileTree tree={fileData} />
+        <Button style={{ marginTop: "2rem" }}>GitHub 보기</Button>
       </div>
     </LeftPart>
   );
