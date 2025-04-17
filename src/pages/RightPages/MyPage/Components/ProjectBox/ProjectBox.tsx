@@ -11,6 +11,8 @@ import {
 //icons
 import { MdMoreVert } from "react-icons/md";
 import DropDownMenu from "../Contents/DropdownMenu";
+import { PageEndPoints } from "../../../../../constants/api";
+import { buildPath } from "../../../../../utils/buildPath";
 
 interface ProjectBoxProps {
   id: number;
@@ -27,7 +29,8 @@ export default function ProjectBox({
 }: ProjectBoxProps) {
   const navigate = useNavigate();
 
-  const handleClick = () => navigate(`/project/${id}`);
+  const handleClick = () =>
+    navigate(buildPath(PageEndPoints.GITHUB_PROJECT, { id }));
 
   return (
     <div className={styles.project_item} onClick={handleClick}>

@@ -20,7 +20,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import useAxios from "../../../../hooks/useAxios";
 import { buildPath } from "../../../../utils/buildPath";
-import { APIEndPoints } from "../../../../constants/api";
+import { APIEndPoints, PageEndPoints } from "../../../../constants/api";
 import { Project } from "../../../../constants/types/types";
 
 const MainPage = () => {
@@ -35,9 +35,9 @@ const MainPage = () => {
   const algorithms = ["네이버 대비 알고리즘", "알고리즘 연습", "PS 연습"];
 
   // 더보기 페이지 이동
-  const handleNaviCompany = () => navigate(`/mypage/company`);
-  const handleNaviProject = () => navigate(`/mypage/project`);
-  const handleNaviAlgorithm = () => navigate(`/mypage/algorithm`);
+  const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
+  const handleNaviProject = () => navigate(PageEndPoints.MY_PROJECT);
+  const handleNaviAlgorithm = () => navigate(PageEndPoints.MY_ALGO);
 
   useEffect(() => {
     if (!id) return;
@@ -109,7 +109,7 @@ const MainPage = () => {
                 <div className={styles.projectList}>
                   {projects.map((project, i) => (
                     <ProjectBox
-                      id={i}
+                      id={project.id}
                       key={"project" + i}
                       title={project.name}
                       contents={project.description}
