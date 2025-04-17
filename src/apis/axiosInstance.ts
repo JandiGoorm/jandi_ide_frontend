@@ -7,13 +7,18 @@ const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-const useHeaderEndPoints = new Set([`GET:${APIEndPoints.MY_INFO}`]);
+const useHeaderEndPoints = new Set([
+  `GET:${APIEndPoints.MY_INFO}`,
+  `GET:${APIEndPoints.GIT_REPO}`,
+]);
 
 axiosInstance.interceptors.request.use((config) => {
   const method = config.method?.toUpperCase();
-  const url = config.url;
-  const requestKey = `${method}:${url}`;
+  const url = config.url ?? "";
 
+  const normalizedUrl = url.replace(/\/\d+(?=\/|$)/g, "/:id");
+
+  const requestKey = `${method}:${normalizedUrl}`;
   const isRequiredAuth = useHeaderEndPoints.has(requestKey);
 
   console.log(isRequiredAuth);
