@@ -22,6 +22,10 @@ import ChatDetailPage from "../pages/RightPages/ChatPage/Detail/ChatDetailPage";
 import AlgorithmPage from "../pages/RightPages/AlgorithmPage/Main/AlgorithmPage";
 import ProjectEditPage from "../pages/RightPages/CodeEditPage/ProjectEditPage/ProjectEditPage";
 
+// 코딩 테스트
+import CompanyCodeTestPage from "../pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+import CustomCodeTestPage from "../pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+
 export const routes = [
   {
     path: PageEndPoints.HOME,
@@ -105,6 +109,17 @@ export const routes = [
   {
     path: PageEndPoints.GITHUB_PROJECT,
     element: <ProjectEditPage />,
+    requireAuth: true,
+  },
+  // 코딩 테스트
+  {
+    path: PageEndPoints.ALGO_COMPANY_TEST,
+    element: <CompanyCodeTestPage />,
+    requireAuth: true,
+  },
+  {
+    path: PageEndPoints.ALGO_CUSTOM_TEST,
+    element: <CustomCodeTestPage />,
     requireAuth: true,
   },
 ];
