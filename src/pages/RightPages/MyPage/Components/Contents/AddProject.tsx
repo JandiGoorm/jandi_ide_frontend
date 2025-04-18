@@ -4,9 +4,8 @@ import Select, { SelectRef } from "../../../../../components/Select/Select";
 import Button from "../../../../../components/Button/Button";
 import { User } from "../../../../../constants/types/types";
 import { useEffect, useState, useRef } from "react";
-import useAxios from "../../../../../hooks/useAxios";
-import { buildPath } from "../../../../../utils/buildPath";
-import { APIEndPoints } from "../../../../../constants/api";
+import useProjects from "../../../../../hooks/useprojects";
+import { ProjectData } from "../../../../../constants/types/types";
 
 interface AddProjectProps {
   user: User | null;
@@ -14,8 +13,7 @@ interface AddProjectProps {
 
 const AddProject: React.FC<AddProjectProps> = ({ user }) => {
   const id = user?.id;
-  const { fetchData: getApi } = useAxios();
-  const { fetchData: postApi } = useAxios();
+  const { getRepoProjects, addProjects } = useProjects();
   const [repo, setRepo] = useState<string[]>([]);
   const [repoMap, setRepoMap] = useState<Record<string, string>>({});
 
@@ -26,51 +24,44 @@ const AddProject: React.FC<AddProjectProps> = ({ user }) => {
   useEffect(() => {
     if (!id) return;
 
-    getApi({
-      method: "GET",
-      url: buildPath(APIEndPoints.GIT_REPO, { id }),
-    })
-      .then((res) => {
-        const repoNames: string[] = [];
-        const repoMap: Record<string, string> = {};
+    const fetchRepos = async () => {
+      const res = await getRepoProjects();
+      if (!res) return;
 
-        res?.data.forEach((repo: { name: string; htmlUrl: string }) => {
-          repoNames.push(repo.name);
-          repoMap[repo.name] = repo.htmlUrl;
-        });
+      const repoNames: string[] = [];
+      const repoMap: Record<string, string> = {};
 
-        setRepo(repoNames);
-        setRepoMap(repoMap);
-      })
-      .catch((err) => {
-        console.error(err);
+      res.forEach((repo: { name: string; htmlUrl: string }) => {
+        repoNames.push(repo.name);
+        repoMap[repo.name] = repo.htmlUrl;
       });
-  }, [user, getApi]);
+
+      setRepo(repoNames);
+      setRepoMap(repoMap);
+    };
+
+    fetchRepos();
+  }, [user, getRepoProjects]);
 
   const handleSubmit = () => {
-    console.log("버튼클릭");
     const projectName = nameRef.current?.value.trim();
     const description = descRef.current?.value.trim();
     const selectedRepo = selectRef.current?.value;
-    const selectedHtmlUrl = selectedRepo ? repoMap[selectedRepo] : undefined;
+    const selectedHtmlUrl = selectedRepo ? repoMap[selectedRepo] : "";
 
     if (!projectName || !selectedRepo || !description) {
       //toast 추가
       return;
     }
 
-    postApi({
-      method: "POST",
-      url: APIEndPoints.ADD_PROJECT,
-      data: {
-        name: projectName,
-        description: description,
-        githubName: selectedRepo,
-        url: selectedHtmlUrl,
-      },
-    }).then((res) => {
-      console.log(res);
-    });
+    const data: ProjectData = {
+      projectName,
+      description,
+      selectedRepo,
+      selectedHtmlUrl,
+    };
+
+    addProjects(data);
   };
 
   return (

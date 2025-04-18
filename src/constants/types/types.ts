@@ -35,3 +35,10 @@ export interface Tree {
   type: string;
   url: string;
 }
+
+export type ProjectData = {
+  projectName: string;
+  description: string;
+  selectedRepo: string;
+  selectedHtmlUrl: string;
+};

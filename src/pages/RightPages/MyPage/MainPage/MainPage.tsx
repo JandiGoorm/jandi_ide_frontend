@@ -17,18 +17,14 @@ import {
 } from "../../../../components/Modal/Modal";
 import AddProject from "../Components/Contents/AddProject";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { useEffect, useState } from "react";
-import useAxios from "../../../../hooks/useAxios";
-import { buildPath } from "../../../../utils/buildPath";
-import { APIEndPoints, PageEndPoints } from "../../../../constants/api";
-import { Project } from "../../../../constants/types/types";
+import { PageEndPoints } from "../../../../constants/api";
+import useProjects from "../../../../hooks/useprojects";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { fetchData: getApi } = useAxios();
-  const id = user?.id;
-  const [projects, setProjects] = useState<Project[]>([]);
+  const { projects } = useProjects();
+  // const [projects, setProjects] = useState<Project[]>([]);
 
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
   const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
@@ -38,17 +34,6 @@ const MainPage = () => {
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
   const handleNaviProject = () => navigate(PageEndPoints.MY_PROJECT);
   const handleNaviAlgorithm = () => navigate(PageEndPoints.MY_ALGO);
-
-  useEffect(() => {
-    if (!id) return;
-
-    getApi({
-      method: "GET",
-      url: buildPath(APIEndPoints.MY_PROJECT, { id }),
-    }).then((res) => {
-      setProjects(res?.data);
-    });
-  }, [getApi, user]);
 
   return (
     <BaseLayout>
