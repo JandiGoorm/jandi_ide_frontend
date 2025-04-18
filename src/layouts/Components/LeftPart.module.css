@@ -64,3 +64,60 @@
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
 }
+
+.drawer_body {
+  padding: 1rem;
+  padding-top: 3rem;
+
+  display: flex;
+  position: relative;
+}
+
+.line {
+  position: relative;
+  width: 2px;
+  background-color: var(--color-drawer-bar);
+  margin-right: 1rem;
+}
+
+.indicator {
+  position: absolute;
+  left: -5px;
+  width: 11px;
+  height: 11px;
+  background-color: var(--color-text-side-on); 
+  border-radius: 10px;
+  transition: top 0.3s ease;
+}
+
+.navi {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.menu_item {
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu_item:hover,
+.menu_item.active {
+  color: var(--color-text-side-on);
+  transform: scale(1.05);
+}
+
+.drawer_footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.drawer_icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}

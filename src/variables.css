@@ -132,6 +132,7 @@
   --color-tag-back: oklch(0.83 0.1542 87.81); 
   --color-tooltip-back: oklch(0.99 0 0);
   --color-chat-back: oklch(0.94 0.0823 90.81);
+  --color-drawer-bar: oklch(0.87 0 0);
 }
 
 :root[theme="dark"] {
@@ -157,4 +158,5 @@
   --color-tag-back: oklch(0.64 0.1176 158.9);
   --color-tooltip-back: oklch(0.24 0 0);
   --color-chat-back: oklch(0.3 0.0195 163.33);
+  --color-drawer-bar: oklch(0.39 0 0);
 }

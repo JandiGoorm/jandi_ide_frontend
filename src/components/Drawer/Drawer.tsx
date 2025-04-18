@@ -3,6 +3,8 @@ import styles from "./Drawer.module.css";
 import { DrawerContext, useDrawer } from "./DrawerContext";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useDarkModeContext } from "../../contexts/DarkmodeContext";
 
 // Drawer 컴포넌트
 interface DrawerProps {
@@ -63,6 +65,8 @@ interface DrawerContentProps {
 
 const DrawerContent = ({ children }: DrawerContentProps) => {
   const { isOpen, closeDrawer } = useDrawer();
+  const { isDarkMode } = useDarkModeContext();
+  const logo = isDarkMode ? "/logo_white.png" : "/logo_black.png";
 
   const variants = {
     hidden: {
@@ -87,11 +91,16 @@ const DrawerContent = ({ children }: DrawerContentProps) => {
           transition={{ duration: 0.2 }}
         >
           <Button
-            onClick={closeDrawer}
+            className={styles.drawer_header}
+            onClick={() => {
+              closeDrawer();
+            }}
             variant="none"
-            style={{ position: "absolute", top: "1rem", right: "1rem" }}
           >
-            x
+            <div>
+              <GiHamburgerMenu className={styles.drawer_hamburger} size={28} />
+              <img src={logo} alt="Logo" className={styles.logo} />
+            </div>
           </Button>
           {children}
         </motion.div>
