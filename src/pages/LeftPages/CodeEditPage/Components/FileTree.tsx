@@ -58,12 +58,10 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         } ${isSelected ? styles.selected : ""}`}
         onClick={handleClick}
       >
-        {node.type === "tree" ? (
-          <FaFolder style={{ marginRight: "0.2rem" }} />
-        ) : (
-          <FaFile style={{ marginRight: "0.2rem" }} />
-        )}
-        {node.name}
+        <span className={styles.icon}>
+          {node.type === "tree" ? <FaFolder /> : <FaFile />}
+        </span>
+        <span className={styles.name}>{node.name}</span>
       </div>
       {hasChildren && isOpen && (
         <ul className={styles.tree}>
