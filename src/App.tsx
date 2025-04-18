@@ -27,6 +27,10 @@ import AlgorithmPage from "./pages/RightPages/AlgorithmPage/Main/AlgorithmPage";
 //코드편집기
 import ProjectEditPage from "./pages/RightPages/CodeEditPage/ProjectEditPage/ProjectEditPage";
 
+// 코딩 테스트
+import CompanyCodeTestPage from "./pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+import CustomCodeTestPage from "./pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+
 function App() {
   return (
     <DarkModeProvider>
@@ -70,6 +74,16 @@ function App() {
 
           {/* 알고리즘 */}
           <Route path={PageEndPoints.ALGO_MAIN} element={<AlgorithmPage />} />
+
+          {/* 코딩테스트 */}
+          <Route
+            path={PageEndPoints.ALGO_COMPANY_TEST}
+            element={<CompanyCodeTestPage />}
+          />
+          <Route
+            path={PageEndPoints.ALGO_CUSTOM_TEST}
+            element={<CustomCodeTestPage />}
+          />
 
           {/* 코드편집기 */}
           <Route

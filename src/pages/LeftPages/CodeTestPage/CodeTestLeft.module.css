@@ -1,0 +1,9 @@
+.container{
+    color: var(--color-text-primary);
+}
+
+.prob_title{
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+}

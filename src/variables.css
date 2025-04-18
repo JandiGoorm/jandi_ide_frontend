@@ -128,7 +128,6 @@
   --color-button-chat-on: oklch(0.93 0.0896 88.54);
   --color-input-basic: oklch(0.83 0.1542 87.81);
   --color-project-back: oklch(0.94 0.0823 90.81);
-  --img-mode-switch: url('/switch_sun');
   --color-tag-back: oklch(0.83 0.1542 87.81); 
   --color-tooltip-back: oklch(0.99 0 0);
   --color-chat-back: oklch(0.94 0.0823 90.81);
@@ -140,7 +139,7 @@
   --color-back-line: oklch(0.89 0 0 / 0.1);
   --color-menu-background: oklch(0.24 0 0);
   --color-code-main: oklch(0.27 0.0068 164.46);
-  --color-code-terminal: oklch(0.24 0.007 164.37);
+  --color-code-terminal: oklch(0.29 0 0);
   --color-side-background: oklch(0.89 0 0 / 0.1);
   --color-text-primary: oklch(0.95 0.0272 160.88);
   --color-text-inside: oklch(1 0 0);

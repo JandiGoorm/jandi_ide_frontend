@@ -39,7 +39,7 @@ const Provider = ({
     setIsOpen((prev) => !prev);
   }, []);
 
-  console.log("className: ", className);
+  // console.log("className: ", className);
 
   return (
     <SidebarContext.Provider
