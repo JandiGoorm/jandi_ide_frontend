@@ -10,8 +10,8 @@ import Regitster_done from "../pages/Auth/Register/DonePage";
 // 메인 페이지
 import MainPage from "../pages/RightPages/MyPage/MainPage/MainPage";
 import CompanyMorePage from "../pages/RightPages/MyPage/MorePage/CompanyMorePage";
-import ProjectMorePage from "../pages/RightPages/MyPage/MorePage/ProjectMorePage";
-import AlgorithmMorePage from "../pages/RightPages/MyPage/MorePage/AlgorithmMorePage";
+import MorePage from "../pages/RightPages/MyPage/MorePage/MorePage";
+// import AlgorithmMorePage from "../pages/RightPages/MyPage/MorePage/AlgorithmMorePage";
 import SettingPage from "../pages/RightPages/MyPage/SettingPage/SettingPage";
 
 // 채팅
@@ -72,12 +72,12 @@ export const routes = [
   },
   {
     path: PageEndPoints.MY_PROJECT,
-    element: <ProjectMorePage />,
+    element: <MorePage />,
     requireAuth: true,
   },
   {
     path: PageEndPoints.MY_ALGO,
-    element: <AlgorithmMorePage />,
+    element: <MorePage />,
     requireAuth: true,
   },
   {
