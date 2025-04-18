@@ -43,7 +43,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setUser(null);
-    window.location.reload();
+    // window.location.reload();
   };
 
   useEffect(() => {

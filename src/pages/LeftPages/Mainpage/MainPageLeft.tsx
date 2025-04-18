@@ -5,6 +5,8 @@ import LeftPart from "../../../layouts/Components/LeftPart";
 import LangTag from "./components/LangTag";
 import Button from "../../../components/Button/Button";
 import { User } from "../../../constants/types/types";
+import { useAuth } from "../../../contexts/AuthContext";
+import { PageEndPoints } from "../../../constants/api";
 
 interface MainPageLeftProps {
   user: User | null;
@@ -13,7 +15,7 @@ interface MainPageLeftProps {
 const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
   const navigate = useNavigate();
   const { isDarkMode } = useDarkModeContext();
-  console.log(user);
+  const { signOut } = useAuth();
 
   const userData = {
     profile: isDarkMode
@@ -28,9 +30,9 @@ const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
 
   const handleLogout = () => {
     // 로그아웃 진행...
-
+    signOut();
     // 로그아웃 후 랜딩 페이지로 이동
-    navigate("/");
+    navigate(PageEndPoints.LOGIN);
   };
 
   const handleSetting = () => {
