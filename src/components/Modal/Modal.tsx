@@ -60,18 +60,27 @@ const ModalTrigger = ({ children, onOpen }: ModalTriggerProps) => {
 };
 
 interface ModalContentProps {
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 const ModalContent = ({ children }: ModalContentProps) => {
   const { isOpen, closeModal } = useModal();
+  const handleContainerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
   return (
     <>
       {isOpen && (
         <>
-          <div className={styles.backdrop} onClick={closeModal} />
-          <div className={styles.container}>
+          <div
+            className={styles.backdrop}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
+          />
+          <div className={styles.container} onClick={handleContainerClick}>
             <MdClose onClick={closeModal} className={styles.close} size={24} />
             {children}
           </div>

@@ -3,12 +3,8 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import styles from "./MainPage.module.css";
-
-//icons
 import { BsPinAngleFill } from "react-icons/bs";
 import { AiOutlineDoubleRight } from "react-icons/ai";
-
-//components
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
 import SimpleCompanyBox from "../Components/CompanyBox/SimpleCompanyBox";
@@ -20,28 +16,31 @@ import {
   ModalContent,
 } from "../../../../components/Modal/Modal";
 import AddProject from "../Components/Contents/AddProject";
+import { useAuth } from "../../../../contexts/AuthContext";
+import { PageEndPoints } from "../../../../constants/api";
+import useProjects from "../../../../hooks/useprojects";
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { projects, getProjects } = useProjects();
 
-  const projectContents =
-    "이것은 구름 딥다이브의 지정 프로젝트인 Web IDE 개발을 위한 디자인입니다. ";
+  console.log(projects);
+
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
-
   const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
-  const projects = ["구름 프로젝트", "구름구름 프로젝트", "프로젝트 이름"];
   const algorithms = ["네이버 대비 알고리즘", "알고리즘 연습", "PS 연습"];
 
   // 더보기 페이지 이동
-  const handleNaviCompany = () => navigate(`/mypage/company`);
-  const handleNaviProject = () => navigate(`/mypage/project`);
-  const handleNaviAlgorithm = () => navigate(`/mypage/algorithm`);
+  const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
+  const handleNaviProject = () => navigate(PageEndPoints.MY_PROJECT);
+  const handleNaviAlgorithm = () => navigate(PageEndPoints.MY_ALGO);
 
   return (
     <BaseLayout>
       <Sidebar.Provider>
         <Sidebar.Panel className={styles.panner}>
-          <LeftSide />
+          <LeftSide user={user} />
         </Sidebar.Panel>
 
         <Sidebar.Content header={<BasicHeader />}>
@@ -88,7 +87,7 @@ const MainPage = () => {
                     <Button>깃허브에서 불러오기</Button>
                   </ModalTrigger>
                   <ModalContent>
-                    <AddProject />
+                    <AddProject user={user} onAddProject={getProjects} />
                   </ModalContent>
                 </Modal>
               </div>
@@ -96,11 +95,12 @@ const MainPage = () => {
                 <div className={styles.projectList}>
                   {projects.map((project, i) => (
                     <ProjectBox
-                      id={i}
+                      id={project.id}
                       key={"project" + i}
-                      title={project}
-                      contents={projectContents.repeat(i + 1)}
-                      lang={langs[i]}
+                      title={project.name}
+                      contents={project.description}
+                      lang={langs[i % langs.length]}
+                      onAddProject={getProjects}
                     />
                   ))}
                 </div>

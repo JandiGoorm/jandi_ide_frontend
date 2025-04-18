@@ -39,8 +39,6 @@ const Provider = ({
     setIsOpen((prev) => !prev);
   }, []);
 
-  console.log("className: ", className);
-
   return (
     <SidebarContext.Provider
       value={{ isOpen, toggleSidebar: handleToggleSidebar }}

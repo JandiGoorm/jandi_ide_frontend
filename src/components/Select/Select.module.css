@@ -8,7 +8,7 @@
   
   .selected {
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
     border: 1px solid var(--color-input-basic);
     border-radius: var(--radius-input);
     background-color: transparent;
@@ -17,6 +17,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    min-height: 2.5rem;
   }
   
   .optionList {
@@ -46,6 +47,8 @@
   }
   
   .arrow {
+    position: absolute;
+    right: 1rem;
     margin-left: 0.5rem;
     font-size: var(--text-xs);
 

@@ -40,3 +40,14 @@
     color: var(--color-text-side-on);
   }
   
+  .icon {
+    margin-right: 0.3rem;
+    flex-shrink: 0; /* 아이콘이 줄어들지 않도록 */
+  }
+  
+  .name {
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+  }

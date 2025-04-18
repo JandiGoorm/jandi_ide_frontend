@@ -1,15 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 import styles from "./MainPage.module.css";
-
-//components
 import LeftPart from "../../../layouts/Components/LeftPart";
 import LangTag from "./components/LangTag";
 import Button from "../../../components/Button/Button";
+import { User } from "../../../constants/types/types";
+import { useAuth } from "../../../contexts/AuthContext";
+import { PageEndPoints } from "../../../constants/api";
 
-const MainPageLeft = () => {
+interface MainPageLeftProps {
+  user: User | null;
+}
+
+const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
   const navigate = useNavigate();
   const { isDarkMode } = useDarkModeContext();
+  const { signOut } = useAuth();
+
   const userData = {
     profile: isDarkMode
       ? "/user_profile_green.png"
@@ -23,9 +30,9 @@ const MainPageLeft = () => {
 
   const handleLogout = () => {
     // 로그아웃 진행...
-
+    signOut();
     // 로그아웃 후 랜딩 페이지로 이동
-    navigate("/");
+    navigate(PageEndPoints.LOGIN);
   };
 
   const handleSetting = () => {
@@ -42,30 +49,34 @@ const MainPageLeft = () => {
     <LeftPart>
       <div className={styles.container}>
         {/* 유저 프로필 */}
-        <div className={styles.info}>
-          <img className={styles.user_profile} src={userData.profile} />
-          <p className={styles.user_name}>{userData.name}</p>
-          <p className={styles.user_email}>{userData.email}</p>
-        </div>
-        <hr />
+        {user && (
+          <>
+            <div className={styles.info}>
+              <img className={styles.user_profile} src={user.profileImage} />
+              <p className={styles.user_name}>{user.nickName}</p>
+              <p className={styles.user_email}>{user.email}</p>
+            </div>
+            <hr />
 
-        {/* 유저 설명란 */}
-        <div className={styles.explains}>
-          <p className={styles.user_intro}>{userData.intro}</p>
-        </div>
-        <hr />
+            {/* 유저 설명란 */}
+            <div className={styles.explains}>
+              <p className={styles.user_intro}>{user.introduction}</p>
+            </div>
+            <hr />
 
-        {/* 유저 선호언어 */}
-        <div>
-          <LangTag className={styles.user_langs} langList={userData.lang} />
-        </div>
+            {/* 유저 선호언어 */}
+            <div>
+              <LangTag className={styles.user_langs} langList={userData.lang} />
+            </div>
 
-        {/* 버튼 */}
-        <div className={styles.button_list}>
-          <Button onClick={handleLogout}>로그아웃</Button>
-          <Button onClick={handleSetting}>회원 정보 수정</Button>
-          <Button onClick={handleViewProfile}>내 프로필 보기</Button>
-        </div>
+            {/* 버튼 */}
+            <div className={styles.button_list}>
+              <Button onClick={handleLogout}>로그아웃</Button>
+              <Button onClick={handleSetting}>회원 정보 수정</Button>
+              <Button onClick={handleViewProfile}>내 프로필 보기</Button>
+            </div>
+          </>
+        )}
       </div>
     </LeftPart>
   );

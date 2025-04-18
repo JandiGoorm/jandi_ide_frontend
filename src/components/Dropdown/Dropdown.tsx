@@ -129,7 +129,7 @@ const DropdownTrigger = ({ children, style = {} }: TriggerProps) => {
 };
 
 interface DropdownContentProps {
-  children: ReactNode;
+  children: React.ReactElement;
 }
 
 const DropdownContent = ({ children }: DropdownContentProps) => {

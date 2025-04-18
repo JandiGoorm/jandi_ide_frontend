@@ -4,15 +4,51 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import LeftSide from "../../../LeftPages/CodeEditPage/ProjectLeft";
 import Editor from "@monaco-editor/react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import useProjectDetails from "../../../../hooks/useProjectDetails";
 
 const ProjectEditPage = () => {
   const { isDarkMode } = useDarkModeContext();
+  const { id } = useParams<{ id: string }>();
+  const numericId = id ? Number(id) : undefined;
+  const { projectFileTree, fileContent, getProjectCode } = useProjectDetails({
+    id: numericId as number,
+  });
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id || !selectedFile) return;
+
+    console.log(projectFileTree);
+    console.log(selectedFile);
+
+    const matchedFile = projectFileTree.find((file) => {
+      const fileName = file.path.split("/").pop();
+      return fileName === selectedFile;
+    });
+
+    console.log(matchedFile);
+    if (!matchedFile) return;
+
+    const fethchCodes = async (sha: string) => {
+      if (!sha) return;
+
+      await getProjectCode({ sha });
+    };
+
+    fethchCodes(matchedFile.sha);
+  }, [selectedFile, id, getProjectCode]);
 
   return (
     <BaseLayout>
       <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
-          <LeftSide />
+          <LeftSide
+            fileTree={projectFileTree}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+          />
         </Sidebar.Panel>
 
         <Sidebar.Content fullWidth>
@@ -22,8 +58,9 @@ const ProjectEditPage = () => {
               theme={isDarkMode ? "vs-dark" : "light"}
               defaultLanguage="java"
               path="file.java"
+              value={fileContent}
               options={{
-                // readOnly: true,
+                readOnly: true,
                 minimap: {
                   enabled: true,
                 },

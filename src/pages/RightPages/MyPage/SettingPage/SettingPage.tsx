@@ -7,8 +7,11 @@ import defaultUser from "../../../../../public/defaultUser.webp";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
 import { useState } from "react";
+import { useAuth } from "../../../../contexts/AuthContext";
+
 const SettingPage = () => {
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+  const { user } = useAuth();
 
   // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
   const handleLanguageClick = (lang: string) => {
@@ -20,7 +23,7 @@ const SettingPage = () => {
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
-        <LeftSide />
+        <LeftSide user={user} />
       </Sidebar.Panel>
 
       <Sidebar.Content header={<BasicHeader />}>

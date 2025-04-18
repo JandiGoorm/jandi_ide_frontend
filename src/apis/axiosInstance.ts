@@ -7,15 +7,24 @@ const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-const useHeaderEndPoints = new Set([`GET:${APIEndPoints.MY_INFO}`]);
+const useHeaderEndPoints = new Set([
+  `GET:${APIEndPoints.MY_INFO}`,
+  `GET:${APIEndPoints.GIT_REPO}`,
+  `POST:${APIEndPoints.ADD_PROJECT}`,
+  `GET:${APIEndPoints.MY_PROJECT}`,
+  `GET:${APIEndPoints.MANAGE_PROJECT}`,
+  `PUT:${APIEndPoints.MANAGE_PROJECT}`,
+  `DELETE:${APIEndPoints.MANAGE_PROJECT}`,
+  `GET:${APIEndPoints.PROJECT_BLOB}`,
+]);
 
 axiosInstance.interceptors.request.use((config) => {
   const method = config.method?.toUpperCase();
-  const url = config.url;
-  const requestKey = `${method}:${url}`;
+  const url = config.url ?? "";
 
-  console.log("interceptor", { method, url, requestKey });
+  const normalizedUrl = url.replace(/\/\d+(?=\/|$)/g, "/:id");
 
+  const requestKey = `${method}:${normalizedUrl}`;
   const isRequiredAuth = useHeaderEndPoints.has(requestKey);
 
   console.log(isRequiredAuth);
