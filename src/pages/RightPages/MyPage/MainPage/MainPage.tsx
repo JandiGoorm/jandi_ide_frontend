@@ -23,8 +23,9 @@ import useProjects from "../../../../hooks/useprojects";
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { projects } = useProjects();
-  // const [projects, setProjects] = useState<Project[]>([]);
+  const { projects, getProjects } = useProjects();
+
+  console.log(projects);
 
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
   const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
@@ -86,7 +87,7 @@ const MainPage = () => {
                     <Button>깃허브에서 불러오기</Button>
                   </ModalTrigger>
                   <ModalContent>
-                    <AddProject user={user} />
+                    <AddProject user={user} onAddProject={getProjects} />
                   </ModalContent>
                 </Modal>
               </div>
@@ -99,6 +100,7 @@ const MainPage = () => {
                       title={project.name}
                       contents={project.description}
                       lang={langs[i % langs.length]}
+                      onAddProject={getProjects}
                     />
                   ))}
                 </div>

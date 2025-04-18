@@ -42,3 +42,8 @@ export type ProjectData = {
   selectedRepo: string;
   selectedHtmlUrl: string;
 };
+
+export type ModifyProjectData = {
+  projectName: string;
+  description: string;
+};

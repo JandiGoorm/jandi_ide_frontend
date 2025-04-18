@@ -14,7 +14,7 @@ const MorePage = () => {
   const { user } = useAuth();
   const paths = location.pathname.split("/");
   const lastPath = paths[paths.length - 1];
-  const { projects } = useProjects();
+  const { projects, getProjects } = useProjects();
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
 
   const algorithms = [
@@ -62,6 +62,7 @@ const MorePage = () => {
                         title={project.name}
                         contents={project.description}
                         lang={langs[i % 5]}
+                        onAddProject={getProjects}
                       />
                     ))}
                   </div>

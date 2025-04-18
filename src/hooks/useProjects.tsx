@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import useAxios from "./useAxios";
 import { buildPath } from "../utils/buildPath";
 import { APIEndPoints } from "../constants/api";
-import { ProjectData } from "../constants/types/types";
+import { ProjectData, ModifyProjectData } from "../constants/types/types";
 
 //프로젝트 관리 hooks
 const useProjects = () => {
@@ -13,6 +13,8 @@ const useProjects = () => {
   const { fetchData: getApi } = useAxios();
   const { fetchData: getRepoApi } = useAxios();
   const { fetchData: postApi } = useAxios();
+  const { fetchData: putApi } = useAxios();
+  const { fetchData: deleteApi } = useAxios();
   const id = user?.id;
 
   const getProjects = useCallback(async () => {
@@ -36,10 +38,42 @@ const useProjects = () => {
         githubName: data.selectedRepo,
         url: data.selectedHtmlUrl,
       },
-    }).then(() => {
-      getProjects();
     });
+
+    await getProjects();
   }, []);
+
+  const modifyProject = useCallback(
+    async (projectId: number, data: ModifyProjectData) => {
+      if (!projectId) return;
+
+      putApi({
+        method: "PUT",
+        url: buildPath(APIEndPoints.MANAGE_PROJECT, { id: projectId }),
+        data: {
+          name: data.projectName,
+          description: data.description,
+        },
+      });
+
+      await getProjects();
+    },
+    []
+  );
+
+  const deleteProject = useCallback(
+    async (projectId: number) => {
+      if (!projectId) return;
+
+      deleteApi({
+        method: "DELETE",
+        url: buildPath(APIEndPoints.MANAGE_PROJECT, { id: projectId }),
+      });
+
+      await getProjects();
+    },
+    [deleteApi]
+  );
 
   const getRepoProjects = useCallback(async () => {
     if (!id) return;
@@ -60,6 +94,8 @@ const useProjects = () => {
     projects,
     getProjects,
     addProjects,
+    modifyProject,
+    deleteProject,
 
     getRepoProjects,
   };

@@ -9,9 +9,10 @@ import { ProjectData } from "../../../../../constants/types/types";
 
 interface AddProjectProps {
   user: User | null;
+  onAddProject?: () => void;
 }
 
-const AddProject: React.FC<AddProjectProps> = ({ user }) => {
+const AddProject: React.FC<AddProjectProps> = ({ user, onAddProject }) => {
   const id = user?.id;
   const { getRepoProjects, addProjects } = useProjects();
   const [repo, setRepo] = useState<string[]>([]);
@@ -43,7 +44,7 @@ const AddProject: React.FC<AddProjectProps> = ({ user }) => {
     fetchRepos();
   }, [user, getRepoProjects]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const projectName = nameRef.current?.value.trim();
     const description = descRef.current?.value.trim();
     const selectedRepo = selectRef.current?.value;
@@ -61,7 +62,8 @@ const AddProject: React.FC<AddProjectProps> = ({ user }) => {
       selectedHtmlUrl,
     };
 
-    addProjects(data);
+    await addProjects(data);
+    onAddProject?.();
   };
 
   return (

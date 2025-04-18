@@ -7,18 +7,25 @@ import {
   DropdownTrigger,
   DropdownContent,
 } from "../../../../../components/Dropdown/Dropdown";
-
-//icons
+import { LuPencilLine, LuTrash2 } from "react-icons/lu";
 import { MdMoreVert } from "react-icons/md";
-import DropDownMenu from "../Contents/DropdownMenu";
 import { PageEndPoints } from "../../../../../constants/api";
 import { buildPath } from "../../../../../utils/buildPath";
+import { useRef } from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalTrigger,
+} from "../../../../../components/Modal/Modal";
+import ModifyProject from "../Contents/ModifyProject";
+import useProjects from "../../../../../hooks/useprojects";
 
 interface ProjectBoxProps {
   id: number;
   title: string;
   contents: string;
   lang: string;
+  onAddProject?: () => void;
 }
 
 export default function ProjectBox({
@@ -26,11 +33,21 @@ export default function ProjectBox({
   title,
   contents,
   lang,
+  onAddProject,
 }: ProjectBoxProps) {
   const navigate = useNavigate();
+  const dropdownRef = useRef<{ close: () => void }>(null);
+  const { deleteProject } = useProjects();
 
   const handleClick = () =>
     navigate(buildPath(PageEndPoints.GITHUB_PROJECT, { id }));
+
+  const deleteClick = async () => {
+    await deleteProject(id).then(() => {
+      dropdownRef.current?.close();
+      onAddProject?.();
+    });
+  };
 
   return (
     <div className={styles.project_item} onClick={handleClick}>
@@ -43,28 +60,49 @@ export default function ProjectBox({
       {/* 하단 - 언어태그, 더보기 버튼 */}
       <div className={styles.footer}>
         <LangTag langList={[lang]} />
-        <Dropdown>
-          <DropdownTrigger>
-            <Button variant="none" size="sm">
-              <MdMoreVert size={24} />
-            </Button>
-          </DropdownTrigger>
-          <DropdownContent>
-            <DropDownMenu menu="프로젝트" />
-          </DropdownContent>
-        </Dropdown>
-      </div>
 
-      {/* 더보기 버튼 처리 */}
-      {/* {showMenu && (
-            <div
-            className={styles.drop_box}
-            onClick={(e) => e.stopPropagation()}
-            >
-            <button className={styles.togle_btn}>문제집 수정</button>
-            <button className={styles.togle_btn}>문제집 삭제</button>
-            </div>
-        )} */}
+        <Modal>
+          <Dropdown dropdownRef={dropdownRef}>
+            <DropdownTrigger>
+              <Button variant="none" size="sm">
+                <MdMoreVert size={24} />
+              </Button>
+            </DropdownTrigger>
+            <DropdownContent>
+              <div
+                className={styles.dropdown_content}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ModalTrigger
+                  onOpen={() => {
+                    if (
+                      dropdownRef.current &&
+                      typeof dropdownRef.current.close === "function"
+                    ) {
+                      dropdownRef.current.close();
+                    }
+                  }}
+                >
+                  <div className={styles.dropdown_menu}>
+                    <LuPencilLine /> 프로젝트 수정
+                  </div>
+                </ModalTrigger>
+                <div className={styles.dropdown_menu} onClick={deleteClick}>
+                  <LuTrash2 /> 프로젝트 삭제
+                </div>
+              </div>
+            </DropdownContent>
+          </Dropdown>
+          <ModalContent>
+            <ModifyProject
+              id={id}
+              name={title}
+              description={contents}
+              onAddProject={onAddProject}
+            />
+          </ModalContent>
+        </Modal>
+      </div>
     </div>
   );
 }

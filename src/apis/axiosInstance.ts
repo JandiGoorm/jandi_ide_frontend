@@ -13,6 +13,8 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.ADD_PROJECT}`,
   `GET:${APIEndPoints.MY_PROJECT}`,
   `GET:${APIEndPoints.MANAGE_PROJECT}`,
+  `PUT:${APIEndPoints.MANAGE_PROJECT}`,
+  `DELETE:${APIEndPoints.MANAGE_PROJECT}`,
   `GET:${APIEndPoints.PROJECT_BLOB}`,
 ]);
 
