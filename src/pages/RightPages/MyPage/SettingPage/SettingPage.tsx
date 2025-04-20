@@ -14,6 +14,7 @@ const SettingPage = () => {
   const { user } = useAuth();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
   const [nickname, setNickname] = useState(user.nickName || "");
+  const [introduction, setIntroduction] = useState(user.nickName || "");
 
   const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
 
@@ -31,6 +32,17 @@ const SettingPage = () => {
     console.log("변경할 닉네임:", nickname);
     await modifyUser(user.id, {
       introduction: user.introduction,
+      email: user.email,
+      nickname: nickname,
+      profileImage: user.profileImage,
+    });
+  };
+
+  const handleUpdateIntro = async () => {
+    if (!user) return;
+    console.log("변경할 소개글:", introduction);
+    await modifyUser(user.id, {
+      introduction: introduction,
       email: user.email,
       nickname: nickname,
       profileImage: user.profileImage,
@@ -91,7 +103,7 @@ const SettingPage = () => {
               <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
                 <Button>프로필 초기화</Button>
-                <Button>소개글 변경</Button>
+                <Button onClick={handleUpdateIntro}>소개글 변경</Button>
               </div>
             </div>
             <div className={styles.profileModify_content}>
@@ -105,6 +117,7 @@ const SettingPage = () => {
               <div className={styles.profile_description}>
                 <textarea
                   className={styles.description_content}
+                  onChange={(e) => setIntroduction(e.target.value)}
                   placeholder={
                     user.introduction
                       ? user.introduction
