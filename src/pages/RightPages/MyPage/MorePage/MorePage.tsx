@@ -7,7 +7,7 @@ import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
 import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import { useAuth } from "../../../../contexts/AuthContext";
-import useProjects from "../../../../hooks/useprojects";
+import useProjects from "../../../../hooks/useProjects";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 
 const MorePage = () => {
@@ -55,13 +55,13 @@ const MorePage = () => {
               <>
                 {projects.length > 0 ? (
                   <div className={styles.projectList}>
-                    {projects.map((project, i) => (
+                    {projects.map((project) => (
                       <ProjectBox
                         id={project.id}
-                        key={"project" + i}
+                        key={project.id}
                         title={project.name}
                         contents={project.description}
-                        lang={langs[i % 5]}
+                        lang={langs[1]}
                         onAddProject={getProjects}
                       />
                     ))}

@@ -18,7 +18,7 @@ import {
   ModalTrigger,
 } from "../../../../../components/Modal/Modal";
 import ModifyProject from "../Contents/ModifyProject";
-import useProjects from "../../../../../hooks/useprojects";
+import useProjects from "../../../../../hooks/useProjects";
 
 interface ProjectBoxProps {
   id: number;

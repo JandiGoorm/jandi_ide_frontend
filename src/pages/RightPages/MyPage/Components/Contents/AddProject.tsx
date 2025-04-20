@@ -4,7 +4,7 @@ import Select, { SelectRef } from "../../../../../components/Select/Select";
 import Button from "../../../../../components/Button/Button";
 import { User } from "../../../../../constants/types/types";
 import { useEffect, useState, useRef } from "react";
-import useProjects from "../../../../../hooks/useprojects";
+import useProjects from "../../../../../hooks/useProjects";
 import { ProjectData } from "../../../../../constants/types/types";
 
 interface AddProjectProps {
