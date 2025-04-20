@@ -41,4 +41,7 @@ export const APIEndPoints = {
   COMPANY: "/companies",
   MANAGE_COMPANY: "/companies/:id",
   COMPANY_POSTING: "/companies/:id/job-posting",
+
+  //채팅
+  CHATROOM_MANAGE: "/chat/rooms/:id",
 };

@@ -77,3 +77,12 @@ export interface Company {
   programmingLanguages: string;
   jobPostings: JobPosting[];
 }
+
+export interface ChatRoom {
+  roomId: string;
+  name: string;
+  description: string;
+  createdBy: string;
+  createdAt: string;
+  participants: string[];
+}
