@@ -47,3 +47,42 @@ export type ModifyProjectData = {
   projectName: string;
   description: string;
 };
+
+export interface Schedule {
+  id: number;
+  scheduleName: string;
+  date: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface JobPosting {
+  id: number;
+  title: string;
+  description: string;
+  schedules: Schedule[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Company {
+  id: number;
+  companyName: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  levels: number[];
+  timeInMinutes: number;
+  programmingLanguages: string;
+  jobPostings: JobPosting[];
+}
+
+export interface ChatRoom {
+  roomId: string;
+  name: string;
+  description: string;
+  createdBy: string;
+  createdAt: string;
+  participants: string[];
+}

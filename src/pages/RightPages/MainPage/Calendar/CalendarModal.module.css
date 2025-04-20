@@ -1,0 +1,5 @@
+.header{
+    display: flex;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+}
