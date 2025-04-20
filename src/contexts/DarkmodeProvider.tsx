@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import useDarkMode from "../hooks/useDarkmode";
+import useDarkMode from "../hooks/useDarkMode";
 import { DarkModeContext } from "./DarkmodeContext";
 
 interface DarkModeProviderProps {
