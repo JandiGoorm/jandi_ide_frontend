@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useAxios from "./useAxios";
 import { APIEndPoints } from "../constants/api";
 import { Company } from "../constants/types/types";
+import { buildPath } from "../utils/buildPath";
 
 const useCompany = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -16,6 +17,20 @@ const useCompany = () => {
     });
   }, [getApi]);
 
+  const getCompany = useCallback(
+    async (id: number) => {
+      const res = await getApi({
+        method: "GET",
+        url: buildPath(APIEndPoints.MANAGE_COMPANY, { id: id }),
+      });
+
+      console.log(res?.data);
+
+      return res?.data;
+    },
+    [getApi]
+  );
+
   useEffect(() => {
     getCompanies();
   }, [getCompanies]);
@@ -23,6 +38,8 @@ const useCompany = () => {
   return {
     companies,
     getCompanies,
+
+    getCompany,
   };
 };
 

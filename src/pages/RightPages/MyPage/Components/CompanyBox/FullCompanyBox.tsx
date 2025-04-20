@@ -34,7 +34,7 @@ export default function FullCompanyBox({
             <Button> 기업 정보 보기</Button>
           </ModalTrigger>
           <ModalContent>
-            <CompanyModal company={company} thumbnail={thumbnail} />
+            <CompanyModal id={company.id} thumbnail={thumbnail} />
           </ModalContent>
         </Modal>
         <Button onClick={handleAction}>
