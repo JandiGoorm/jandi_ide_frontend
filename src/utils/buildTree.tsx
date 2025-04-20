@@ -1,15 +1,18 @@
+import { Tree } from "../constants/types/types"; // Tree 타입 불러온다고 가정
+
 export type Node = {
   name: string;
   type: "blob" | "tree";
   children?: Node[];
 };
 
-export const buildTree = (
-  items: { path: string; type: "blob" | "tree" }[]
-): Node[] => {
+export const buildTree = (items: Tree[]): Node[] => {
   const root: Node[] = [];
 
   for (const item of items) {
+    // 타입 안전하게 처리
+    const type =
+      item.type === "tree" || item.type === "blob" ? item.type : "blob";
     const parts = item.path.split("/");
     let currentLevel = root;
 
@@ -24,7 +27,7 @@ export const buildTree = (
       } else {
         const newNode: Node = {
           name: part,
-          type: index === parts.length - 1 ? item.type : "tree",
+          type: index === parts.length - 1 ? type : "tree",
         };
         if (newNode.type === "tree") {
           newNode.children = [];

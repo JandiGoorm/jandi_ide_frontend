@@ -27,5 +27,13 @@ export const PageEndPoints = {
 export const APIEndPoints = {
   LOGIN: "/users/login",
   REFRESH: "/users/refresh",
+
+  //내정보
   MY_INFO: "/users/me",
+  MY_PROJECT: "/users/:id/projects",
+  GIT_REPO: "/users/:id/repos",
+
+  ADD_PROJECT: "/projects",
+  MANAGE_PROJECT: "/projects/:id",
+  PROJECT_BLOB: "/projects/:id/blob",
 };

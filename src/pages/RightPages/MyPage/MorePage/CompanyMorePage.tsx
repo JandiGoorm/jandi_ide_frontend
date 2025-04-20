@@ -3,14 +3,11 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import styles from "./CompanyMorePage.module.css";
-
-//icons
 import { BsPinAngleFill } from "react-icons/bs";
-
-//components
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
 import FullCompanyBox from "../Components/CompanyBox/FullCompanyBox";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const dummyCompanies = [
   { id: 1, name: "네이버" },
@@ -23,6 +20,7 @@ const dummyCompanies = [
 
 const MainPage = () => {
   const [myCompanies, setMyCompanies] = useState([]); //관심 기업 리스트 관리
+  const { user } = useAuth();
 
   // 액션 정의 - 관심 기업에 추가 or 삭제
   const handleAction = (id: number, isFavorite: boolean) => {
@@ -56,7 +54,7 @@ const MainPage = () => {
     <BaseLayout>
       <Sidebar.Provider>
         <Sidebar.Panel className={styles.panner}>
-          <LeftSide />
+          <LeftSide user={user} />
         </Sidebar.Panel>
 
         <Sidebar.Content header={<BasicHeader />}>

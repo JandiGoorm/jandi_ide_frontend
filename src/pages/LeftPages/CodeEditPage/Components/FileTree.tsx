@@ -5,11 +5,11 @@ import { FaFile, FaFolder } from "react-icons/fa";
 
 type Props = {
   tree: Node[];
+  selectedFile: string | null;
+  setSelectedFile: (file: string | null) => void;
 };
 
-const FileTree: React.FC<Props> = ({ tree }) => {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-
+const FileTree: React.FC<Props> = ({ tree, selectedFile, setSelectedFile }) => {
   return (
     <ul className={styles.tree}>
       {tree.map((node) => (
@@ -58,12 +58,10 @@ const TreeNode: React.FC<TreeNodeProps> = ({
         } ${isSelected ? styles.selected : ""}`}
         onClick={handleClick}
       >
-        {node.type === "tree" ? (
-          <FaFolder style={{ marginRight: "0.2rem" }} />
-        ) : (
-          <FaFile style={{ marginRight: "0.2rem" }} />
-        )}
-        {node.name}
+        <span className={styles.icon}>
+          {node.type === "tree" ? <FaFolder /> : <FaFile />}
+        </span>
+        <span className={styles.name}>{node.name}</span>
       </div>
       {hasChildren && isOpen && (
         <ul className={styles.tree}>
