@@ -4,6 +4,8 @@ import Header from "./Header";
 import { useState } from "react";
 import Days from "./Days";
 import Cells from "./Cells";
+import { Modal, ModalContent } from "../../../../components/Modal/Modal";
+import CalendarModal from "./CalendarModal";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -32,11 +34,16 @@ const Calendar = () => {
         onChangeMonth={onChangeMonth}
       />
       <Days />
-      <Cells
-        currentMonth={currentMonth}
-        onDateClick={onDateClick}
-        selectedDate={selectedDate}
-      />
+      <Modal>
+        <Cells
+          currentMonth={currentMonth}
+          onDateClick={onDateClick}
+          selectedDate={selectedDate}
+        />
+        <ModalContent>
+          <CalendarModal selectedDate={selectedDate} />
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
