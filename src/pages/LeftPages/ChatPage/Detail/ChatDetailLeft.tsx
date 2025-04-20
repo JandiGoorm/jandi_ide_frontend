@@ -4,8 +4,12 @@ import { ChatRoom } from "../../../../constants/types/types";
 
 interface ChatDetailLeftProps {
   chatRoomInfo: ChatRoom | null;
+  chatPeoples: number | null;
 }
-const ChatDetailLeft: React.FC<ChatDetailLeftProps> = ({ chatRoomInfo }) => {
+const ChatDetailLeft: React.FC<ChatDetailLeftProps> = ({
+  chatRoomInfo,
+  chatPeoples,
+}) => {
   return (
     <LeftPart>
       <div className={styles.container}>
@@ -16,7 +20,7 @@ const ChatDetailLeft: React.FC<ChatDetailLeftProps> = ({ chatRoomInfo }) => {
             {chatRoomInfo?.name} 채팅방에 입장하셨습니다.
           </div>
         </div>
-        <div className={styles.chat_count_div}>현재 2345명 채팅중</div>
+        <div className={styles.chat_count_div}>{chatPeoples}명 채팅중</div>
       </div>
     </LeftPart>
   );

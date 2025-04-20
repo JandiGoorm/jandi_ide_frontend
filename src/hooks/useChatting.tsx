@@ -5,8 +5,9 @@ import { APIEndPoints } from "../constants/api";
 import { buildPath } from "../utils/buildPath";
 
 const useChatting = () => {
-  const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoom[]>([]);
+  const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoom | null>(null);
   const { fetchData: getApi } = useAxios();
+  const { fetchData: getParticipantsApi } = useAxios();
 
   const getChatRoomInfo = useCallback(
     async (id: string) => {
@@ -21,10 +22,23 @@ const useChatting = () => {
     [getApi]
   );
 
+  const getChatRoomParticipants = useCallback(
+    async (id: string) => {
+      const res = await getParticipantsApi({
+        method: "GET",
+        url: buildPath(APIEndPoints.CHATROOM_PARTICIPANTS, { id }),
+      });
+
+      return res?.data.length;
+    },
+    [getParticipantsApi]
+  );
+
   return {
     chatRoomInfo,
 
     getChatRoomInfo,
+    getChatRoomParticipants,
   };
 };
 

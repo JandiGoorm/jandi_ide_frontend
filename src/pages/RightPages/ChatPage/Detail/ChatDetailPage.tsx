@@ -6,21 +6,31 @@ import Button from "../../../../components/Button/Button";
 import { chatDummyData } from "./constants";
 import Chatting from "./Components/Chatting";
 import useChatting from "../../../../hooks/useChatting";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ChatDetailPage = () => {
-  const { chatRoomInfo, getChatRoomInfo } = useChatting();
+  const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
+    useChatting();
+  const [chatPeoples, setChatPeoples] = useState<number | null>(null);
 
   useEffect(() => {
-    getChatRoomInfo("278c5e02-9a6b-4831-bc1b-58411fffbd37");
-  }, [getChatRoomInfo]);
+    const fetchData = async () => {
+      await getChatRoomInfo("278c5e02-9a6b-4831-bc1b-58411fffbd37");
+      const count = await getChatRoomParticipants(
+        "278c5e02-9a6b-4831-bc1b-58411fffbd37"
+      );
+      setChatPeoples(count);
+    };
+
+    fetchData();
+  }, [getChatRoomInfo, getChatRoomParticipants]);
 
   if (chatRoomInfo === null) return null;
 
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
-        <LeftSide chatRoomInfo={chatRoomInfo} />
+        <LeftSide chatRoomInfo={chatRoomInfo} chatPeoples={chatPeoples} />
       </Sidebar.Panel>
       <Sidebar.Content header={<ChatHeader />}>
         <div className={styles.content}>

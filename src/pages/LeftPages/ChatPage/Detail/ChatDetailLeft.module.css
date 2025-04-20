@@ -26,6 +26,9 @@
   color: var(--color-text-inside);
   background-color: var(--color-button-lang-off);
   padding: 0.5rem 1.5rem;
+  box-sizing: border-box;
+  min-width: 10rem;
+  text-align: center;
   border-radius: var(--radius-xl);
   font-size: var(--text-sm);
 }

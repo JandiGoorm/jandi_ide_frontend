@@ -44,4 +44,7 @@ export const APIEndPoints = {
 
   //채팅
   CHATROOM_MANAGE: "/chat/rooms/:id",
+  CHATROOM_JOIN: "/chat/rooms/:id/join",
+  CHATROOM_LEAVE: "/chat/rooms/:id/leave",
+  CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
 };

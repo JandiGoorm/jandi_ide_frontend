@@ -23,6 +23,9 @@ const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.MANAGE_COMPANY}`,
   `POST:${APIEndPoints.COMPANY_POSTING}`,
   `GET:${APIEndPoints.CHATROOM_MANAGE}`,
+  `POST:${APIEndPoints.CHATROOM_JOIN}`,
+  `POST:${APIEndPoints.CHATROOM_LEAVE}`,
+  `POST:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
