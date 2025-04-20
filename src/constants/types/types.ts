@@ -13,6 +13,13 @@ export interface User {
   role: UserRole;
 }
 
+export type ModifyUserData = {
+  introduction: string;
+  email: string;
+  nickname: string;
+  profileImage: string;
+};
+
 export interface Project {
   createdAt: string;
   description: string;

@@ -16,6 +16,7 @@ const useHeaderEndPoints = new Set([
   `PUT:${APIEndPoints.MANAGE_PROJECT}`,
   `DELETE:${APIEndPoints.MANAGE_PROJECT}`,
   `GET:${APIEndPoints.PROJECT_BLOB}`,
+  `PUT:${APIEndPoints.MODIFY_PROFILE}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {

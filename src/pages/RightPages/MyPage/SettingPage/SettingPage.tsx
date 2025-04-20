@@ -8,16 +8,33 @@ import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
 import { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
+import useUserSetting from "../../../../hooks/useUserSetting";
 
 const SettingPage = () => {
-  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
   const { user } = useAuth();
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+  const [nickname, setNickname] = useState(user.nickName || "");
+
+  const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
 
   // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
   const handleLanguageClick = (lang: string) => {
     setSelectedLangs((prev) =>
       prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
     );
+  };
+
+  // 닉네임 수정
+  const handleUpdateNickname = async () => {
+    if (!user) return;
+
+    console.log("변경할 닉네임:", nickname);
+    await modifyUser(user.id, {
+      introduction: user.introduction,
+      email: user.email,
+      nickname: nickname,
+      profileImage: user.profileImage,
+    });
   };
 
   return (
@@ -31,7 +48,7 @@ const SettingPage = () => {
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>
               <p className={styles.title}>기본정보 수정</p>
-              <Button>닉네임 변경</Button>
+              <Button onClick={handleUpdateNickname}>닉네임 변경</Button>
             </div>
             <div className={styles.basicInfo_content}>
               <Input
@@ -41,7 +58,7 @@ const SettingPage = () => {
                   minWidth: "15rem",
                 }}
                 inputSize="lg"
-                placeholder="Email"
+                placeholder={user.email}
               />
               <Input
                 style={{
@@ -50,7 +67,8 @@ const SettingPage = () => {
                   minWidth: "10rem",
                 }}
                 inputSize="lg"
-                placeholder="UserName"
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder={user.nickName}
               />
             </div>
           </div>
@@ -86,7 +104,11 @@ const SettingPage = () => {
               <div className={styles.profile_description}>
                 <textarea
                   className={styles.description_content}
-                  placeholder="자기소개를 적어주세요!"
+                  placeholder={
+                    user.introduction
+                      ? user.introduction
+                      : "자기소개를 적어주세요!"
+                  }
                 />
               </div>
             </div>
