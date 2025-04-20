@@ -3,22 +3,26 @@ import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import LeftSide from "../../../LeftPages/ChatPage/Detail/ChatDetailLeft";
 import ChatHeader from "../../../../layouts/Components/ChatHeader";
 import Button from "../../../../components/Button/Button";
-import { chatDummyData } from "./constants";
 import Chatting from "./Components/Chatting";
 import useChatting from "../../../../hooks/useChatting";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import useChat from "../../../../hooks/useChat";
 
 const ChatDetailPage = () => {
   const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
     useChatting();
+  const { messages, enterChatRoom } = useChat();
   const [chatPeoples, setChatPeoples] = useState<number | null>(null);
   const { id } = useParams<{ id: string }>();
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!id) return;
+      if (!id || initializedRef.current) return;
 
+      initializedRef.current = true;
+      await enterChatRoom(id);
       await getChatRoomInfo(id);
       const count = await getChatRoomParticipants(id);
       setChatPeoples(count);
@@ -38,7 +42,7 @@ const ChatDetailPage = () => {
         <div className={styles.content}>
           <div className={styles.flexBox}>
             <div className={styles.chat_container}>
-              {chatDummyData.map((chat, index) => (
+              {messages?.map((chat, index) => (
                 <Chatting chat={chat} key={index} />
               ))}
             </div>

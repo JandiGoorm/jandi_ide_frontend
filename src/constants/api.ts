@@ -48,4 +48,5 @@ export const APIEndPoints = {
   CHATROOM_JOIN: "/chat/rooms/:id/join",
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
+  CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
 };

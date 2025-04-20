@@ -86,3 +86,19 @@ export interface ChatRoom {
   createdAt: string;
   participants: string[];
 }
+
+// interface ChatMessage {
+//   type: string; // 문자열로 변경 (enum값 사용)
+//   roomId: string;
+//   sender: string;
+//   message: string;
+//   timestamp: string;
+// }
+
+// interface ChatMessage {
+//   type: string; // 문자열로 변경 (enum값 사용)
+//   roomId: string;
+//   sender: string;
+//   message: string;
+//   timestamp: string;
+// }
