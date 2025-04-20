@@ -15,6 +15,7 @@ const SettingPage = () => {
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
   const [nickname, setNickname] = useState(user.nickName || "");
   const [introduction, setIntroduction] = useState(user.nickName || "");
+  const maxLength = 500;
 
   const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
 
@@ -38,13 +39,14 @@ const SettingPage = () => {
     });
   };
 
+  // 소개글 수정
   const handleUpdateIntro = async () => {
     if (!user) return;
     console.log("변경할 소개글:", introduction);
     await modifyUser(user.id, {
       introduction: introduction,
       email: user.email,
-      nickname: nickname,
+      nickname: user.nickname,
       profileImage: user.profileImage,
     });
   };
@@ -115,9 +117,15 @@ const SettingPage = () => {
                 />
               </div>
               <div className={styles.profile_description}>
+                <div className={styles.textLengthBox}>
+                  <p>{introduction.length}자</p>
+                  <p> / </p>
+                  <p>{maxLength}자</p>
+                </div>
                 <textarea
                   className={styles.description_content}
                   onChange={(e) => setIntroduction(e.target.value)}
+                  maxlength={maxLength} //글자수 제한
                   placeholder={
                     user.introduction
                       ? user.introduction
