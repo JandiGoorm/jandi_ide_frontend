@@ -58,7 +58,8 @@ const SettingPage = () => {
                   minWidth: "15rem",
                 }}
                 inputSize="lg"
-                placeholder={user.email}
+                value={user.email}
+                readOnly
               />
               <Input
                 style={{
