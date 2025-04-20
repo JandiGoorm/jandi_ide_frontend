@@ -87,7 +87,7 @@ export const routes = [
   {
     path: PageEndPoints.SETTING,
     element: <SettingPage />,
-    requireAuth: false,
+    requireAuth: true,
   },
   //채팅
   {
