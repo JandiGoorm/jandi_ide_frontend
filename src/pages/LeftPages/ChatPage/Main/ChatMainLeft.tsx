@@ -1,10 +1,18 @@
 import styles from "./ChatMainLeft.module.css";
-
-//components
 import ChatRoomButton from "./components/ChatRoomButton";
 import LeftPart from "../../../../layouts/Components/LeftPart";
+import useChatting from "../../../../hooks/useChatting";
+import { useEffect } from "react";
 
 const ChatMainLeft = () => {
+  const { chatRooms, getChatRooms } = useChatting();
+
+  useEffect(() => {
+    getChatRooms();
+  }, [getChatRooms]);
+
+  if (chatRooms === null) return null;
+
   return (
     <LeftPart>
       <div className={styles.container}>
@@ -15,11 +23,13 @@ const ChatMainLeft = () => {
         </div>
 
         <div className={styles.chat_button_list}>
-          <ChatRoomButton chatName={"네이버"} chatParticipant={101} />
-
-          <ChatRoomButton chatName={"카카오"} chatParticipant={67} />
-
-          <ChatRoomButton chatName={"라인"} chatParticipant={24} />
+          {chatRooms.map((chatRoom) => (
+            <ChatRoomButton
+              chatName={chatRoom.name}
+              chatId={chatRoom.roomId}
+              key={chatRoom.roomId}
+            />
+          ))}
         </div>
       </div>
     </LeftPart>

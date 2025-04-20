@@ -7,23 +7,25 @@ import { chatDummyData } from "./constants";
 import Chatting from "./Components/Chatting";
 import useChatting from "../../../../hooks/useChatting";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ChatDetailPage = () => {
   const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
     useChatting();
   const [chatPeoples, setChatPeoples] = useState<number | null>(null);
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     const fetchData = async () => {
-      await getChatRoomInfo("278c5e02-9a6b-4831-bc1b-58411fffbd37");
-      const count = await getChatRoomParticipants(
-        "278c5e02-9a6b-4831-bc1b-58411fffbd37"
-      );
+      if (!id) return;
+
+      await getChatRoomInfo(id);
+      const count = await getChatRoomParticipants(id);
       setChatPeoples(count);
     };
 
     fetchData();
-  }, [getChatRoomInfo, getChatRoomParticipants]);
+  }, [getChatRoomInfo, getChatRoomParticipants, id]);
 
   if (chatRoomInfo === null) return null;
 
