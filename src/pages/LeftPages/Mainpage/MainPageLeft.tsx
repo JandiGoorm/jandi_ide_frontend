@@ -66,7 +66,7 @@ const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
 
             {/* 유저 선호언어 */}
             <div>
-              <LangTag className={styles.user_langs} langList={userData.lang} />
+              <LangTag langList={userData.lang} />
             </div>
 
             {/* 버튼 */}

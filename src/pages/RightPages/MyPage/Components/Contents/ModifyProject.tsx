@@ -3,7 +3,7 @@ import Input from "../../../../../components/Input/Input";
 import Button from "../../../../../components/Button/Button";
 import { useRef } from "react";
 import { ModifyProjectData } from "../../../../../constants/types/types";
-import useProjects from "../../../../../hooks/useprojects";
+import useProjects from "../../../../../hooks/useProjects";
 
 interface ModifyProjectProps {
   id: number;

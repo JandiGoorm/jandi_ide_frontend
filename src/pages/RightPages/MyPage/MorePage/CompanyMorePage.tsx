@@ -20,7 +20,9 @@ const dummyCompanies = [
 ];
 
 const MainPage = () => {
-  const [myCompanies, setMyCompanies] = useState([]); //관심 기업 리스트 관리
+  const [myCompanies, setMyCompanies] = useState<
+    { id: number; name: string }[]
+  >([]); //관심 기업 리스트 관리
   const { user } = useAuth();
   const { companies } = useCompany();
 
