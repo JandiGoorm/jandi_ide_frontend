@@ -36,4 +36,9 @@ export const APIEndPoints = {
   ADD_PROJECT: "/projects",
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",
+
+  //기업
+  COMPANY: "/companies",
+  MANAGE_COMPANY: "/companies/:id",
+  COMPANY_POSTING: "/companies/:id/job-posting",
 };

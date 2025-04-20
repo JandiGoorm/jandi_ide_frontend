@@ -8,6 +8,7 @@ import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import Button from "../../../../components/Button/Button";
 import FullCompanyBox from "../Components/CompanyBox/FullCompanyBox";
 import { useAuth } from "../../../../contexts/AuthContext";
+import useCompany from "../../../../hooks/useCompany";
 
 const dummyCompanies = [
   { id: 1, name: "네이버" },
@@ -21,6 +22,9 @@ const dummyCompanies = [
 const MainPage = () => {
   const [myCompanies, setMyCompanies] = useState([]); //관심 기업 리스트 관리
   const { user } = useAuth();
+  const { companies } = useCompany();
+
+  console.log(companies);
 
   // 액션 정의 - 관심 기업에 추가 or 삭제
   const handleAction = (id: number, isFavorite: boolean) => {
@@ -64,7 +68,7 @@ const MainPage = () => {
               <BsPinAngleFill /> 관심 기업
             </Button>
             <div className={styles.companyList}>
-              {myCompanies.map((company, i) => {
+              {/* {myCompanies.map((company, i) => {
                 return (
                   <FullCompanyBox
                     key={"myCompany" + i}
@@ -75,7 +79,7 @@ const MainPage = () => {
                     isFavorite={true}
                   />
                 );
-              })}
+              })} */}
             </div>
           </section>
 
@@ -85,7 +89,7 @@ const MainPage = () => {
               <BsPinAngleFill /> 전체 기업을 확인해보세요!
             </Button>
             <div className={styles.companyList}>
-              {dummyCompanies.map((company, i) => {
+              {companies.map((company) => {
                 if (
                   myCompanies.find((myCompany) => myCompany.id === company.id)
                 )
@@ -93,10 +97,9 @@ const MainPage = () => {
 
                 return (
                   <FullCompanyBox
-                    key={"company" + i}
-                    id={company.id}
+                    key={company.id}
+                    company={company}
                     thumbnail="/logo_goorm.png"
-                    name={company.name}
                     onHandle={handleAction}
                     isFavorite={false}
                   />
