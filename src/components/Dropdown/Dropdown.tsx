@@ -10,7 +10,7 @@ import {
 } from "react";
 import { DropdownContext, useDropdown } from "./DropdownContext";
 import { createPortal } from "react-dom";
-import styles from "./DropDown.module.css";
+import styles from "./Dropdown.module.css";
 
 interface DropdownProps {
   children: ReactNode;
