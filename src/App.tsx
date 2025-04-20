@@ -4,6 +4,10 @@ import { routes } from "./routes/Routes";
 import PrivateRoute from "./routes/PrivateRoute";
 import AuthProvider from "./contexts/AuthProvider";
 
+// 코딩 테스트
+import CompanyCodeTestPage from "./pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+import CustomCodeTestPage from "./pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+
 function App() {
   return (
     <DarkModeProvider>
@@ -23,6 +27,14 @@ function App() {
                 />
               );
             })}
+             <Route
+            path={PageEndPoints.ALGO_COMPANY_TEST}
+            element={<CompanyCodeTestPage />}
+          />
+          <Route
+            path={PageEndPoints.ALGO_CUSTOM_TEST}
+            element={<CustomCodeTestPage />}
+          />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

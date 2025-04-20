@@ -48,8 +48,8 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={`${sizeClass} ${variantClass} ${baseClass} ${clickedClass}`}
-      onClick={onClick}
       {...props}
+      onClick={onClick}
     >
       {children}
     </button>

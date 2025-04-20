@@ -8,11 +8,35 @@
     width: 15%;
     height: 30%;
     max-width: 20rem;
-    min-height: 20rem; 
+    min-width: 15rem;
+    min-height: fit-content; 
   
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: var(--color-menu-background);
     z-index: 9999;
   }
+
+.drawer_header{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--font-general);
+  z-index: 10000;
+}
+
+.drawer_hamburger{
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.drawer_hamburger:hover {
+  transform: rotate(90deg);
+}
+
+.logo{
+  height: 1.5rem;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 0.5rem;
+}
+  

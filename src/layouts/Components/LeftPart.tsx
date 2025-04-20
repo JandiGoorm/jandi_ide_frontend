@@ -11,17 +11,35 @@ import {
 } from "../../components/Drawer/Drawer";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "../../components/Tooltip/Tooltip";
+import { useState } from "react";
+import { PageEndPoints } from "../../constants/api";
+
+import { AiFillHome } from "react-icons/ai";
+import { MdSettings } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 interface LeftLayoutProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
+const menuItems = [
+  // 아직 소개 공간이 없어서 임의 공간으로 이동
+  { key: "Team! jandi 소개", navi: "/intro" },
+  { key: "채용 달력", navi: PageEndPoints.HOME },
+  { key: "코딩 테스트", navi: PageEndPoints.ALGO_MAIN },
+  { key: "오픈 채팅방", navi: PageEndPoints.CHAT_MAIN },
+  { key: "나의 관심 기업", navi: PageEndPoints.MY_COMPANY },
+  { key: "나의 프로젝트", navi: PageEndPoints.MY_PROJECT },
+  { key: "코딩 문제집", navi: PageEndPoints.MY_ALGO },
+];
+
 const LeftPart: React.FC<LeftLayoutProps> = ({ children }) => {
   const { isOpen } = useSidebar();
   const { isDarkMode } = useDarkModeContext();
   const logo = isDarkMode ? "/logo_white.png" : "/logo_black.png";
   const navigate = useNavigate();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className={styles.sidebar}>
@@ -33,7 +51,61 @@ const LeftPart: React.FC<LeftLayoutProps> = ({ children }) => {
                 <GiHamburgerMenu size={28} style={{ cursor: "pointer" }} />
               </DrawerTrigger>
               <DrawerContent>
-                <div>d</div>
+                <div className={styles.drawer_body}>
+                  <div className={styles.line}>
+                    {hoveredIndex !== null && (
+                      <div
+                        className={styles.indicator}
+                        style={{
+                          top: `${hoveredIndex * 2.3}rem`, // 메뉴 위치에 맞게 조정
+                        }}
+                      />
+                    )}
+                  </div>
+                  <div className={styles.navi}>
+                    {menuItems.map((item, idx) => (
+                      <div
+                        key={item.key}
+                        className={clsx(
+                          styles.menu_item,
+                          hoveredIndex === idx && styles.active
+                        )}
+                        onMouseEnter={() => setHoveredIndex(idx)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        onClick={() => navigate(item.navi)}
+                      >
+                        {item.key}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.drawer_footer}>
+                  <Tooltip text={"마이 페이지"}>
+                    <p
+                      className={styles.drawer_icon}
+                      onClick={() => navigate(PageEndPoints.MYPAGE)}
+                    >
+                      <AiFillHome />
+                    </p>
+                  </Tooltip>
+                  <Tooltip text={"설정"}>
+                    <p
+                      className={styles.drawer_icon}
+                      onClick={() => navigate(PageEndPoints.SETTING)}
+                    >
+                      <MdSettings />
+                    </p>
+                  </Tooltip>
+                  <Tooltip text={"로그아웃"}>
+                    <p
+                      className={styles.drawer_icon}
+                      // 아직 로그아웃이 없어서 임의 공간으로 이동
+                      onClick={() => navigate(PageEndPoints.TEST)}
+                    >
+                      <MdLogout />
+                    </p>
+                  </Tooltip>
+                </div>
               </DrawerContent>
             </Drawer>
           </div>
