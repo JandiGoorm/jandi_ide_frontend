@@ -95,10 +95,13 @@ export interface ChatRoom {
 //   timestamp: string;
 // }
 
-// interface ChatMessage {
-//   type: string; // 문자열로 변경 (enum값 사용)
-//   roomId: string;
-//   sender: string;
-//   message: string;
-//   timestamp: string;
-// }
+export interface Problems {
+  id: number;
+  description: string;
+  level: number;
+  memory: number;
+  timeLimit: number;
+  tagName: string[];
+  createdAt: string;
+  updatedAt: string;
+}
