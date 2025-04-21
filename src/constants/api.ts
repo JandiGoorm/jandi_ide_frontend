@@ -33,6 +33,9 @@ export const APIEndPoints = {
   MY_PROJECT: "/users/:id/projects",
   GIT_REPO: "/users/:id/repos",
 
+  //내정보 수정
+  MODIFY_PROFILE: "/users/:id",
+
   ADD_PROJECT: "/projects",
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",

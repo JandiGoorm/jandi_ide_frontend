@@ -121,4 +121,15 @@ export const routes = [
     element: <ProjectEditPage />,
     requireAuth: true,
   },
+  // 코딩 테스트
+  {
+    path: PageEndPoints.ALGO_COMPANY_TEST,
+    element: <CompanyCodeTestPage />,
+    requireAuth: true,
+  },
+  {
+    path: PageEndPoints.ALGO_CUSTOM_TEST,
+    element: <CustomCodeTestPage />,
+    requireAuth: true,
+  },
 ];

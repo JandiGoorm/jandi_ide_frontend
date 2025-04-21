@@ -8,16 +8,47 @@ import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
 import { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
+import useUserSetting from "../../../../hooks/useUserSetting";
 
 const SettingPage = () => {
-  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
   const { user } = useAuth();
+  const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
+  const [nickname, setNickname] = useState(user.nickName || "");
+  const [introduction, setIntroduction] = useState(user.nickName || "");
+  const maxLength = 500;
+
+  const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
 
   // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
   const handleLanguageClick = (lang: string) => {
     setSelectedLangs((prev) =>
       prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
     );
+  };
+
+  // 닉네임 수정
+  const handleUpdateNickname = async () => {
+    if (!user) return;
+
+    console.log("변경할 닉네임:", nickname);
+    await modifyUser(user.id, {
+      introduction: user.introduction,
+      email: user.email,
+      nickname: nickname,
+      profileImage: user.profileImage,
+    });
+  };
+
+  // 소개글 수정
+  const handleUpdateIntro = async () => {
+    if (!user) return;
+    console.log("변경할 소개글:", introduction);
+    await modifyUser(user.id, {
+      introduction: introduction,
+      email: user.email,
+      nickname: user.nickname,
+      profileImage: user.profileImage,
+    });
   };
 
   return (
@@ -31,7 +62,7 @@ const SettingPage = () => {
           <div className={styles.basicInfo_container}>
             <div className={styles.basicInfo_header}>
               <p className={styles.title}>기본정보 수정</p>
-              <Button>닉네임 변경</Button>
+              <Button onClick={handleUpdateNickname}>닉네임 변경</Button>
             </div>
             <div className={styles.basicInfo_content}>
               <Input
@@ -41,7 +72,8 @@ const SettingPage = () => {
                   minWidth: "15rem",
                 }}
                 inputSize="lg"
-                placeholder="Email"
+                value={user.email}
+                readOnly
               />
               <Input
                 style={{
@@ -50,7 +82,8 @@ const SettingPage = () => {
                   minWidth: "10rem",
                 }}
                 inputSize="lg"
-                placeholder="UserName"
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder={user.nickName}
               />
             </div>
           </div>
@@ -72,7 +105,7 @@ const SettingPage = () => {
               <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
                 <Button>프로필 초기화</Button>
-                <Button>소개글 변경</Button>
+                <Button onClick={handleUpdateIntro}>소개글 변경</Button>
               </div>
             </div>
             <div className={styles.profileModify_content}>
@@ -84,9 +117,20 @@ const SettingPage = () => {
                 />
               </div>
               <div className={styles.profile_description}>
+                <div className={styles.textLengthBox}>
+                  <p>{introduction.length}자</p>
+                  <p> / </p>
+                  <p>{maxLength}자</p>
+                </div>
                 <textarea
                   className={styles.description_content}
-                  placeholder="자기소개를 적어주세요!"
+                  onChange={(e) => setIntroduction(e.target.value)}
+                  maxlength={maxLength} //글자수 제한
+                  placeholder={
+                    user.introduction
+                      ? user.introduction
+                      : "자기소개를 적어주세요!"
+                  }
                 />
               </div>
             </div>
