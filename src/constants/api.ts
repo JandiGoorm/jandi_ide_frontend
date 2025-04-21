@@ -39,4 +39,15 @@ export const APIEndPoints = {
   ADD_PROJECT: "/projects",
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",
+
+  //기업
+  COMPANY: "/companies",
+  MANAGE_COMPANY: "/companies/:id",
+  COMPANY_POSTING: "/companies/:id/job-posting",
+
+  //채팅
+  CHATROOM_MANAGE: "/chat/rooms/:id",
+  CHATROOM_JOIN: "/chat/rooms/:id/join",
+  CHATROOM_LEAVE: "/chat/rooms/:id/leave",
+  CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
 };

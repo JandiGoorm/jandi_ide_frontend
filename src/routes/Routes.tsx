@@ -30,7 +30,7 @@ export const routes = [
   {
     path: PageEndPoints.HOME,
     element: <HomePage />,
-    requireAuth: true,
+    requireAuth: true, //true
   },
   {
     path: PageEndPoints.TEST,
@@ -104,6 +104,16 @@ export const routes = [
   {
     path: PageEndPoints.ALGO_MAIN,
     element: <AlgorithmPage />,
+    requireAuth: true,
+  },
+  {
+    path: PageEndPoints.ALGO_COMPANY_TEST,
+    element: <CompanyCodeTestPage />,
+    requireAuth: true,
+  },
+  {
+    path: PageEndPoints.ALGO_CUSTOM_TEST,
+    element: <CustomCodeTestPage />,
     requireAuth: true,
   },
   {

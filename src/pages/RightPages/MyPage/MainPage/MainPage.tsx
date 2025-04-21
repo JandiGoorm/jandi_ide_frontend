@@ -18,7 +18,7 @@ import {
 import AddProject from "../Components/Contents/AddProject";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { PageEndPoints } from "../../../../constants/api";
-import useProjects from "../../../../hooks/useprojects";
+import useProjects from "../../../../hooks/useProjects";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -93,13 +93,13 @@ const MainPage = () => {
               </div>
               {projects.length > 0 ? (
                 <div className={styles.projectList}>
-                  {projects.map((project, i) => (
+                  {projects.map((project) => (
                     <ProjectBox
                       id={project.id}
-                      key={"project" + i}
+                      key={project.id}
                       title={project.name}
                       contents={project.description}
-                      lang={langs[i % langs.length]}
+                      lang={langs[0]}
                       onAddProject={getProjects}
                     />
                   ))}

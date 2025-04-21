@@ -1,12 +1,12 @@
 import styles from "./CodeTestPage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
 
 //components
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
-import LeftSide from "../../../LeftPages/CodeTestPage/codeTestLeft";
+import LeftSide from "../../../LeftPages/CodeTestPage/CodeTestLeft";
 import Editor from "@monaco-editor/react";
 import Button from "../../../../components/Button/Button";
 
@@ -74,7 +74,7 @@ const CodeTestPage = () => {
             <div className={styles.code_header}>
               <div
                 className={styles.timer}
-                style={{ borderColor: getBorderColor(minutes, seconds) }}
+                style={{ borderColor: getBorderColor(minutes) }}
               >
                 {formatTime(minutes)}:{formatTime(seconds)}
               </div>

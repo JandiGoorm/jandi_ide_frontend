@@ -5,7 +5,7 @@ const GREEN = "#15653E" as const;
 
 interface ChatRoomButtonProps {
   chatName: string;
-  chatParticipant: int;
+  chatParticipant: number;
 }
 
 const ChatRoomButton: React.FC<ChatRoomButtonProps> = ({

@@ -1,7 +1,6 @@
 import styles from "./BasicHeader.module.css";
 import React from "react";
 import { useDarkModeContext } from "../../contexts/DarkmodeContext";
-import { FaSun, FaMoon } from "react-icons/fa";
 
 const BasicHeader: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkModeContext();

@@ -7,6 +7,7 @@ import {
   startOfWeek,
 } from "date-fns";
 import styles from "./Cells.module.css";
+import { ModalTrigger } from "../../../../components/Modal/Modal";
 
 interface Props {
   currentMonth: Date;
@@ -39,19 +40,24 @@ const Cells = ({ currentMonth, onDateClick, selectedDate }: Props) => {
       const isToday = format(today, "yyyy-MM-dd") === formattedDate;
 
       days.push(
-        <div
+        <ModalTrigger
           key={num}
-          className={`${styles.dayCell} ${!isCurrentMonth ? styles.notCurrentMonth : styles.currentMonth} ${isToday ? styles.today_cell : ""}`}
-          onClick={() => {
-            onDateClick(cloneDay);
-          }}
+          onOpen={() => onDateClick(cloneDay)} // 날짜 클릭 시 상태 업데이트
         >
-          <span
-            className={`${styles.dayNumber} ${isToday ? styles.today : ""}`}
+          <div
+            key={num}
+            className={`${styles.dayCell} ${!isCurrentMonth ? styles.notCurrentMonth : styles.currentMonth} ${isToday ? styles.today_cell : ""}`}
+            onClick={() => {
+              onDateClick(cloneDay);
+            }}
           >
-            {isCurrentMonth ? format(day, "d") : ""}
-          </span>
-        </div>
+            <span
+              className={`${styles.dayNumber} ${isToday ? styles.today : ""}`}
+            >
+              {isCurrentMonth ? format(day, "d") : ""}
+            </span>
+          </div>
+        </ModalTrigger>
       );
 
       day = addDays(day, 1);

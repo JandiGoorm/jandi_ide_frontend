@@ -1,5 +1,8 @@
 import axios from "axios";
 import { APIEndPoints } from "../constants/api";
+import AuthService from "./auth";
+
+const { refreshAccessToken } = AuthService;
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -17,6 +20,13 @@ const useHeaderEndPoints = new Set([
   `DELETE:${APIEndPoints.MANAGE_PROJECT}`,
   `GET:${APIEndPoints.PROJECT_BLOB}`,
   `PUT:${APIEndPoints.MODIFY_PROFILE}`,
+  `GET:${APIEndPoints.COMPANY}`,
+  `GET:${APIEndPoints.MANAGE_COMPANY}`,
+  `POST:${APIEndPoints.COMPANY_POSTING}`,
+  `GET:${APIEndPoints.CHATROOM_MANAGE}`,
+  `POST:${APIEndPoints.CHATROOM_JOIN}`,
+  `POST:${APIEndPoints.CHATROOM_LEAVE}`,
+  `POST:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
@@ -38,4 +48,35 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (err) => {
+    if (
+      err.response.status === 401 &&
+      err.config.url !== APIEndPoints.REFRESH
+    ) {
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (refreshToken) {
+        const response = await refreshAccessToken(refreshToken);
+
+        if (!response.accessToken || !response.refreshToken) {
+          return Promise.reject("리프레쉬 토큰으로 액세스토큰 재발행 실패");
+        }
+
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("refreshToken", response.refreshToken);
+
+        err.config.headers["Authorization"] = `Bearer ${response.accessToken}`;
+
+        return axios.request(err.config);
+      }
+    }
+    return Promise.reject(err);
+  }
+);
+
 export default axiosInstance;
