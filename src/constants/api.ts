@@ -46,8 +46,10 @@ export const APIEndPoints = {
   COMPANY_POSTING: "/companies/:id/job-posting",
 
   //채팅
+  ALL_CHATROOMS: "/chat/rooms",
   CHATROOM_MANAGE: "/chat/rooms/:id",
   CHATROOM_JOIN: "/chat/rooms/:id/join",
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
+  CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
 };
