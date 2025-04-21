@@ -39,7 +39,6 @@ const useChatting = () => {
         method: "GET",
         url: buildPath(APIEndPoints.CHATROOM_PARTICIPANTS, { id }),
       });
-
       return res?.data.length;
     },
     [getParticipantsApi]

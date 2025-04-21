@@ -15,30 +15,33 @@ interface ChattingProps {
 const Chatting = ({ chat }: ChattingProps) => {
   return (
     <div className={`${styles.chat_bubble}`}>
-      {/* <img
-        src={chat.profileImage}
-        alt="profile"
-        className={styles.profile_img}
-      /> */}
-      <div className={styles.chat_content}>
-        <div className={styles.chat_sub_info_box}>
-          <div className={styles.chat_name}>{chat.sender}</div>
-          <div>
-            <Button size="lg" variant="none">
-              <MdMoreHoriz />
-            </Button>
+      {chat.type === "ENTER" ? (
+        <div className={styles.chat_content}>
+          <div className={styles.enter_name}>
+            {chat.sender}님이 접속하셨습니다.
           </div>
         </div>
-        <div className={styles.chat_text}>{chat.message}</div>
-        <div className={styles.chat_sub_info_box}>
-          <div>
-            <Button size="lg" variant="none">
-              +
-            </Button>
+      ) : (
+        <div className={styles.chat_content}>
+          <div className={styles.chat_sub_info_box}>
+            <div className={styles.chat_name}>{chat.sender}</div>
+            <div>
+              <Button size="lg" variant="none">
+                <MdMoreHoriz />
+              </Button>
+            </div>
           </div>
-          <div className={styles.chat_date}>{chat.timestamp}</div>
+          <div className={styles.chat_text}>{chat.message}</div>
+          <div className={styles.chat_sub_info_box}>
+            <div>
+              <Button size="lg" variant="none">
+                +
+              </Button>
+            </div>
+            <div className={styles.chat_date}>{chat.timestamp}</div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
