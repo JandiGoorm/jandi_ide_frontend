@@ -1,7 +1,7 @@
 import { PageEndPoints } from "../constants/api";
 import LoginPage from "../pages/Auth/Login/LoginPage";
 import Test from "../pages/BasicPages/Test/Test";
-import HomePage from "../pages/RightPages/MainPage/HomePage";
+// import HomePage from "../pages/RightPages/MainPage/HomePage";
 import LoginCallback from "../pages/Auth/Login/LoginCallback";
 import Regitster_lang from "../pages/Auth/Register/SelectLanguagePage";
 import Regitster_company from "../pages/Auth/Register/SelectCompanyPage";
@@ -25,12 +25,13 @@ import ProjectEditPage from "../pages/RightPages/CodeEditPage/ProjectEditPage/Pr
 // 코딩 테스트
 import CompanyCodeTestPage from "../pages/RightPages/AlgorithmPage/Test/CodeTestPage";
 import CustomCodeTestPage from "../pages/RightPages/AlgorithmPage/Test/CodeTestPage";
+import HomeRouter from "./HomeRouter";
 
 export const routes = [
   {
     path: PageEndPoints.HOME,
-    element: <HomePage />,
-    requireAuth: true, //true
+    element: <HomeRouter />,
+    requireAuth: false,
   },
   {
     path: PageEndPoints.TEST,
