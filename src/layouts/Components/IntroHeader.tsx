@@ -2,14 +2,23 @@ import styles from "./IntroHeader.module.css";
 import React from "react";
 import { useDarkModeContext } from "../../contexts/DarkmodeContext";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
+import { PageEndPoints } from "../../constants/api";
 
 const IntroHeader: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkModeContext();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <div className={styles.button_div}>
-        <Button>LogIn</Button>
+        <Button
+          onClick={() => {
+            navigate(PageEndPoints.LOGIN);
+          }}
+        >
+          LogIn
+        </Button>
       </div>
       <div className={styles.switchContainer}>
         <div

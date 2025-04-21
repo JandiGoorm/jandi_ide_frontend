@@ -32,7 +32,7 @@ const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
     // 로그아웃 진행...
     signOut();
     // 로그아웃 후 랜딩 페이지로 이동
-    navigate(PageEndPoints.LOGIN);
+    navigate(PageEndPoints.HOME);
   };
 
   const handleSetting = () => {

@@ -32,7 +32,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         navigate(`${PageEndPoints.LOGIN_LANGUAGE}`);
       } else {
         console.log("기존 회원!");
-        navigate(`${PageEndPoints.HOME}`);
+        const next = sessionStorage.getItem("loginNext");
+        if (next) {
+          sessionStorage.removeItem("loginNext");
+          navigate(next);
+        } else {
+          navigate(PageEndPoints.HOME);
+        }
       }
     } catch (err) {
       console.error("OAuth 로그인 에러", err);

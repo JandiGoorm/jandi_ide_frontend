@@ -47,7 +47,7 @@ const slides = [
 const IntroPage = () => {
   const autoplay = useRef(
     Autoplay({
-      delay: 3000,
+      delay: 5000,
     })
   ).current;
 
