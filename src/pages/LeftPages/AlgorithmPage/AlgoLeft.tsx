@@ -4,22 +4,35 @@ import Company from "./Components/Company";
 
 import Button from "../../../components/Button/Button";
 import Custom from "./Components/Custom";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 type Mode = "company" | "practice";
 
 interface AlgoLeftProps {
   selected: Mode;
   setSelected: (value: Mode) => void;
+  onStart: (form?: { title: string; language: string; time: number }) => void;
 }
 
-const AlgoLeft: React.FC<AlgoLeftProps> = ({ selected, setSelected }) => {
-  const navigate = useNavigate();
-  const startAlgo = () => {
-    if (selected === "company") {
-      navigate("/algo/test/company");
+const AlgoLeft: React.FC<AlgoLeftProps> = ({
+  selected,
+  setSelected,
+  onStart,
+}) => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const languageRef = useRef<HTMLSelectElement>(null);
+  const timeRef = useRef<HTMLInputElement>(null);
+
+  const handleStartClick = () => {
+    if (selected === "practice") {
+      const form = {
+        title: titleRef.current?.value || "",
+        language: languageRef.current?.value || "",
+        time: Number(timeRef.current?.value) || 0,
+      };
+      onStart(form);
     } else {
-      navigate("/algo/test/custom");
+      onStart(); // company 모드
     }
   };
 
@@ -41,16 +54,14 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({ selected, setSelected }) => {
           </div>
         </div>
         <div className={styles.content_box}>
-          {selected === "company" ? <Company /> : <Custom />}
+          {selected === "company" ? (
+            <Company />
+          ) : (
+            <Custom refs={{ titleRef, languageRef, timeRef }} />
+          )}
         </div>
         <div className={styles.button_box}>
-          <Button
-            onClick={() => {
-              startAlgo();
-            }}
-          >
-            시작하기
-          </Button>
+          <Button onClick={handleStartClick}>시작하기</Button>
         </div>
       </div>
     </LeftPart>

@@ -31,6 +31,8 @@ const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.CHAT_MESSAGE}`,
   `GET:${APIEndPoints.SCHEDULES}`,
   `GET:${APIEndPoints.ALL_PROBLEMS}`,
+  `GET:${APIEndPoints.MANAGE_BASKETS}`,
+  `POST:${APIEndPoints.MANAGE_BASKETS}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {

@@ -38,6 +38,8 @@ export const APIEndPoints = {
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",
 
+  MANAGE_BASKETS: "problem-set",
+
   //기업
   COMPANY: "/companies",
   MANAGE_COMPANY: "/companies/:id",

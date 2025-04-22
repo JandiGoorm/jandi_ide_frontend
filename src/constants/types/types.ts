@@ -111,6 +111,7 @@ export interface Problems {
   tags: string[];
   createdAt: string; // ISO 형식의 날짜 문자열
   updatedAt: string;
+  title: string;
 }
 
 export interface Schedule {
@@ -129,4 +130,21 @@ export interface RecruitInfo {
   schedules: Schedule[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Baskets {
+  id: number;
+  isCompanyProb: boolean;
+  problemIds: string[];
+  minutes: number;
+  title: string;
+  company: string;
+}
+
+export interface BasketBody {
+  isCompanyProb: boolean;
+  problemIds: number[];
+  minutes: number;
+  title: string;
+  companyName: string;
 }
