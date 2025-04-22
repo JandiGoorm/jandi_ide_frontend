@@ -34,6 +34,19 @@ const Calendar = () => {
     setCurrentMonth(newDate);
   };
 
+  const selectedSchedules =
+    monthSchedules?.flatMap((posting) => {
+      if (!posting.schedules) return [];
+
+      return posting.schedules
+        .filter((schedule) => schedule.date === selectedDate)
+        .map((schedule) => ({
+          scheduleName: schedule.scheduleName,
+          description: schedule.description,
+          jobTitle: posting.title,
+        }));
+    }) ?? [];
+
   return (
     <div className={styles.container}>
       <Header
@@ -51,7 +64,10 @@ const Calendar = () => {
           monthSchedules={monthSchedules}
         />
         <ModalContent>
-          <CalendarModal selectedDate={selectedDate} />
+          <CalendarModal
+            selectedDate={selectedDate}
+            schedules={selectedSchedules}
+          />
         </ModalContent>
       </Modal>
     </div>
