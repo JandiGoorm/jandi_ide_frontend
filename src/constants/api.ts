@@ -32,8 +32,6 @@ export const APIEndPoints = {
   MY_INFO: "/users/me",
   MY_PROJECT: "/users/:id/projects",
   GIT_REPO: "/users/:id/repos",
-
-  //내정보 수정
   MODIFY_PROFILE: "/users/:id",
 
   ADD_PROJECT: "/projects",
@@ -44,6 +42,8 @@ export const APIEndPoints = {
   COMPANY: "/companies",
   MANAGE_COMPANY: "/companies/:id",
   COMPANY_POSTING: "/companies/:id/job-posting",
+  //체용공고
+  SCHEDULES: "/schedules",
 
   //채팅
   ALL_CHATROOMS: "/chat/rooms",

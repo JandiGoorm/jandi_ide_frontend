@@ -112,3 +112,21 @@ export interface Problems {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Schedule {
+  id: number;
+  scheduleName: string;
+  date: string; // ISO 날짜 형식 (예: "2025-04-19")
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RecruitInfo {
+  id: number;
+  title: string;
+  description: string;
+  schedules: Schedule[];
+  createdAt: string;
+  updatedAt: string;
+}

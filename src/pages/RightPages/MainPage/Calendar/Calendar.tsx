@@ -1,18 +1,27 @@
 import { format } from "date-fns";
 import styles from "./Calendar.module.css";
 import Header from "./Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Days from "./Days";
 import Cells from "./Cells";
 import { Modal, ModalContent } from "../../../../components/Modal/Modal";
 import CalendarModal from "./CalendarModal";
+import useJobPosting from "../../../../hooks/useJobPosting";
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState("");
   const onDateClick = (day: Date) => setSelectedDate(format(day, "yyyy-MM-dd"));
   const goToday = () => setCurrentMonth(new Date());
+  const { monthSchedules, getMonth } = useJobPosting();
 
+  useEffect(() => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth() + 1;
+    getMonth(year, month);
+  }, [currentMonth]);
+
+  console.log(monthSchedules);
   const onChangeYear = (year: number) => {
     const newDate = new Date(currentMonth);
     newDate.setFullYear(year);
@@ -39,6 +48,7 @@ const Calendar = () => {
           currentMonth={currentMonth}
           onDateClick={onDateClick}
           selectedDate={selectedDate}
+          monthSchedules={monthSchedules}
         />
         <ModalContent>
           <CalendarModal selectedDate={selectedDate} />

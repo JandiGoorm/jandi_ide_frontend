@@ -29,6 +29,7 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.CHATROOM_LEAVE}`,
   `POST:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
   `GET:${APIEndPoints.CHAT_MESSAGE}`,
+  `GET:${APIEndPoints.SCHEDULES}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
