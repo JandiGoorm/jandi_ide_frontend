@@ -93,7 +93,7 @@ const SettingPage = () => {
             </div>
             <div className={styles.selectLanguage_content}>
               <SelectButtonList
-                type={"lang"}
+                listItem={["ㄴㄴ"]}
                 selectedItems={selectedLangs}
                 onClickItem={handleLanguageClick}
               />

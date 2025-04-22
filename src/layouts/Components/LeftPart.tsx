@@ -26,7 +26,6 @@ interface LeftLayoutProps
 
 const menuItems = [
   // 아직 소개 공간이 없어서 임의 공간으로 이동
-  { key: "Team! jandi 소개", navi: "/intro" },
   { key: "채용 달력", navi: PageEndPoints.HOME },
   { key: "코딩 테스트", navi: PageEndPoints.ALGO_MAIN },
   { key: "오픈 채팅방", navi: PageEndPoints.CHAT_MAIN },

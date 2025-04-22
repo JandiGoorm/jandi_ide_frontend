@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
 import styles from "./MainPage.module.css";
 import LeftPart from "../../../layouts/Components/LeftPart";
 import LangTag from "./components/LangTag";
 import Button from "../../../components/Button/Button";
 import { User } from "../../../constants/types/types";
-import { useAuth } from "../../../contexts/AuthContext";
 import { PageEndPoints } from "../../../constants/api";
 
 interface MainPageLeftProps {
@@ -14,36 +12,6 @@ interface MainPageLeftProps {
 
 const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
   const navigate = useNavigate();
-  const { isDarkMode } = useDarkModeContext();
-  const { signOut } = useAuth();
-
-  const userData = {
-    profile: isDarkMode
-      ? "/user_profile_green.png"
-      : "/user_profile_yellow.png",
-    name: "User name",
-    email: "useremail@exaple.com",
-    intro:
-      "작은 기능 하나에도 이유를 담고 싶습니다. 개발은 저에게 단순한 구현이 아니라, 끊임없이 배우고 성장하는 과정입니다. 기록과 공유를 통해 더 나은 개발자가 되기 위해 꾸준히 나아가고 있습니다. 오늘보다 나은 내일의 나를 꿈꿉니다.",
-    lang: ["#Python", "#Java", "#C/C++"],
-  };
-
-  const handleLogout = () => {
-    // 로그아웃 진행...
-    signOut();
-    // 로그아웃 후 랜딩 페이지로 이동
-    navigate(PageEndPoints.HOME);
-  };
-
-  const handleSetting = () => {
-    // 설정 페이지로 이동
-    navigate("/mypage/setting");
-  };
-
-  const handleViewProfile = () => {
-    // 프로필 페이지로 이동
-    navigate("/mypage");
-  };
 
   return (
     <LeftPart>
@@ -66,14 +34,39 @@ const MainPageLeft: React.FC<MainPageLeftProps> = ({ user }) => {
 
             {/* 유저 선호언어 */}
             <div>
-              <LangTag langList={userData.lang} />
+              <LangTag langList={["#Python", "#Java", "#C/C++"]} />
             </div>
 
             {/* 버튼 */}
             <div className={styles.button_list}>
-              <Button onClick={handleLogout}>로그아웃</Button>
-              <Button onClick={handleSetting}>회원 정보 수정</Button>
-              <Button onClick={handleViewProfile}>내 프로필 보기</Button>
+              <Button
+                onClick={() => {
+                  navigate(PageEndPoints.CHAT_MAIN);
+                }}
+              >
+                오픈채팅 가기
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate(PageEndPoints.ALGO_MAIN);
+                }}
+              >
+                알고리즘 문제풀기
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate(PageEndPoints.MYPAGE);
+                }}
+              >
+                내 프로필 보기
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate(PageEndPoints.SETTING);
+                }}
+              >
+                회원 정보 수정
+              </Button>
             </div>
           </>
         )}
