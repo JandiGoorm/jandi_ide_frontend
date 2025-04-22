@@ -57,4 +57,5 @@ export const APIEndPoints = {
 
   //알고리즘
   ALL_PROBLEMS: "/problems",
+  PROBLEM: "/problems/:id",
 };

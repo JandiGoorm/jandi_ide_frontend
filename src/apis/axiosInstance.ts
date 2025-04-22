@@ -33,6 +33,7 @@ const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.ALL_PROBLEMS}`,
   `GET:${APIEndPoints.MANAGE_BASKETS}`,
   `POST:${APIEndPoints.MANAGE_BASKETS}`,
+  `GET:${APIEndPoints.PROBLEM}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {

@@ -19,17 +19,27 @@ import AddProject from "../Components/Contents/AddProject";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { PageEndPoints } from "../../../../constants/api";
 import useProjects from "../../../../hooks/useProjects";
+import useBaskets from "../../../../hooks/useBaskets";
+import { useEffect, useState } from "react";
+import { Baskets } from "../../../../constants/types/types";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { projects, getProjects } = useProjects();
+  const { getAllBaskets } = useBaskets();
+  const [baskets, setBaskets] = useState<Baskets[]>([]);
 
-  console.log(projects);
+  useEffect(() => {
+    const getBaskets = async () => {
+      const data = await getAllBaskets();
+      setBaskets(data);
+    };
+    getBaskets();
+  }, [getAllBaskets]);
 
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
   const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
-  const algorithms = ["네이버 대비 알고리즘", "알고리즘 연습", "PS 연습"];
 
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
@@ -123,16 +133,16 @@ const MainPage = () => {
                   <BsPinAngleFill /> 알고리즘 문제 <AiOutlineDoubleRight />
                 </Button>
               </div>
-              {algorithms.length > 0 ? (
+              {baskets.length > 0 ? (
                 <div className={styles.algorithmList}>
-                  {algorithms.map((algorithm, i) => (
+                  {baskets.map((basket, i) => (
                     <AlgorithmBox
-                      id={i + 1}
-                      key={"project" + i}
-                      title={algorithm}
-                      problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                      duration={60}
-                      problemCount={2 * (i + 1)}
+                      id={basket.id}
+                      key={basket.id}
+                      title={basket.title}
+                      problems={basket.problemIds.map((id) => Number(id))}
+                      duration={basket.minutes}
+                      problemCount={basket.problemIds.length}
                       lang={langs[i]}
                       levelImg="/level_5.png"
                     />

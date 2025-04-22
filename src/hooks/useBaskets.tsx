@@ -1,21 +1,22 @@
-import { useCallback, useState } from "react";
-import { BasketBody, Baskets } from "../constants/types/types";
+import { useCallback } from "react";
+import { BasketBody } from "../constants/types/types";
 import useAxios from "./useAxios";
 import { APIEndPoints } from "../constants/api";
 
 //알고리즘 문제, 문제집 관리 hooks
 const useBaskets = () => {
-  const [baskets, setBaskets] = useState<Baskets[]>([]);
   const { fetchData: getApi } = useAxios();
   const { fetchData: postApi } = useAxios();
 
   const getAllBaskets = useCallback(async () => {
-    await getApi({
+    const res = await getApi({
       method: "GET",
       url: APIEndPoints.MANAGE_BASKETS,
-    }).then((res) => {
-      setBaskets(res?.data);
     });
+    if (res?.data) {
+      return res.data;
+    }
+    return null;
   }, [getApi]);
 
   const addBaskets = useCallback(
@@ -36,7 +37,6 @@ const useBaskets = () => {
   );
 
   return {
-    baskets,
     getAllBaskets,
     addBaskets,
   };
