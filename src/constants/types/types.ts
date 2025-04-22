@@ -108,8 +108,8 @@ export interface Problems {
   level: number;
   memory: number;
   timeLimit: number;
-  tagName: string[];
-  createdAt: string;
+  tags: string[];
+  createdAt: string; // ISO 형식의 날짜 문자열
   updatedAt: string;
 }
 

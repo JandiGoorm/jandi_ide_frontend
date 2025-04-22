@@ -1,15 +1,17 @@
 import styles from "./PracticeContent.module.css";
-import { problemDummyData } from "../constants";
 import { FaMedal } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import Button from "../../../../../components/Button/Button";
 import { useState } from "react";
 import { Problems } from "../../../../../constants/types/types";
+import useProblems from "../../../../../hooks/useProblems";
 
 const PracticeContent = () => {
   const [selected, setSelected] = useState<Problems[]>([]);
+  const { problems } = useProblems();
 
+  console.log(problems);
   const getMedalColor = (level: number) => {
     switch (level) {
       case 4:
@@ -24,7 +26,6 @@ const PracticeContent = () => {
         return "#b73d3d";
     }
   };
-
   const toggleProblem = (problem: Problems) => {
     const exists = selected.find((p) => p.id === problem.id);
     if (exists) {
@@ -46,7 +47,7 @@ const PracticeContent = () => {
               </Button>
               <FaMedal color={getMedalColor(problem.level)} />
               <span className={styles.desc}>{problem.description}</span>
-              {problem.tagName.map((tag) => (
+              {problem.tags.map((tag) => (
                 <div className={styles.tag}>{tag}</div>
               ))}
             </div>
@@ -56,16 +57,18 @@ const PracticeContent = () => {
       <div className={styles.select_box}>
         <div className={styles.header}>문제 리스트</div>
         <div className={styles.content_box}>
-          {problemDummyData.map((problem) => (
+          {problems.map((problem) => (
             <div className={styles.problem} key={problem.id}>
               <Button variant="none" onClick={() => toggleProblem(problem)}>
                 <FaPlus size={18} />
               </Button>
               <FaMedal color={getMedalColor(problem.level)} />
               <span className={styles.desc}>{problem.description}</span>
-              {problem.tagName.map((tag) => (
-                <div className={styles.tag}>{tag}</div>
-              ))}
+              <div className={styles.tag_box}>
+                {problem.tags.map((tag) => (
+                  <div className={styles.tag}>{tag}</div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

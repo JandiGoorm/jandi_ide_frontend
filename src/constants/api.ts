@@ -52,4 +52,7 @@ export const APIEndPoints = {
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
   CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
+
+  //알고리즘
+  ALL_PROBLEMS: "/problems",
 };
