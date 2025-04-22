@@ -45,10 +45,7 @@ axiosInstance.interceptors.request.use((config) => {
   const requestKey = `${method}:${normalizedUrl}`;
   const isRequiredAuth = useHeaderEndPoints.has(requestKey);
 
-  console.log(isRequiredAuth);
-
   if (isRequiredAuth) {
-    console.log("여기");
     const accessToken = localStorage.getItem("accessToken") ?? "";
     config.headers["Authorization"] = `Bearer ${accessToken}`;
   }

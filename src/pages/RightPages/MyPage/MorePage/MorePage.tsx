@@ -85,7 +85,6 @@ const MorePage = () => {
                         duration={basket.minutes}
                         problemCount={basket.problemIds.length}
                         lang={langs[i]}
-                        levelImg="/level_5.png"
                       />
                     ))}
                   </div>

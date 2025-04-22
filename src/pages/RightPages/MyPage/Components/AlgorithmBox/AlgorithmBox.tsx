@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AlgorithmBox.module.css";
 import LangTag from "../../../../LeftPages/Mainpage/components/LangTag";
@@ -14,16 +14,33 @@ import { BsPinAngle } from "react-icons/bs";
 import { BsPinAngleFill } from "react-icons/bs";
 import { MdMoreVert } from "react-icons/md";
 import DropDownMenu from "../Contents/DropdownMenu";
+import useProblems from "../../../../../hooks/useProblems";
+import { ProblemInfo } from "../../../../../constants/types/types";
+import { FaMedal } from "react-icons/fa";
 
 interface AlgorithmBoxProps {
   id: number;
   title: string;
-  problems: string[];
+  problems: number[];
   duration: number;
   problemCount: number;
   lang: string;
-  levelImg: string;
 }
+
+const getMedalColor = (level: number) => {
+  switch (level) {
+    case 4:
+      return "#27E2A4";
+    case 3:
+      return "#FFD700";
+    case 2:
+      return "#C0C0C0";
+    case 1:
+      return "#CD7F32";
+    default:
+      return "#b73d3d";
+  }
+};
 
 export default function AlgorithmBox({
   id,
@@ -32,16 +49,31 @@ export default function AlgorithmBox({
   duration,
   problemCount,
   lang,
-  levelImg,
 }: AlgorithmBoxProps) {
   const navigate = useNavigate();
   const [isPinned, setIsPinned] = useState(false);
+  const { getaProblemsInfo } = useProblems();
+  const [problemInfos, setProblemInfos] = useState<ProblemInfo[]>([]);
 
   const handleClick = () => navigate(`/mypage/problem/${id}`);
   const handlePin = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPinned(!isPinned);
   };
+
+  useEffect(() => {
+    const fetchProblems = async () => {
+      try {
+        const res = await getaProblemsInfo(problems); // problems: number[]
+        console.log(res);
+        setProblemInfos(res);
+      } catch (err) {
+        console.error("문제 정보를 가져오는 중 오류 발생:", err);
+      }
+    };
+
+    fetchProblems();
+  }, [problems, getaProblemsInfo]);
 
   return (
     <div className={styles.algorithm_item} onClick={handleClick}>
@@ -55,10 +87,13 @@ export default function AlgorithmBox({
 
       {/* 중간 - 문제 리스트 */}
       <div className={styles.problem_list}>
-        {problems.map((prob, idx) => (
-          <div key={idx} className={styles.problem}>
-            <span>{prob}</span>
-            <img src={levelImg} />
+        {problemInfos.map((problemInfo) => (
+          <div key={problemInfo.id} className={styles.problem}>
+            <span>{problemInfo.title}</span>
+            <FaMedal
+              color={getMedalColor(problemInfo.level)}
+              style={{ marginLeft: "0.3rem" }}
+            />
           </div>
         ))}
       </div>

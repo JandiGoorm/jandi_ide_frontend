@@ -148,3 +148,24 @@ export interface BasketBody {
   title: string;
   companyName: string;
 }
+
+export interface TestCase {
+  id: number;
+  input: string;
+  output: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProblemInfo {
+  id: number;
+  title: string;
+  description: string;
+  level: number;
+  memory: number;
+  timeLimit: number;
+  tags: string[];
+  testCases: TestCase[];
+  createdAt: string;
+  updatedAt: string;
+}
