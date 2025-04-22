@@ -3,7 +3,6 @@ import Input from "../../../../components/Input/Input";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import styles from "./SettingPage.module.css";
-import defaultUser from "../../../../../public/defaultUser.webp";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
 import { useState } from "react";
@@ -46,7 +45,7 @@ const SettingPage = () => {
     await modifyUser(user.id, {
       introduction: introduction,
       email: user.email,
-      nickname: user.nickname,
+      nickname: user.nickName,
       profileImage: user.profileImage,
     });
   };
@@ -111,7 +110,7 @@ const SettingPage = () => {
             <div className={styles.profileModify_content}>
               <div className={styles.profile_image_div}>
                 <img
-                  src={defaultUser}
+                  src={user.profileImage}
                   alt="Logo"
                   className={styles.UserProfile}
                 />
