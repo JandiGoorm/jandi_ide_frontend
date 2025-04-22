@@ -3,15 +3,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
-
-//component
 import AuthBanner from "../AuthBanner";
 import Button from "../../../components/Button/Button";
 import SelectButtonList from "../../../components/SelectListButton/SelectListButton";
+import useUserSetting from "../../../hooks/useUserSetting";
+import useCompany from "../../../hooks/useCompany";
+import { PageEndPoints } from "../../../constants/api";
 
 const SelectCompanyPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { favoriteCompany } = useUserSetting();
+  const { companies } = useCompany();
   const selectedLangs = location.state?.selectedLangs || [];
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
 
@@ -25,7 +28,7 @@ const SelectCompanyPage = () => {
   };
 
   // Next 버튼 클릭 시 회원가입 진행 후 홈으로 이동
-  const handleOnClickNext = () => {
+  const handleOnClickNext = async () => {
     if (selectedCompanies.length === 0)
       // 기업 미선택 시 넘어가지 않음
       return;
@@ -34,9 +37,11 @@ const SelectCompanyPage = () => {
     console.log("기업 선택:", selectedCompanies);
 
     // 회원가입 진행...
+    await favoriteCompany(selectedCompanies);
+    // await favoriteTech(selectedLangs);
 
     // 가입 완료 페이지로 이동
-    navigate("/register/done");
+    navigate(PageEndPoints.LOGIN_DONE);
   };
 
   return (
@@ -50,7 +55,7 @@ const SelectCompanyPage = () => {
 
         {/* 기업 선택 버튼 */}
         <SelectButtonList
-          type={"company"}
+          listItem={companies.map((c) => c.companyName)}
           selectedItems={selectedCompanies}
           onClickItem={handleCompanyClick}
         />

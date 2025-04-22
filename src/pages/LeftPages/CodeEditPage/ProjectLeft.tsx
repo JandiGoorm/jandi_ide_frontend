@@ -8,12 +8,14 @@ import { Tree } from "../../../constants/types/types";
 interface ProjectLeftProps {
   fileTree: Tree[] | null;
   selectedFile: string | null;
+  projectLink: string | null;
   setSelectedFile: (file: string | null) => void;
 }
 
 const ProjectLeft: React.FC<ProjectLeftProps> = ({
   fileTree,
   selectedFile,
+  projectLink,
   setSelectedFile,
 }) => {
   const fileData = fileTree ? buildTree(fileTree) : [];
@@ -27,7 +29,16 @@ const ProjectLeft: React.FC<ProjectLeftProps> = ({
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
         />
-        <Button style={{ marginTop: "2rem" }}>GitHub 보기</Button>
+        <Button
+          style={{ marginTop: "2rem" }}
+          onClick={() => {
+            if (projectLink) {
+              window.open(projectLink, "_blank");
+            }
+          }}
+        >
+          GitHub 보기
+        </Button>
       </div>
     </LeftPart>
   );

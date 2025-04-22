@@ -8,6 +8,7 @@ import { APIEndPoints } from "../constants/api";
 const useProjectDetails = ({ id }: { id: number }) => {
   const [projectDetail, setProjectDetail] = useState<ProjectInfo[]>([]);
   const [projectFileTree, setProjectFileTree] = useState<Tree[]>([]);
+  const [projectLink, setProjectLink] = useState<string>();
   const [fileContent, setFileContent] = useState<string>();
   const { fetchData: getCodeApi } = useAxios();
   const { fetchData: getDetailApi } = useAxios();
@@ -21,8 +22,9 @@ const useProjectDetails = ({ id }: { id: number }) => {
     }).then((res) => {
       setProjectDetail(res?.data);
       setProjectFileTree(res?.data.tree);
+      setProjectLink(res?.data.url);
     });
-  }, [getDetailApi]);
+  }, [getDetailApi, id]);
 
   const getProjectCode = useCallback(
     async ({ sha }: { sha: string }) => {
@@ -44,7 +46,7 @@ const useProjectDetails = ({ id }: { id: number }) => {
         }
       });
     },
-    [getCodeApi]
+    [getCodeApi, id]
   );
 
   useEffect(() => {
@@ -54,6 +56,7 @@ const useProjectDetails = ({ id }: { id: number }) => {
   return {
     projectDetail,
     projectFileTree,
+    projectLink,
     getProjectDetail,
     fileContent,
     getProjectCode,

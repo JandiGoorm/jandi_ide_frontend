@@ -12,16 +12,14 @@ const ProjectEditPage = () => {
   const { isDarkMode } = useDarkModeContext();
   const { id } = useParams<{ id: string }>();
   const numericId = id ? Number(id) : undefined;
-  const { projectFileTree, fileContent, getProjectCode } = useProjectDetails({
-    id: numericId as number,
-  });
+  const { projectFileTree, fileContent, projectLink, getProjectCode } =
+    useProjectDetails({
+      id: numericId as number,
+    });
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id || !selectedFile) return;
-
-    console.log(projectFileTree);
-    console.log(selectedFile);
 
     const matchedFile = projectFileTree.find((file) => {
       const fileName = file.path.split("/").pop();
@@ -38,7 +36,7 @@ const ProjectEditPage = () => {
     };
 
     fethchCodes(matchedFile.sha);
-  }, [selectedFile, id, getProjectCode]);
+  }, [selectedFile, id, projectFileTree, getProjectCode]);
 
   return (
     <BaseLayout>
@@ -47,6 +45,7 @@ const ProjectEditPage = () => {
           <LeftSide
             fileTree={projectFileTree}
             selectedFile={selectedFile}
+            projectLink={projectLink ?? null}
             setSelectedFile={setSelectedFile}
           />
         </Sidebar.Panel>

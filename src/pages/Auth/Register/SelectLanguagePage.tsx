@@ -8,6 +8,21 @@ import AuthBanner from "../AuthBanner";
 import Button from "../../../components/Button/Button";
 import SelectButtonList from "../../../components/SelectListButton/SelectListButton";
 
+const languageList = [
+  "Python",
+  "C/C++",
+  "JavaScript",
+  "C#",
+  "Go",
+  "Fortran",
+  "Delphi/Object Pascal",
+  "SQL",
+  "MATLAB",
+  "Rust",
+  "R",
+  "Ruby",
+];
+
 const SelectLanguagePage = () => {
   const navigate = useNavigate();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
@@ -42,7 +57,7 @@ const SelectLanguagePage = () => {
 
         {/* 언어 선택 버튼 */}
         <SelectButtonList
-          type={"lang"}
+          listItem={languageList}
           selectedItems={selectedLangs}
           onClickItem={handleLanguageClick}
         />

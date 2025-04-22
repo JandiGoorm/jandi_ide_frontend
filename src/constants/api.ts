@@ -27,6 +27,8 @@ export const PageEndPoints = {
 export const APIEndPoints = {
   LOGIN: "/users/login",
   REFRESH: "/users/refresh",
+  FAVORITE_STACK: "/tech-stack/favorite",
+  FAVORITE_COMPANY: "/companies/favorite",
 
   //내정보
   MY_INFO: "/users/me",
