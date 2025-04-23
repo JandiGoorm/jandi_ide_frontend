@@ -1,4 +1,5 @@
 import Button from "../../../../../components/Button/Button";
+import { formatDay } from "../../../../../utils/format";
 import styles from "./Chatting.module.css";
 import { MdMoreHoriz } from "react-icons/md";
 
@@ -38,7 +39,7 @@ const Chatting = ({ chat }: ChattingProps) => {
                 +
               </Button>
             </div>
-            <div className={styles.chat_date}>{chat.timestamp}</div>
+            <div className={styles.chat_date}>{formatDay(chat.timestamp)}</div>
           </div>
         </div>
       )}
