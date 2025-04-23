@@ -14,7 +14,7 @@ import { buildPath } from "../../../../utils/buildPath";
 const AlgorithmPage = () => {
   const [selected, setSelected] = useState<"company" | "practice">("company");
   const [selectedProblems, setSelectedProblems] = useState<Problems[]>([]);
-  const { addBaskets } = useBaskets();
+  const { addBaskets, addCompanyBaskets } = useBaskets();
   const navigate = useNavigate();
 
   const handleStart = async (form?: {
@@ -30,19 +30,22 @@ const AlgorithmPage = () => {
         minutes: 60, // 나중에
         title: form.title,
         isCompanyProb: true,
+        language: form.language,
+        problemIds: [0],
       };
 
-      console.log(basketData);
+      const id = await addCompanyBaskets(basketData);
+      navigate(buildPath(PageEndPoints.ALGO_TEST, { id: Number(id) }));
       // CompanyContent 쪽에서 처리할 동작 트리거
-      console.log("모의 코딩 시작!");
     } else {
       if (!form) return;
       const basketData = {
         problemIds: selectedProblems.map((p) => p.id),
         minutes: form.time,
         title: form.title,
-        companyName: form.company,
+        companyName: "",
         isCompanyProb: false,
+        language: form.language,
       };
 
       console.log(basketData);
