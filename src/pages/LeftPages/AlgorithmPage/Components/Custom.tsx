@@ -23,7 +23,7 @@ const Custom: React.FC<CustomProps> = ({ refs }) => {
       <div className={styles.input_box}>
         <p>언어 선택</p>
         <Select
-          options={["C++", "Phython", "Java", "JS"]}
+          options={["C++", "PYTHON", "JAVA"]}
           defaultValue="C++"
           ref={languageRef}
         />

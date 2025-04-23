@@ -151,6 +151,7 @@ export interface BasketBody {
   minutes: number;
   title: string;
   companyName: string;
+  language: string;
 }
 
 export interface TestCase {

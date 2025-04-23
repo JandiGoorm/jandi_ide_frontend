@@ -34,8 +34,8 @@ const Company: React.FC<CompanyProps> = ({ refs }) => {
       <div className={styles.input_box}>
         <p>언어 선택</p>
         <Select
-          options={["Phython", "C++", "Java"]}
-          defaultValue="Phython"
+          options={["C++", "PYTHON", "JAVA"]}
+          defaultValue="PYTHON"
           ref={languageRef}
         />
       </div>

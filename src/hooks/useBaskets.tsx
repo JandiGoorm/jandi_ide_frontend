@@ -50,6 +50,7 @@ const useBaskets = () => {
           title: data.title,
           companyName: data.companyName,
           isCompanyProb: data.isCompanyProb,
+          language: data.language,
         },
       });
       return res?.data.id;
@@ -59,7 +60,8 @@ const useBaskets = () => {
 
   const addBaskets = useCallback(
     async (data: BasketBody) => {
-      await postApi({
+      console.log(data);
+      const res = await postApi({
         method: "POST",
         url: APIEndPoints.BASKETS,
         data: {
@@ -68,8 +70,10 @@ const useBaskets = () => {
           title: data.title,
           companyName: data.companyName,
           isCompanyProb: data.isCompanyProb,
+          language: data.language,
         },
       });
+      return res?.data.id;
     },
     [postApi]
   );
