@@ -40,7 +40,8 @@ export const APIEndPoints = {
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",
 
-  MANAGE_BASKETS: "problem-set",
+  BASKETS: "problem-set",
+  MANAGE_BASKETS: "problem-set/:id",
 
   //기업
   COMPANY: "/companies",

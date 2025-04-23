@@ -1,4 +1,4 @@
-import styles from "./AddProject.module.css";
+import styles from "./ModifyProject.module.css";
 import Input from "../../../../../components/Input/Input";
 import Button from "../../../../../components/Button/Button";
 import { useRef } from "react";

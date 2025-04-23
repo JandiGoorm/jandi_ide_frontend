@@ -55,6 +55,10 @@ export type ModifyProjectData = {
   description: string;
 };
 
+export type ModifyBasketData = {
+  title: string;
+};
+
 export interface Schedule {
   id: number;
   scheduleName: string;
