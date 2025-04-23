@@ -56,7 +56,7 @@ const MainPage = () => {
   }, [getAllBaskets]);
 
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
-
+  console.log(baskets);
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
   const handleNaviProject = () => navigate(PageEndPoints.MY_PROJECT);
@@ -151,7 +151,7 @@ const MainPage = () => {
               </div>
               {baskets.length > 0 ? (
                 <div className={styles.algorithmList}>
-                  {baskets.map((basket, i) => (
+                  {baskets.map((basket) => (
                     <AlgorithmBox
                       id={basket.id}
                       key={basket.id}
@@ -159,7 +159,7 @@ const MainPage = () => {
                       problems={basket.problemIds.map((id) => Number(id))}
                       duration={basket.minutes}
                       problemCount={basket.problemIds.length}
-                      lang={langs[i]}
+                      lang={basket.language}
                     />
                   ))}
                 </div>

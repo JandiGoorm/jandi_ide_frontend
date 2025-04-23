@@ -150,6 +150,7 @@ export interface Baskets {
   minutes: number;
   title: string;
   company: string;
+  language: string;
 }
 
 export interface BasketBody {

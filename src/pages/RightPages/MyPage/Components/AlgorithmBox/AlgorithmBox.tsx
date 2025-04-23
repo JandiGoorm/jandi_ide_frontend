@@ -57,7 +57,6 @@ export default function AlgorithmBox({
     const fetchProblems = async () => {
       try {
         const res = await getaProblemsInfo(problems); // problems: number[]
-        console.log(res);
         setProblemInfos(res);
       } catch (err) {
         console.error("문제 정보를 가져오는 중 오류 발생:", err);
