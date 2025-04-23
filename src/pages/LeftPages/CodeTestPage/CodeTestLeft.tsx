@@ -17,6 +17,8 @@ const ProjectLeft = ({
 }) => {
   const currentProblem = problems[currentIndex];
 
+  // console.log(currentProblem);
+
   useEffect(() => {
     console.log("문제 리스트가 업데이트됨", problems);
     setCurrentIndex(0);
@@ -47,6 +49,21 @@ const ProjectLeft = ({
               <div className={styles.prob_content}>
                 {currentProblem.description}
               </div>
+            </div>
+            <div className={styles.prob_reuirement}>
+              <p>메모리제한:{currentProblem.memory}MB</p>
+              <p>시간제한:{currentProblem.timeLimit}초</p>
+            </div>
+            <div className={styles.prob_reuirement}>
+              <div className={styles.prob_title}>테스트 케이스</div>
+              {currentProblem.testCases.map((testcase) => (
+                <div key={testcase.id}>
+                  <div>Input</div>
+                  <div>{testcase.input}</div>
+                  <div>Output</div>
+                  <div>{testcase.output}</div>
+                </div>
+              ))}
             </div>
 
             <div className={styles.button_group}>

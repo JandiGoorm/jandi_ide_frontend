@@ -72,10 +72,10 @@ const CodeTestPage = () => {
       navigate(`/mypage/problem/${id}`);
     }
   };
-  const handleStore = () => {
-    console.log("코드 저장!");
-    // 코드 저장...
-  };
+  // const handleStore = () => {
+  //   console.log("코드 저장!");
+  //   // 코드 저장...
+  // };
   const handleRun = () => {
     console.log("코드 실행!");
     // 코드 실행...
@@ -125,7 +125,7 @@ const CodeTestPage = () => {
             {/* 코드 실행기 */}
             <div className={styles.footer}>
               <div className={styles.buttons}>
-                <Button onClick={handleStore}>저장</Button>
+                {/* <Button onClick={handleStore}>저장</Button> */}
                 <Button onClick={handleRun}>실행</Button>
               </div>
               <div className={styles.result}>

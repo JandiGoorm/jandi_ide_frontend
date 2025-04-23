@@ -1,9 +1,11 @@
 .container{
     color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .prob{
-    min-height: 40rem;
 }
 
 .prob_title{
@@ -16,6 +18,7 @@
 
 .prob_content{
     line-height: 1.4;  
+    /* min-height: 20rem; */
 }
 
 .button_group{
