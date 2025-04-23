@@ -27,7 +27,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const userInfo = await getUserInfo();
       setUser(userInfo.data);
 
-      if (userInfo.data?.introduction == null) {
+      if (userInfo.data?.techStacks == null) {
         console.log("신규 회원!");
         navigate(`${PageEndPoints.LOGIN_LANGUAGE}`);
       } else {
