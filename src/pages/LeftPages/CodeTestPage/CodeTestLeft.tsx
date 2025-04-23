@@ -3,7 +3,8 @@ import { ProblemInfo } from "../../../constants/types/types";
 import LeftPart from "../../../layouts/Components/LeftPart";
 import styles from "./CodeTestLeft.module.css";
 import Button from "../../../components/Button/Button";
-// import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
+import { FaMedal } from "react-icons/fa";
+import { getMedalColor } from "../../../utils/medal";
 
 const ProjectLeft = ({
   problems,
@@ -35,7 +36,14 @@ const ProjectLeft = ({
         {currentProblem ? (
           <>
             <div className={styles.prob}>
-              <div className={styles.prob_title}>{currentProblem.title}</div>
+              <div className={styles.prob_title}>
+                {currentProblem.title}
+                <FaMedal
+                  color={getMedalColor(currentProblem.level)}
+                  size="1.25rem"
+                  style={{ marginLeft: "0.5rem" }}
+                />
+              </div>
               <div className={styles.prob_content}>
                 {currentProblem.description}
               </div>

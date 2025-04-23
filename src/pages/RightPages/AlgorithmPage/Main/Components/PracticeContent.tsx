@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import Button from "../../../../../components/Button/Button";
 import { Problems } from "../../../../../constants/types/types";
 import useProblems from "../../../../../hooks/useProblems";
+import { getMedalColor } from "../../../../../utils/medal";
 
 interface PracticeContentProps {
   selectedProblems: Problems[];
@@ -17,20 +18,6 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
 }) => {
   const { problems } = useProblems();
 
-  const getMedalColor = (level: number) => {
-    switch (level) {
-      case 4:
-        return "#27E2A4";
-      case 3:
-        return "#FFD700";
-      case 2:
-        return "#C0C0C0";
-      case 1:
-        return "#CD7F32";
-      default:
-        return "#b73d3d";
-    }
-  };
   const toggleProblem = (problem: Problems) => {
     const exists = selectedProblems.find((p) => p.id === problem.id);
     if (exists) {
@@ -50,7 +37,7 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
               <Button variant="none" onClick={() => toggleProblem(problem)}>
                 <MdClose size={18} />
               </Button>
-              <FaMedal color={getMedalColor(problem.level)} />
+              <FaMedal color={getMedalColor(problem.level)} size={18} />
               <span className={styles.desc}>{problem.title}</span>
               <div className={styles.tag_box}>
                 {problem.tags.map((tag, index) => (
@@ -72,7 +59,7 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
                 <FaPlus size={18} />
               </Button>
               <div>
-                <FaMedal color={getMedalColor(problem.level)} />
+                <FaMedal color={getMedalColor(problem.level)} size={18} />
               </div>
               <span className={styles.desc}>{problem.title}</span>
               <div className={styles.tag_box}>

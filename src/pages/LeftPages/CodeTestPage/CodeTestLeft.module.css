@@ -10,6 +10,12 @@
     font-weight: var(--font-weight-semibold);
     font-size: var(--text-xl);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.prob_content{
+    line-height: 1.4;  
 }
 
 .button_group{

@@ -20,6 +20,7 @@ import {
 import { LuPencilLine, LuTrash2 } from "react-icons/lu";
 import useBaskets from "../../../../../hooks/useBaskets";
 import ModifyBaksket from "../Contents/ModifyBaksket";
+import { getMedalColor } from "../../../../../utils/medal";
 
 interface AlgorithmBoxProps {
   id: number;
@@ -29,21 +30,6 @@ interface AlgorithmBoxProps {
   problemCount: number;
   lang: string;
 }
-
-const getMedalColor = (level: number) => {
-  switch (level) {
-    case 4:
-      return "#27E2A4";
-    case 3:
-      return "#FFD700";
-    case 2:
-      return "#C0C0C0";
-    case 1:
-      return "#CD7F32";
-    default:
-      return "#b73d3d";
-  }
-};
 
 export default function AlgorithmBox({
   id,
