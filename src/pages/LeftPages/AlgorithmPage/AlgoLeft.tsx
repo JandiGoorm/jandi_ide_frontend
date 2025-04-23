@@ -6,12 +6,18 @@ import Button from "../../../components/Button/Button";
 import Custom from "./Components/Custom";
 import { useRef } from "react";
 
+interface Form {
+  title: string;
+  language: string;
+  time: number;
+  company: string;
+}
 type Mode = "company" | "practice";
 
 interface AlgoLeftProps {
   selected: Mode;
   setSelected: (value: Mode) => void;
-  onStart: (form?: { title: string; language: string; time: number }) => void;
+  onStart: (form: Form) => void;
 }
 
 const AlgoLeft: React.FC<AlgoLeftProps> = ({
@@ -19,6 +25,7 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
   setSelected,
   onStart,
 }) => {
+  const companyRef = useRef<HTMLSelectElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const languageRef = useRef<HTMLSelectElement>(null);
   const timeRef = useRef<HTMLInputElement>(null);
@@ -26,13 +33,20 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
   const handleStartClick = () => {
     if (selected === "practice") {
       const form = {
+        company: "",
         title: titleRef.current?.value || "",
         language: languageRef.current?.value || "",
         time: Number(timeRef.current?.value) || 0,
       };
       onStart(form);
     } else {
-      onStart(); // company 모드
+      const form = {
+        company: companyRef.current?.value || "",
+        language: languageRef.current?.value || "",
+        title: titleRef.current?.value || "",
+        time: 60, //변경
+      };
+      onStart(form); // company 모드
     }
   };
 
@@ -55,7 +69,7 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
         </div>
         <div className={styles.content_box}>
           {selected === "company" ? (
-            <Company />
+            <Company refs={{ companyRef, languageRef, titleRef }} />
           ) : (
             <Custom refs={{ titleRef, languageRef, timeRef }} />
           )}

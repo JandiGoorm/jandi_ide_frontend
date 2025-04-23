@@ -17,8 +17,18 @@ const AlgorithmPage = () => {
     title: string;
     language: string;
     time: number;
+    company: string;
   }) => {
     if (selected === "company") {
+      if (!form) return;
+      const basketData = {
+        companyName: form.company,
+        minutes: 60, // 나중에
+        title: form.title,
+        isCompanyProb: true,
+      };
+
+      console.log(basketData);
       // CompanyContent 쪽에서 처리할 동작 트리거
       console.log("모의 코딩 시작!");
     } else {
@@ -27,7 +37,7 @@ const AlgorithmPage = () => {
         problemIds: selectedProblems.map((p) => p.id),
         minutes: form.time,
         title: form.title,
-        companyName: "",
+        companyName: form.company,
         isCompanyProb: false,
       };
 

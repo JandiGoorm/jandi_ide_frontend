@@ -6,6 +6,7 @@ import { APIEndPoints } from "../constants/api";
 //알고리즘 문제, 문제집 관리 hooks
 const useBaskets = () => {
   const { fetchData: getApi } = useAxios();
+  const { fetchData: postCompanyApi } = useAxios();
   const { fetchData: postApi } = useAxios();
 
   const getAllBaskets = useCallback(async () => {
@@ -18,6 +19,22 @@ const useBaskets = () => {
     }
     return null;
   }, [getApi]);
+
+  const addCompanyBaskets = useCallback(
+    async (data: BasketBody) => {
+      await postCompanyApi({
+        method: "POST",
+        url: APIEndPoints.MANAGE_BASKETS,
+        data: {
+          minutes: data.minutes,
+          title: data.title,
+          companyName: data.companyName,
+          isCompanyProb: data.isCompanyProb,
+        },
+      });
+    },
+    [postApi]
+  );
 
   const addBaskets = useCallback(
     async (data: BasketBody) => {
@@ -38,6 +55,7 @@ const useBaskets = () => {
 
   return {
     getAllBaskets,
+    addCompanyBaskets,
     addBaskets,
   };
 };

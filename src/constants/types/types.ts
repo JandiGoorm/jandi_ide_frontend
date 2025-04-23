@@ -81,7 +81,7 @@ export interface Company {
   updatedAt: string;
   levels: number[];
   timeInMinutes: number;
-  programmingLanguages: string;
+  programmingLanguages: string[];
   jobPostings: JobPosting[];
 }
 
