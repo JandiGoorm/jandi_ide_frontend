@@ -28,6 +28,7 @@ export const APIEndPoints = {
   REFRESH: "/users/refresh",
   FAVORITE_STACK: "/tech-stack/favorite",
   FAVORITE_COMPANY: "/companies/favorite",
+  STACK: "/tech-stack",
 
   //내정보
   MY_INFO: "/users/me",

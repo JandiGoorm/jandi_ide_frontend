@@ -35,6 +35,8 @@ const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.BASKETS}`,
   `POST:${APIEndPoints.BASKETS}`,
   `GET:${APIEndPoints.PROBLEM}`,
+  `GET:${APIEndPoints.STACK}`,
+  `GET:${APIEndPoints.FAVORITE_STACK}`,
   `PUT:${APIEndPoints.FAVORITE_STACK}`,
   `POST:${APIEndPoints.FAVORITE_COMPANY}`,
   `PUT:${APIEndPoints.MANAGE_BASKETS}`,

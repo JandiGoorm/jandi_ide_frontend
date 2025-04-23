@@ -2,29 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../../../layouts/AuthLayout/AuthLayout";
 import BaseLayout from "../../../layouts/BaseLayout/BaseLayout";
-
-//component
 import AuthBanner from "../AuthBanner";
 import Button from "../../../components/Button/Button";
 import SelectButtonList from "../../../components/SelectListButton/SelectListButton";
-
-const languageList = [
-  "Python",
-  "C/C++",
-  "JavaScript",
-  "C#",
-  "Go",
-  "Fortran",
-  "Delphi/Object Pascal",
-  "SQL",
-  "MATLAB",
-  "Rust",
-  "R",
-  "Ruby",
-];
+import useTech from "../../../hooks/useTech";
 
 const SelectLanguagePage = () => {
   const navigate = useNavigate();
+  const { techs } = useTech();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
 
   // 언어 버튼 클릭 시 selectedLangs에 추가 or 삭제
@@ -46,6 +31,7 @@ const SelectLanguagePage = () => {
     });
   };
 
+  if (!techs) return;
   return (
     <BaseLayout>
       <AuthLayout>
@@ -57,7 +43,7 @@ const SelectLanguagePage = () => {
 
         {/* 언어 선택 버튼 */}
         <SelectButtonList
-          listItem={languageList}
+          listItem={techs.map((t) => t.techStack)}
           selectedItems={selectedLangs}
           onClickItem={handleLanguageClick}
         />
