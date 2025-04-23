@@ -18,8 +18,7 @@ export const PageEndPoints = {
   CHAT_DETAIL: "/chat/:id",
 
   ALGO_MAIN: "/algo",
-  ALGO_COMPANY_TEST: "/algo/test/company/:id",
-  ALGO_CUSTOM_TEST: "/algo/test/custom/:id",
+  ALGO_TEST: "/algo/test/:id",
 
   GITHUB_PROJECT: "/project/:id",
 };
@@ -27,23 +26,30 @@ export const PageEndPoints = {
 export const APIEndPoints = {
   LOGIN: "/users/login",
   REFRESH: "/users/refresh",
+  FAVORITE_STACK: "/tech-stack/favorite",
+  FAVORITE_COMPANY: "/companies/favorite",
+  FAVORITE_A_COMPANY: "/companies/favorite/:id",
+  STACK: "/tech-stack",
 
   //내정보
   MY_INFO: "/users/me",
   MY_PROJECT: "/users/:id/projects",
   GIT_REPO: "/users/:id/repos",
-
-  //내정보 수정
   MODIFY_PROFILE: "/users/:id",
 
   ADD_PROJECT: "/projects",
   MANAGE_PROJECT: "/projects/:id",
   PROJECT_BLOB: "/projects/:id/blob",
 
+  BASKETS: "problem-set",
+  MANAGE_BASKETS: "problem-set/:id",
+
   //기업
   COMPANY: "/companies",
   MANAGE_COMPANY: "/companies/:id",
   COMPANY_POSTING: "/companies/:id/job-posting",
+  //체용공고
+  SCHEDULES: "/schedules",
 
   //채팅
   ALL_CHATROOMS: "/chat/rooms",
@@ -52,4 +58,9 @@ export const APIEndPoints = {
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
   CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
+  CHAT_MESSAGE_PAGE: "/chat/rooms/rooms/:id/messages/paged",
+
+  //알고리즘
+  ALL_PROBLEMS: "/problems",
+  PROBLEM: "/problems/:id",
 };

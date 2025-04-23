@@ -1,36 +1,29 @@
 import styles from "./PracticeContent.module.css";
-import { problemDummyData } from "../constants";
 import { FaMedal } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import Button from "../../../../../components/Button/Button";
-import { useState } from "react";
 import { Problems } from "../../../../../constants/types/types";
+import useProblems from "../../../../../hooks/useProblems";
+import { getMedalColor } from "../../../../../utils/medal";
 
-const PracticeContent = () => {
-  const [selected, setSelected] = useState<Problems[]>([]);
+interface PracticeContentProps {
+  selectedProblems: Problems[];
+  setSelectedProblems: React.Dispatch<React.SetStateAction<Problems[]>>;
+}
 
-  const getMedalColor = (level: number) => {
-    switch (level) {
-      case 4:
-        return "#27E2A4";
-      case 3:
-        return "#FFD700";
-      case 2:
-        return "#C0C0C0";
-      case 1:
-        return "#CD7F32";
-      default:
-        return "#b73d3d";
-    }
-  };
+const PracticeContent: React.FC<PracticeContentProps> = ({
+  selectedProblems,
+  setSelectedProblems,
+}) => {
+  const { problems } = useProblems();
 
   const toggleProblem = (problem: Problems) => {
-    const exists = selected.find((p) => p.id === problem.id);
+    const exists = selectedProblems.find((p) => p.id === problem.id);
     if (exists) {
-      setSelected(selected.filter((p) => p.id !== problem.id));
+      setSelectedProblems(selectedProblems.filter((p) => p.id !== problem.id));
     } else {
-      setSelected((prev) => [...prev, problem]);
+      setSelectedProblems((prev) => [...prev, problem]);
     }
   };
 
@@ -39,16 +32,24 @@ const PracticeContent = () => {
       <div className={styles.selected_box}>
         <div className={styles.header}>선택된 문제</div>
         <div className={styles.content_box}>
-          {selected.map((problem) => (
+          {selectedProblems.map((problem) => (
             <div className={styles.problem} key={problem.id}>
               <Button variant="none" onClick={() => toggleProblem(problem)}>
                 <MdClose size={18} />
               </Button>
-              <FaMedal color={getMedalColor(problem.level)} />
-              <span className={styles.desc}>{problem.description}</span>
-              {problem.tagName.map((tag) => (
-                <div className={styles.tag}>{tag}</div>
-              ))}
+              <FaMedal
+                color={getMedalColor(problem.level)}
+                size={18}
+                style={{ flexShrink: 0, minWidth: 18 }}
+              />
+              <span className={styles.desc}>{problem.title}</span>
+              <div className={styles.tag_box}>
+                {problem.tags.map((tag, index) => (
+                  <div key={index} className={styles.tag}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -56,18 +57,32 @@ const PracticeContent = () => {
       <div className={styles.select_box}>
         <div className={styles.header}>문제 리스트</div>
         <div className={styles.content_box}>
-          {problemDummyData.map((problem) => (
-            <div className={styles.problem} key={problem.id}>
-              <Button variant="none" onClick={() => toggleProblem(problem)}>
-                <FaPlus size={18} />
-              </Button>
-              <FaMedal color={getMedalColor(problem.level)} />
-              <span className={styles.desc}>{problem.description}</span>
-              {problem.tagName.map((tag) => (
-                <div className={styles.tag}>{tag}</div>
-              ))}
-            </div>
-          ))}
+          {problems
+            .filter(
+              (problem) => !selectedProblems.some((p) => p.id === problem.id)
+            ) // 선택된 문제 제외
+            .map((problem) => (
+              <div className={styles.problem} key={problem.id}>
+                <Button variant="none" onClick={() => toggleProblem(problem)}>
+                  <FaPlus size={18} />
+                </Button>
+                <div>
+                  <FaMedal
+                    color={getMedalColor(problem.level)}
+                    size={18}
+                    style={{ flexShrink: 0, minWidth: 18 }}
+                  />
+                </div>
+                <span className={styles.desc}>{problem.title}</span>
+                <div className={styles.tag_box}>
+                  {problem.tags.map((tag, index) => (
+                    <div key={index} className={styles.tag}>
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

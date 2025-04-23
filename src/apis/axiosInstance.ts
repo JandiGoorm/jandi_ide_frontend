@@ -29,6 +29,22 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.CHATROOM_LEAVE}`,
   `POST:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
   `GET:${APIEndPoints.CHAT_MESSAGE}`,
+  `GET:${APIEndPoints.CHAT_MESSAGE_PAGE}`,
+  `GET:${APIEndPoints.SCHEDULES}`,
+  `GET:${APIEndPoints.ALL_PROBLEMS}`,
+  `GET:${APIEndPoints.BASKETS}`,
+  `POST:${APIEndPoints.BASKETS}`,
+  `GET:${APIEndPoints.PROBLEM}`,
+  `GET:${APIEndPoints.STACK}`,
+  `GET:${APIEndPoints.FAVORITE_STACK}`,
+  `PUT:${APIEndPoints.FAVORITE_STACK}`,
+  `GET:${APIEndPoints.FAVORITE_COMPANY}`,
+  `POST:${APIEndPoints.FAVORITE_COMPANY}`,
+  `PUT:${APIEndPoints.MANAGE_BASKETS}`,
+  `DELETE:${APIEndPoints.MANAGE_BASKETS}`,
+  `GET:${APIEndPoints.MANAGE_BASKETS}`,
+  `PUT:${APIEndPoints.FAVORITE_A_COMPANY}`,
+  `DELETE:${APIEndPoints.FAVORITE_A_COMPANY}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
@@ -40,10 +56,7 @@ axiosInstance.interceptors.request.use((config) => {
   const requestKey = `${method}:${normalizedUrl}`;
   const isRequiredAuth = useHeaderEndPoints.has(requestKey);
 
-  console.log(isRequiredAuth);
-
   if (isRequiredAuth) {
-    console.log("여기");
     const accessToken = localStorage.getItem("accessToken") ?? "";
     config.headers["Authorization"] = `Bearer ${accessToken}`;
   }

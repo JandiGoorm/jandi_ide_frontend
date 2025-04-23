@@ -19,6 +19,8 @@ const useChat = () => {
 
   const { fetchData: joinApi } = useAxios();
   const { fetchData: getMessageApi } = useAxios();
+  const { fetchData: getMessagePageApi } = useAxios();
+  const [allmessages, setAllMessages] = useState<ChatMessages[]>([]);
   const [messages, setMessages] = useState<ChatMessages[]>([]);
 
   const clientRef = useRef<Client | null>(null);
@@ -28,6 +30,7 @@ const useChat = () => {
     try {
       // 먼저 메시지 상태와 중복 메시지 필터 초기화
       setMessages([]);
+      setAllMessages([]);
       receivedMsgIds.current.clear();
 
       try {
@@ -62,7 +65,28 @@ const useChat = () => {
       })
         .then((res) => {
           console.log(res?.data);
-          setMessages(res?.data);
+          setAllMessages(res?.data);
+        })
+        .catch((err) => {
+          console.log(err + "채팅내역오류");
+        });
+    },
+    [getMessageApi]
+  );
+
+  const getChatMessagePages = useCallback(
+    async (id: string, page: number) => {
+      await getMessagePageApi({
+        method: "GET",
+        url: buildPath(APIEndPoints.CHAT_MESSAGE_PAGE, { id }),
+        params: {
+          page: page,
+          size: 20,
+        },
+      })
+        .then((res) => {
+          console.log(res?.data);
+          setMessages(res?.data.content);
         })
         .catch((err) => {
           console.log(err + "채팅내역오류");
@@ -117,6 +141,7 @@ const useChat = () => {
       console.log("수신된 메시지:", newMessage);
 
       setMessages((prev) => [...prev, newMessage]);
+      setAllMessages((prev) => [...prev, newMessage]);
     });
   };
 
@@ -144,9 +169,10 @@ const useChat = () => {
   return {
     enterChatRoom,
 
+    allmessages,
     messages,
     getChatMessages,
-
+    getChatMessagePages,
     connectWebSocket,
     sendMessage,
   };

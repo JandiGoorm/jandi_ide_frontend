@@ -9,28 +9,26 @@ import ProjectBox from "../Components/ProjectBox/ProjectBox";
 import { useAuth } from "../../../../contexts/AuthContext";
 import useProjects from "../../../../hooks/useProjects";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
+import useBaskets from "../../../../hooks/useBaskets";
+import { useEffect, useState } from "react";
+import { Baskets } from "../../../../constants/types/types";
 
 const MorePage = () => {
   const { user } = useAuth();
   const paths = location.pathname.split("/");
   const lastPath = paths[paths.length - 1];
   const { projects, getProjects } = useProjects();
+  const { getAllBaskets } = useBaskets();
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
+  const [baskets, setBaskets] = useState<Baskets[]>([]);
 
-  const algorithms = [
-    "네이버 대비 알고리즘",
-    "알고리즘 연습",
-    "PS 연습",
-    "네이버 대비 알고리즘",
-    "알고리즘 연습",
-    "PS 연습",
-    "네이버 대비 알고리즘",
-    "알고리즘 연습",
-    "PS 연습",
-    "네이버 대비 알고리즘",
-    "알고리즘 연습",
-    "PS 연습",
-  ];
+  useEffect(() => {
+    const getBaskets = async () => {
+      const data = await getAllBaskets();
+      setBaskets(data);
+    };
+    getBaskets();
+  }, [getAllBaskets]);
 
   return (
     <BaseLayout>
@@ -76,18 +74,17 @@ const MorePage = () => {
               </>
             ) : (
               <>
-                {algorithms.length > 0 ? (
+                {baskets.length > 0 ? (
                   <div className={styles.projectList}>
-                    {algorithms.map((algorithm, i) => (
+                    {baskets.map((basket, i) => (
                       <AlgorithmBox
-                        id={i + 1}
-                        key={"project" + i}
-                        title={algorithm}
-                        problems={["No 9995. 숫자 세기", "No 9995. 숫자 세기"]}
-                        duration={60}
-                        problemCount={2 * (i + 1)}
+                        id={basket.id}
+                        key={basket.id}
+                        title={basket.title}
+                        problems={basket.problemIds.map((id) => Number(id))}
+                        duration={basket.minutes}
+                        problemCount={basket.problemIds.length}
                         lang={langs[i]}
-                        levelImg="/level_5.png"
                       />
                     ))}
                   </div>

@@ -1,9 +1,27 @@
 .container{
     color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.prob{
 }
 
 .prob_title{
     font-weight: var(--font-weight-semibold);
     font-size: var(--text-xl);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.prob_content{
+    line-height: 1.4;  
+    /* min-height: 20rem; */
+}
+
+.button_group{
+    display: flex;
+    justify-content: space-between;
 }

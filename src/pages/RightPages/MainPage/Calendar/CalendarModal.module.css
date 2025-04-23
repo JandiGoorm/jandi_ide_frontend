@@ -1,6 +1,35 @@
+.container{
+    padding: 0 2rem;
+}
+
 .header{
     display: flex;
     font-size: var(--text-xl);
     font-weight: var(--font-weight-semibold);
-    margin-right: 4rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+.content_box{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title{
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+}
+
+.sub_title{
+    font-family: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    padding-left: 1rem;
+    
 }

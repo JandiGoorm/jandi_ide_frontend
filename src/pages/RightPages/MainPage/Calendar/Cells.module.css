@@ -20,12 +20,14 @@
     height: 9rem;
     position: relative;
     box-sizing: border-box;
+    padding: 0 0.5rem;
     border: 1px solid var(--color-text-primary);
     border-radius: var(--radius-input);
     text-align: end;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow: hidden;
   }
   
   .currentMonth {
@@ -53,4 +55,43 @@
     color: var(--color-text-side-on);
     font-weight: var(--font-weight-bold);
   }
+
+  .scheduleList{
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    gap: 0.5rem;
+    max-width: 100%;
+  }
   
+  .schedule {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .schedule_name{
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .schedule_sub{
+    font-size: var(--text-sm);
+    color: var(--color-text-sub);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }

@@ -13,17 +13,22 @@ import { useAuth } from "../../../../contexts/AuthContext";
 const ChatDetailPage = () => {
   const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
     useChatting();
-  const { messages, enterChatRoom, sendMessage, getChatMessages } = useChat();
+  const { allmessages, enterChatRoom, sendMessage, getChatMessages } =
+    useChat();
+  // const { messages, allmessages, enterChatRoom, sendMessage, getChatMessages,getChatMessagePages } = useChat();
   const { user } = useAuth();
   const [chatPeoples, setChatPeoples] = useState<number | null>(null);
   const { id } = useParams<{ id: string }>();
   const initializedRef = useRef(false);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  // const [page, setPage] = useState(0);
+  // const [hasMore, setHasMore] = useState(true);
+  // const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [allmessages]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +67,7 @@ const ChatDetailPage = () => {
         <div className={styles.content}>
           <div className={styles.flexBox}>
             <div className={styles.chat_container}>
-              {messages?.map((chat, index) => (
+              {allmessages?.map((chat, index) => (
                 <Chatting chat={chat} key={index} />
               ))}
               <div ref={chatEndRef} />

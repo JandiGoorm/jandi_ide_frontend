@@ -37,6 +37,8 @@
 
 .description {
     width: 100%;
-    white-space: nowrap;
+    max-width: 30rem;
+    white-space: normal;
     color: var(--color-text-primary);
-}
+    word-wrap: break-word;
+  }

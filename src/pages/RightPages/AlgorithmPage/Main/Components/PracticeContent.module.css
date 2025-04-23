@@ -42,21 +42,36 @@
   .problem{
     font-size: var(--text-xl);
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
   .desc{
-    width: 40%;
+    width: 100%;
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
+  .tag_box{
+    display: flex;
+    gap: 1rem;
+  }
+
   .tag{
     background-color: var(--color-button-lang-on);
-    color: var(--color-black);
+    color: var(--color-text-inside);
     font-weight: var(--font-weight-semibold);
     border-radius: var(--radius-xl);
     padding: 0.25rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media screen and (max-width: 900px) {
+    .tag_box {
+      display: none;
+    }
   }
