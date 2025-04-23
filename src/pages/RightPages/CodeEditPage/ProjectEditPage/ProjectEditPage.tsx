@@ -12,10 +12,15 @@ const ProjectEditPage = () => {
   const { isDarkMode } = useDarkModeContext();
   const { id } = useParams<{ id: string }>();
   const numericId = id ? Number(id) : undefined;
-  const { projectFileTree, fileContent, projectLink, getProjectCode } =
-    useProjectDetails({
-      id: numericId as number,
-    });
+  const {
+    projectName,
+    projectFileTree,
+    fileContent,
+    projectLink,
+    getProjectCode,
+  } = useProjectDetails({
+    id: numericId as number,
+  });
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   useEffect(() => {
@@ -43,6 +48,7 @@ const ProjectEditPage = () => {
       <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
           <LeftSide
+            projectName={projectName}
             fileTree={projectFileTree}
             selectedFile={selectedFile}
             projectLink={projectLink ?? null}

@@ -30,10 +30,15 @@ export interface Project {
   name: string;
   owner: User;
 }
-
+export interface ProjectDefaultInfo {
+  name: string;
+  treeData: ProjectInfo;
+}
 export interface ProjectInfo {
   sha: string;
   tree: Tree;
+  truncated: boolean;
+  url: string;
 }
 
 export interface Tree {

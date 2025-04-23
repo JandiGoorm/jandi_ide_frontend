@@ -6,6 +6,7 @@ import Button from "../../../components/Button/Button";
 import { Tree } from "../../../constants/types/types";
 
 interface ProjectLeftProps {
+  projectName: string | null;
   fileTree: Tree[] | null;
   selectedFile: string | null;
   projectLink: string | null;
@@ -13,6 +14,7 @@ interface ProjectLeftProps {
 }
 
 const ProjectLeft: React.FC<ProjectLeftProps> = ({
+  projectName,
   fileTree,
   selectedFile,
   projectLink,
@@ -23,7 +25,7 @@ const ProjectLeft: React.FC<ProjectLeftProps> = ({
   return (
     <LeftPart>
       <div className={styles.container}>
-        <div className={styles.project_name}> PROJECT 1 </div>
+        <div className={styles.project_name}> {projectName} </div>
         <FileTree
           tree={fileData}
           selectedFile={selectedFile}
