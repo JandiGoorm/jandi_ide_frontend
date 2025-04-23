@@ -2,23 +2,47 @@ import styles from "./CodeTestPage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
-
-//components
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
 import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import LeftSide from "../../../LeftPages/CodeTestPage/CodeTestLeft";
 import Editor from "@monaco-editor/react";
 import Button from "../../../../components/Button/Button";
+import useBaskets from "../../../../hooks/useBaskets";
+import { ProblemInfo } from "../../../../constants/types/types";
 
 const CodeTestPage = () => {
   const navigate = useNavigate();
+  const { getBasket } = useBaskets();
   const { id } = useParams(); // 현재 문제집 번호
+  const basketId = Number(id);
   const { isDarkMode } = useDarkModeContext();
-  const [totalSeconds, setTotalSeconds] = useState(1800); // 전체 시간: 초 단위
+  const [totalSeconds, setTotalSeconds] = useState(0); // 전체 시간: 초 단위
   const minutes = Math.floor(totalSeconds / 60); // 환산된 분
   const seconds = totalSeconds % 60; // 환산된 초
   const formatTime = (time: number) => String(time).padStart(2, "0");
+  const [problems, setProblems] = useState<ProblemInfo[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [problemCodeMap, setProblemCodeMap] = useState<{
+    [id: number]: string;
+  }>({});
 
+  const handleCodeChange = (value: string | undefined) => {
+    if (value !== undefined && problems[currentIndex]) {
+      const id = problems[currentIndex].id;
+      setProblemCodeMap((prev) => ({ ...prev, [id]: value }));
+    }
+  };
+
+  useEffect(() => {
+    const getProblem = async () => {
+      const data = await getBasket(basketId);
+      console.log(data);
+      setTotalSeconds(data.solvingTimeInMinutes * 60);
+      setProblems(data.problems);
+    };
+
+    getProblem();
+  }, [getBasket, basketId]);
   // 남은 시간에 따라 색상 변경
   const getBorderColor = (minutes: number) => {
     if (minutes < 10) return "#E74C3C";
@@ -56,16 +80,16 @@ const CodeTestPage = () => {
     console.log("코드 실행!");
     // 코드 실행...
   };
-  const handleSubmit = () => {
-    console.log("코드 제출!");
-    // 코드 제출...
-  };
 
   return (
     <BaseLayout>
       <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
-          <LeftSide />
+          <LeftSide
+            problems={problems}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+          />
         </Sidebar.Panel>
 
         <Sidebar.Content fullWidth>
@@ -88,6 +112,8 @@ const CodeTestPage = () => {
                 theme={isDarkMode ? "vs-dark" : "light"}
                 defaultLanguage="java"
                 path="file.java"
+                value={problemCodeMap[problems[currentIndex]?.id] || ""}
+                onChange={handleCodeChange}
                 options={{
                   minimap: {
                     enabled: true,
@@ -101,7 +127,6 @@ const CodeTestPage = () => {
               <div className={styles.buttons}>
                 <Button onClick={handleStore}>저장</Button>
                 <Button onClick={handleRun}>실행</Button>
-                <Button onClick={handleSubmit}>제출</Button>
               </div>
               <div className={styles.result}>
                 <p>결과결과</p>

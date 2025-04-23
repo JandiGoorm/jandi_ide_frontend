@@ -18,8 +18,7 @@ export const PageEndPoints = {
   CHAT_DETAIL: "/chat/:id",
 
   ALGO_MAIN: "/algo",
-  ALGO_COMPANY_TEST: "/algo/test/company/:id",
-  ALGO_CUSTOM_TEST: "/algo/test/custom/:id",
+  ALGO_TEST: "/algo/test/:id",
 
   GITHUB_PROJECT: "/project/:id",
 };

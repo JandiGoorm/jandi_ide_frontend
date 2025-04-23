@@ -7,6 +7,7 @@ import { buildPath } from "../utils/buildPath";
 //알고리즘 문제, 문제집 관리 hooks
 const useBaskets = () => {
   const { fetchData: getApi } = useAxios();
+  const { fetchData: getaApi } = useAxios();
   const { fetchData: postCompanyApi } = useAxios();
   const { fetchData: postApi } = useAxios();
   const { fetchData: putApi } = useAxios();
@@ -23,9 +24,25 @@ const useBaskets = () => {
     return null;
   }, [getApi]);
 
+  const getBasket = useCallback(
+    async (id: number) => {
+      if (!id) return;
+
+      const res = await getaApi({
+        method: "GET",
+        url: buildPath(APIEndPoints.MANAGE_BASKETS, { id }),
+      });
+      if (res) {
+        return res.data;
+      }
+      return null;
+    },
+    [getaApi]
+  );
+
   const addCompanyBaskets = useCallback(
     async (data: BasketBody) => {
-      await postCompanyApi({
+      const res = await postCompanyApi({
         method: "POST",
         url: APIEndPoints.BASKETS,
         data: {
@@ -35,8 +52,9 @@ const useBaskets = () => {
           isCompanyProb: data.isCompanyProb,
         },
       });
+      return res?.data.id;
     },
-    [postApi]
+    [postCompanyApi]
   );
 
   const addBaskets = useCallback(
@@ -70,7 +88,7 @@ const useBaskets = () => {
 
       await getAllBaskets();
     },
-    []
+    [getAllBaskets, putApi]
   );
 
   const deleteBaskets = useCallback(
@@ -84,11 +102,12 @@ const useBaskets = () => {
 
       await getAllBaskets();
     },
-    [deleteApi]
+    [deleteApi, getAllBaskets]
   );
 
   return {
     getAllBaskets,
+    getBasket,
     addCompanyBaskets,
     addBaskets,
     modifyBaskets,

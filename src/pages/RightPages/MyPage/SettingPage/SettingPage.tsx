@@ -124,7 +124,7 @@ const SettingPage = () => {
                 <textarea
                   className={styles.description_content}
                   onChange={(e) => setIntroduction(e.target.value)}
-                  maxlength={maxLength} //글자수 제한
+                  maxLength={maxLength} //글자수 제한
                   placeholder={
                     user.introduction
                       ? user.introduction

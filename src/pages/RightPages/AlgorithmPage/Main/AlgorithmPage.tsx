@@ -7,11 +7,15 @@ import { useState } from "react";
 import PracticeContent from "./Components/PracticeContent";
 import { Problems } from "../../../../constants/types/types";
 import useBaskets from "../../../../hooks/useBaskets";
+import { useNavigate } from "react-router-dom";
+import { PageEndPoints } from "../../../../constants/api";
+import { buildPath } from "../../../../utils/buildPath";
 
 const AlgorithmPage = () => {
   const [selected, setSelected] = useState<"company" | "practice">("company");
   const [selectedProblems, setSelectedProblems] = useState<Problems[]>([]);
   const { addBaskets } = useBaskets();
+  const navigate = useNavigate();
 
   const handleStart = async (form?: {
     title: string;
@@ -43,7 +47,8 @@ const AlgorithmPage = () => {
 
       console.log(basketData);
 
-      await addBaskets(basketData);
+      const id = await addBaskets(basketData);
+      navigate(buildPath(PageEndPoints.ALGO_TEST, { id: Number(id) }));
     }
   };
 

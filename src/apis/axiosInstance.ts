@@ -39,6 +39,7 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.FAVORITE_COMPANY}`,
   `PUT:${APIEndPoints.MANAGE_BASKETS}`,
   `DELETE:${APIEndPoints.MANAGE_BASKETS}`,
+  `GET:${APIEndPoints.MANAGE_BASKETS}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
