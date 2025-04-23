@@ -11,6 +11,8 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: UserRole;
+  techStacks: string[];
+  favoriteCompanies: string[];
 }
 
 export type ModifyUserData = {
@@ -173,4 +175,9 @@ export interface ProblemInfo {
   testCases: TestCase[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Techs {
+  id: number;
+  techStack: string;
 }

@@ -21,7 +21,9 @@ import { PageEndPoints } from "../../../../constants/api";
 import useProjects from "../../../../hooks/useProjects";
 import useBaskets from "../../../../hooks/useBaskets";
 import { useEffect, useState } from "react";
-import { Baskets } from "../../../../constants/types/types";
+import { Baskets, Company } from "../../../../constants/types/types";
+import useUserSetting from "../../../../hooks/useUserSetting";
+import useCompany from "../../../../hooks/useCompany";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -29,6 +31,21 @@ const MainPage = () => {
   const { projects, getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
   const [baskets, setBaskets] = useState<Baskets[]>([]);
+  const { getFavoriteCompany } = useUserSetting();
+  const [myCompanies, setMyCompanies] = useState<Company[]>([]);
+  const { companies } = useCompany();
+
+  useEffect(() => {
+    const fetchFavoriteCompanies = async () => {
+      const favoriteIds = await getFavoriteCompany();
+      const matchedCompanies = companies.filter((company) =>
+        favoriteIds.includes(company.id)
+      );
+      setMyCompanies(matchedCompanies);
+    };
+
+    fetchFavoriteCompanies();
+  }, [getFavoriteCompany, companies]);
 
   useEffect(() => {
     const getBaskets = async () => {
@@ -39,7 +56,6 @@ const MainPage = () => {
   }, [getAllBaskets]);
 
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
-  const companies = ["네이버", "카카오", "라인", "쿠팡", "배민", "구름"];
 
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
@@ -65,12 +81,12 @@ const MainPage = () => {
               </Button>
               {companies.length > 0 ? (
                 <div className={styles.companyList}>
-                  {companies.map((company, i) => (
+                  {myCompanies.map((company) => (
                     <SimpleCompanyBox
-                      key={"company" + i}
-                      id={i + 1}
+                      key={company.id}
+                      id={company.id}
                       thumbnail="/logo_goorm.png"
-                      name={company}
+                      name={company.companyName}
                     />
                   ))}
                 </div>

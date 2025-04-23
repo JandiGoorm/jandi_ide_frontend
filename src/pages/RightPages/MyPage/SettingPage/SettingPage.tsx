@@ -5,15 +5,18 @@ import LeftSide from "../../../LeftPages/Mainpage/MainPageLeft";
 import styles from "./SettingPage.module.css";
 import BasicHeader from "../../../../layouts/Components/BasicHeader";
 import SelectButtonList from "../../../../components/SelectListButton/SelectListButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import useUserSetting from "../../../../hooks/useUserSetting";
+import useTech from "../../../../hooks/useTech";
 
 const SettingPage = () => {
   const { user } = useAuth();
+  const { techs } = useTech();
+  const { getFavoriteTech, favoriteTech } = useUserSetting();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
-  const [nickname, setNickname] = useState(user.nickName || "");
-  const [introduction, setIntroduction] = useState(user.nickName || "");
+  const [nickname, setNickname] = useState(user?.nickName || "");
+  const [introduction, setIntroduction] = useState(user?.nickName || "");
   const maxLength = 500;
 
   const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
@@ -24,6 +27,10 @@ const SettingPage = () => {
       prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
     );
   };
+
+  useEffect(() => {
+    getFavoriteTech().then(setSelectedLangs);
+  }, [getFavoriteTech]);
 
   // 닉네임 수정
   const handleUpdateNickname = async () => {
@@ -50,6 +57,13 @@ const SettingPage = () => {
     });
   };
 
+  // 소개글 수정
+  const handleUpdateLang = async () => {
+    console.log("dd");
+    if (!user) return;
+    await favoriteTech(selectedLangs);
+  };
+
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
@@ -71,7 +85,7 @@ const SettingPage = () => {
                   minWidth: "15rem",
                 }}
                 inputSize="lg"
-                value={user.email}
+                value={user?.email}
                 readOnly
               />
               <Input
@@ -82,18 +96,18 @@ const SettingPage = () => {
                 }}
                 inputSize="lg"
                 onChange={(e) => setNickname(e.target.value)}
-                placeholder={user.nickName}
+                placeholder={user?.nickName}
               />
             </div>
           </div>
           <div className={styles.selectLanguage_container}>
             <div className={styles.basicInfo_header}>
               <p className={styles.title}>선호 언어 선택</p>
-              <Button>언어 변경 완료</Button>
+              <Button onClick={handleUpdateLang}>언어 변경 완료</Button>
             </div>
             <div className={styles.selectLanguage_content}>
               <SelectButtonList
-                listItem={["ㄴㄴ"]}
+                listItem={techs.map((t) => t.techStack)}
                 selectedItems={selectedLangs}
                 onClickItem={handleLanguageClick}
               />
@@ -110,7 +124,7 @@ const SettingPage = () => {
             <div className={styles.profileModify_content}>
               <div className={styles.profile_image_div}>
                 <img
-                  src={user.profileImage}
+                  src={user?.profileImage}
                   alt="Logo"
                   className={styles.UserProfile}
                 />
@@ -126,7 +140,7 @@ const SettingPage = () => {
                   onChange={(e) => setIntroduction(e.target.value)}
                   maxLength={maxLength} //글자수 제한
                   placeholder={
-                    user.introduction
+                    user?.introduction
                       ? user.introduction
                       : "자기소개를 적어주세요!"
                   }

@@ -13,7 +13,7 @@ import { PageEndPoints } from "../../../constants/api";
 const SelectCompanyPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { favoriteCompany } = useUserSetting();
+  const { favoriteCompany, favoriteTech } = useUserSetting();
   const { companies } = useCompany();
   const selectedLangs = location.state?.selectedLangs || [];
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
@@ -38,7 +38,7 @@ const SelectCompanyPage = () => {
 
     // 회원가입 진행...
     await favoriteCompany(selectedCompanies);
-    // await favoriteTech(selectedLangs);
+    await favoriteTech(selectedLangs);
 
     // 가입 완료 페이지로 이동
     navigate(PageEndPoints.LOGIN_DONE);
