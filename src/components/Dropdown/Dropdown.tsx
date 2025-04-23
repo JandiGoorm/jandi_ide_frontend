@@ -58,12 +58,18 @@ const Dropdown = ({
     const contentRect = contentRef.current.getBoundingClientRect();
 
     const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
 
-    const top = triggerRect.bottom + window.scrollY;
+    let top = triggerRect.bottom + window.scrollY;
     let left = triggerRect.right + window.scrollX;
 
     if (viewportWidth - triggerRect.right < contentRect.width) {
       left = triggerRect.left - contentRect.width + window.scrollX;
+    }
+
+    // 세로 공간 부족하면 위로 띄우기
+    if (viewportHeight - triggerRect.bottom < contentRect.height) {
+      top = triggerRect.top - contentRect.height + window.scrollY;
     }
 
     setPosition({ top, left });
