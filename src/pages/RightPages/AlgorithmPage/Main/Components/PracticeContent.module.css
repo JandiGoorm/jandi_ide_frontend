@@ -42,6 +42,7 @@
   .problem{
     font-size: var(--text-xl);
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
