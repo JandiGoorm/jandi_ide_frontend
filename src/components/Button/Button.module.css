@@ -38,8 +38,18 @@
   
   .btn_none {
     background: transparent;
-    /* color: var(--color-text-sub); */
     padding: 0rem;
+  }
+
+  .btn_pagination {
+    background: transparent;
+    padding: 0.5rem;
+  }
+
+  .btn_pagination_now {
+    background: transparent;
+    border: 1px solid white;
+    padding: 0.5rem;
   }
 
   .btn_lang {

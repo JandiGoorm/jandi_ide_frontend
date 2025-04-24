@@ -6,6 +6,9 @@
     color: var(--color-text-primary);
     -ms-overflow-style: none;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 ::-webkit-scrollbar {
@@ -40,7 +43,6 @@
     overflow-x: hidden;
     overflow-y: scroll;
     height: 3rem;
-    padding: 0.5rem 0rem;
 }
 
 .problem {
