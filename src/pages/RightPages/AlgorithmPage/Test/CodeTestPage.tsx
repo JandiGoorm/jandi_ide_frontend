@@ -1,5 +1,5 @@
 import styles from "./CodeTestPage.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
@@ -23,9 +23,9 @@ import { LuLoader } from "react-icons/lu";
 import { highlightErrorText } from "../../../../utils/resultText";
 
 const CodeTestPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { getBasket } = useBaskets();
-  const { getSubmitResult } = useCodeTest();
+  const { getResult, getSubmitResult } = useCodeTest();
   const { user } = useAuth();
   const { id } = useParams(); // 현재 문제집 번호
   const basketId = Number(id);
@@ -34,13 +34,14 @@ const CodeTestPage = () => {
   const minutes = Math.floor(totalSeconds / 60); // 환산된 분
   const seconds = totalSeconds % 60; // 환산된 초
   const formatTime = (time: number) => String(time).padStart(2, "0");
+  const [solvingTime, setSolvingTime] = useState<number>();
   const [isRunning, setIsRunning] = useState(false);
   const [problems, setProblems] = useState<ProblemInfo[]>([]);
   const [language, setLanguage] = useState<string>();
   const editorLanguage = getEditorLanguage(language || "");
   const filePath = getFilePath(language || "");
   const [currentIndex, setCurrentIndex] = useState(0);
-  //각각 문제 및 결과 각각 저장장
+  //각각 문제 및 결과 각각 저장
   const [problemCodeMap, setProblemCodeMap] = useState<{
     [id: number]: string;
   }>({});
@@ -60,6 +61,7 @@ const CodeTestPage = () => {
       const data = await getBasket(basketId);
       console.log(data);
       setTotalSeconds(data.solvingTimeInMinutes * 60);
+      setSolvingTime(data.solvingTimeInMinutes);
       setProblems(data.problems);
       setLanguage(data.language);
 
@@ -102,8 +104,19 @@ const CodeTestPage = () => {
   //버튼 핸들러
   const handleExit = () => {
     const confirmEnd = confirm("정말 종료하시겠습니까?");
-    if (confirmEnd) {
-      navigate(`/mypage/problem/${id}`);
+    if (confirmEnd && user && language && solvingTime) {
+      getSubmitResult({
+        userId: user?.id,
+        problemSetId: basketId,
+        language: language?.toLowerCase(),
+        solvingTime: solvingTime,
+        codes: Object.entries(problemCodeMap).map(([id, code]) => ({
+          problemId: Number(id),
+          code,
+        })),
+      });
+
+      // navigate(`/mypage/problem/${id}`);
     }
   };
   const handleRun = async () => {
@@ -121,7 +134,7 @@ const CodeTestPage = () => {
       language: language?.toLowerCase(),
       solvingTime: currentProblem?.timeLimit,
     };
-    const result = await getSubmitResult(data);
+    const result = await getResult(data);
 
     setProblemResultMap((prev) => ({
       ...prev,

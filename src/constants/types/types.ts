@@ -208,3 +208,18 @@ export interface CompilerResponse {
   status: number | string;
   timestamp: string;
 }
+
+export interface SubmitBody {
+  userId: number;
+  problemId: number;
+  problemSetId: number;
+  code: string;
+  language: string;
+  isCorrect: boolean;
+  solvingTime: number;
+  additionalInfo: string;
+  memoryUsage: number;
+  executionTime: number;
+  status: string | number;
+  description: string;
+}

@@ -66,4 +66,5 @@ export const APIEndPoints = {
 
   //코테
   COMPILER: "/compiler/compile",
+  SUBMIT_CODE: "/compiler/save-solution",
 };
