@@ -9,6 +9,11 @@ import Editor from "@monaco-editor/react";
 import Button from "../../../../components/Button/Button";
 import useBaskets from "../../../../hooks/useBaskets";
 import { ProblemInfo } from "../../../../constants/types/types";
+import {
+  getEditorLanguage,
+  getFilePath,
+  getDefaultCode,
+} from "../../../../utils/codeTestSet";
 
 const CodeTestPage = () => {
   const navigate = useNavigate();
@@ -21,6 +26,9 @@ const CodeTestPage = () => {
   const seconds = totalSeconds % 60; // 환산된 초
   const formatTime = (time: number) => String(time).padStart(2, "0");
   const [problems, setProblems] = useState<ProblemInfo[]>([]);
+  const [language, setLanguage] = useState<string>();
+  const editorLanguage = getEditorLanguage(language || "");
+  const filePath = getFilePath(language || "");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [problemCodeMap, setProblemCodeMap] = useState<{
     [id: number]: string;
@@ -39,6 +47,18 @@ const CodeTestPage = () => {
       console.log(data);
       setTotalSeconds(data.solvingTimeInMinutes * 60);
       setProblems(data.problems);
+      setLanguage(data.language);
+
+      // 문제별 기본 코드 설정
+      const defaultCode = getDefaultCode(data.language);
+      const initialCodeMap = data.problems.reduce(
+        (acc: { [id: number]: string }, problem: ProblemInfo) => {
+          acc[problem.id] = defaultCode;
+          return acc;
+        },
+        {}
+      );
+      setProblemCodeMap(initialCodeMap);
     };
 
     getProblem();
@@ -110,8 +130,8 @@ const CodeTestPage = () => {
               <Editor
                 height="100%"
                 theme={isDarkMode ? "vs-dark" : "light"}
-                defaultLanguage="java"
-                path="file.java"
+                defaultLanguage={editorLanguage}
+                path={filePath}
                 value={problemCodeMap[problems[currentIndex]?.id] || ""}
                 onChange={handleCodeChange}
                 options={{
