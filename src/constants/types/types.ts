@@ -223,3 +223,37 @@ export interface SubmitBody {
   status: string | number;
   description: string;
 }
+
+export interface ResultsInfo {
+  problemSetId: number;
+  problemSetName: string;
+  problems: ResultsProblems[];
+  userId: number;
+}
+
+export interface ResultsProblems {
+  level: number;
+  problemDescription: string;
+  problemId: number;
+  problemTitle: string;
+  solution: Solution[];
+}
+
+export interface Solution {
+  additionalInfo: string;
+  code: string;
+  createdAt: string;
+  description: string;
+  executionTime: number;
+  id: number;
+  isCorrect: boolean;
+  language: string;
+  memoryUsage: number;
+  problemId: number;
+  problemSetId: number;
+  solvingTime: number;
+  status: string;
+  updatedAt: string;
+  userId: number;
+  userName: string;
+}

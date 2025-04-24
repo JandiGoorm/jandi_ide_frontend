@@ -1,0 +1,95 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.code_header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  flex: 1; /* 비율 1 */
+}
+
+.code_body {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  flex: 7; /* 비율 7 */
+  overflow-y: auto; 
+  background-color: var(--color-code-main);
+}
+
+  .Code_layout {
+    background-color: var(--color-menu-background);
+  }
+
+
+  .timer {
+    color: var(--color-text-primary);
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 100px;
+    padding: 0.5rem 2rem;
+    width: fit-content;
+    border: 2px solid transparent;
+  }
+
+  .green {
+    border-color: green;
+  }
+  
+  .yellow {
+    border-color: gold;
+  }
+  
+  .red {
+    border-color: red;
+  }
+
+  .footer {
+    background-color: var(--color-code-terminal);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    gap: 1rem;
+    flex: 3; /* 비율 3 */
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title_box{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: var(--text-lg);
+    color: var(--color-text-primary);
+  }
+
+  .title{
+    font-size: var(--text-xl);
+  }
+
+  .title_run{
+    color: var(--color-text-sub);
+  }
+  
+  .result {
+    overflow-y: auto;
+    flex: 1;
+    word-break: break-word;
+    white-space: pre-wrap;
+    margin: 0;
+    line-height: 1.4;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-code-main);
+  }

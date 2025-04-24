@@ -19,6 +19,7 @@ export const PageEndPoints = {
 
   ALGO_MAIN: "/algo",
   ALGO_TEST: "/algo/test/:id",
+  ALGO_RESULT: "/algo/result/:id",
 
   GITHUB_PROJECT: "/project/:id",
 };
@@ -67,4 +68,6 @@ export const APIEndPoints = {
   //코테
   COMPILER: "/compiler/compile",
   SUBMIT_CODE: "/compiler/save-solution",
+
+  BASKET_CODE_RESULT: "/solutions/user/:id/problem-set/:id",
 };

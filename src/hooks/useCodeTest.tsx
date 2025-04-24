@@ -17,6 +17,7 @@ type SubmitData = {
 const useCodeTest = () => {
   const { fetchData: postApi } = useAxios();
   const { fetchData: postResultApi } = useAxios();
+  const { fetchData: getApi } = useAxios();
 
   const getResult = useCallback(
     async (data: CompilerBody) => {
@@ -108,9 +109,24 @@ const useCodeTest = () => {
     [getResult, postResultApi]
   );
 
+  const getBasketResults = useCallback(
+    async (id: number, setId: number) => {
+      const res = await getApi({
+        method: "GET",
+        url: `/solutions/user/${id}/problem-set/${setId}`,
+      });
+
+      console.log(res);
+
+      return res?.data;
+    },
+    [getApi]
+  );
+
   return {
     getResult,
     getSubmitResult,
+    getBasketResults,
   };
 };
 

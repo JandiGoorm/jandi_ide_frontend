@@ -25,6 +25,7 @@ import ProjectEditPage from "../pages/RightPages/CodeEditPage/ProjectEditPage/Pr
 // 코딩 테스트
 import CodeTestPage from "../pages/RightPages/AlgorithmPage/Test/CodeTestPage";
 import HomeRouter from "./HomeRouter";
+import CodeTestResultPage from "../pages/RightPages/AlgorithmPage/Result/CodeTestResultPage";
 
 export const routes = [
   {
@@ -109,6 +110,11 @@ export const routes = [
   {
     path: PageEndPoints.ALGO_TEST,
     element: <CodeTestPage />,
+    requireAuth: true,
+  },
+  {
+    path: PageEndPoints.ALGO_RESULT,
+    element: <CodeTestResultPage />,
     requireAuth: true,
   },
   {

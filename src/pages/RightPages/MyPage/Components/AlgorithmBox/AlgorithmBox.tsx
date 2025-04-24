@@ -21,6 +21,8 @@ import { LuPencilLine, LuTrash2 } from "react-icons/lu";
 import useBaskets from "../../../../../hooks/useBaskets";
 import ModifyBaksket from "../Contents/ModifyBaksket";
 import { getMedalColor } from "../../../../../utils/medal";
+import { buildPath } from "../../../../../utils/buildPath";
+import { PageEndPoints } from "../../../../../constants/api";
 
 interface AlgorithmBoxProps {
   id: number;
@@ -45,7 +47,8 @@ export default function AlgorithmBox({
   const [problemInfos, setProblemInfos] = useState<ProblemInfo[]>([]);
   const { deleteBaskets } = useBaskets();
 
-  const handleClick = () => navigate(`/mypage/problem/${id}`);
+  const handleClick = () =>
+    navigate(buildPath(PageEndPoints.ALGO_RESULT, { id }));
 
   const deleteClick = async () => {
     await deleteBaskets(id).then(() => {
