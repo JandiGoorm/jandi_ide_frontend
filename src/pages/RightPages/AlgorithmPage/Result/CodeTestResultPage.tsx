@@ -28,7 +28,9 @@ const CodeTestResultPage = () => {
   const [problemCodeMap, setProblemCodeMap] = useState<{
     [id: number]: string;
   }>({});
-  // const [problemResultMap, setProblemResultMap] = useState<{[id: number]: CompilerResponse;}>({});
+  const [problemResultMap, setProblemResultMap] = useState<{
+    [id: number]: string;
+  }>({});
 
   const handleCodeChange = (value: string | undefined) => {
     if (value !== undefined && problems[currentIndex]) {
@@ -47,10 +49,24 @@ const CodeTestResultPage = () => {
 
       const result = await getBasketResults(user.id, basketId);
       console.log(result);
+
+      const codeMap: { [id: number]: string } = {};
+      const resultMap: { [id: number]: string } = {};
+      result.problems.forEach(
+        (problem: {
+          problemId: number;
+          solution?: { code?: string; additionalInfo?: string };
+        }) => {
+          codeMap[problem.problemId] = problem.solution?.code || "";
+          resultMap[problem.problemId] = problem.solution?.additionalInfo || "";
+        }
+      );
+      setProblemCodeMap(codeMap);
+      setProblemResultMap(resultMap);
     };
 
     getResults();
-  }, [getBasketResults, basketId]);
+  }, [getBasketResults, getBasket, basketId, user]);
 
   return (
     <BaseLayout>
@@ -80,8 +96,9 @@ const CodeTestResultPage = () => {
                 value={problemCodeMap[problems[currentIndex]?.id] || ""}
                 onChange={handleCodeChange}
                 options={{
+                  readOnly: true,
                   minimap: {
-                    enabled: false,
+                    enabled: true,
                   },
                 }}
               />
@@ -92,7 +109,10 @@ const CodeTestResultPage = () => {
               <div className={styles.title_box}>
                 <div className={styles.title}>실행 결과</div>
               </div>
-              <div className={styles.result}></div>
+              <div className={styles.result}>
+                {problemResultMap[problems[currentIndex]?.id] ||
+                  "결과가 없습니다."}
+              </div>
             </div>
           </div>
         </Sidebar.Content>

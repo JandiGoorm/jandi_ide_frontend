@@ -91,7 +91,9 @@ const useCodeTest = () => {
               language: data.language,
               isCorrect: result.isCorrect ? result.isCorrect : false,
               solvingTime: data.solvingTime,
-              additionalInfo: "",
+              additionalInfo: result.resultDetails
+                ? result.resultDetails
+                : result.errorDetails,
               memoryUsage: result.memoryUsage ? result.memoryUsage : 0,
               executionTime: result.executionTime ? result.executionTime : 0,
               status:
@@ -115,8 +117,6 @@ const useCodeTest = () => {
         method: "GET",
         url: `/solutions/user/${id}/problem-set/${setId}`,
       });
-
-      console.log(res);
 
       return res?.data;
     },

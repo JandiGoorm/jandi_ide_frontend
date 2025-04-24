@@ -1,5 +1,5 @@
 import styles from "./CodeTestPage.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
 import { Sidebar } from "../../../../layouts/SidebarLayout/SidebarLayout";
@@ -21,9 +21,11 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import useCodeTest from "../../../../hooks/useCodeTest";
 import { LuLoader } from "react-icons/lu";
 import { highlightErrorText } from "../../../../utils/resultText";
+import { buildPath } from "../../../../utils/buildPath";
+import { PageEndPoints } from "../../../../constants/api";
 
 const CodeTestPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { getBasket } = useBaskets();
   const { getResult, getSubmitResult } = useCodeTest();
   const { user } = useAuth();
@@ -116,7 +118,7 @@ const CodeTestPage = () => {
         })),
       });
 
-      // navigate(`/mypage/problem/${id}`);
+      navigate(buildPath(PageEndPoints.ALGO_RESULT, { id: basketId }));
     }
   };
   const handleRun = async () => {
