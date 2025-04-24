@@ -46,23 +46,6 @@ const MainPage = () => {
     setMyCompanies(matchedCompanies);
   };
 
-  // //관심 기업에서 삭제
-  // const handleDelete = (id: number) => {
-  //   setMyCompanies((prev) => prev.filter((company) => company.id !== id));
-  // };
-
-  // //관심 기업에 추가
-  // const handleAdd = (id: number) => {
-  //   const companyToAdd = dummyCompanies.find((company) => company.id === id);
-  //   if (!companyToAdd) return;
-
-  //   setMyCompanies((prev) => {
-  //     // 중복 추가 방지
-  //     if (prev.find((c) => c.id === id)) return prev;
-  //     return [...prev, companyToAdd];
-  //   });
-  // };
-
   return (
     <BaseLayout>
       <Sidebar.Provider>
@@ -82,7 +65,7 @@ const MainPage = () => {
                   <FullCompanyBox
                     key={company.id}
                     company={company}
-                    thumbnail="/logo_goorm.png"
+                    thumbnail={company.profileUrl}
                     onHandle={handleAction}
                     isFavorite={true}
                   />
@@ -107,7 +90,7 @@ const MainPage = () => {
                   <FullCompanyBox
                     key={company.id}
                     company={company}
-                    thumbnail="/logo_goorm.png"
+                    thumbnail={company.profileUrl}
                     onHandle={handleAction}
                     isFavorite={false}
                   />

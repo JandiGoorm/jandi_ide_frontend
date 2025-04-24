@@ -85,7 +85,7 @@ const MainPage = () => {
                     <SimpleCompanyBox
                       key={company.id}
                       id={company.id}
-                      thumbnail="/logo_goorm.png"
+                      thumbnail={company.profileUrl}
                       name={company.companyName}
                     />
                   ))}
