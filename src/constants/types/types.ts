@@ -94,6 +94,7 @@ export interface Company {
   timeInMinutes: number;
   programmingLanguages: string[];
   jobPostings: JobPosting[];
+  profileUrl: string;
 }
 
 export interface ChatRoom {
@@ -191,7 +192,19 @@ export interface Techs {
 export interface CompilerBody {
   userId: number;
   problemId: number;
+  problemSetId: number;
   code: string;
   language: string;
   solvingTime: number;
+}
+
+export interface CompilerResponse {
+  code: string;
+  error: string;
+  errorDetails: string;
+  errorType: string;
+  language: string;
+  message: string;
+  status: number | string;
+  timestamp: string;
 }

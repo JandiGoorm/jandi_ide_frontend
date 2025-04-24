@@ -65,5 +65,5 @@ export const APIEndPoints = {
   PROBLEM: "/problems/:id",
 
   //코테
-  COMPILER: "/compiler/submit",
+  COMPILER: "/compiler/compile",
 };

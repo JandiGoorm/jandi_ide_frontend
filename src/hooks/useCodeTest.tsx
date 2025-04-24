@@ -15,6 +15,7 @@ const useCodeTest = () => {
         data: {
           userId: data.userId,
           problemId: data.problemId,
+          problemSetId: data.problemSetId,
           code: data.code,
           language: data.language,
           solvingTime: data.solvingTime,
@@ -22,6 +23,8 @@ const useCodeTest = () => {
       });
 
       console.log(res);
+
+      return res?.data;
     },
     [postApi]
   );

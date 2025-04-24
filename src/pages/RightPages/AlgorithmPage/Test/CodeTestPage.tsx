@@ -8,7 +8,10 @@ import LeftSide from "../../../LeftPages/CodeTestPage/CodeTestLeft";
 import Editor from "@monaco-editor/react";
 import Button from "../../../../components/Button/Button";
 import useBaskets from "../../../../hooks/useBaskets";
-import { ProblemInfo } from "../../../../constants/types/types";
+import {
+  CompilerResponse,
+  ProblemInfo,
+} from "../../../../constants/types/types";
 import {
   getEditorLanguage,
   getFilePath,
@@ -16,6 +19,8 @@ import {
 } from "../../../../utils/codeTestSet";
 import { useAuth } from "../../../../contexts/AuthContext";
 import useCodeTest from "../../../../hooks/useCodeTest";
+import { LuLoader } from "react-icons/lu";
+import { highlightErrorText } from "../../../../utils/resultText";
 
 const CodeTestPage = () => {
   const navigate = useNavigate();
@@ -29,13 +34,18 @@ const CodeTestPage = () => {
   const minutes = Math.floor(totalSeconds / 60); // 환산된 분
   const seconds = totalSeconds % 60; // 환산된 초
   const formatTime = (time: number) => String(time).padStart(2, "0");
+  const [isRunning, setIsRunning] = useState(false);
   const [problems, setProblems] = useState<ProblemInfo[]>([]);
   const [language, setLanguage] = useState<string>();
   const editorLanguage = getEditorLanguage(language || "");
   const filePath = getFilePath(language || "");
   const [currentIndex, setCurrentIndex] = useState(0);
+  //각각 문제 및 결과 각각 저장장
   const [problemCodeMap, setProblemCodeMap] = useState<{
     [id: number]: string;
+  }>({});
+  const [problemResultMap, setProblemResultMap] = useState<{
+    [id: number]: CompilerResponse;
   }>({});
 
   const handleCodeChange = (value: string | undefined) => {
@@ -97,20 +107,27 @@ const CodeTestPage = () => {
     }
   };
   const handleRun = async () => {
+    setIsRunning(true);
     console.log("코드 실행!");
     const currentProblem = problems[currentIndex];
     const currentProblemId = currentProblem?.id;
     const currentCode = problemCodeMap[currentProblemId] || "";
-    console.log("현재 문제 ID:", currentProblemId);
-    console.log("현재 코드:", currentCode);
+
     const data = {
       userId: user?.id,
       problemId: currentProblemId,
       code: currentCode,
+      problemSetId: basketId,
       language: language?.toLowerCase(),
       solvingTime: currentProblem?.timeLimit,
     };
-    await getSubmitResult(data);
+    const result = await getSubmitResult(data);
+
+    setProblemResultMap((prev) => ({
+      ...prev,
+      [currentProblemId]: result || null,
+    }));
+    setIsRunning(false);
   };
 
   return (
@@ -157,11 +174,51 @@ const CodeTestPage = () => {
             {/* 코드 실행기 */}
             <div className={styles.footer}>
               <div className={styles.buttons}>
-                {/* <Button onClick={handleStore}>저장</Button> */}
+                <div className={styles.title_box}>
+                  <div className={styles.title}>실행 결과</div>
+                  {isRunning ? (
+                    <div className={styles.title_run}>
+                      <LuLoader size={"1.125rem"} /> 실행중
+                    </div>
+                  ) : null}
+                </div>
                 <Button onClick={handleRun}>실행</Button>
               </div>
               <div className={styles.result}>
-                <p>결과결과</p>
+                <pre>
+                  {problemResultMap[problems[currentIndex]?.id] ? (
+                    problemResultMap[problems[currentIndex]?.id].status ===
+                    "CORRECT" ? (
+                      <div>
+                        <p style={{ color: "green" }}>
+                          <strong>상태:</strong>{" "}
+                          {problemResultMap[problems[currentIndex]?.id].status}
+                        </p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>
+                          <strong>에러:</strong>{" "}
+                          {problemResultMap[problems[currentIndex]?.id].error}
+                        </p>
+                        <p>
+                          <strong>메시지:</strong>{" "}
+                          {problemResultMap[problems[currentIndex]?.id].message}
+                        </p>
+                        <p>
+                          에러내용: <br />
+                          <br />
+                          {highlightErrorText(
+                            problemResultMap[problems[currentIndex]?.id]
+                              ?.errorDetails || ""
+                          )}
+                        </p>
+                      </div>
+                    )
+                  ) : (
+                    <p>아직 실행 결과가 없습니다.</p>
+                  )}
+                </pre>
               </div>
             </div>
           </div>
