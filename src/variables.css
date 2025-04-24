@@ -76,6 +76,9 @@
   --radius-button-md: var(--radius-md);
   --radius-button-lg: var(--radius-lg);
   --radius-input: var(--radius-md);
+
+  --color-bg-toast-success: oklch(0.627 0.194 149.214);
+  --color-bg-toast-error:   oklch(0.577 0.245 27.325);
 }
 
   /* 

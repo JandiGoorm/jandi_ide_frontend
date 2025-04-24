@@ -1,4 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import {
+  Modal,
+  ModalTrigger,
+  ModalContent,
+} from "../../../../../components/Modal/Modal";
+import CompanyModal from "./CompanyModal";
 import styles from "./SimpleCompanyBox.module.css";
 
 interface SimpleCompanyBoxProps {
@@ -12,13 +17,17 @@ export default function SimpleCompanyBox({
   thumbnail,
   name,
 }: SimpleCompanyBoxProps) {
-  const navigate = useNavigate();
-  const handleClick = () => navigate(`/company/${id}`);
-
   return (
-    <div className={styles.company_item} onClick={handleClick}>
-      <img className={styles.thumbnail} src={thumbnail} />
-      <p className={styles.name}>{name}</p>
-    </div>
+    <Modal>
+      <ModalTrigger>
+        <div className={styles.company_item}>
+          <img className={styles.thumbnail} src={thumbnail} />
+          <p className={styles.name}>{name}</p>
+        </div>
+      </ModalTrigger>
+      <ModalContent>
+        <CompanyModal id={id} thumbnail={thumbnail} />
+      </ModalContent>
+    </Modal>
   );
 }

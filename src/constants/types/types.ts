@@ -11,7 +11,16 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: UserRole;
+  techStacks: string[];
+  favoriteCompanies: string[];
 }
+
+export type ModifyUserData = {
+  introduction: string;
+  email: string;
+  nickname: string;
+  profileImage: string;
+};
 
 export interface Project {
   createdAt: string;
@@ -21,10 +30,15 @@ export interface Project {
   name: string;
   owner: User;
 }
-
+export interface ProjectDefaultInfo {
+  name: string;
+  treeData: ProjectInfo;
+}
 export interface ProjectInfo {
   sha: string;
   tree: Tree;
+  truncated: boolean;
+  url: string;
 }
 
 export interface Tree {
@@ -46,6 +60,10 @@ export type ProjectData = {
 export type ModifyProjectData = {
   projectName: string;
   description: string;
+};
+
+export type ModifyBasketData = {
+  title: string;
 };
 
 export interface Schedule {
@@ -74,7 +92,7 @@ export interface Company {
   updatedAt: string;
   levels: number[];
   timeInMinutes: number;
-  programmingLanguages: string;
+  programmingLanguages: string[];
   jobPostings: JobPosting[];
 }
 
@@ -85,4 +103,87 @@ export interface ChatRoom {
   createdBy: string;
   createdAt: string;
   participants: string[];
+}
+
+// interface ChatMessage {
+//   type: string; // 문자열로 변경 (enum값 사용)
+//   roomId: string;
+//   sender: string;
+//   message: string;
+//   timestamp: string;
+// }
+
+export interface Problems {
+  id: number;
+  description: string;
+  level: number;
+  memory: number;
+  timeLimit: number;
+  tags: string[];
+  createdAt: string; // ISO 형식의 날짜 문자열
+  updatedAt: string;
+  title: string;
+}
+
+export interface Schedule {
+  id: number;
+  scheduleName: string;
+  date: string; // ISO 날짜 형식 (예: "2025-04-19")
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RecruitInfo {
+  id: number;
+  title: string;
+  description: string;
+  schedules: Schedule[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Baskets {
+  id: number;
+  isCompanyProb: boolean;
+  problemIds: string[];
+  minutes: number;
+  title: string;
+  company: string;
+  language: string;
+}
+
+export interface BasketBody {
+  isCompanyProb: boolean;
+  problemIds: number[];
+  minutes: number;
+  title: string;
+  companyName: string;
+  language: string;
+}
+
+export interface TestCase {
+  id: number;
+  input: string;
+  output: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProblemInfo {
+  id: number;
+  title: string;
+  description: string;
+  level: number;
+  memory: number;
+  timeLimit: number;
+  tags: string[];
+  testCases: TestCase[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Techs {
+  id: number;
+  techStack: string;
 }

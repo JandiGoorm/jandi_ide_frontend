@@ -1,8 +1,16 @@
-import { ReactNode } from "react";
 import styles from "./BaseLayout.module.css";
 
-const BaseLayout = ({ children }: { children: ReactNode }) => {
-  return <div className={styles.container}>{children}</div>;
+interface ContentProps extends React.HTMLProps<HTMLDivElement> {
+  header?: React.ReactNode;
+}
+
+const BaseLayout = ({ header, children }: ContentProps) => {
+  return (
+    <div className={styles.container}>
+      {header}
+      {children}
+    </div>
+  );
 };
 
 export default BaseLayout;

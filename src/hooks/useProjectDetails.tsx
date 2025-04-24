@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { ProjectInfo, Tree } from "../constants/types/types";
+import { Tree } from "../constants/types/types";
 import useAxios from "./useAxios";
 import { buildPath } from "../utils/buildPath";
 import { APIEndPoints } from "../constants/api";
 
 //프로젝트 디테일 관리 hooks
 const useProjectDetails = ({ id }: { id: number }) => {
-  const [projectDetail, setProjectDetail] = useState<ProjectInfo[]>([]);
+  const [projectName, setProjectName] = useState<string>();
   const [projectFileTree, setProjectFileTree] = useState<Tree[]>([]);
+  const [projectLink, setProjectLink] = useState<string>();
   const [fileContent, setFileContent] = useState<string>();
   const { fetchData: getCodeApi } = useAxios();
   const { fetchData: getDetailApi } = useAxios();
@@ -19,10 +20,12 @@ const useProjectDetails = ({ id }: { id: number }) => {
       method: "GET",
       url: buildPath(APIEndPoints.MANAGE_PROJECT, { id }),
     }).then((res) => {
-      setProjectDetail(res?.data);
-      setProjectFileTree(res?.data.tree);
+      console.log(res);
+      setProjectName(res?.data.name);
+      setProjectFileTree(res?.data.treeData.tree);
+      setProjectLink(res?.data.treeData.url);
     });
-  }, [getDetailApi]);
+  }, [getDetailApi, id]);
 
   const getProjectCode = useCallback(
     async ({ sha }: { sha: string }) => {
@@ -44,7 +47,7 @@ const useProjectDetails = ({ id }: { id: number }) => {
         }
       });
     },
-    [getCodeApi]
+    [getCodeApi, id]
   );
 
   useEffect(() => {
@@ -52,8 +55,9 @@ const useProjectDetails = ({ id }: { id: number }) => {
   }, [getProjectDetail]);
 
   return {
-    projectDetail,
+    projectName,
     projectFileTree,
+    projectLink,
     getProjectDetail,
     fileContent,
     getProjectCode,

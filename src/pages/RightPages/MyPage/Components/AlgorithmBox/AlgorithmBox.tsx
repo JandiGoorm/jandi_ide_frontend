@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AlgorithmBox.module.css";
 import LangTag from "../../../../LeftPages/Mainpage/components/LangTag";
@@ -8,21 +8,27 @@ import {
   DropdownTrigger,
   DropdownContent,
 } from "../../../../../components/Dropdown/Dropdown";
-
-//icons
-import { BsPinAngle } from "react-icons/bs";
-import { BsPinAngleFill } from "react-icons/bs";
 import { MdMoreVert } from "react-icons/md";
-import DropDownMenu from "../Contents/DropdownMenu";
+import useProblems from "../../../../../hooks/useProblems";
+import { ProblemInfo } from "../../../../../constants/types/types";
+import { FaMedal } from "react-icons/fa";
+import {
+  Modal,
+  ModalContent,
+  ModalTrigger,
+} from "../../../../../components/Modal/Modal";
+import { LuPencilLine, LuTrash2 } from "react-icons/lu";
+import useBaskets from "../../../../../hooks/useBaskets";
+import ModifyBaksket from "../Contents/ModifyBaksket";
+import { getMedalColor } from "../../../../../utils/medal";
 
 interface AlgorithmBoxProps {
   id: number;
   title: string;
-  problems: string[];
+  problems: number[];
   duration: number;
   problemCount: number;
   lang: string;
-  levelImg: string;
 }
 
 export default function AlgorithmBox({
@@ -32,16 +38,33 @@ export default function AlgorithmBox({
   duration,
   problemCount,
   lang,
-  levelImg,
 }: AlgorithmBoxProps) {
   const navigate = useNavigate();
-  const [isPinned, setIsPinned] = useState(false);
+  const { getaProblemsInfo } = useProblems();
+  const dropdownRef = useRef<{ close: () => void }>(null);
+  const [problemInfos, setProblemInfos] = useState<ProblemInfo[]>([]);
+  const { deleteBaskets } = useBaskets();
 
   const handleClick = () => navigate(`/mypage/problem/${id}`);
-  const handlePin = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsPinned(!isPinned);
+
+  const deleteClick = async () => {
+    await deleteBaskets(id).then(() => {
+      dropdownRef.current?.close();
+    });
   };
+
+  useEffect(() => {
+    const fetchProblems = async () => {
+      try {
+        const res = await getaProblemsInfo(problems); // problems: number[]
+        setProblemInfos(res);
+      } catch (err) {
+        console.error("문제 정보를 가져오는 중 오류 발생:", err);
+      }
+    };
+
+    fetchProblems();
+  }, [problems, getaProblemsInfo]);
 
   return (
     <div className={styles.algorithm_item} onClick={handleClick}>
@@ -55,10 +78,13 @@ export default function AlgorithmBox({
 
       {/* 중간 - 문제 리스트 */}
       <div className={styles.problem_list}>
-        {problems.map((prob, idx) => (
-          <div key={idx} className={styles.problem}>
-            <span>{prob}</span>
-            <img src={levelImg} />
+        {problemInfos.map((problemInfo) => (
+          <div key={problemInfo.id} className={styles.problem}>
+            <span>{problemInfo.title}</span>
+            <FaMedal
+              color={getMedalColor(problemInfo.level)}
+              style={{ marginLeft: "0.3rem" }}
+            />
           </div>
         ))}
       </div>
@@ -67,32 +93,44 @@ export default function AlgorithmBox({
       <div className={styles.footer}>
         <LangTag langList={[lang]} />
         <div className={styles.buttons}>
-          <Button variant="none" size="sm" onClick={handlePin}>
-            {isPinned ? <BsPinAngleFill size={24} /> : <BsPinAngle size={24} />}
-          </Button>
-          <Dropdown>
-            <DropdownTrigger>
-              <Button variant="none" size="sm">
-                <MdMoreVert size={24} />
-              </Button>
-            </DropdownTrigger>
-            <DropdownContent>
-              <DropDownMenu menu="문제집" />
-            </DropdownContent>
-          </Dropdown>
+          <Modal>
+            <Dropdown dropdownRef={dropdownRef}>
+              <DropdownTrigger>
+                <Button variant="none" size="sm">
+                  <MdMoreVert size={24} />
+                </Button>
+              </DropdownTrigger>
+              <DropdownContent>
+                <div
+                  className={styles.dropdown_content}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ModalTrigger
+                    onOpen={() => {
+                      if (
+                        dropdownRef.current &&
+                        typeof dropdownRef.current.close === "function"
+                      ) {
+                        dropdownRef.current.close();
+                      }
+                    }}
+                  >
+                    <div className={styles.dropdown_menu}>
+                      <LuPencilLine /> 문제바구니 수정
+                    </div>
+                  </ModalTrigger>
+                  <div className={styles.dropdown_menu} onClick={deleteClick}>
+                    <LuTrash2 /> 문제바구니 삭제
+                  </div>
+                </div>
+              </DropdownContent>
+            </Dropdown>
+            <ModalContent>
+              <ModifyBaksket id={id} title={title} />
+            </ModalContent>
+          </Modal>
         </div>
       </div>
-
-      {/* 더보기 버튼 처리 */}
-      {/* {showMenu && (
-            <div
-            className={styles.drop_box}
-            onClick={(e) => e.stopPropagation()}
-            >
-            <button className={styles.togle_btn}>문제집 수정</button>
-            <button className={styles.togle_btn}>문제집 삭제</button>
-            </div>
-        )} */}
     </div>
   );
 }

@@ -24,24 +24,28 @@ const useProjects = () => {
       method: "GET",
       url: buildPath(APIEndPoints.MY_PROJECT, { id }),
     }).then((res) => {
+      console.log(res?.data);
       setProjects(res?.data);
     });
-  }, [getApi]);
+  }, [getApi, id]);
 
-  const addProjects = useCallback(async (data: ProjectData) => {
-    await postApi({
-      method: "POST",
-      url: APIEndPoints.ADD_PROJECT,
-      data: {
-        name: data.projectName,
-        description: data.description,
-        githubName: data.selectedRepo,
-        url: data.selectedHtmlUrl,
-      },
-    });
+  const addProjects = useCallback(
+    async (data: ProjectData) => {
+      await postApi({
+        method: "POST",
+        url: APIEndPoints.ADD_PROJECT,
+        data: {
+          name: data.projectName,
+          description: data.description,
+          githubName: data.selectedRepo,
+          url: data.selectedHtmlUrl,
+        },
+      });
 
-    await getProjects();
-  }, []);
+      await getProjects();
+    },
+    [postApi, getProjects]
+  );
 
   const modifyProject = useCallback(
     async (projectId: number, data: ModifyProjectData) => {
@@ -58,7 +62,7 @@ const useProjects = () => {
 
       await getProjects();
     },
-    []
+    [putApi, getProjects]
   );
 
   const deleteProject = useCallback(
@@ -72,7 +76,7 @@ const useProjects = () => {
 
       await getProjects();
     },
-    [deleteApi]
+    [deleteApi, getProjects]
   );
 
   const getRepoProjects = useCallback(async () => {
@@ -84,7 +88,7 @@ const useProjects = () => {
     });
 
     return res?.data;
-  }, [getRepoApi]);
+  }, [getRepoApi, id]);
 
   useEffect(() => {
     getProjects();

@@ -27,12 +27,18 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const userInfo = await getUserInfo();
       setUser(userInfo.data);
 
-      if (userInfo.data?.introduction == null) {
+      if (userInfo.data?.techStacks == null) {
         console.log("신규 회원!");
         navigate(`${PageEndPoints.LOGIN_LANGUAGE}`);
       } else {
         console.log("기존 회원!");
-        navigate(`${PageEndPoints.HOME}`);
+        const next = sessionStorage.getItem("loginNext");
+        if (next) {
+          sessionStorage.removeItem("loginNext");
+          navigate(next);
+        } else {
+          navigate(PageEndPoints.HOME);
+        }
       }
     } catch (err) {
       console.error("OAuth 로그인 에러", err);
@@ -88,7 +94,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

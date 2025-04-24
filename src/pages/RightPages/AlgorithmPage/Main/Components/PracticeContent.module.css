@@ -32,4 +32,46 @@
     border: 1px solid var(--color-input-basic);
     border-radius: var(--radius-input);
     box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 2rem;
+  }
+
+  .problem{
+    font-size: var(--text-xl);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .desc{
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tag_box{
+    display: flex;
+    gap: 1rem;
+  }
+
+  .tag{
+    background-color: var(--color-button-lang-on);
+    color: var(--color-text-inside);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-xl);
+    padding: 0.25rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media screen and (max-width: 900px) {
+    .tag_box {
+      display: none;
+    }
   }

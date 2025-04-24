@@ -20,7 +20,7 @@
     box-sizing: border-box;
     padding: 1rem;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     overflow-y: auto;
     min-height: 0;
 

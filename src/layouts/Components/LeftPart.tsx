@@ -17,6 +17,7 @@ import { PageEndPoints } from "../../constants/api";
 import { AiFillHome } from "react-icons/ai";
 import { MdSettings } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface LeftLayoutProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,7 +26,6 @@ interface LeftLayoutProps
 
 const menuItems = [
   // 아직 소개 공간이 없어서 임의 공간으로 이동
-  { key: "Team! jandi 소개", navi: "/intro" },
   { key: "채용 달력", navi: PageEndPoints.HOME },
   { key: "코딩 테스트", navi: PageEndPoints.ALGO_MAIN },
   { key: "오픈 채팅방", navi: PageEndPoints.CHAT_MAIN },
@@ -40,6 +40,14 @@ const LeftPart: React.FC<LeftLayoutProps> = ({ children }) => {
   const logo = isDarkMode ? "/logo_white.png" : "/logo_black.png";
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { signOut } = useAuth();
+
+  const handleLogout = () => {
+    // 로그아웃 진행...
+    signOut();
+    // 로그아웃 후 랜딩 페이지로 이동
+    navigate(PageEndPoints.HOME);
+  };
 
   return (
     <div className={styles.sidebar}>
@@ -100,7 +108,7 @@ const LeftPart: React.FC<LeftLayoutProps> = ({ children }) => {
                     <p
                       className={styles.drawer_icon}
                       // 아직 로그아웃이 없어서 임의 공간으로 이동
-                      onClick={() => navigate(PageEndPoints.TEST)}
+                      onClick={handleLogout}
                     >
                       <MdLogout />
                     </p>
