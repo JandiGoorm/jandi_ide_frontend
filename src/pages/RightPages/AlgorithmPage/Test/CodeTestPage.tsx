@@ -14,10 +14,14 @@ import {
   getFilePath,
   getDefaultCode,
 } from "../../../../utils/codeTestSet";
+import { useAuth } from "../../../../contexts/AuthContext";
+import useCodeTest from "../../../../hooks/useCodeTest";
 
 const CodeTestPage = () => {
   const navigate = useNavigate();
   const { getBasket } = useBaskets();
+  const { getSubmitResult } = useCodeTest();
+  const { user } = useAuth();
   const { id } = useParams(); // 현재 문제집 번호
   const basketId = Number(id);
   const { isDarkMode } = useDarkModeContext();
@@ -92,13 +96,21 @@ const CodeTestPage = () => {
       navigate(`/mypage/problem/${id}`);
     }
   };
-  // const handleStore = () => {
-  //   console.log("코드 저장!");
-  //   // 코드 저장...
-  // };
-  const handleRun = () => {
+  const handleRun = async () => {
     console.log("코드 실행!");
-    // 코드 실행...
+    const currentProblem = problems[currentIndex];
+    const currentProblemId = currentProblem?.id;
+    const currentCode = problemCodeMap[currentProblemId] || "";
+    console.log("현재 문제 ID:", currentProblemId);
+    console.log("현재 코드:", currentCode);
+    const data = {
+      userId: user?.id,
+      problemId: currentProblemId,
+      code: currentCode,
+      language: language?.toLowerCase(),
+      solvingTime: currentProblem?.timeLimit,
+    };
+    await getSubmitResult(data);
   };
 
   return (

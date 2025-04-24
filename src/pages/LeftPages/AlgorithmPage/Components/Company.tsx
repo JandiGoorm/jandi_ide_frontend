@@ -43,8 +43,8 @@ const Company: React.FC<CompanyProps> = ({ refs, onChangeCompanyTime }) => {
       <div className={styles.input_box}>
         <p>언어 선택</p>
         <Select
-          options={["C++", "PYTHON", "JAVA"]}
-          defaultValue="PYTHON"
+          options={["c++", "python", "java"]}
+          defaultValue="python"
           ref={languageRef}
         />
       </div>

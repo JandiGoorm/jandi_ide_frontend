@@ -187,3 +187,11 @@ export interface Techs {
   id: number;
   techStack: string;
 }
+
+export interface CompilerBody {
+  userId: number;
+  problemId: number;
+  code: string;
+  language: string;
+  solvingTime: number;
+}
