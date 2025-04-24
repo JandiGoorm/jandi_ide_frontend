@@ -64,3 +64,7 @@ export const APIEndPoints = {
   ALL_PROBLEMS: "/problems",
   PROBLEM: "/problems/:id",
 };
+
+export const PrefixEndpoints = {
+  CHATROOMS: "/chat/rooms/",
+};
