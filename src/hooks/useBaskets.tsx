@@ -42,6 +42,7 @@ const useBaskets = () => {
 
   const addCompanyBaskets = useCallback(
     async (data: BasketBody) => {
+      console.log(data);
       const res = await postCompanyApi({
         method: "POST",
         url: APIEndPoints.BASKETS,
