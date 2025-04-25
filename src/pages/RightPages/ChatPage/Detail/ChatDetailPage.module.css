@@ -1,75 +1,74 @@
 .content {
-    width: 100%;
-    padding: 0 6rem;
-    box-sizing: border-box;
-    color: var(--color-text-primary);
-    display: flex;
-    flex-direction: column; /* 세로 정렬 */
-    height: calc(100vh - 4rem);
-  }
+  width: 100%;
+  padding: 0 6rem;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  height: calc(100vh - 4rem);
+}
 
-  .flexBox {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: calc(100vh - 4rem);
-  }
+.flexBox {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - 4rem);
+}
 
-  .chat_container{
-    flex: 1;
-    box-sizing: border-box;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    min-height: 0;
+.chat_container {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  min-height: 0;
+}
 
-  }
+.chat_container::-webkit-scrollbar {
+  width: 8px; /* 세로 스크롤바 너비 */
+}
 
-  .chat_container::-webkit-scrollbar {
-    width: 8px; /* 세로 스크롤바 너비 */
-  }
-  
-  /* 스크롤바 트랙 (배경) */
-  .chat_container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  /* 스크롤바 썸 (움직이는 부분) */
-  .chat_container::-webkit-scrollbar-thumb {
-    background-color: var(--color-text-primary);
-    border-radius: 4px;
-  }
+/* 스크롤바 트랙 (배경) */
+.chat_container::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  .chat_input_container{
-    box-sizing: border-box;
-    padding-top: 0.5rem;
-  }
+/* 스크롤바 썸 (움직이는 부분) */
+.chat_container::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-primary);
+  border-radius: 4px;
+}
 
-  .chat_input_box{
-    flex:4;
-    overflow-y: auto;
-    display: flex;
-  }
+.chat_input_container {
+  box-sizing: border-box;
+  padding-top: 0.5rem;
+}
 
-  .send_button_box{
-    flex:1;
-    display: flex;
-    justify-content: right;
-    box-sizing: border-box;
-    padding: 1rem 0;
-  }
+.chat_input_box {
+  flex: 4;
+  overflow-y: auto;
+  display: flex;
+}
 
-  .description_content{
-    padding: 1rem;
-    border: 1px solid var(--color-input-basic);
-    box-sizing: border-box;
-    background-color: transparent;
-    border-radius: var(--radius-md);
-    font-size: var(--text-md);
-    resize: none;
-    color: var(--color-text-primary);
-    outline: none;
-    height: 100%;
-    width: 100%;
-  }
+.send_button_box {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  box-sizing: border-box;
+  padding: 1rem 0;
+}
+
+.description_content {
+  padding: 1rem;
+  border: 1px solid var(--color-input-basic);
+  box-sizing: border-box;
+  background-color: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  resize: none;
+  color: var(--color-text-primary);
+  outline: none;
+  height: 100%;
+  width: 100%;
+}

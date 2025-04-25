@@ -5,7 +5,7 @@ import useAxios from "./useAxios";
 import { APIEndPoints } from "../constants/api";
 import { buildPath } from "../utils/buildPath";
 
-interface ChatMessages {
+export interface ChatMessages {
   type: string; // 문자열로 변경 (enum값 사용)
   roomId: string;
   sender: string;
@@ -62,6 +62,7 @@ const useChat = () => {
       await getMessageApi({
         method: "GET",
         url: buildPath(APIEndPoints.CHAT_MESSAGE, { id }),
+        params: {},
       })
         .then((res) => {
           console.log(res?.data);
@@ -76,7 +77,7 @@ const useChat = () => {
 
   const getChatMessagePages = useCallback(
     async (id: string, page: number) => {
-      await getMessagePageApi({
+      return await getMessagePageApi({
         method: "GET",
         url: buildPath(APIEndPoints.CHAT_MESSAGE_PAGE, { id }),
         params: {
@@ -85,14 +86,13 @@ const useChat = () => {
         },
       })
         .then((res) => {
-          console.log(res?.data);
-          setMessages(res?.data.content);
+          return res;
         })
         .catch((err) => {
           console.log(err + "채팅내역오류");
         });
     },
-    [getMessageApi]
+    [getMessagePageApi]
   );
 
   //소켓 연결

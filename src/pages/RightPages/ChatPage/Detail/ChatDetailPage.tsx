@@ -5,30 +5,40 @@ import ChatHeader from "../../../../layouts/Components/ChatHeader";
 import Button from "../../../../components/Button/Button";
 import Chatting from "./Components/Chatting";
 import useChatting from "../../../../hooks/useChatting";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import useChat from "../../../../hooks/useChat";
+import useChat, { ChatMessages } from "../../../../hooks/useChat";
 import { useAuth } from "../../../../contexts/AuthContext";
 
 const ChatDetailPage = () => {
-  const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
-    useChatting();
-  const { allmessages, enterChatRoom, sendMessage, getChatMessages } =
-    useChat();
-  // const { messages, allmessages, enterChatRoom, sendMessage, getChatMessages,getChatMessagePages } = useChat();
-  const { user } = useAuth();
+  const [messages, setMessages] = useState<ChatMessages[]>([]);
   const [chatPeoples, setChatPeoples] = useState<number | null>(null);
-  const { id } = useParams<{ id: string }>();
+
   const initializedRef = useRef(false);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
-  // const [page, setPage] = useState(0);
-  // const [hasMore, setHasMore] = useState(true);
-  // const chatContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const { id } = useParams<{ id: string }>();
+  const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
+    useChatting();
+
+  const { enterChatRoom, sendMessage, getChatMessagePages } = useChat();
+
+  const { user } = useAuth();
+
+  const sendTo = useCallback(() => {
+    if (!id || !user) return;
+    const message = messageInputRef.current?.value?.trim();
+
+    if (!message) return;
+
+    sendMessage(id, message, user?.githubUsername);
+    messageInputRef.current!.value = "";
+  }, [id, sendMessage, user]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [allmessages]);
+  }, [messages]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,23 +48,23 @@ const ChatDetailPage = () => {
       await enterChatRoom(id);
       await getChatRoomInfo(id);
 
-      await getChatMessages(id);
       const count = await getChatRoomParticipants(id);
       setChatPeoples(count);
+      const res = await getChatMessagePages(id, 0);
+      console.log("res", res);
+      if (res && res.data) {
+        setMessages(res.data.content);
+      }
     };
 
     fetchData();
-  }, [getChatRoomInfo, getChatRoomParticipants, id]);
-
-  const sendTo = () => {
-    if (!id || !user) return;
-    const message = messageInputRef.current?.value?.trim();
-
-    if (!message) return;
-
-    sendMessage(id, message, user?.githubUsername);
-    messageInputRef.current!.value = "";
-  };
+  }, [
+    enterChatRoom,
+    getChatMessagePages,
+    getChatRoomInfo,
+    getChatRoomParticipants,
+    id,
+  ]);
 
   if (chatRoomInfo === null) return null;
 
@@ -67,10 +77,10 @@ const ChatDetailPage = () => {
         <div className={styles.content}>
           <div className={styles.flexBox}>
             <div className={styles.chat_container}>
-              {allmessages?.map((chat, index) => (
+              <div ref={chatEndRef} />
+              {messages?.map((chat, index) => (
                 <Chatting chat={chat} key={index} />
               ))}
-              <div ref={chatEndRef} />
             </div>
             <div className={styles.chat_input_container}>
               <div className={styles.chat_input_box}>
