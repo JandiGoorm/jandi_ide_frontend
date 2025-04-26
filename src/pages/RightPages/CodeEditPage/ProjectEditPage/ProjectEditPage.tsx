@@ -48,7 +48,7 @@ const ProjectEditPage = () => {
       <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
           <LeftSide
-            projectName={projectName}
+            projectName={projectName ?? null}
             fileTree={projectFileTree}
             selectedFile={selectedFile}
             projectLink={projectLink ?? null}
