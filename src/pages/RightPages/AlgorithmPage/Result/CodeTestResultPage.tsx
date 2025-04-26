@@ -4,7 +4,7 @@ import BaseLayout from "../../../../layouts/BaseLayout/BaseLayout";
 import LeftSide from "../../../LeftPages/CodeTestPage/CodeTestLeft";
 import Editor from "@monaco-editor/react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDarkModeContext } from "../../../../contexts/DarkmodeContext";
 import useCodeTest from "../../../../hooks/useCodeTest";
 import { useEffect, useState } from "react";
@@ -12,8 +12,12 @@ import { ProblemInfo } from "../../../../constants/types/types";
 import useBaskets from "../../../../hooks/useBaskets";
 import { getEditorLanguage, getFilePath } from "../../../../utils/codeTestSet";
 import { highlightErrorText } from "../../../../utils/resultText";
+import Button from "../../../../components/Button/Button";
+import { PageEndPoints } from "../../../../constants/api";
+import { buildPath } from "../../../../utils/buildPath";
 
 const CodeTestResultPage = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { id } = useParams();
   const basketId = Number(id);
@@ -86,6 +90,15 @@ const CodeTestResultPage = () => {
             {/* 헤더 - 시간, 종료버튼 */}
             <div className={styles.code_header}>
               <div>결과확인</div>
+              <Button
+                onClick={() => {
+                  navigate(
+                    buildPath(PageEndPoints.ALGO_TEST, { id: basketId })
+                  );
+                }}
+              >
+                다시 풀기
+              </Button>
             </div>
 
             {/* 코드 편집기 */}
@@ -109,7 +122,7 @@ const CodeTestResultPage = () => {
             {/* 코드 실행기 */}
             <div className={styles.footer}>
               <div className={styles.title_box}>
-                <div className={styles.title}>실행 결과</div>
+                <div className={styles.title}>채점 결과</div>
               </div>
               <div className={styles.result}>
                 {highlightErrorText(

@@ -11,24 +11,36 @@ import useProjects from "../../../../hooks/useProjects";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 import useBaskets from "../../../../hooks/useBaskets";
 import { useEffect, useState } from "react";
-import { Baskets } from "../../../../constants/types/types";
+import { Baskets, Project } from "../../../../constants/types/types";
+import usePagination from "../../../../hooks/usePagination";
+import Pagination from "../../../../components/Pagination/Pagination";
 
 const MorePage = () => {
   const { user } = useAuth();
   const paths = location.pathname.split("/");
   const lastPath = paths[paths.length - 1];
-  const { projects, getProjects } = useProjects();
+  const { getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
   const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
+  const [projects, setProjects] = useState<Project[]>([]);
   const [baskets, setBaskets] = useState<Baskets[]>([]);
+  const { currentPage, totalPage, setTotalPage, handlePageChange } =
+    usePagination();
 
   useEffect(() => {
-    const getBaskets = async () => {
-      const data = await getAllBaskets();
-      setBaskets(data);
+    const getBaskets = async (page: number) => {
+      if (lastPath === "project") {
+        const data = await getProjects(page, 12);
+        setProjects(data.data);
+        setTotalPage(data.totalPages);
+      } else {
+        const data = await getAllBaskets(page, 12);
+        setBaskets(data.data);
+        setTotalPage(data.totalPages);
+      }
     };
-    getBaskets();
-  }, [getAllBaskets]);
+    getBaskets(currentPage - 1);
+  }, [getAllBaskets, getProjects, currentPage, setTotalPage]);
 
   return (
     <BaseLayout>
@@ -60,7 +72,6 @@ const MorePage = () => {
                         title={project.name}
                         contents={project.description}
                         lang={langs[1]}
-                        onAddProject={getProjects}
                       />
                     ))}
                   </div>
@@ -97,6 +108,13 @@ const MorePage = () => {
                 )}
               </>
             )}
+            <div className={styles.pagination}>
+              <Pagination
+                currentPage={currentPage}
+                totalPage={totalPage}
+                callback={handlePageChange}
+              />
+            </div>
           </section>
         </Sidebar.Content>
       </Sidebar.Provider>

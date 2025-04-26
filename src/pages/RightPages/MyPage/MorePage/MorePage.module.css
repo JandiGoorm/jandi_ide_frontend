@@ -3,6 +3,8 @@
 
     container-type: inline-size; 
     container-name: project_section;
+    display: flex;
+    flex-direction: column;
 }
 
 .projectMore{
@@ -49,3 +51,10 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+
+.pagination {
+    padding-top: 1rem;
+    align-self: center;
+  }
+  

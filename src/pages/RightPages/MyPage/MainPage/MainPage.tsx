@@ -21,15 +21,16 @@ import { PageEndPoints } from "../../../../constants/api";
 import useProjects from "../../../../hooks/useProjects";
 import useBaskets from "../../../../hooks/useBaskets";
 import { useEffect, useState } from "react";
-import { Baskets, Company } from "../../../../constants/types/types";
+import { Baskets, Company, Project } from "../../../../constants/types/types";
 import useUserSetting from "../../../../hooks/useUserSetting";
 import useCompany from "../../../../hooks/useCompany";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { projects, getProjects } = useProjects();
+  const { getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
+  const [projects, setProjects] = useState<Project[]>([]);
   const [baskets, setBaskets] = useState<Baskets[]>([]);
   const { getFavoriteCompany } = useUserSetting();
   const [myCompanies, setMyCompanies] = useState<Company[]>([]);
@@ -49,8 +50,11 @@ const MainPage = () => {
 
   useEffect(() => {
     const getBaskets = async () => {
-      const data = await getAllBaskets();
-      setBaskets(data);
+      const projectdata = await getProjects(0, 6);
+      setProjects(projectdata.data);
+
+      const data = await getAllBaskets(0, 6);
+      setBaskets(data.data);
     };
     getBaskets();
   }, [getAllBaskets]);
