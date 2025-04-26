@@ -4,7 +4,7 @@ import LeftSide from "../../../LeftPages/ChatPage/Detail/ChatDetailLeft";
 import ChatHeader from "../../../../layouts/Components/ChatHeader";
 import Button from "../../../../components/Button/Button";
 import Chatting from "./Components/Chatting";
-import useChatting from "../../../../hooks/useChatting";
+import useChatRoom from "../../../../hooks/useChatRoom";
 import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { useParams } from "react-router-dom";
 import useChat, { ChatMessages } from "../../../../hooks/useChat";
@@ -24,7 +24,7 @@ const ChatDetailPage = () => {
 
   const { id } = useParams<{ id: string }>();
   const { chatRoomInfo, getChatRoomInfo, getChatRoomParticipants } =
-    useChatting();
+    useChatRoom();
 
   const {
     enterChatRoom,

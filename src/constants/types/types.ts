@@ -96,6 +96,11 @@ export interface Company {
   jobPostings: JobPosting[];
 }
 
+export enum ChatRoomType {
+  COMPANY = "COMPANY",
+  TECH_STACK = "TECH_STACK",
+}
+
 export interface ChatRoom {
   roomId: string;
   name: string;
@@ -103,6 +108,7 @@ export interface ChatRoom {
   createdBy: string;
   createdAt: string;
   participants: string[];
+  roomType: ChatRoomType;
 }
 
 // interface ChatMessage {

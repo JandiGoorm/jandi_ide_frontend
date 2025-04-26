@@ -13,17 +13,18 @@ export interface ChatMessages {
   timestamp: string;
 }
 
+const API_URL = import.meta.env.VITE_WS_URL;
 ///채팅(socket연결)관리 hooks
 const useChat = () => {
-  const API_URL = import.meta.env.VITE_WS_URL;
+  const [messages, setMessages] = useState<ChatMessages[]>([]);
 
   const { fetchData: joinApi } = useAxios();
   const { fetchData: getMessagePageApi, loading: getMessageLoading } =
     useAxios();
-  const [messages, setMessages] = useState<ChatMessages[]>([]);
 
   const clientRef = useRef<Client | null>(null);
   const receivedMsgIds = useRef<Set<string>>(new Set()); // 중복 메시지 처리를 위한 ID 저장소
+
   const enterChatRoom = async (newRoomId: string) => {
     try {
       // 먼저 메시지 상태와 중복 메시지 필터 초기화
@@ -70,6 +71,7 @@ const useChat = () => {
         },
       })
         .then((res) => {
+          console.log("res", res);
           const newMessages = res?.data.content.filter(
             (msg: ChatMessages) =>
               !receivedMsgIds.current.has(`${msg.timestamp}_${msg.message}`)
@@ -78,7 +80,6 @@ const useChat = () => {
           newMessages.forEach((msg: ChatMessages) => {
             receivedMsgIds.current.add(`${msg.timestamp}_${msg.message}`);
           });
-          console.log("ids", receivedMsgIds.current);
           setPrevMessages((prev) => [...prev, ...newMessages]);
           return res;
         })
@@ -90,42 +91,39 @@ const useChat = () => {
   );
 
   //소켓 연결
-  const connectWebSocket = useCallback(
-    async (roomId: string) => {
-      console.log("소켓 연결 시도");
-      const token = localStorage.getItem(`accessToken`);
+  const connectWebSocket = useCallback(async (roomId: string) => {
+    console.log("소켓 연결 시도");
+    const token = localStorage.getItem(`accessToken`);
 
-      const socket = new SockJS(`${API_URL}`);
-      const client = new Client({
-        webSocketFactory: () => socket,
-        connectHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-        onConnect: () => {
-          subscribeRoom(roomId);
-        },
-        onStompError: (frame) => {
-          console.error("STOMP 에러:", frame);
-        },
-        onDisconnect: () => {
-          console.log("연결 해제됨");
-        },
-      });
+    const socket = new SockJS(`${API_URL}`);
+    const client = new Client({
+      webSocketFactory: () => socket,
+      connectHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        subscribeRoom(roomId);
+      },
+      onStompError: (frame) => {
+        console.error("STOMP 에러:", frame);
+      },
+      onDisconnect: () => {
+        console.log("연결 해제됨");
+      },
+    });
 
-      client.activate();
-      clientRef.current = client;
-    },
-    [API_URL]
-  );
+    client.activate();
+    clientRef.current = client;
+  }, []);
 
   //채팅방 구독 함수
   const subscribeRoom = (roomId: string) => {
     console.log("채팅방 구독하기");
     if (!clientRef.current || !clientRef.current.connected) {
-      console.log("ㄴㄴ");
+      console.error("WebSocket이 연결되지 않았습니다.");
       return;
     }
 
