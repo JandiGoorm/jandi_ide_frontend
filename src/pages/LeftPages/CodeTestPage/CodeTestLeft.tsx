@@ -58,7 +58,14 @@ const ProjectLeft = ({
               {currentProblem.testCases.map((testcase) => (
                 <div className={styles.testcase_card} key={testcase.id}>
                   <div>입력값</div>
-                  <div className={styles.case_input}>{testcase.input}</div>
+                  <div className={styles.case_input}>
+                    {testcase.input.split("\n").map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </div>
                   <div>출력값</div>
                   <div className={styles.case_input}>
                     {testcase.output.split("\n").map((line, idx) => (
