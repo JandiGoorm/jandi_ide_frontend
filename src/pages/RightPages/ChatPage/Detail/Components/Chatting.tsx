@@ -25,14 +25,16 @@ const Chatting = ({ chat }: ChattingProps) => {
   return (
     <div className={styles.chat_bubble}>
       {chat.type === "ENTER" ? (
-        <div className={styles.enter_content}>
-          <div className={styles.enter_name}>
-            <img
-              src={chat.profileImage ?? noneUserImage}
-              alt="profile"
-              className={styles.profile_img}
-            />
-            <p>{chat.sender}님이 접속하셨습니다.</p>
+        <div className={styles.center}>
+          <div className={styles.enter_content}>
+            <div className={styles.enter_name}>
+              <img
+                src={chat.profileImage ?? noneUserImage}
+                alt="profile"
+                className={styles.profile_img}
+              />
+              <p>{chat.sender}님이 접속하셨습니다.</p>
+            </div>
           </div>
         </div>
       ) : (

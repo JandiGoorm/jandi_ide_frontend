@@ -25,8 +25,6 @@ const useChat = () => {
       receivedMsgIds.current.clear();
 
       try {
-        // 기존 구독이 있으면 먼저 해제
-
         await joinApi({
           method: "POST",
           url: buildPath(APIEndPoints.CHATROOM_JOIN, { id: newRoomId }),
@@ -61,6 +59,7 @@ const useChat = () => {
         params: {
           page,
           size: 10,
+          messageType: "TALK",
         },
       })
         .then((res) => {
@@ -121,7 +120,6 @@ const useChat = () => {
     }
 
     clientRef.current.subscribe(`/topic/chat/room/${roomId}`, (message) => {
-      console.log("hit", message);
       const newMessage = JSON.parse(message.body);
       console.log("수신된 메시지:", newMessage);
 
@@ -151,6 +149,7 @@ const useChat = () => {
   };
 
   const sendEnterMessage = (roomId: string, sender: string) => {
+    console.log("채팅방 입장 메시지 보내기");
     if (!clientRef.current || !clientRef.current.connected) {
       console.error("WebSocket이 연결되지 않았습니다.");
       return;
@@ -169,6 +168,7 @@ const useChat = () => {
   };
 
   const sendLeaveMessage = (roomId: string, sender: string) => {
+    console.log("채팅방 퇴장 메시지 보내기");
     if (!clientRef.current || !clientRef.current.connected) {
       console.error("WebSocket이 연결되지 않았습니다.");
       return;
