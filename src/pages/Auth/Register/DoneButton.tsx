@@ -1,15 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./DoneButton.module.css";
 import Button from "../../../components/Button/Button";
 import { useDarkModeContext } from "../../../contexts/DarkmodeContext";
+import { PageEndPoints } from "../../../constants/api";
 
 const DoneButton = () => {
-  const navigate = useNavigate();
   const { isDarkMode } = useDarkModeContext();
 
   // Done 버튼 클릭 시 메인 페이지로 이동
   const handleNext = () => {
-    navigate("/");
+    window.location.href = PageEndPoints.HOME;
   };
 
   return (

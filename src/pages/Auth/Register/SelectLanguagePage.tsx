@@ -38,7 +38,7 @@ const SelectLanguagePage = () => {
         {/* 상단 문구 */}
         <AuthBanner
           catchPhrases={["Welcome, creator.", "Tell me about yourself."]}
-          explains={["선호하는 프로그래밍 언어를 선택해주세요."]}
+          explains={["선호하는 기술 스택을 선택해주세요."]}
         />
 
         {/* 언어 선택 버튼 */}

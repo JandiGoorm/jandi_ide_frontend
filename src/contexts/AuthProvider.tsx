@@ -27,7 +27,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const userInfo = await getUserInfo();
       setUser(userInfo.data);
 
-      if (userInfo.data?.techStacks == null) {
+      if (!userInfo.data?.techStacks || userInfo.data.techStacks.length === 0) {
         console.log("신규 회원!");
         navigate(`${PageEndPoints.LOGIN_LANGUAGE}`);
       } else {
@@ -35,9 +35,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         const next = sessionStorage.getItem("loginNext");
         if (next) {
           sessionStorage.removeItem("loginNext");
-          navigate(next);
+          window.location.href = next;
         } else {
-          navigate(PageEndPoints.HOME);
+          window.location.href = PageEndPoints.HOME;
         }
       }
     } catch (err) {

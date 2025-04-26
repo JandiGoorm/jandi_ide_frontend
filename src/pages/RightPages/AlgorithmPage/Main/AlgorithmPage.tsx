@@ -10,12 +10,14 @@ import useBaskets from "../../../../hooks/useBaskets";
 import { useNavigate } from "react-router-dom";
 import { PageEndPoints } from "../../../../constants/api";
 import { buildPath } from "../../../../utils/buildPath";
+import { useToast } from "../../../../contexts/ToastContext";
 
 const AlgorithmPage = () => {
   const [selected, setSelected] = useState<"company" | "practice">("company");
   const [selectedProblems, setSelectedProblems] = useState<Problems[]>([]);
   const { addBaskets, addCompanyBaskets } = useBaskets();
   const navigate = useNavigate();
+  const { createToast } = useToast();
 
   const handleStart = async (form?: {
     title: string;
@@ -23,8 +25,9 @@ const AlgorithmPage = () => {
     time: number;
     company: string;
   }) => {
+    if (!form) return;
+
     if (selected === "company") {
-      if (!form) return;
       const basketData = {
         companyName: form.company,
         minutes: form.time,
@@ -38,7 +41,10 @@ const AlgorithmPage = () => {
       navigate(buildPath(PageEndPoints.ALGO_TEST, { id: Number(id) }));
       // CompanyContent 쪽에서 처리할 동작 트리거
     } else {
-      if (!form) return;
+      if (selectedProblems.length === 0) {
+        createToast({ type: "error", text: "문제를 선택해주세요!" });
+        return;
+      }
       const basketData = {
         problemIds: selectedProblems.map((p) => p.id),
         minutes: form.time,

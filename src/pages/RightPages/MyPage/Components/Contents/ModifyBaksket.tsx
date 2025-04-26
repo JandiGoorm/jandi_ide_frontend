@@ -4,6 +4,7 @@ import Button from "../../../../../components/Button/Button";
 import { useRef } from "react";
 import { ModifyBasketData } from "../../../../../constants/types/types";
 import useBaskets from "../../../../../hooks/useBaskets";
+import { useToast } from "../../../../../contexts/ToastContext";
 
 interface ModifyBaksketProps {
   id: number;
@@ -18,12 +19,13 @@ const ModifyBaksket: React.FC<ModifyBaksketProps> = ({
 }) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const { modifyBaskets } = useBaskets();
+  const { createToast } = useToast();
 
   const handleSubmit = async () => {
     const title = titleRef.current?.value.trim();
 
     if (!title) {
-      //toast 추가
+      createToast({ type: "error", text: "정보를 빠짐없이 입력해주세요!" });
       return;
     }
 

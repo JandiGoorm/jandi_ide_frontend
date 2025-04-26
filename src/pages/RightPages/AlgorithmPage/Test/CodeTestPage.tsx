@@ -148,6 +148,8 @@ const CodeTestPage = () => {
   };
 
   const handleRun = async () => {
+    if (!user || !language) return;
+
     setIsRunning(true);
     console.log("코드 실행!");
     const currentProblem = problems[currentIndex];
@@ -155,7 +157,7 @@ const CodeTestPage = () => {
     const currentCode = problemCodeMap[currentProblemId] || "";
 
     const data = {
-      userId: user?.id,
+      userId: user!.id,
       problemId: currentProblemId,
       code: currentCode,
       problemSetId: basketId,
