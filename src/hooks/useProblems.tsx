@@ -9,13 +9,15 @@ const useProblems = () => {
   const { fetchData: getaApi } = useAxios();
 
   const getProblems = useCallback(
-    async (page: number) => {
+    async (page: number, sort: string) => {
       const res = await getApi({
         method: "GET",
         url: APIEndPoints.ALL_PROBLEMS,
         params: {
           page: page,
           size: 10,
+          sort: "level",
+          direction: sort,
         },
       });
 

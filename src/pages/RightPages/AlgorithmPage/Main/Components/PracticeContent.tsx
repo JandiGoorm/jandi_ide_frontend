@@ -19,6 +19,7 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
   selectedProblems,
   setSelectedProblems,
 }) => {
+  const [sortType, setSortType] = useState<"asc" | "desc">("asc");
   const { getProblems } = useProblems();
   const { currentPage, totalPage, setTotalPage, handlePageChange } =
     usePagination();
@@ -34,13 +35,13 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
   };
 
   useEffect(() => {
-    const fetchProblems = async (page: number) => {
-      const data = await getProblems(page);
+    const fetchProblems = async (page: number, sort: "asc" | "desc") => {
+      const data = await getProblems(page, sort);
       setTotalPage(data.totalPages);
       setProblems(data.data);
     };
-    fetchProblems(currentPage - 1);
-  }, [getProblems, currentPage, setTotalPage]);
+    fetchProblems(currentPage - 1, sortType);
+  }, [getProblems, currentPage, setTotalPage, sortType]);
 
   return (
     <div className={styles.container}>
@@ -70,7 +71,17 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
         </div>
       </div>
       <div className={styles.select_box}>
-        <div className={styles.header}>문제 리스트</div>
+        <div className={styles.header}>
+          <div>문제 리스트</div>
+          <div className={styles.button_box}>
+            <Button variant="none" onClick={() => setSortType("asc")}>
+              쉬운순
+            </Button>
+            <Button variant="none" onClick={() => setSortType("desc")}>
+              어려운순
+            </Button>
+          </div>
+        </div>
         <div className={styles.content_box}>
           {problems
             // .filter(
