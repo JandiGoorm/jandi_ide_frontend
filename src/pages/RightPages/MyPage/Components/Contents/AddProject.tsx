@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import useProjects from "../../../../../hooks/useProjects";
 import { ProjectData } from "../../../../../constants/types/types";
 import { useModal } from "../../../../../components/Modal/ModalContext";
+import { useToast } from "../../../../../contexts/ToastContext";
 
 interface AddProjectProps {
   user: User | null;
@@ -19,6 +20,7 @@ const AddProject: React.FC<AddProjectProps> = ({ user, onUpdate }) => {
   const [repo, setRepo] = useState<string[]>([]);
   const [repoMap, setRepoMap] = useState<Record<string, string>>({});
   const { closeModal } = useModal();
+  const { createToast } = useToast();
 
   const nameRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLInputElement>(null);
@@ -53,7 +55,7 @@ const AddProject: React.FC<AddProjectProps> = ({ user, onUpdate }) => {
     const selectedHtmlUrl = selectedRepo ? repoMap[selectedRepo] : "";
 
     if (!projectName || !selectedRepo || !description) {
-      //toast 추가
+      createToast({ type: "error", text: "모든 내용을 입력해주세요!" });
       return;
     }
 

@@ -4,6 +4,7 @@ import Button from "../../../../../components/Button/Button";
 import { useRef } from "react";
 import { ModifyProjectData } from "../../../../../constants/types/types";
 import useProjects from "../../../../../hooks/useProjects";
+import { useToast } from "../../../../../contexts/ToastContext";
 
 interface ModifyProjectProps {
   id: number;
@@ -21,13 +22,14 @@ const ModifyProject: React.FC<ModifyProjectProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLInputElement>(null);
   const { modifyProject } = useProjects();
+  const { createToast } = useToast();
 
   const handleSubmit = async () => {
     const projectName = nameRef.current?.value.trim();
     const description = descRef.current?.value.trim();
 
     if (!projectName || !description) {
-      //toast 추가
+      createToast({ type: "error", text: "정보를 빠짐없이 입력해주세요!" });
       return;
     }
 

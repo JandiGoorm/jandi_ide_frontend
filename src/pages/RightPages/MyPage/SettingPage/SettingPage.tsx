@@ -44,6 +44,11 @@ const SettingPage = () => {
   const handleUpdateNickname = async () => {
     if (!user) return;
 
+    if (nickname.trim() === "") {
+      createToast({ type: "error", text: "닉네임을 입력해주세요!" });
+      return;
+    }
+
     console.log("변경할 닉네임:", nickname);
     await modifyUser(user.id, {
       introduction: user.introduction,
@@ -57,6 +62,10 @@ const SettingPage = () => {
   // 소개글 수정
   const handleUpdateIntro = async () => {
     if (!user) return;
+    if (introduction.trim() === "") {
+      createToast({ type: "error", text: "소개글을 입력해주세요!" });
+      return;
+    }
     console.log("변경할 소개글:", introduction);
     await modifyUser(user.id, {
       introduction: introduction,
