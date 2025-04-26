@@ -4,6 +4,8 @@ import { useDarkModeContext } from "../../contexts/DarkmodeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import clsx from "clsx";
+import { IoSearch } from "react-icons/io5";
 
 const ChatHeader: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkModeContext();
@@ -12,15 +14,23 @@ const ChatHeader: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.Input_div}>
         <Input
-          style={{ width: "80%" }}
+          style={{ width: "80%", height: "2.5rem" }}
           inputSize="sm"
           placeholder="검색할 단어를 입력하세요"
         />
-        <Button size="md">검색하기</Button>
+        <Button
+          size="sm"
+          style={{
+            height: "2.5rem",
+          }}
+        >
+          <IoSearch size={24} color="white" />
+        </Button>
       </div>
+
       <div className={styles.switchContainer}>
         <div
-          className={`${styles.switch} ${isDarkMode ? styles.switchOn : ""}`}
+          className={clsx(styles.switch, isDarkMode && styles.switchOn)}
           onClick={toggleDarkMode}
         >
           <div className={styles.switchHandle}>

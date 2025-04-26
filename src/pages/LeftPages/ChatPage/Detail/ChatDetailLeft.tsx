@@ -20,7 +20,7 @@ const ChatDetailLeft: React.FC<ChatDetailLeftProps> = ({
             {chatRoomInfo?.name} 채팅방에 입장하셨습니다.
           </div>
         </div>
-        <div className={styles.chat_count_div}>{chatPeoples}명 채팅중</div>
+        <div className={styles.chat_count_div}>{chatPeoples}명 참여중</div>
       </div>
     </LeftPart>
   );
