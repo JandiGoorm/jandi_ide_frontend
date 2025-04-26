@@ -120,7 +120,6 @@ const SettingPage = () => {
             <div className={styles.basicInfo_header}>
               <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
-                <Button>프로필 초기화</Button>
                 <Button onClick={handleUpdateIntro}>소개글 변경</Button>
               </div>
             </div>
