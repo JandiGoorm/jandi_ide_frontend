@@ -75,3 +75,9 @@
       display: none;
     }
   }
+
+  .pagination {
+    padding-top: 1rem;
+    align-self: center;
+  }
+  

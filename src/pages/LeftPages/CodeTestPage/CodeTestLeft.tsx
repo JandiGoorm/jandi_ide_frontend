@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ProblemInfo } from "../../../constants/types/types";
 import LeftPart from "../../../layouts/Components/LeftPart";
 import styles from "./CodeTestLeft.module.css";
@@ -43,7 +43,6 @@ const ProjectLeft = ({
                 <FaMedal
                   color={getMedalColor(currentProblem.level)}
                   size="1.25rem"
-                  style={{ marginLeft: "0.5rem" }}
                 />
               </div>
               <div className={styles.prob_content}>
@@ -57,11 +56,18 @@ const ProjectLeft = ({
             <div className={styles.prob_reuirement}>
               <div className={styles.prob_title}>테스트 케이스</div>
               {currentProblem.testCases.map((testcase) => (
-                <div key={testcase.id}>
-                  <div>Input</div>
-                  <div>{testcase.input}</div>
-                  <div>Output</div>
-                  <div>{testcase.output}</div>
+                <div className={styles.testcase_card} key={testcase.id}>
+                  <div>입력값</div>
+                  <div className={styles.case_input}>{testcase.input}</div>
+                  <div>출력값</div>
+                  <div className={styles.case_input}>
+                    {testcase.output.split("\n").map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>

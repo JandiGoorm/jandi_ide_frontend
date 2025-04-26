@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import clsx from "clsx";
-import React, { createContext, useCallback, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
 import styles from "./SidebarLayout.module.css";
 
@@ -118,6 +118,21 @@ const Content = ({
   fullWidth,
   ...props
 }: ContentProps) => {
+  const { isOpen } = useSidebar();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isHidden = windowWidth <= 700 && isOpen; // 👈 조건: 600px 이하 + 열려있으면 숨김
+
+  if (isHidden) return null;
+
   return (
     <div className={clsx(styles.content, className)} {...props}>
       <div

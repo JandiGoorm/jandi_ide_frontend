@@ -4,7 +4,7 @@ import Company from "./Components/Company";
 
 import Button from "../../../components/Button/Button";
 import Custom from "./Components/Custom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface Form {
   title: string;
@@ -29,6 +29,7 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
   const titleRef = useRef<HTMLInputElement>(null);
   const languageRef = useRef<HTMLSelectElement>(null);
   const timeRef = useRef<HTMLInputElement>(null);
+  const [companyTime, setCompanyTime] = useState<number>(60);
 
   const handleStartClick = () => {
     if (selected === "practice") {
@@ -44,8 +45,9 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
         company: companyRef.current?.value || "",
         language: languageRef.current?.value || "",
         title: titleRef.current?.value || "",
-        time: 60, //변경
+        time: companyTime,
       };
+      console.log(form);
       onStart(form); // company 모드
     }
   };
@@ -69,7 +71,10 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
         </div>
         <div className={styles.content_box}>
           {selected === "company" ? (
-            <Company refs={{ companyRef, languageRef, titleRef }} />
+            <Company
+              refs={{ companyRef, languageRef, titleRef }}
+              onChangeCompanyTime={setCompanyTime}
+            />
           ) : (
             <Custom refs={{ titleRef, languageRef, timeRef }} />
           )}

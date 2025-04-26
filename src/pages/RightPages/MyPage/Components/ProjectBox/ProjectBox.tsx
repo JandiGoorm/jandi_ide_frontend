@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./ProjectBox.module.css";
-import LangTag from "../../../../LeftPages/Mainpage/components/LangTag";
 import Button from "../../../../../components/Button/Button";
 import {
   Dropdown,
@@ -19,25 +18,27 @@ import {
 } from "../../../../../components/Modal/Modal";
 import ModifyProject from "../Contents/ModifyProject";
 import useProjects from "../../../../../hooks/useProjects";
+import { useDarkModeContext } from "../../../../../contexts/DarkmodeContext";
 
 interface ProjectBoxProps {
   id: number;
   title: string;
   contents: string;
-  lang: string;
-  onAddProject?: () => void;
+  link: string;
+  onUpdate?: () => void;
 }
 
 export default function ProjectBox({
   id,
   title,
   contents,
-  lang,
-  onAddProject,
+  link,
+  onUpdate,
 }: ProjectBoxProps) {
   const navigate = useNavigate();
   const dropdownRef = useRef<{ close: () => void }>(null);
   const { deleteProject } = useProjects();
+  const { isDarkMode } = useDarkModeContext();
 
   const handleClick = () =>
     navigate(buildPath(PageEndPoints.GITHUB_PROJECT, { id }));
@@ -45,7 +46,9 @@ export default function ProjectBox({
   const deleteClick = async () => {
     await deleteProject(id).then(() => {
       dropdownRef.current?.close();
-      onAddProject?.();
+      setTimeout(() => {
+        onUpdate?.();
+      }, 300);
     });
   };
 
@@ -59,7 +62,11 @@ export default function ProjectBox({
 
       {/* 하단 - 언어태그, 더보기 버튼 */}
       <div className={styles.footer}>
-        <LangTag langList={[lang]} />
+        <img
+          className={styles.github}
+          src={isDarkMode ? "/github_icon_white.png" : "/github_icon_black.png"}
+          onClick={() => window.open(link, "_blank")}
+        />
 
         <Modal>
           <Dropdown dropdownRef={dropdownRef}>
@@ -98,7 +105,7 @@ export default function ProjectBox({
               id={id}
               name={title}
               description={contents}
-              onAddProject={onAddProject}
+              onUpdate={onUpdate}
             />
           </ModalContent>
         </Modal>

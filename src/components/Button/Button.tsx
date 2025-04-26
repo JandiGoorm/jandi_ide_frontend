@@ -19,7 +19,12 @@ import styles from "./Button.module.css";
  */
 
 type ButtonSize = "sm" | "md" | "lg";
-type ButtonVariant = "solid" | "lang" | "none";
+type ButtonVariant =
+  | "solid"
+  | "lang"
+  | "pagination"
+  | "pagination_now"
+  | "none";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
