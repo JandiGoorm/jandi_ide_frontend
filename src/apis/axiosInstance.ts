@@ -1,5 +1,5 @@
 import axios from "axios";
-import { APIEndPoints } from "../constants/api";
+import { APIEndPoints, PrefixEndpoints } from "../constants/api";
 import AuthService from "./auth";
 
 const { refreshAccessToken } = AuthService;
@@ -48,18 +48,17 @@ const useHeaderEndPoints = new Set([
   `POST:${APIEndPoints.COMPILER}`,
   `POST:${APIEndPoints.SUBMIT_CODE}`,
   `GET:${APIEndPoints.BASKET_CODE_RESULT}`,
+  `GET:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
+  `GET:${PrefixEndpoints.CHATROOMS}`,
+  `POST:${PrefixEndpoints.CHATROOMS}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {
   const method = config.method?.toUpperCase();
   const url = config.url ?? "";
+  if (!method || !url) return config;
 
-  const normalizedUrl = url.replace(/\/\d+(?=\/|$)/g, "/:id");
-
-  const requestKey = `${method}:${normalizedUrl}`;
-  const isRequiredAuth = useHeaderEndPoints.has(requestKey);
-
-  if (isRequiredAuth) {
+  if (isProtectedUrl(url, method)) {
     const accessToken = localStorage.getItem("accessToken") ?? "";
     config.headers["Authorization"] = `Bearer ${accessToken}`;
   }
@@ -96,5 +95,20 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+function isProtectedUrl(configUrl: string, method: string): boolean {
+  for (const protectedEntry of useHeaderEndPoints) {
+    const [protectedMethod, pattern] = protectedEntry.split(":");
+    if (protectedMethod !== method) continue;
+    if (configUrl.startsWith(pattern)) return true;
+
+    const regexPattern = pattern.replace(/:\w+/g, "[^/]+");
+    const regex = new RegExp(`^${regexPattern}$`);
+
+    if (regex.test(configUrl)) return true;
+  }
+
+  return false;
+}
 
 export default axiosInstance;

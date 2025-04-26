@@ -2,7 +2,7 @@ export const formatDay = (iso: string) => {
   if (!iso) return "";
 
   const date = new Date(iso);
-  date.setHours(date.getHours() + 7);
+  date.setHours(date.getHours() + 9);
   const now = new Date();
 
   const isToday =
