@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { useParams } from "react-router-dom";
 import useChat, { ChatMessages } from "../../../../hooks/useChat";
 import { useAuth } from "../../../../contexts/AuthContext";
+import Loading from "../../../../components/Loading/Loading";
 
 const ChatDetailPage = () => {
   const [prevMessages, setPrevMessages] = useState<ChatMessages[]>([]);
@@ -30,6 +31,7 @@ const ChatDetailPage = () => {
     sendMessage,
     getChatMessagePages,
     messages: realtimeMessages,
+    getMessageLoading,
   } = useChat();
 
   const { user } = useAuth();
@@ -114,6 +116,7 @@ const ChatDetailPage = () => {
       <Sidebar.Content header={<ChatHeader />}>
         <div className={styles.content}>
           <div className={styles.flexBox}>
+            {getMessageLoading && <Loading />}
             <div
               className={styles.chat_container}
               onWheel={(e) => handleWheel(e)}

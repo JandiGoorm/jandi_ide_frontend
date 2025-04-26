@@ -9,6 +9,7 @@
 }
 
 .flexBox {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -23,19 +24,6 @@
   overflow-y: auto;
   min-height: 0;
 }
-
-/* .chat_container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.chat_container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.chat_container::-webkit-scrollbar-thumb {
-  background-color: var(--color-text-primary);
-  border-radius: 4px;
-} */
 
 .chat_input_container {
   box-sizing: border-box;

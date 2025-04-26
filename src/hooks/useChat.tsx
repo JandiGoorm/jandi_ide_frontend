@@ -66,7 +66,7 @@ const useChat = () => {
         url: buildPath(APIEndPoints.CHAT_MESSAGE_PAGE, { id }),
         params: {
           page,
-          size: 20,
+          size: 10,
         },
       })
         .then((res) => {
