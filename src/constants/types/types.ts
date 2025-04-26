@@ -96,6 +96,11 @@ export interface Company {
   jobPostings: JobPosting[];
 }
 
+export enum ChatRoomType {
+  COMPANY = "COMPANY",
+  TECH_STACK = "TECH_STACK",
+}
+
 export interface ChatRoom {
   roomId: string;
   name: string;
@@ -103,15 +108,19 @@ export interface ChatRoom {
   createdBy: string;
   createdAt: string;
   participants: string[];
+  roomType: ChatRoomType;
 }
 
-// interface ChatMessage {
-//   type: string; // 문자열로 변경 (enum값 사용)
-//   roomId: string;
-//   sender: string;
-//   message: string;
-//   timestamp: string;
-// }
+export type Nullable<T> = T | null;
+
+export interface ChatMessages {
+  type: string; // 문자열로 변경 (enum값 사용)
+  roomId: string;
+  sender: string;
+  message: string;
+  timestamp: string;
+  profileImage: Nullable<string>;
+}
 
 export interface Problems {
   id: number;

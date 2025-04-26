@@ -1,27 +1,19 @@
-import { useCallback, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import useAxios from "./useAxios";
 import { APIEndPoints } from "../constants/api";
 import { buildPath } from "../utils/buildPath";
+import { ChatMessages } from "../constants/types/types";
 
-interface ChatMessages {
-  type: string; // 문자열로 변경 (enum값 사용)
-  roomId: string;
-  sender: string;
-  message: string;
-  timestamp: string;
-}
-
+const API_URL = import.meta.env.VITE_WS_URL;
 ///채팅(socket연결)관리 hooks
 const useChat = () => {
-  const API_URL = import.meta.env.VITE_WS_URL;
+  const [messages, setMessages] = useState<ChatMessages[]>([]);
 
   const { fetchData: joinApi } = useAxios();
-  const { fetchData: getMessageApi } = useAxios();
-  const { fetchData: getMessagePageApi } = useAxios();
-  const [allmessages, setAllMessages] = useState<ChatMessages[]>([]);
-  const [messages, setMessages] = useState<ChatMessages[]>([]);
+  const { fetchData: getMessagePageApi, loading: getMessageLoading } =
+    useAxios();
 
   const clientRef = useRef<Client | null>(null);
   const receivedMsgIds = useRef<Set<string>>(new Set()); // 중복 메시지 처리를 위한 ID 저장소
@@ -30,7 +22,6 @@ const useChat = () => {
     try {
       // 먼저 메시지 상태와 중복 메시지 필터 초기화
       setMessages([]);
-      setAllMessages([]);
       receivedMsgIds.current.clear();
 
       try {
@@ -57,91 +48,84 @@ const useChat = () => {
     }
   };
 
-  const getChatMessages = useCallback(
-    async (id: string) => {
-      await getMessageApi({
-        method: "GET",
-        url: buildPath(APIEndPoints.CHAT_MESSAGE, { id }),
-      })
-        .then((res) => {
-          console.log(res?.data);
-          setAllMessages(res?.data);
-        })
-        .catch((err) => {
-          console.log(err + "채팅내역오류");
-        });
-    },
-    [getMessageApi]
-  );
-
+  // 페이지별 채팅 메시지 불러오는 함수
   const getChatMessagePages = useCallback(
-    async (id: string, page: number) => {
-      await getMessagePageApi({
+    async (
+      id: string,
+      page: number,
+      setPrevMessages: Dispatch<SetStateAction<ChatMessages[]>>
+    ) => {
+      return await getMessagePageApi({
         method: "GET",
         url: buildPath(APIEndPoints.CHAT_MESSAGE_PAGE, { id }),
         params: {
-          page: page,
-          size: 20,
+          page,
+          size: 10,
         },
       })
         .then((res) => {
-          console.log(res?.data);
-          setMessages(res?.data.content);
+          console.log("res", res);
+          const newMessages = res?.data.content.filter(
+            (msg: ChatMessages) =>
+              !receivedMsgIds.current.has(`${msg.timestamp}_${msg.message}`)
+          );
+
+          newMessages.forEach((msg: ChatMessages) => {
+            receivedMsgIds.current.add(`${msg.timestamp}_${msg.message}`);
+          });
+          setPrevMessages((prev) => [...prev, ...newMessages]);
+          return res;
         })
         .catch((err) => {
           console.log(err + "채팅내역오류");
         });
     },
-    [getMessageApi]
+    [getMessagePageApi]
   );
 
   //소켓 연결
-  const connectWebSocket = useCallback(
-    async (roomId: string) => {
-      console.log("소켓 연결 시도");
-      const token = localStorage.getItem(`accessToken`);
-      console.log(token);
+  const connectWebSocket = useCallback(async (roomId: string) => {
+    console.log("소켓 연결 시도");
+    const token = localStorage.getItem(`accessToken`);
 
-      const socket = new SockJS(`${API_URL}`);
-      const client = new Client({
-        webSocketFactory: () => socket,
-        connectHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-        onConnect: () => {
-          subscribeRoom(roomId);
-        },
-        onStompError: (frame) => {
-          console.error("STOMP 에러:", frame);
-        },
-        onDisconnect: () => {
-          console.log("연결 해제됨");
-        },
-      });
+    const socket = new SockJS(`${API_URL}`);
+    const client = new Client({
+      webSocketFactory: () => socket,
+      connectHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        subscribeRoom(roomId);
+      },
+      onStompError: (frame) => {
+        console.error("STOMP 에러:", frame);
+      },
+      onDisconnect: () => {
+        console.log("연결 해제됨");
+      },
+    });
 
-      client.activate();
-      clientRef.current = client;
-    },
-    [API_URL]
-  );
+    client.activate();
+    clientRef.current = client;
+  }, []);
 
   //채팅방 구독 함수
   const subscribeRoom = (roomId: string) => {
     console.log("채팅방 구독하기");
     if (!clientRef.current || !clientRef.current.connected) {
-      console.log("ㄴㄴ");
+      console.error("WebSocket이 연결되지 않았습니다.");
       return;
     }
 
     clientRef.current.subscribe(`/topic/chat/room/${roomId}`, (message) => {
+      console.log("hit", message);
       const newMessage = JSON.parse(message.body);
       console.log("수신된 메시지:", newMessage);
 
-      setMessages((prev) => [...prev, newMessage]);
-      setAllMessages((prev) => [...prev, newMessage]);
+      setMessages((prev) => [newMessage, ...prev]);
     });
   };
 
@@ -166,15 +150,52 @@ const useChat = () => {
     });
   };
 
-  return {
-    enterChatRoom,
+  const sendEnterMessage = (roomId: string, sender: string) => {
+    if (!clientRef.current || !clientRef.current.connected) {
+      console.error("WebSocket이 연결되지 않았습니다.");
+      return;
+    }
+    const payload = {
+      roomId,
+      type: "ENTER",
+      sender,
+      message: "",
+    };
 
-    allmessages,
-    messages,
-    getChatMessages,
+    clientRef.current.publish({
+      destination: "/app/chat/message",
+      body: JSON.stringify(payload),
+    });
+  };
+
+  const sendLeaveMessage = (roomId: string, sender: string) => {
+    if (!clientRef.current || !clientRef.current.connected) {
+      console.error("WebSocket이 연결되지 않았습니다.");
+      return;
+    }
+
+    const payload = {
+      roomId,
+      type: "LEAVE",
+      sender,
+      message: "",
+    };
+
+    clientRef.current.publish({
+      destination: "/app/chat/message",
+      body: JSON.stringify(payload),
+    });
+  };
+
+  return {
+    getMessageLoading,
+    enterChatRoom,
     getChatMessagePages,
     connectWebSocket,
     sendMessage,
+    sendEnterMessage,
+    sendLeaveMessage,
+    messages,
   };
 };
 

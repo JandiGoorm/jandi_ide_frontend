@@ -57,10 +57,14 @@ export const APIEndPoints = {
   CHATROOM_JOIN: "/chat/rooms/:id/join",
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
-  CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
-  CHAT_MESSAGE_PAGE: "/chat/rooms/rooms/:id/messages/paged",
+  CHAT_MESSAGE: "/chat/rooms:id/messages",
+  CHAT_MESSAGE_PAGE: "/chat/rooms/:id/messages/paged",
 
   //알고리즘
   ALL_PROBLEMS: "/problems",
   PROBLEM: "/problems/:id",
+};
+
+export const PrefixEndpoints = {
+  CHATROOMS: "/chat/rooms/",
 };

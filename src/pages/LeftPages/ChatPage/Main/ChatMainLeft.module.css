@@ -9,7 +9,8 @@
 .title_div {
   color: var(--color-text-primary);
   text-align: center;
-  padding: 2rem 1rem;
+
+  padding-top: 2rem;
 }
 
 .title {
@@ -23,6 +24,14 @@
   font-family: var(--font-general);
   font-size: var(--text-base);
   padding-bottom: 0.5rem;
+}
+
+.type_button_list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem 0;
 }
 
 .chat_button_list {

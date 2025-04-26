@@ -4,9 +4,10 @@ import { useCallback, useState } from "react";
 import { APIEndPoints } from "../constants/api";
 import { buildPath } from "../utils/buildPath";
 
-const useChatting = () => {
+const useChatRoom = () => {
   const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
   const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoom | null>(null);
+
   const { fetchData: getAllApi } = useAxios();
   const { fetchData: getApi } = useAxios();
   const { fetchData: getParticipantsApi } = useAxios();
@@ -56,4 +57,4 @@ const useChatting = () => {
   };
 };
 
-export default useChatting;
+export default useChatRoom;
