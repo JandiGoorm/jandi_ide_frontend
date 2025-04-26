@@ -129,3 +129,25 @@
     align-items: center;
   }
 }
+
+.modal_container{
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_title{
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-semibold);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_button{
+  display: flex;
+  gap: 1rem;
+}

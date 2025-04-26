@@ -26,7 +26,7 @@ const IntroEditorPage = ({
       sessionStorage.setItem("loginNext", PageEndPoints.CHAT_MAIN);
       navigate(PageEndPoints.LOGIN);
     } else {
-      sessionStorage.setItem("loginNext", PageEndPoints.HOME);
+      sessionStorage.setItem("loginNext", PageEndPoints.MYPAGE);
       navigate(PageEndPoints.LOGIN);
     }
   };

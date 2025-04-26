@@ -5,6 +5,7 @@ import Company from "./Components/Company";
 import Button from "../../../components/Button/Button";
 import Custom from "./Components/Custom";
 import { useRef, useState } from "react";
+import { useToast } from "../../../contexts/ToastContext";
 
 interface Form {
   title: string;
@@ -30,6 +31,7 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
   const languageRef = useRef<HTMLSelectElement>(null);
   const timeRef = useRef<HTMLInputElement>(null);
   const [companyTime, setCompanyTime] = useState<number>(60);
+  const { createToast } = useToast();
 
   const handleStartClick = () => {
     if (selected === "practice") {
@@ -39,6 +41,10 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
         language: languageRef.current?.value || "",
         time: Number(timeRef.current?.value) || 0,
       };
+      if (!form.title || !form.language || form.time <= 0) {
+        createToast({ type: "error", text: "모든 항목을 입력해주세요!" });
+        return;
+      }
       onStart(form);
     } else {
       const form = {
@@ -47,7 +53,11 @@ const AlgoLeft: React.FC<AlgoLeftProps> = ({
         title: titleRef.current?.value || "",
         time: companyTime,
       };
-      console.log(form);
+
+      if (!form.company || !form.title || !form.language || form.time <= 0) {
+        createToast({ type: "error", text: "모든 항목을 입력해주세요!" });
+        return;
+      }
       onStart(form); // company 모드
     }
   };

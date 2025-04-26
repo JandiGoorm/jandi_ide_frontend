@@ -9,15 +9,23 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import useUserSetting from "../../../../hooks/useUserSetting";
 import useTech from "../../../../hooks/useTech";
+import { useToast } from "../../../../contexts/ToastContext";
+import { PageEndPoints } from "../../../../constants/api";
+import {
+  Modal,
+  ModalTrigger,
+  ModalContent,
+} from "../../../../components/Modal/Modal";
 
 const SettingPage = () => {
   const { user, refreshUser } = useAuth();
   const { techs } = useTech();
-  const { getFavoriteTech, favoriteTech } = useUserSetting();
+  const { getFavoriteTech, favoriteTech, deleteUser } = useUserSetting();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
   const [nickname, setNickname] = useState(user?.nickName || "");
   const [introduction, setIntroduction] = useState(user?.nickName || "");
   const maxLength = 500;
+  const { createToast } = useToast();
 
   const { modifyUser } = useUserSetting(); // 유저 정보 수정 API
 
@@ -36,6 +44,11 @@ const SettingPage = () => {
   const handleUpdateNickname = async () => {
     if (!user) return;
 
+    if (nickname.trim() === "") {
+      createToast({ type: "error", text: "닉네임을 입력해주세요!" });
+      return;
+    }
+
     console.log("변경할 닉네임:", nickname);
     await modifyUser(user.id, {
       introduction: user.introduction,
@@ -49,6 +62,10 @@ const SettingPage = () => {
   // 소개글 수정
   const handleUpdateIntro = async () => {
     if (!user) return;
+    if (introduction.trim() === "") {
+      createToast({ type: "error", text: "소개글을 입력해주세요!" });
+      return;
+    }
     console.log("변경할 소개글:", introduction);
     await modifyUser(user.id, {
       introduction: introduction,
@@ -67,6 +84,16 @@ const SettingPage = () => {
     refreshUser();
   };
 
+  const handleLeave = async () => {
+    if (!user) return;
+    try {
+      await deleteUser(user.id);
+
+      window.location.href = PageEndPoints.HOME;
+    } catch {
+      createToast({ type: "error", text: "회원탈퇴에 실패하였습니다!" });
+    }
+  };
   return (
     <Sidebar.Provider>
       <Sidebar.Panel className={styles.userInfo}>
@@ -120,7 +147,6 @@ const SettingPage = () => {
             <div className={styles.basicInfo_header}>
               <p className={styles.title}>프로필 수정</p>
               <div className={styles.basicInfo_button_div}>
-                <Button>프로필 초기화</Button>
                 <Button onClick={handleUpdateIntro}>소개글 변경</Button>
               </div>
             </div>
@@ -152,7 +178,22 @@ const SettingPage = () => {
             </div>
           </div>
           <div className={styles.userDelete_conainer}>
-            <Button>탈퇴하기</Button>
+            <Modal>
+              <ModalTrigger>
+                <Button>탈퇴하기</Button>
+              </ModalTrigger>
+              <ModalContent>
+                <div className={styles.modal_container}>
+                  <div className={styles.modal_title}>
+                    정말 탈퇴하시겠습니까?
+                  </div>
+                  <div className={styles.modal_button}>
+                    <Button onClick={handleLeave}> 탈퇴하기 </Button>
+                    <Button> 아니요 </Button>
+                  </div>
+                </div>
+              </ModalContent>
+            </Modal>
           </div>
         </div>
       </Sidebar.Content>
