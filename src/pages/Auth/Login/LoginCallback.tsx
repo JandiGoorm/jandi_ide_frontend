@@ -1,8 +1,11 @@
 import useEffectOnce from "../../../hooks/useEffectOnce";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { PageEndPoints } from "../../../constants/api";
 
 const OAuthCallbackPage = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
 
   useEffectOnce(() => {
     const url = new URL(window.location.href);
@@ -14,6 +17,7 @@ const OAuthCallbackPage = () => {
           await signIn(code);
         } catch (err) {
           console.error("OAuth 로그인 에러", err);
+          navigate(PageEndPoints.LOGIN);
         }
       }
     };

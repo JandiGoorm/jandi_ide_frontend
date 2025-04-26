@@ -35,9 +35,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         const next = sessionStorage.getItem("loginNext");
         if (next) {
           sessionStorage.removeItem("loginNext");
-          navigate(next);
+          window.location.href = next;
         } else {
-          navigate(PageEndPoints.HOME);
+          window.location.href = PageEndPoints.HOME;
         }
       }
     } catch (err) {

@@ -98,6 +98,21 @@ const useUserSetting = () => {
     [putApi]
   );
 
+  const deleteUser = useCallback(
+    async (userId: number) => {
+      if (!userId) return;
+
+      await putApi({
+        method: "DELETE",
+        url: buildPath(APIEndPoints.DELETE_USER, { id: userId }),
+      }).then(() => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+      });
+    },
+    [putApi]
+  );
+
   return {
     getFavoriteCompany,
     getFavoriteTech,
@@ -106,6 +121,7 @@ const useUserSetting = () => {
     DeleteACompany,
     favoriteTech,
     modifyUser,
+    deleteUser,
   };
 };
 

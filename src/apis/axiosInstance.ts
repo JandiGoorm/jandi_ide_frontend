@@ -51,6 +51,7 @@ const useHeaderEndPoints = new Set([
   `GET:${APIEndPoints.CHATROOM_PARTICIPANTS}`,
   `GET:${PrefixEndpoints.CHATROOMS}`,
   `POST:${PrefixEndpoints.CHATROOMS}`,
+  `DELETE:${APIEndPoints.DELETE_USER}`,
 ]);
 
 axiosInstance.interceptors.request.use((config) => {

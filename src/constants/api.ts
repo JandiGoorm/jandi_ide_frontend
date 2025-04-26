@@ -31,6 +31,8 @@ export const APIEndPoints = {
   FAVORITE_COMPANY: "/companies/favorite",
   FAVORITE_A_COMPANY: "/companies/favorite/:id",
   STACK: "/tech-stack",
+  //탈퇴
+  DELETE_USER: "/users/:id",
 
   //내정보
   MY_INFO: "/users/me",
