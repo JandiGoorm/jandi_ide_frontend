@@ -52,11 +52,19 @@ const MainPage = () => {
     setProjects([]);
     setBaskets([]);
 
-    const projectdata = await getProjects(0, 6);
-    setProjects(projectdata.data);
+    try {
+      const projectdata = await getProjects(0, 6);
+      setProjects(projectdata.data);
+    } catch (e) {
+      console.error("getProjects 실패", e);
+    }
 
-    const data = await getAllBaskets(0, 6);
-    setBaskets(data.data);
+    try {
+      const data = await getAllBaskets(0, 6);
+      setBaskets(data.data);
+    } catch (e) {
+      console.error("getAllBaskets 실패", e);
+    }
   }, [getProjects, getAllBaskets]);
 
   useEffect(() => {
