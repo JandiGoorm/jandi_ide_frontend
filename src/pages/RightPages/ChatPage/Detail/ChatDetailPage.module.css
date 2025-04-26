@@ -18,27 +18,24 @@
 .chat_container {
   flex: 1;
   box-sizing: border-box;
-  padding: 1rem;
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
   min-height: 0;
 }
 
-.chat_container::-webkit-scrollbar {
-  width: 8px; /* 세로 스크롤바 너비 */
+/* .chat_container::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* 스크롤바 트랙 (배경) */
 .chat_container::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* 스크롤바 썸 (움직이는 부분) */
 .chat_container::-webkit-scrollbar-thumb {
   background-color: var(--color-text-primary);
   border-radius: 4px;
-}
+} */
 
 .chat_input_container {
   box-sizing: border-box;

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import useAxios from "./useAxios";
@@ -18,19 +18,16 @@ const useChat = () => {
   const API_URL = import.meta.env.VITE_WS_URL;
 
   const { fetchData: joinApi } = useAxios();
-  const { fetchData: getMessageApi } = useAxios();
-  const { fetchData: getMessagePageApi } = useAxios();
-  const [allmessages, setAllMessages] = useState<ChatMessages[]>([]);
+  const { fetchData: getMessagePageApi, loading: getMessageLoading } =
+    useAxios();
   const [messages, setMessages] = useState<ChatMessages[]>([]);
 
   const clientRef = useRef<Client | null>(null);
   const receivedMsgIds = useRef<Set<string>>(new Set()); // 중복 메시지 처리를 위한 ID 저장소
-
   const enterChatRoom = async (newRoomId: string) => {
     try {
       // 먼저 메시지 상태와 중복 메시지 필터 초기화
       setMessages([]);
-      setAllMessages([]);
       receivedMsgIds.current.clear();
 
       try {
@@ -57,35 +54,32 @@ const useChat = () => {
     }
   };
 
-  const getChatMessages = useCallback(
-    async (id: string) => {
-      await getMessageApi({
-        method: "GET",
-        url: buildPath(APIEndPoints.CHAT_MESSAGE, { id }),
-        params: {},
-      })
-        .then((res) => {
-          console.log(res?.data);
-          setAllMessages(res?.data);
-        })
-        .catch((err) => {
-          console.log(err + "채팅내역오류");
-        });
-    },
-    [getMessageApi]
-  );
-
+  // 페이지별 채팅 메시지 불러오는 함수
   const getChatMessagePages = useCallback(
-    async (id: string, page: number) => {
+    async (
+      id: string,
+      page: number,
+      setPrevMessages: Dispatch<SetStateAction<ChatMessages[]>>
+    ) => {
       return await getMessagePageApi({
         method: "GET",
         url: buildPath(APIEndPoints.CHAT_MESSAGE_PAGE, { id }),
         params: {
-          page: page,
+          page,
           size: 20,
         },
       })
         .then((res) => {
+          const newMessages = res?.data.content.filter(
+            (msg: ChatMessages) =>
+              !receivedMsgIds.current.has(`${msg.timestamp}_${msg.message}`)
+          );
+
+          newMessages.forEach((msg: ChatMessages) => {
+            receivedMsgIds.current.add(`${msg.timestamp}_${msg.message}`);
+          });
+          console.log("ids", receivedMsgIds.current);
+          setPrevMessages((prev) => [...prev, ...newMessages]);
           return res;
         })
         .catch((err) => {
@@ -100,7 +94,6 @@ const useChat = () => {
     async (roomId: string) => {
       console.log("소켓 연결 시도");
       const token = localStorage.getItem(`accessToken`);
-      console.log(token);
 
       const socket = new SockJS(`${API_URL}`);
       const client = new Client({
@@ -140,8 +133,7 @@ const useChat = () => {
       const newMessage = JSON.parse(message.body);
       console.log("수신된 메시지:", newMessage);
 
-      setMessages((prev) => [...prev, newMessage]);
-      setAllMessages((prev) => [...prev, newMessage]);
+      setMessages((prev) => [newMessage, ...prev]);
     });
   };
 
@@ -167,14 +159,12 @@ const useChat = () => {
   };
 
   return {
+    getMessageLoading,
     enterChatRoom,
-
-    allmessages,
-    messages,
-    getChatMessages,
     getChatMessagePages,
     connectWebSocket,
     sendMessage,
+    messages,
   };
 };
 
