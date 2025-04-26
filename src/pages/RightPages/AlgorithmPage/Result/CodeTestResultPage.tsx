@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { ProblemInfo } from "../../../../constants/types/types";
 import useBaskets from "../../../../hooks/useBaskets";
 import { getEditorLanguage, getFilePath } from "../../../../utils/codeTestSet";
+import { highlightErrorText } from "../../../../utils/resultText";
 
 const CodeTestResultPage = () => {
   const { user } = useAuth();
@@ -58,7 +59,8 @@ const CodeTestResultPage = () => {
           solution?: { code?: string; additionalInfo?: string };
         }) => {
           codeMap[problem.problemId] = problem.solution?.code || "";
-          resultMap[problem.problemId] = problem.solution?.additionalInfo || "";
+          resultMap[problem.problemId] =
+            problem.solution?.additionalInfo || problem.solution?.status || "";
         }
       );
       setProblemCodeMap(codeMap);
@@ -110,8 +112,10 @@ const CodeTestResultPage = () => {
                 <div className={styles.title}>실행 결과</div>
               </div>
               <div className={styles.result}>
-                {problemResultMap[problems[currentIndex]?.id] ||
-                  "결과가 없습니다."}
+                {highlightErrorText(
+                  problemResultMap[problems[currentIndex]?.id] ||
+                    "결과가 없습니다."
+                )}
               </div>
             </div>
           </div>

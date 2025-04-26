@@ -43,6 +43,7 @@ const CodeTestPage = () => {
   const editorLanguage = getEditorLanguage(language || "");
   const filePath = getFilePath(language || "");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   //각각 문제 및 결과 각각 저장
   const [problemCodeMap, setProblemCodeMap] = useState<{
     [id: number]: string;
@@ -90,6 +91,29 @@ const CodeTestPage = () => {
 
   // 타이머 카운트
   useEffect(() => {
+    if (totalSeconds <= 0) {
+      // 시간이 0초가 되면 자동 제출
+      const autoSubmit = async () => {
+        if (user && language && solvingTime) {
+          setIsSubmitting(true);
+          await getSubmitResult({
+            userId: user?.id,
+            problemSetId: basketId,
+            language: language?.toLowerCase(),
+            solvingTime: solvingTime,
+            codes: Object.entries(problemCodeMap).map(([id, code]) => ({
+              problemId: Number(id),
+              code,
+            })),
+          });
+          setIsSubmitting(false);
+          navigate(buildPath(PageEndPoints.ALGO_RESULT, { id: basketId }));
+        }
+      };
+      autoSubmit();
+      return;
+    }
+
     const timer = setInterval(() => {
       setTotalSeconds((prev) => {
         if (prev <= 1) {
@@ -101,13 +125,14 @@ const CodeTestPage = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [totalSeconds]);
 
   //버튼 핸들러
-  const handleExit = () => {
+  const handleExit = async () => {
     const confirmEnd = confirm("정말 종료하시겠습니까?");
     if (confirmEnd && user && language && solvingTime) {
-      getSubmitResult({
+      setIsSubmitting(true);
+      await getSubmitResult({
         userId: user?.id,
         problemSetId: basketId,
         language: language?.toLowerCase(),
@@ -117,10 +142,11 @@ const CodeTestPage = () => {
           code,
         })),
       });
-
+      setIsSubmitting(false);
       navigate(buildPath(PageEndPoints.ALGO_RESULT, { id: basketId }));
     }
   };
+
   const handleRun = async () => {
     setIsRunning(true);
     console.log("코드 실행!");
@@ -147,6 +173,14 @@ const CodeTestPage = () => {
 
   return (
     <BaseLayout>
+      {isSubmitting && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingModal}>
+            <LuLoader size={32} className={styles.loadingSpinner} />
+            <p>제출 중입니다... 잠시만 기다려 주세요.</p>
+          </div>
+        </div>
+      )}
       <Sidebar.Provider className={styles.Code_layout}>
         <Sidebar.Panel>
           <LeftSide

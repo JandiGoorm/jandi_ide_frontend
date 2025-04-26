@@ -61,25 +61,6 @@ const useCodeTest = () => {
 
           // console.log("문제결과"+result);
           // 예: 결과 저장 로직
-          const resultform = {
-            userId: data.userId,
-            problemId: problemId,
-            problemSetId: data.problemSetId,
-            code: code,
-            language: data.language,
-            isCorrect: result.isCorrect ? result.isCorrect : false,
-            solvingTime: data.solvingTime,
-            additionalInfo: result.resultDetails
-              ? result.resultDetails
-              : result.errorDetails,
-            memoryUsage: result.memoryUsage ? result.memoryUsage : 0,
-            executionTime: result.executionTime ? result.executionTime : 0,
-            status: result.status === "CORRECT" ? result.status : result.error,
-            description: "",
-          };
-
-          console.log(resultform);
-
           await postResultApi({
             method: "POST",
             url: APIEndPoints.SUBMIT_CODE,
