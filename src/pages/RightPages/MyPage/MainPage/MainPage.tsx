@@ -57,9 +57,8 @@ const MainPage = () => {
       setBaskets(data.data);
     };
     getBaskets();
-  }, [getAllBaskets]);
+  }, [getAllBaskets, getProjects]);
 
-  const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
   console.log(baskets);
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
@@ -129,7 +128,7 @@ const MainPage = () => {
                       key={project.id}
                       title={project.name}
                       contents={project.description}
-                      lang={langs[0]}
+                      link={project.url}
                       onAddProject={getProjects}
                     />
                   ))}

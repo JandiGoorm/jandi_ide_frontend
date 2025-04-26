@@ -21,7 +21,6 @@ const MorePage = () => {
   const lastPath = paths[paths.length - 1];
   const { getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
-  const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
   const [projects, setProjects] = useState<Project[]>([]);
   const [baskets, setBaskets] = useState<Baskets[]>([]);
   const { currentPage, totalPage, setTotalPage, handlePageChange } =
@@ -40,7 +39,7 @@ const MorePage = () => {
       }
     };
     getBaskets(currentPage - 1);
-  }, [getAllBaskets, getProjects, currentPage, setTotalPage]);
+  }, [getAllBaskets, getProjects, currentPage, setTotalPage, lastPath]);
 
   return (
     <BaseLayout>
@@ -71,7 +70,7 @@ const MorePage = () => {
                         key={project.id}
                         title={project.name}
                         contents={project.description}
-                        lang={langs[1]}
+                        link={project.url}
                       />
                     ))}
                   </div>
@@ -87,7 +86,7 @@ const MorePage = () => {
               <>
                 {baskets.length > 0 ? (
                   <div className={styles.projectList}>
-                    {baskets.map((basket, i) => (
+                    {baskets.map((basket) => (
                       <AlgorithmBox
                         id={basket.id}
                         key={basket.id}
@@ -95,7 +94,7 @@ const MorePage = () => {
                         problems={basket.problemIds.map((id) => Number(id))}
                         duration={basket.minutes}
                         problemCount={basket.problemIds.length}
-                        lang={langs[i]}
+                        lang={basket.language}
                       />
                     ))}
                   </div>

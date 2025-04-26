@@ -34,8 +34,14 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
+    align-items: center;
 }
 
+.github{
+    width: 24px; /* 원하는 너비 */
+    height: 24px; /* 원하는 높이 */
+    object-fit: contain;
+}
 
 .dropdown_content{
     padding: 0.5rem 0.75rem;

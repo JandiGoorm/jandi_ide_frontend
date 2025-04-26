@@ -28,7 +28,7 @@ export interface Project {
   githubName: string;
   id: number;
   name: string;
-  owner: User;
+  url: string;
 }
 export interface ProjectDefaultInfo {
   name: string;
