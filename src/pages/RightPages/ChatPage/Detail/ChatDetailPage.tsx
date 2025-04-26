@@ -93,7 +93,7 @@ const ChatDetailPage = () => {
       await enterChatRoom(id);
       setTimeout(() => {
         sendEnterMessage(id, user.githubUsername);
-      }, 1500);
+      }, 300);
 
       await getChatRoomInfo(id);
 
@@ -170,6 +170,12 @@ const ChatDetailPage = () => {
                   ref={messageInputRef}
                   className={styles.description_content}
                   placeholder="건전한 대화를 위해 타인에게 불쾌감을 줄 수 있는 글은 삼가주세요. 도배, 광고, 홍보 목적의 메시지는 제한되며, 반복 시 이용이 제한될 수 있습니다."
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      sendTo();
+                    }
+                  }}
                 />
               </div>
               <div className={styles.send_button_box}>
