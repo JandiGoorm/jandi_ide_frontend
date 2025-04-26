@@ -3,9 +3,12 @@ import { FaMedal } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import Button from "../../../../../components/Button/Button";
-import { Problems } from "../../../../../constants/types/types";
+import { ProblemInfo, Problems } from "../../../../../constants/types/types";
 import useProblems from "../../../../../hooks/useProblems";
 import { getMedalColor } from "../../../../../utils/medal";
+import usePagination from "../../../../../hooks/usePagination";
+import Pagination from "../../../../../components/Pagination/Pagination";
+import { useEffect, useState } from "react";
 
 interface PracticeContentProps {
   selectedProblems: Problems[];
@@ -16,7 +19,11 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
   selectedProblems,
   setSelectedProblems,
 }) => {
-  const { problems } = useProblems();
+  const [sortType, setSortType] = useState<"asc" | "desc">("asc");
+  const { getProblems } = useProblems();
+  const { currentPage, totalPage, setTotalPage, handlePageChange } =
+    usePagination();
+  const [problems, setProblems] = useState<ProblemInfo[]>([]);
 
   const toggleProblem = (problem: Problems) => {
     const exists = selectedProblems.find((p) => p.id === problem.id);
@@ -26,6 +33,15 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
       setSelectedProblems((prev) => [...prev, problem]);
     }
   };
+
+  useEffect(() => {
+    const fetchProblems = async (page: number, sort: "asc" | "desc") => {
+      const data = await getProblems(page, sort);
+      setTotalPage(data.totalPages);
+      setProblems(data.data);
+    };
+    fetchProblems(currentPage - 1, sortType);
+  }, [getProblems, currentPage, setTotalPage, sortType]);
 
   return (
     <div className={styles.container}>
@@ -55,16 +71,30 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
         </div>
       </div>
       <div className={styles.select_box}>
-        <div className={styles.header}>문제 리스트</div>
+        <div className={styles.header}>
+          <div>문제 리스트</div>
+          <div className={styles.button_box}>
+            <Button variant="none" onClick={() => setSortType("asc")}>
+              쉬운순
+            </Button>
+            <Button variant="none" onClick={() => setSortType("desc")}>
+              어려운순
+            </Button>
+          </div>
+        </div>
         <div className={styles.content_box}>
           {problems
-            .filter(
-              (problem) => !selectedProblems.some((p) => p.id === problem.id)
-            ) // 선택된 문제 제외
+            // .filter(
+            //   (problem) => !selectedProblems.some((p) => p.id === problem.id)
+            // ) // 선택된 문제 제외
             .map((problem) => (
               <div className={styles.problem} key={problem.id}>
                 <Button variant="none" onClick={() => toggleProblem(problem)}>
-                  <FaPlus size={18} />
+                  {selectedProblems.some((p) => p.id === problem.id) ? (
+                    <MdClose size={18} />
+                  ) : (
+                    <FaPlus size={18} />
+                  )}
                 </Button>
                 <div>
                   <FaMedal
@@ -83,6 +113,13 @@ const PracticeContent: React.FC<PracticeContentProps> = ({
                 </div>
               </div>
             ))}
+        </div>
+        <div className={styles.pagination}>
+          <Pagination
+            currentPage={currentPage}
+            totalPage={totalPage}
+            callback={handlePageChange}
+          />
         </div>
       </div>
     </div>

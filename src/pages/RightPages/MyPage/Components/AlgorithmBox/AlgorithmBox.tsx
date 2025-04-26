@@ -21,6 +21,8 @@ import { LuPencilLine, LuTrash2 } from "react-icons/lu";
 import useBaskets from "../../../../../hooks/useBaskets";
 import ModifyBaksket from "../Contents/ModifyBaksket";
 import { getMedalColor } from "../../../../../utils/medal";
+import { buildPath } from "../../../../../utils/buildPath";
+import { PageEndPoints } from "../../../../../constants/api";
 
 interface AlgorithmBoxProps {
   id: number;
@@ -29,6 +31,7 @@ interface AlgorithmBoxProps {
   duration: number;
   problemCount: number;
   lang: string;
+  onUpdate?: () => void;
 }
 
 export default function AlgorithmBox({
@@ -38,6 +41,7 @@ export default function AlgorithmBox({
   duration,
   problemCount,
   lang,
+  onUpdate,
 }: AlgorithmBoxProps) {
   const navigate = useNavigate();
   const { getaProblemsInfo } = useProblems();
@@ -45,11 +49,15 @@ export default function AlgorithmBox({
   const [problemInfos, setProblemInfos] = useState<ProblemInfo[]>([]);
   const { deleteBaskets } = useBaskets();
 
-  const handleClick = () => navigate(`/mypage/problem/${id}`);
+  const handleClick = () =>
+    navigate(buildPath(PageEndPoints.ALGO_RESULT, { id }));
 
   const deleteClick = async () => {
     await deleteBaskets(id).then(() => {
       dropdownRef.current?.close();
+      setTimeout(() => {
+        onUpdate?.();
+      }, 300);
     });
   };
 
@@ -126,7 +134,7 @@ export default function AlgorithmBox({
               </DropdownContent>
             </Dropdown>
             <ModalContent>
-              <ModifyBaksket id={id} title={title} />
+              <ModifyBaksket id={id} title={title} onUpdate={onUpdate} />
             </ModalContent>
           </Modal>
         </div>

@@ -10,25 +10,66 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import useProjects from "../../../../hooks/useProjects";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 import useBaskets from "../../../../hooks/useBaskets";
-import { useEffect, useState } from "react";
-import { Baskets } from "../../../../constants/types/types";
+import { useCallback, useEffect, useState } from "react";
+import { Baskets, Project } from "../../../../constants/types/types";
+import usePagination from "../../../../hooks/usePagination";
+import Pagination from "../../../../components/Pagination/Pagination";
 
 const MorePage = () => {
   const { user } = useAuth();
   const paths = location.pathname.split("/");
   const lastPath = paths[paths.length - 1];
-  const { projects, getProjects } = useProjects();
+  const { getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
-  const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
+  const [projects, setProjects] = useState<Project[]>([]);
   const [baskets, setBaskets] = useState<Baskets[]>([]);
+  const { currentPage, totalPage, setTotalPage, handlePageChange } =
+    usePagination();
+
+  const getBaskets = useCallback(
+    async (page: number) => {
+      setProjects([]);
+      setBaskets([]);
+
+      try {
+        if (lastPath === "project") {
+          const data = await getProjects(page, 12);
+          setProjects(data.data);
+          setTotalPage(data.totalPages);
+        } else {
+          const data = await getAllBaskets(page, 12);
+          setBaskets(data.data);
+          setTotalPage(data.totalPages);
+        }
+      } catch (error) {
+        if (
+          typeof error === "object" &&
+          error !== null &&
+          "response" in error &&
+          (error as { response?: { data?: { error?: string } } }).response?.data
+            ?.error === "INVALID_PAGE" &&
+          page > 0
+        ) {
+          handlePageChange(page);
+        } else {
+          console.error(error);
+        }
+      }
+    },
+    [lastPath, getProjects, getAllBaskets, setTotalPage, handlePageChange]
+  );
+
+  const handleUpdate = useCallback(() => {
+    const navigatePage = Math.max(
+      1,
+      currentPage > totalPage ? totalPage : currentPage
+    );
+    getBaskets(navigatePage - 1);
+  }, [currentPage, totalPage, getBaskets]);
 
   useEffect(() => {
-    const getBaskets = async () => {
-      const data = await getAllBaskets();
-      setBaskets(data);
-    };
-    getBaskets();
-  }, [getAllBaskets]);
+    handleUpdate();
+  }, [lastPath, handleUpdate]);
 
   return (
     <BaseLayout>
@@ -59,8 +100,8 @@ const MorePage = () => {
                         key={project.id}
                         title={project.name}
                         contents={project.description}
-                        lang={langs[1]}
-                        onAddProject={getProjects}
+                        link={project.url}
+                        onUpdate={handleUpdate}
                       />
                     ))}
                   </div>
@@ -76,7 +117,7 @@ const MorePage = () => {
               <>
                 {baskets.length > 0 ? (
                   <div className={styles.projectList}>
-                    {baskets.map((basket, i) => (
+                    {baskets.map((basket) => (
                       <AlgorithmBox
                         id={basket.id}
                         key={basket.id}
@@ -84,7 +125,8 @@ const MorePage = () => {
                         problems={basket.problemIds.map((id) => Number(id))}
                         duration={basket.minutes}
                         problemCount={basket.problemIds.length}
-                        lang={langs[i]}
+                        lang={basket.language}
+                        onUpdate={handleUpdate}
                       />
                     ))}
                   </div>
@@ -97,6 +139,13 @@ const MorePage = () => {
                 )}
               </>
             )}
+            <div className={styles.pagination}>
+              <Pagination
+                currentPage={currentPage}
+                totalPage={totalPage}
+                callback={handlePageChange}
+              />
+            </div>
           </section>
         </Sidebar.Content>
       </Sidebar.Provider>

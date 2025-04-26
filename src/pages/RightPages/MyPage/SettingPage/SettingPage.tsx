@@ -11,7 +11,7 @@ import useUserSetting from "../../../../hooks/useUserSetting";
 import useTech from "../../../../hooks/useTech";
 
 const SettingPage = () => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const { techs } = useTech();
   const { getFavoriteTech, favoriteTech } = useUserSetting();
   const [selectedLangs, setSelectedLangs] = useState<string[]>([]);
@@ -43,6 +43,7 @@ const SettingPage = () => {
       nickname: nickname,
       profileImage: user.profileImage,
     });
+    refreshUser();
   };
 
   // 소개글 수정
@@ -55,13 +56,15 @@ const SettingPage = () => {
       nickname: user.nickName,
       profileImage: user.profileImage,
     });
+    refreshUser();
   };
 
-  // 소개글 수정
   const handleUpdateLang = async () => {
     console.log("dd");
     if (!user) return;
     await favoriteTech(selectedLangs);
+
+    refreshUser();
   };
 
   return (

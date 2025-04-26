@@ -19,6 +19,7 @@ export const PageEndPoints = {
 
   ALGO_MAIN: "/algo",
   ALGO_TEST: "/algo/test/:id",
+  ALGO_RESULT: "/algo/result/:id",
 
   GITHUB_PROJECT: "/project/:id",
 };
@@ -57,10 +58,20 @@ export const APIEndPoints = {
   CHATROOM_JOIN: "/chat/rooms/:id/join",
   CHATROOM_LEAVE: "/chat/rooms/:id/leave",
   CHATROOM_PARTICIPANTS: "/chat/rooms/:id/participants",
-  CHAT_MESSAGE: "/chat/rooms/rooms/:id/messages",
-  CHAT_MESSAGE_PAGE: "/chat/rooms/rooms/:id/messages/paged",
+  CHAT_MESSAGE: "/chat/rooms:id/messages",
+  CHAT_MESSAGE_PAGE: "/chat/rooms/:id/messages/paged/type",
 
   //알고리즘
   ALL_PROBLEMS: "/problems",
   PROBLEM: "/problems/:id",
+
+  //코테
+  COMPILER: "/compiler/compile",
+  SUBMIT_CODE: "/compiler/save-solution",
+
+  BASKET_CODE_RESULT: "/solutions/user/:id/problem-set/:id",
+};
+
+export const PrefixEndpoints = {
+  CHATROOMS: "/chat/rooms/",
 };

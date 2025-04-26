@@ -52,6 +52,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     // window.location.reload();
   };
 
+  const refreshUser = async () => {
+    const userInfo = await getUserInfo();
+    setUser(userInfo.data);
+  };
+
   useEffect(() => {
     const refreshTokenRequest = async () => {
       const accessToken = localStorage.getItem("accessToken");
@@ -94,7 +99,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user, setUser }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, user, setUser, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

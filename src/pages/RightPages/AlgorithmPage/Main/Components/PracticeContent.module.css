@@ -25,6 +25,13 @@
     margin-bottom: 1rem;
     font-size: var(--text-xl);
     font-weight: var(--font-weight-semibold);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button_box{
+    display: flex;
+    gap: 1rem;
   }
 
   .content_box{
@@ -75,3 +82,9 @@
       display: none;
     }
   }
+
+  .pagination {
+    padding-top: 1rem;
+    align-self: center;
+  }
+  

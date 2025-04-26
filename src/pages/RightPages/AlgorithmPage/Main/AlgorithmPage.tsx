@@ -27,7 +27,7 @@ const AlgorithmPage = () => {
       if (!form) return;
       const basketData = {
         companyName: form.company,
-        minutes: 60, // 나중에
+        minutes: form.time,
         title: form.title,
         isCompanyProb: true,
         language: form.language,

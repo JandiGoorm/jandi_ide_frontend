@@ -28,7 +28,7 @@ export interface Project {
   githubName: string;
   id: number;
   name: string;
-  owner: User;
+  url: string;
 }
 export interface ProjectDefaultInfo {
   name: string;
@@ -94,6 +94,12 @@ export interface Company {
   timeInMinutes: number;
   programmingLanguages: string[];
   jobPostings: JobPosting[];
+  profileUrl: string;
+}
+
+export enum ChatRoomType {
+  COMPANY = "COMPANY",
+  TECH_STACK = "TECH_STACK",
 }
 
 export interface ChatRoom {
@@ -103,15 +109,19 @@ export interface ChatRoom {
   createdBy: string;
   createdAt: string;
   participants: string[];
+  roomType: ChatRoomType;
 }
 
-// interface ChatMessage {
-//   type: string; // 문자열로 변경 (enum값 사용)
-//   roomId: string;
-//   sender: string;
-//   message: string;
-//   timestamp: string;
-// }
+export type Nullable<T> = T | null;
+
+export interface ChatMessages {
+  type: string; // 문자열로 변경 (enum값 사용)
+  roomId: string;
+  sender: string;
+  message: string;
+  timestamp: string;
+  profileImage: Nullable<string>;
+}
 
 export interface Problems {
   id: number;
@@ -186,4 +196,73 @@ export interface ProblemInfo {
 export interface Techs {
   id: number;
   techStack: string;
+}
+
+export interface CompilerBody {
+  userId: number;
+  problemId: number;
+  problemSetId: number;
+  code: string;
+  language: string;
+  solvingTime: number;
+}
+
+export interface CompilerResponse {
+  code: string;
+  error: string;
+  errorDetails: string;
+  errorType: string;
+  language: string;
+  message: string;
+  status: number | string;
+  timestamp: string;
+}
+
+export interface SubmitBody {
+  userId: number;
+  problemId: number;
+  problemSetId: number;
+  code: string;
+  language: string;
+  isCorrect: boolean;
+  solvingTime: number;
+  additionalInfo: string;
+  memoryUsage: number;
+  executionTime: number;
+  status: string | number;
+  description: string;
+}
+
+export interface ResultsInfo {
+  problemSetId: number;
+  problemSetName: string;
+  problems: ResultsProblems[];
+  userId: number;
+}
+
+export interface ResultsProblems {
+  level: number;
+  problemDescription: string;
+  problemId: number;
+  problemTitle: string;
+  solution: Solution[];
+}
+
+export interface Solution {
+  additionalInfo: string;
+  code: string;
+  createdAt: string;
+  description: string;
+  executionTime: number;
+  id: number;
+  isCorrect: boolean;
+  language: string;
+  memoryUsage: number;
+  problemId: number;
+  problemSetId: number;
+  solvingTime: number;
+  status: string;
+  updatedAt: string;
+  userId: number;
+  userName: string;
 }

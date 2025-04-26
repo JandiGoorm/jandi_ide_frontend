@@ -9,14 +9,14 @@ interface ModifyProjectProps {
   id: number;
   name: string;
   description: string;
-  onAddProject?: () => void;
+  onUpdate?: () => void;
 }
 
 const ModifyProject: React.FC<ModifyProjectProps> = ({
   id,
   name,
   description,
-  onAddProject,
+  onUpdate,
 }) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLInputElement>(null);
@@ -37,7 +37,9 @@ const ModifyProject: React.FC<ModifyProjectProps> = ({
     };
 
     await modifyProject(id, data);
-    onAddProject?.();
+    setTimeout(() => {
+      onUpdate?.();
+    }, 300);
   };
 
   return (
