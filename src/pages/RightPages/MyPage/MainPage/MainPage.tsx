@@ -20,16 +20,17 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { PageEndPoints } from "../../../../constants/api";
 import useProjects from "../../../../hooks/useProjects";
 import useBaskets from "../../../../hooks/useBaskets";
-import { useEffect, useState } from "react";
-import { Baskets, Company } from "../../../../constants/types/types";
+import { useCallback, useEffect, useState } from "react";
+import { Baskets, Company, Project } from "../../../../constants/types/types";
 import useUserSetting from "../../../../hooks/useUserSetting";
 import useCompany from "../../../../hooks/useCompany";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { projects, getProjects } = useProjects();
+  const { getProjects } = useProjects();
   const { getAllBaskets } = useBaskets();
+  const [projects, setProjects] = useState<Project[]>([]);
   const [baskets, setBaskets] = useState<Baskets[]>([]);
   const { getFavoriteCompany } = useUserSetting();
   const [myCompanies, setMyCompanies] = useState<Company[]>([]);
@@ -47,15 +48,21 @@ const MainPage = () => {
     fetchFavoriteCompanies();
   }, [getFavoriteCompany, companies]);
 
-  useEffect(() => {
-    const getBaskets = async () => {
-      const data = await getAllBaskets();
-      setBaskets(data);
-    };
-    getBaskets();
-  }, [getAllBaskets]);
+  const getBaskets = useCallback(async () => {
+    setProjects([]);
+    setBaskets([]);
 
-  const langs = ["Python", "C/C++", "JavaScript", "C#", "Go"];
+    const projectdata = await getProjects(0, 6);
+    setProjects(projectdata.data);
+
+    const data = await getAllBaskets(0, 6);
+    setBaskets(data.data);
+  }, [getProjects, getAllBaskets]);
+
+  useEffect(() => {
+    getBaskets();
+  }, [getBaskets]);
+
   console.log(baskets);
   // 더보기 페이지 이동
   const handleNaviCompany = () => navigate(PageEndPoints.MY_COMPANY);
@@ -85,7 +92,7 @@ const MainPage = () => {
                     <SimpleCompanyBox
                       key={company.id}
                       id={company.id}
-                      thumbnail="/logo_goorm.png"
+                      thumbnail={company.profileUrl}
                       name={company.companyName}
                     />
                   ))}
@@ -113,7 +120,7 @@ const MainPage = () => {
                     <Button>깃허브에서 불러오기</Button>
                   </ModalTrigger>
                   <ModalContent>
-                    <AddProject user={user} onAddProject={getProjects} />
+                    <AddProject user={user} onUpdate={getBaskets} />
                   </ModalContent>
                 </Modal>
               </div>
@@ -125,8 +132,8 @@ const MainPage = () => {
                       key={project.id}
                       title={project.name}
                       contents={project.description}
-                      lang={langs[0]}
-                      onAddProject={getProjects}
+                      link={project.url}
+                      onUpdate={getBaskets}
                     />
                   ))}
                 </div>
@@ -160,6 +167,7 @@ const MainPage = () => {
                       duration={basket.minutes}
                       problemCount={basket.problemIds.length}
                       lang={basket.language}
+                      onUpdate={getBaskets}
                     />
                   ))}
                 </div>

@@ -6,17 +6,19 @@ import { User } from "../../../../../constants/types/types";
 import { useEffect, useState, useRef } from "react";
 import useProjects from "../../../../../hooks/useProjects";
 import { ProjectData } from "../../../../../constants/types/types";
+import { useModal } from "../../../../../components/Modal/ModalContext";
 
 interface AddProjectProps {
   user: User | null;
-  onAddProject?: () => void;
+  onUpdate?: () => void;
 }
 
-const AddProject: React.FC<AddProjectProps> = ({ user, onAddProject }) => {
+const AddProject: React.FC<AddProjectProps> = ({ user, onUpdate }) => {
   const id = user?.id;
   const { getRepoProjects, addProjects } = useProjects();
   const [repo, setRepo] = useState<string[]>([]);
   const [repoMap, setRepoMap] = useState<Record<string, string>>({});
+  const { closeModal } = useModal();
 
   const nameRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLInputElement>(null);
@@ -42,7 +44,7 @@ const AddProject: React.FC<AddProjectProps> = ({ user, onAddProject }) => {
     };
 
     fetchRepos();
-  }, [user, getRepoProjects]);
+  }, [user, getRepoProjects, id]);
 
   const handleSubmit = async () => {
     const projectName = nameRef.current?.value.trim();
@@ -63,7 +65,10 @@ const AddProject: React.FC<AddProjectProps> = ({ user, onAddProject }) => {
     };
 
     await addProjects(data);
-    onAddProject?.();
+    setTimeout(() => {
+      onUpdate?.();
+      closeModal();
+    }, 300);
   };
 
   return (

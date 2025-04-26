@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import { Project } from "../constants/types/types";
+import { useCallback } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import useAxios from "./useAxios";
 import { buildPath } from "../utils/buildPath";
@@ -8,7 +7,7 @@ import { ProjectData, ModifyProjectData } from "../constants/types/types";
 
 //프로젝트 관리 hooks
 const useProjects = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  // const [projects, setProjects] = useState<Project[]>([]);
   const { user } = useAuth();
   const { fetchData: getApi } = useAxios();
   const { fetchData: getRepoApi } = useAxios();
@@ -17,17 +16,23 @@ const useProjects = () => {
   const { fetchData: deleteApi } = useAxios();
   const id = user?.id;
 
-  const getProjects = useCallback(async () => {
-    if (!id) return;
+  const getProjects = useCallback(
+    async (page: number, size: number) => {
+      if (!id) return;
 
-    await getApi({
-      method: "GET",
-      url: buildPath(APIEndPoints.MY_PROJECT, { id }),
-    }).then((res) => {
-      console.log(res?.data);
-      setProjects(res?.data);
-    });
-  }, [getApi, id]);
+      const res = await getApi({
+        method: "GET",
+        url: buildPath(APIEndPoints.MY_PROJECT, { id }),
+        params: {
+          page: page,
+          size: size,
+        },
+      });
+
+      return res?.data;
+    },
+    [getApi, id]
+  );
 
   const addProjects = useCallback(
     async (data: ProjectData) => {
@@ -41,10 +46,8 @@ const useProjects = () => {
           url: data.selectedHtmlUrl,
         },
       });
-
-      await getProjects();
     },
-    [postApi, getProjects]
+    [postApi]
   );
 
   const modifyProject = useCallback(
@@ -59,10 +62,8 @@ const useProjects = () => {
           description: data.description,
         },
       });
-
-      await getProjects();
     },
-    [putApi, getProjects]
+    [putApi]
   );
 
   const deleteProject = useCallback(
@@ -73,10 +74,8 @@ const useProjects = () => {
         method: "DELETE",
         url: buildPath(APIEndPoints.MANAGE_PROJECT, { id: projectId }),
       });
-
-      await getProjects();
     },
-    [deleteApi, getProjects]
+    [deleteApi]
   );
 
   const getRepoProjects = useCallback(async () => {
@@ -90,12 +89,7 @@ const useProjects = () => {
     return res?.data;
   }, [getRepoApi, id]);
 
-  useEffect(() => {
-    getProjects();
-  }, [getProjects]);
-
   return {
-    projects,
     getProjects,
     addProjects,
     modifyProject,

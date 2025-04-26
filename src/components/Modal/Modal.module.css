@@ -26,6 +26,15 @@
     max-height: 95vh;
     border-radius: var(--radius-xl);
     z-index: 1000;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal_content {
+    flex: 1 1 auto;
+    overflow-y: auto;
   }
 
   .close{

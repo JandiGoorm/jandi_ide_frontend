@@ -82,7 +82,7 @@ const ModalContent = ({ children }: ModalContentProps) => {
           />
           <div className={styles.container} onClick={handleContainerClick}>
             <MdClose onClick={closeModal} className={styles.close} size={24} />
-            {children}
+            <div className={styles.modal_content}>{children}</div>
           </div>
         </>
       )}

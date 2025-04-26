@@ -8,9 +8,14 @@ import useBaskets from "../../../../../hooks/useBaskets";
 interface ModifyBaksketProps {
   id: number;
   title: string;
+  onUpdate?: () => void;
 }
 
-const ModifyBaksket: React.FC<ModifyBaksketProps> = ({ id, title }) => {
+const ModifyBaksket: React.FC<ModifyBaksketProps> = ({
+  id,
+  title,
+  onUpdate,
+}) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const { modifyBaskets } = useBaskets();
 
@@ -27,6 +32,9 @@ const ModifyBaksket: React.FC<ModifyBaksketProps> = ({ id, title }) => {
     };
 
     await modifyBaskets(id, data);
+    setTimeout(() => {
+      onUpdate?.();
+    }, 300);
   };
 
   return (

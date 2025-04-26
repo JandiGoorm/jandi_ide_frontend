@@ -13,16 +13,23 @@ const useBaskets = () => {
   const { fetchData: putApi } = useAxios();
   const { fetchData: deleteApi } = useAxios();
 
-  const getAllBaskets = useCallback(async () => {
-    const res = await getApi({
-      method: "GET",
-      url: APIEndPoints.BASKETS,
-    });
-    if (res?.data) {
-      return res.data;
-    }
-    return null;
-  }, [getApi]);
+  const getAllBaskets = useCallback(
+    async (page: number, size: number) => {
+      const res = await getApi({
+        method: "GET",
+        url: APIEndPoints.BASKETS,
+        params: {
+          page: page,
+          size: size,
+        },
+      });
+      if (res?.data) {
+        return res.data;
+      }
+      return null;
+    },
+    [getApi]
+  );
 
   const getBasket = useCallback(
     async (id: number) => {
@@ -42,6 +49,7 @@ const useBaskets = () => {
 
   const addCompanyBaskets = useCallback(
     async (data: BasketBody) => {
+      console.log(data);
       const res = await postCompanyApi({
         method: "POST",
         url: APIEndPoints.BASKETS,
@@ -89,10 +97,8 @@ const useBaskets = () => {
           title: data.title,
         },
       });
-
-      await getAllBaskets();
     },
-    [getAllBaskets, putApi]
+    [putApi]
   );
 
   const deleteBaskets = useCallback(
@@ -103,10 +109,8 @@ const useBaskets = () => {
         method: "DELETE",
         url: buildPath(APIEndPoints.MANAGE_BASKETS, { id: basketId }),
       });
-
-      await getAllBaskets();
     },
-    [deleteApi, getAllBaskets]
+    [deleteApi]
   );
 
   return {
