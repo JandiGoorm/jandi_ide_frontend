@@ -4,6 +4,7 @@ import { User } from "../constants/types/types";
 interface AuthContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  refreshUser: () => void;
   signIn: (data: string) => Promise<void>;
   signOut: () => void;
 }
@@ -11,6 +12,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   setUser: () => {},
+  refreshUser: () => {},
   signIn: async () => {},
   signOut: () => {},
 });
