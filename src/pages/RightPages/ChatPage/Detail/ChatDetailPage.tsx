@@ -7,9 +7,10 @@ import Chatting from "./Components/Chatting";
 import useChatRoom from "../../../../hooks/useChatRoom";
 import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { useParams } from "react-router-dom";
-import useChat, { ChatMessages } from "../../../../hooks/useChat";
+import useChat from "../../../../hooks/useChat";
 import { useAuth } from "../../../../contexts/AuthContext";
 import Loading from "../../../../components/Loading/Loading";
+import { ChatMessages } from "../../../../constants/types/types";
 
 const ChatDetailPage = () => {
   const [prevMessages, setPrevMessages] = useState<ChatMessages[]>([]);
@@ -32,6 +33,8 @@ const ChatDetailPage = () => {
     getChatMessagePages,
     messages: realtimeMessages,
     getMessageLoading,
+    sendEnterMessage,
+    sendLeaveMessage,
   } = useChat();
 
   const { user } = useAuth();
@@ -84,10 +87,13 @@ const ChatDetailPage = () => {
   // 채팅방 입장 및 데이터 페칭
   useEffect(() => {
     const fetchData = async () => {
-      if (!id || initializedRef.current) return;
+      if (!id || initializedRef.current || !user) return;
 
       initializedRef.current = true;
-      await enterChatRoom(id);
+      await enterChatRoom(id).then(() =>
+        sendEnterMessage(id, user?.githubUsername)
+      );
+
       await getChatRoomInfo(id);
 
       const count = await getChatRoomParticipants(id);
@@ -96,12 +102,25 @@ const ChatDetailPage = () => {
     };
 
     fetchData();
+
+    return () => {
+      if (id && user) {
+        try {
+          sendLeaveMessage(id, user?.githubUsername);
+        } catch (err) {
+          console.error("채팅방 퇴장 처리 중 오류", err);
+        }
+      }
+    };
   }, [
     enterChatRoom,
     fetchCallback,
     getChatRoomInfo,
     getChatRoomParticipants,
     id,
+    sendEnterMessage,
+    sendLeaveMessage,
+    user,
   ]);
 
   if (chatRoomInfo === null) return null;
@@ -128,7 +147,7 @@ const ChatDetailPage = () => {
                 return (
                   <Chatting
                     chat={chat}
-                    key={`${chat.timestamp}_${chat.message}`}
+                    key={`rt_${chat.timestamp}_${chat.message}`}
                   />
                 );
               })}
@@ -137,7 +156,7 @@ const ChatDetailPage = () => {
               {prevMessages?.map((chat) => (
                 <Chatting
                   chat={chat}
-                  key={`${chat.timestamp}_${chat.message}`}
+                  key={`prev_${chat.timestamp}_${chat.message}`}
                 />
               ))}
             </div>

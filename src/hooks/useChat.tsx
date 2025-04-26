@@ -4,14 +4,7 @@ import { Client } from "@stomp/stompjs";
 import useAxios from "./useAxios";
 import { APIEndPoints } from "../constants/api";
 import { buildPath } from "../utils/buildPath";
-
-export interface ChatMessages {
-  type: string; // 문자열로 변경 (enum값 사용)
-  roomId: string;
-  sender: string;
-  message: string;
-  timestamp: string;
-}
+import { ChatMessages } from "../constants/types/types";
 
 const API_URL = import.meta.env.VITE_WS_URL;
 ///채팅(socket연결)관리 hooks
@@ -128,6 +121,7 @@ const useChat = () => {
     }
 
     clientRef.current.subscribe(`/topic/chat/room/${roomId}`, (message) => {
+      console.log("hit", message);
       const newMessage = JSON.parse(message.body);
       console.log("수신된 메시지:", newMessage);
 
@@ -156,12 +150,51 @@ const useChat = () => {
     });
   };
 
+  const sendEnterMessage = (roomId: string, sender: string) => {
+    if (!clientRef.current || !clientRef.current.connected) {
+      console.error("WebSocket이 연결되지 않았습니다.");
+      return;
+    }
+    const payload = {
+      roomId,
+      type: "ENTER",
+      sender,
+      message: "",
+    };
+
+    clientRef.current.publish({
+      destination: "/app/chat/message",
+      body: JSON.stringify(payload),
+    });
+  };
+
+  const sendLeaveMessage = (roomId: string, sender: string) => {
+    if (!clientRef.current || !clientRef.current.connected) {
+      console.error("WebSocket이 연결되지 않았습니다.");
+      return;
+    }
+
+    const payload = {
+      roomId,
+      type: "LEAVE",
+      sender,
+      message: "",
+    };
+
+    clientRef.current.publish({
+      destination: "/app/chat/message",
+      body: JSON.stringify(payload),
+    });
+  };
+
   return {
     getMessageLoading,
     enterChatRoom,
     getChatMessagePages,
     connectWebSocket,
     sendMessage,
+    sendEnterMessage,
+    sendLeaveMessage,
     messages,
   };
 };

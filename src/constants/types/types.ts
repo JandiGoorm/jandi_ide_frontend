@@ -111,13 +111,16 @@ export interface ChatRoom {
   roomType: ChatRoomType;
 }
 
-// interface ChatMessage {
-//   type: string; // 문자열로 변경 (enum값 사용)
-//   roomId: string;
-//   sender: string;
-//   message: string;
-//   timestamp: string;
-// }
+export type Nullable<T> = T | null;
+
+export interface ChatMessages {
+  type: string; // 문자열로 변경 (enum값 사용)
+  roomId: string;
+  sender: string;
+  message: string;
+  timestamp: string;
+  profileImage: Nullable<string>;
+}
 
 export interface Problems {
   id: number;
