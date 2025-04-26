@@ -22,17 +22,28 @@ const Chatting = ({ chat }: ChattingProps) => {
     ? "/user_profile_green.png"
     : "/user_profile_yellow.png";
 
+  const isEnterOrLeave = chat.type === "ENTER" || chat.type === "LEAVE";
+
   return (
     <div className={styles.chat_bubble}>
-      {chat.type === "ENTER" ? (
-        <div className={styles.enter_content}>
-          <div className={styles.enter_name}>
-            <img
-              src={chat.profileImage ?? noneUserImage}
-              alt="profile"
-              className={styles.profile_img}
-            />
-            <p>{chat.sender}님이 접속하셨습니다.</p>
+      {isEnterOrLeave ? (
+        <div className={styles.center}>
+          <div className={styles.enter_content}>
+            <div className={styles.enter_name}>
+              <img
+                src={chat.profileImage ?? noneUserImage}
+                alt="profile"
+                className={styles.profile_img}
+              />
+              <div className={styles.enter_name_box}>
+                <p className={styles.enter_name_text}>{chat.sender}</p>
+                <p>
+                  {chat.type === "ENTER"
+                    ? " 님이 입장하셨습니다."
+                    : " 님이 퇴장하셨습니다."}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       ) : (

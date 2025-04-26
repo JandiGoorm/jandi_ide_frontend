@@ -90,9 +90,10 @@ const ChatDetailPage = () => {
       if (!id || initializedRef.current || !user) return;
 
       initializedRef.current = true;
-      await enterChatRoom(id).then(() =>
-        sendEnterMessage(id, user?.githubUsername)
-      );
+      await enterChatRoom(id);
+      setTimeout(() => {
+        sendEnterMessage(id, user.githubUsername);
+      }, 1500);
 
       await getChatRoomInfo(id);
 
@@ -102,7 +103,17 @@ const ChatDetailPage = () => {
     };
 
     fetchData();
+  }, [
+    enterChatRoom,
+    fetchCallback,
+    getChatRoomInfo,
+    getChatRoomParticipants,
+    id,
+    sendEnterMessage,
+    user,
+  ]);
 
+  useEffect(() => {
     return () => {
       if (id && user) {
         try {
@@ -112,16 +123,8 @@ const ChatDetailPage = () => {
         }
       }
     };
-  }, [
-    enterChatRoom,
-    fetchCallback,
-    getChatRoomInfo,
-    getChatRoomParticipants,
-    id,
-    sendEnterMessage,
-    sendLeaveMessage,
-    user,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (chatRoomInfo === null) return null;
 
