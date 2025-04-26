@@ -47,6 +47,7 @@
     width: 100%;
     padding: 0.5rem;
     background-color: var(--color-code-terminal);
+    line-height: 1.4;
   }
   
 .button_group{

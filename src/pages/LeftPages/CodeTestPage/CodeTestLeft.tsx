@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ProblemInfo } from "../../../constants/types/types";
 import LeftPart from "../../../layouts/Components/LeftPart";
 import styles from "./CodeTestLeft.module.css";
@@ -60,7 +60,14 @@ const ProjectLeft = ({
                   <div>입력값</div>
                   <div className={styles.case_input}>{testcase.input}</div>
                   <div>출력값</div>
-                  <div className={styles.case_input}>{testcase.output}</div>
+                  <div className={styles.case_input}>
+                    {testcase.output.split("\n").map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
