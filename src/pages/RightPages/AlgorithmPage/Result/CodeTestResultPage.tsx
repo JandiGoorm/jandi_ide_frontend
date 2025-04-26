@@ -60,7 +60,11 @@ const CodeTestResultPage = () => {
       result.problems.forEach(
         (problem: {
           problemId: number;
-          solution?: { code?: string; additionalInfo?: string };
+          solution?: {
+            code?: string;
+            additionalInfo?: string;
+            status?: string;
+          };
         }) => {
           codeMap[problem.problemId] = problem.solution?.code || "";
           resultMap[problem.problemId] =
