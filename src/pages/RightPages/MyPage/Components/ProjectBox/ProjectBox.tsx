@@ -25,7 +25,7 @@ interface ProjectBoxProps {
   title: string;
   contents: string;
   link: string;
-  onAddProject?: () => void;
+  onUpdate?: () => void;
 }
 
 export default function ProjectBox({
@@ -33,7 +33,7 @@ export default function ProjectBox({
   title,
   contents,
   link,
-  onAddProject,
+  onUpdate,
 }: ProjectBoxProps) {
   const navigate = useNavigate();
   const dropdownRef = useRef<{ close: () => void }>(null);
@@ -46,7 +46,9 @@ export default function ProjectBox({
   const deleteClick = async () => {
     await deleteProject(id).then(() => {
       dropdownRef.current?.close();
-      onAddProject?.();
+      setTimeout(() => {
+        onUpdate?.();
+      }, 300);
     });
   };
 
@@ -103,7 +105,7 @@ export default function ProjectBox({
               id={id}
               name={title}
               description={contents}
-              onAddProject={onAddProject}
+              onUpdate={onUpdate}
             />
           </ModalContent>
         </Modal>

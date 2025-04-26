@@ -20,7 +20,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { PageEndPoints } from "../../../../constants/api";
 import useProjects from "../../../../hooks/useProjects";
 import useBaskets from "../../../../hooks/useBaskets";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Baskets, Company, Project } from "../../../../constants/types/types";
 import useUserSetting from "../../../../hooks/useUserSetting";
 import useCompany from "../../../../hooks/useCompany";
@@ -48,16 +48,20 @@ const MainPage = () => {
     fetchFavoriteCompanies();
   }, [getFavoriteCompany, companies]);
 
-  useEffect(() => {
-    const getBaskets = async () => {
-      const projectdata = await getProjects(0, 6);
-      setProjects(projectdata.data);
+  const getBaskets = useCallback(async () => {
+    setProjects([]);
+    setBaskets([]);
 
-      const data = await getAllBaskets(0, 6);
-      setBaskets(data.data);
-    };
+    const projectdata = await getProjects(0, 6);
+    setProjects(projectdata.data);
+
+    const data = await getAllBaskets(0, 6);
+    setBaskets(data.data);
+  }, [getProjects, getAllBaskets]);
+
+  useEffect(() => {
     getBaskets();
-  }, [getAllBaskets, getProjects]);
+  }, [getBaskets]);
 
   console.log(baskets);
   // 더보기 페이지 이동
@@ -116,7 +120,7 @@ const MainPage = () => {
                     <Button>깃허브에서 불러오기</Button>
                   </ModalTrigger>
                   <ModalContent>
-                    <AddProject user={user} onAddProject={getProjects} />
+                    <AddProject user={user} onUpdate={getBaskets} />
                   </ModalContent>
                 </Modal>
               </div>
@@ -129,7 +133,7 @@ const MainPage = () => {
                       title={project.name}
                       contents={project.description}
                       link={project.url}
-                      onAddProject={getProjects}
+                      onUpdate={getBaskets}
                     />
                   ))}
                 </div>
@@ -163,6 +167,7 @@ const MainPage = () => {
                       duration={basket.minutes}
                       problemCount={basket.problemIds.length}
                       lang={basket.language}
+                      onUpdate={getBaskets}
                     />
                   ))}
                 </div>

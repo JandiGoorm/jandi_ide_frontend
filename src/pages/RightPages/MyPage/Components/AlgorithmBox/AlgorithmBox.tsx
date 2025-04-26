@@ -31,6 +31,7 @@ interface AlgorithmBoxProps {
   duration: number;
   problemCount: number;
   lang: string;
+  onUpdate?: () => void;
 }
 
 export default function AlgorithmBox({
@@ -40,6 +41,7 @@ export default function AlgorithmBox({
   duration,
   problemCount,
   lang,
+  onUpdate,
 }: AlgorithmBoxProps) {
   const navigate = useNavigate();
   const { getaProblemsInfo } = useProblems();
@@ -53,6 +55,9 @@ export default function AlgorithmBox({
   const deleteClick = async () => {
     await deleteBaskets(id).then(() => {
       dropdownRef.current?.close();
+      setTimeout(() => {
+        onUpdate?.();
+      }, 300);
     });
   };
 
@@ -129,7 +134,7 @@ export default function AlgorithmBox({
               </DropdownContent>
             </Dropdown>
             <ModalContent>
-              <ModifyBaksket id={id} title={title} />
+              <ModifyBaksket id={id} title={title} onUpdate={onUpdate} />
             </ModalContent>
           </Modal>
         </div>

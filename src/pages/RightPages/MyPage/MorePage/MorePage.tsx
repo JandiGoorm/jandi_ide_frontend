@@ -10,7 +10,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import useProjects from "../../../../hooks/useProjects";
 import AlgorithmBox from "../Components/AlgorithmBox/AlgorithmBox";
 import useBaskets from "../../../../hooks/useBaskets";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Baskets, Project } from "../../../../constants/types/types";
 import usePagination from "../../../../hooks/usePagination";
 import Pagination from "../../../../components/Pagination/Pagination";
@@ -26,20 +26,50 @@ const MorePage = () => {
   const { currentPage, totalPage, setTotalPage, handlePageChange } =
     usePagination();
 
-  useEffect(() => {
-    const getBaskets = async (page: number) => {
-      if (lastPath === "project") {
-        const data = await getProjects(page, 12);
-        setProjects(data.data);
-        setTotalPage(data.totalPages);
-      } else {
-        const data = await getAllBaskets(page, 12);
-        setBaskets(data.data);
-        setTotalPage(data.totalPages);
+  const getBaskets = useCallback(
+    async (page: number) => {
+      setProjects([]);
+      setBaskets([]);
+
+      try {
+        if (lastPath === "project") {
+          const data = await getProjects(page, 12);
+          setProjects(data.data);
+          setTotalPage(data.totalPages);
+        } else {
+          const data = await getAllBaskets(page, 12);
+          setBaskets(data.data);
+          setTotalPage(data.totalPages);
+        }
+      } catch (error) {
+        if (
+          typeof error === "object" &&
+          error !== null &&
+          "response" in error &&
+          (error as { response?: { data?: { error?: string } } }).response?.data
+            ?.error === "INVALID_PAGE" &&
+          page > 0
+        ) {
+          handlePageChange(page);
+        } else {
+          console.error(error);
+        }
       }
-    };
-    getBaskets(currentPage - 1);
-  }, [getAllBaskets, getProjects, currentPage, setTotalPage, lastPath]);
+    },
+    [lastPath, getProjects, getAllBaskets, setTotalPage, handlePageChange]
+  );
+
+  const handleUpdate = useCallback(() => {
+    const navigatePage = Math.max(
+      1,
+      currentPage > totalPage ? totalPage : currentPage
+    );
+    getBaskets(navigatePage - 1);
+  }, [currentPage, totalPage, getBaskets]);
+
+  useEffect(() => {
+    handleUpdate();
+  }, [lastPath, handleUpdate]);
 
   return (
     <BaseLayout>
@@ -71,6 +101,7 @@ const MorePage = () => {
                         title={project.name}
                         contents={project.description}
                         link={project.url}
+                        onUpdate={handleUpdate}
                       />
                     ))}
                   </div>
@@ -95,6 +126,7 @@ const MorePage = () => {
                         duration={basket.minutes}
                         problemCount={basket.problemIds.length}
                         lang={basket.language}
+                        onUpdate={handleUpdate}
                       />
                     ))}
                   </div>
