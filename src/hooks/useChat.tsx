@@ -185,6 +185,8 @@ const useChat = () => {
       destination: "/app/chat/message",
       body: JSON.stringify(payload),
     });
+
+    clientRef.current.deactivate();
   };
 
   return {
