@@ -183,7 +183,11 @@ const CodeTestPage = () => {
           </div>
         </div>
       )}
-      <Sidebar.Provider className={styles.Code_layout}>
+      <Sidebar.Provider
+        className={styles.Code_layout}
+        minWidth={350}
+        maxWidth={700}
+      >
         <Sidebar.Panel>
           <LeftSide
             problems={problems}
@@ -191,7 +195,7 @@ const CodeTestPage = () => {
             setCurrentIndex={setCurrentIndex}
           />
         </Sidebar.Panel>
-
+        <Sidebar.Resizer />
         <Sidebar.Content fullWidth>
           <div className={styles.container}>
             {/* 헤더 - 시간, 종료버튼 */}
