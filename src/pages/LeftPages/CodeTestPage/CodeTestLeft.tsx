@@ -32,6 +32,9 @@ const ProjectLeft = ({
     if (currentIndex < problems.length - 1) setCurrentIndex(currentIndex + 1);
   };
 
+  if (!currentProblem) return null;
+  const arr = currentProblem.description.split("\n");
+
   return (
     <LeftPart>
       <div className={styles.container}>
@@ -46,7 +49,9 @@ const ProjectLeft = ({
                 />
               </div>
               <div className={styles.prob_content}>
-                {currentProblem.description}
+                {arr.map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
               </div>
             </div>
             <div className={styles.prob_reuirement}>
